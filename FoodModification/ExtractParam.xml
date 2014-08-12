@@ -1,24 +1,19 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <Params>
+	<CriterionNum>2</CriterionNum>
 	<Criterion ID="10">
 		<hue>120</hue>
 		<saturation>121</saturation>
 		<value>122</value>
-		<blue>123</blue>
-		<green>240</green>
-		<red>241</red>
 		<y>125</y>
 		<cr>126</cr>
 		<cb>127</cb>
 	</Criterion>
 
 	<Criterion ID="1">
-		<hue>120</hue>
-		<saturation>120</saturation>
-		<value>120</value>
-		<blue>120</blue>
-		<green>240</green>
-		<red>240</red>
+		<hue>130</hue>
+		<saturation>140</saturation>
+		<value>160</value>
 		<y>125</y>
 		<cr>125</cr>
 		<cb>125</cb>

@@ -15,29 +15,29 @@ TEMPLATE = app
 SOURCES += main.cpp\
         mainwindow.cpp \
     finddialog.cpp \
-    opencvManager.cpp \
-    opencvBase.cpp \
-    opencvUtils.cpp \
-    colorCriterion.cpp \
     extractParamManager.cpp \
-    extractController.cpp \
-    colorExtractService.cpp \
     colorExtractTolerance.cpp \
     domParser.cpp \
-    propertyController.cpp
+    propertyController.cpp \
+    Param/colorCriterion.cpp \
+    ImgProc/colorExtractService.cpp \
+    ImgProc/extractController.cpp \
+    ImgProc/opencvBase.cpp \
+    ImgProc/opencvManager.cpp \
+    ImgProc/opencvUtils.cpp
 
 HEADERS  += mainwindow.h \
     finddialog.h \
-    opencvManager.h \
-    opencvBase.h \
-    opencvUtils.h \
-    colorCriterion.h \
     extractParamManager.h \
-    extractController.h \
-    colorExtractService.h \
     colorExtractTolerance.h \
     domParser.h \
-    propertyController.h
+    propertyController.h \
+    Param/colorCriterion.h \
+    ImgProc/colorExtractService.h \
+    ImgProc/extractController.h \
+    ImgProc/opencvBase.h \
+    ImgProc/opencvManager.h \
+    ImgProc/opencvUtils.h
 
 FORMS    += mainwindow.ui
 

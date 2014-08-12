@@ -14,7 +14,7 @@
 #include <QSlider>
 #include <QSpinBox>
 #include "finddialog.h"
-#include "opencvManager.h"
+#include "ImgProc\\opencvManager.h"
 #include <QtCore>
 #include "propertyController.h"
 
@@ -52,15 +52,13 @@ int main(int argc, char *argv[])
     FindDialog *dialog = new FindDialog;
     dialog->show();
 
-    ExtractParamManager *extractParamManager = new ExtractParamManager;
-    PropertyController *propertyController = new PropertyController(extractParamManager);
     QString filePath ="C:\\cygwin64\\home\\ueda\\git\\VisualTextureC\\FoodModification\\FoodModification\\ExtractParam.xml";
-    propertyController->readParameters(filePath);
+    PropertyController* propertyController = new PropertyController(filePath);
 
-    qDebug() << extractParamManager->criterion[0]->getHue();
-    qDebug() << extractParamManager->criterion[1]->getHue();
+    qDebug() << propertyController->getExtractParamManager()->criterion[0].getHue();
+    qDebug() << propertyController->getExtractParamManager()->criterion[1].getHue();
 
-   // OpenCVManager *manager = new OpenCVManager(extractParamManager);
-   // manager->doConvertion();
+   OpenCVManager *manager = new OpenCVManager(propertyController->getExtractParamManager());
+   manager->doConvertion();
     return app.exec();
 }

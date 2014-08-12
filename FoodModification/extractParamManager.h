@@ -1,16 +1,17 @@
 #ifndef EXTRACTPARAMMANAGER_H
 #define EXTRACTPARAMMANAGER_H
 #include <QString>
-#include "colorCriterion.h"
+#include "Param\\colorCriterion.h"
 #include "colorExtractTolerance.h"
 
 class ExtractParamManager
 {
 public:
-    ColorCriterion *criterion[2];
-    ColorExtractTolerance *colorExtractTolerance[2];
+    int criterionNum;
+    ColorCriterion* criterion;
+    ColorExtractTolerance* colorExtractTolerance;
 public:
-    ExtractParamManager();
+    ExtractParamManager(int criterionNum);
 
 };
 

@@ -1,8 +1,9 @@
 #include "extractParamManager.h"
 
-ExtractParamManager::ExtractParamManager()
+ExtractParamManager::ExtractParamManager(int criterionNum)
 {
-    this->colorExtractTolerance[2] = new ColorExtractTolerance[2];
-    this->criterion[2] = new ColorCriterion[2];
+    this->criterionNum = criterionNum;
+    this->criterion = new ColorCriterion[criterionNum];
+    this->colorExtractTolerance = new ColorExtractTolerance[criterionNum];
 }
 

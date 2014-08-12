@@ -3,37 +3,39 @@
 #include <QtXml>
 #include "domParser.h"
 
-PropertyController::PropertyController(ExtractParamManager *extractParamManager)
+PropertyController::PropertyController(QString filePath)
 {
-    this->extractParamManager = extractParamManager;
-}
-
-bool PropertyController::readParameters(QString filePath) {
-
-     //Create a document to write XML
-    QDomDocument document;
 
      // Open a file for reading
      QFile file(filePath);
-    if(!file.open(QIODevice::ReadOnly | QIODevice::Text)) {
+     if(!file.open(QIODevice::ReadOnly | QIODevice::Text)) {
         qDebug() << "Failed to open the file for reading1.";
-        return false;
-    } else {
+        //return false;
+     } else {
         //loding
-         if (!document.setContent(&file)) {
+         if (!this->document.setContent(&file)) {
             qDebug() << "Failed to load the file for readingi2.";
-            return false;
+          //  return false;
         }
         file.close();
     }
 
-     //Getting root element
-    QDomElement root = document.firstChildElement();
+    //Getting root element
+    this->domRoot = document.firstChildElement();
 
-     //parse
-    DomParser *domParser = new DomParser;
-    
-    setColorCriterion(root, extractParamManager->criterion[0]);
+     this->extractParamManager = new ExtractParamManager(getColorCriterionNum());
+
+     readParameters();
+}
+
+int PropertyController::getColorCriterionNum() {
+
+    return getIntParamByTagName("CriterionNum", this->domRoot);
+}
+
+bool PropertyController::readParameters() {
+
+    setColorCriterion(this->domRoot,  this->extractParamManager->criterion);
 
     return true;
     
@@ -55,10 +57,16 @@ void PropertyController::setColorCriterion(QDomElement root, ColorCriterion *cri
         QDomNode node = nodes.at(i);
         if (node.hasChildNodes()) {
             QDomElement element = node.toElement();
-            criterion->setHue( getIntParamByTagName("hue", element));
-            criterion->setSaturation( getIntParamByTagName("saturation", element));
-            criterion->setValue(getIntParamByTagName("value", element));
+            criterion[i].setHue( getIntParamByTagName("hue", element));
+            criterion[i].setSaturation( getIntParamByTagName("saturation", element));
+            criterion[i].setValue(getIntParamByTagName("value", element));
         }
-        criterion++;
+       // criterion++;
     }
+ }
+
+
+ExtractParamManager* PropertyController::getExtractParamManager() {
+    return this->extractParamManager;
 }
+
