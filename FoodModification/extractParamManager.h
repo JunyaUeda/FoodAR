@@ -2,7 +2,7 @@
 #define EXTRACTPARAMMANAGER_H
 #include <QString>
 #include "Param\\colorCriterion.h"
-#include "colorExtractTolerance.h"
+#include "Param\\colorExtractTolerance.h"
 
 class ExtractParamManager
 {

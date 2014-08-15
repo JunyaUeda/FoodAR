@@ -2,9 +2,9 @@
 
 #include "opencvUtils.h"
 #include <math.h>
-#include "Param\\colorCriterion.h"
-#include "colorExtractTolerance.h"
-#include "extractParamManager.h"
+#include "..\\Param\\colorCriterion.h"
+#include "..\\Param\\colorExtractTolerance.h"
+#include "..\\extractParamManager.h"
 
 ColorExtractService::ColorExtractService()
 {

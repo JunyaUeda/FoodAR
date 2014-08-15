@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <Params>
 	<CriterionNum>2</CriterionNum>
-	<Criterion ID="10">
-		<hue>120</hue>
-		<saturation>121</saturation>
-		<value>122</value>
+	<Criterion ID="0">
+		<hue>152</hue>
+		<saturation>3</saturation>
+		<value>254</value>
 		<y>125</y>
-		<cr>126</cr>
+		<cr>129</cr>
 		<cb>127</cb>
 	</Criterion>
 
@@ -18,4 +18,18 @@
 		<cr>125</cr>
 		<cb>125</cb>
 	</Criterion>
+
+	<ColorExtractTolerance>
+		<hueTolerance>50</hueTolerance>
+		<saturationTolerance>50</saturationTolerance>
+		<valueTolerance>50</valueTolerance>
+		<crTolerance>50</crTolerance>
+	</ColorExtractTolerance>
+
+	<ColorExtractTolerance>
+		<hueTolerance>60</hueTolerance>
+		<saturationTolerance>60</saturationTolerance>
+		<valueTolerance>60</valueTolerance>
+		<crTolerance>60</crTolerance>
+	</ColorExtractTolerance>
 </Params>

@@ -4,6 +4,7 @@
 #include <QDomElement>
 #include "extractParamManager.h"
 #include "Param\\colorCriterion.h"
+#include "Param\\colorExtractTolerance.h"
 
 class PropertyController
 {
@@ -21,6 +22,7 @@ public:
     PropertyController(QString filePath);
     bool readParameters();
     void setColorCriterion(QDomElement root, ColorCriterion* criterion);
+    void setColorExtractTolerance(QDomElement root, ColorExtractTolerance* tolerance);
     ExtractParamManager* getExtractParamManager();
  };
 

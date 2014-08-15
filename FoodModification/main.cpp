@@ -57,6 +57,9 @@ int main(int argc, char *argv[])
 
     qDebug() << propertyController->getExtractParamManager()->criterion[0].getHue();
     qDebug() << propertyController->getExtractParamManager()->criterion[1].getHue();
+    qDebug() << propertyController->getExtractParamManager()->colorExtractTolerance[0].getHueTolerance();
+    qDebug() << propertyController->getExtractParamManager()->colorExtractTolerance[1].getHueTolerance();
+
 
    OpenCVManager *manager = new OpenCVManager(propertyController->getExtractParamManager());
    manager->doConvertion();

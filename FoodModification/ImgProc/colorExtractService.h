@@ -2,7 +2,7 @@
 #define COLOREXTRACTSERVICE_H
 
 #include "opencvBase.h"
-#include "extractParamManager.h"
+#include "..\\extractParamManager.h"
 
 class ColorExtractService : public OpenCVBase
 {

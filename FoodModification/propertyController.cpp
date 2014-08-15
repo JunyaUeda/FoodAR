@@ -36,7 +36,7 @@ int PropertyController::getColorCriterionNum() {
 bool PropertyController::readParameters() {
 
     setColorCriterion(this->domRoot,  this->extractParamManager->criterion);
-
+    setColorExtractTolerance(this->domRoot, this->extractParamManager->colorExtractTolerance);
     return true;
     
 }
@@ -50,7 +50,7 @@ int PropertyController::getIntParamByTagName(QString tag, QDomElement inElement)
 
 }
 
-void PropertyController::setColorCriterion(QDomElement root, ColorCriterion *criterion) {
+void PropertyController::setColorCriterion(QDomElement root, ColorCriterion* criterion) {
     
     QDomNodeList nodes = root.elementsByTagName("Criterion");
     for(int i =0;  i<nodes.count(); i++ ) {
@@ -60,11 +60,26 @@ void PropertyController::setColorCriterion(QDomElement root, ColorCriterion *cri
             criterion[i].setHue( getIntParamByTagName("hue", element));
             criterion[i].setSaturation( getIntParamByTagName("saturation", element));
             criterion[i].setValue(getIntParamByTagName("value", element));
+            criterion[i].setCr(getIntParamByTagName("cr", element));
         }
        // criterion++;
     }
  }
 
+void PropertyController::setColorExtractTolerance(QDomElement root, ColorExtractTolerance* tolerance) {
+
+    QDomNodeList nodes = root.elementsByTagName("ColorExtractTolerance");
+    for(int i=0; i<nodes.count(); i++) {
+        QDomNode node = nodes.at(i);
+        if(node.hasChildNodes()){
+            QDomElement element = node.toElement();
+            tolerance[i].setHueTolerance(getIntParamByTagName("hueTolerance", element));
+            tolerance[i].setSaturationTolerance(getIntParamByTagName("saturationTolerance", element));
+            tolerance[i].setValueTolerance(getIntParamByTagName("valueTolerance", element));
+            tolerance[i].setCrTolerance(getIntParamByTagName("crTolerance", element));
+        }
+    }
+}
 
 ExtractParamManager* PropertyController::getExtractParamManager() {
     return this->extractParamManager;

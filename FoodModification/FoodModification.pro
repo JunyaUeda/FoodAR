@@ -16,7 +16,6 @@ SOURCES += main.cpp\
         mainwindow.cpp \
     finddialog.cpp \
     extractParamManager.cpp \
-    colorExtractTolerance.cpp \
     domParser.cpp \
     propertyController.cpp \
     Param/colorCriterion.cpp \
@@ -24,12 +23,13 @@ SOURCES += main.cpp\
     ImgProc/extractController.cpp \
     ImgProc/opencvBase.cpp \
     ImgProc/opencvManager.cpp \
-    ImgProc/opencvUtils.cpp
+    ImgProc/opencvUtils.cpp \
+    Param/colorExtractTolerance.cpp \
+    ImgProc/Service/contourService.cpp
 
 HEADERS  += mainwindow.h \
     finddialog.h \
     extractParamManager.h \
-    colorExtractTolerance.h \
     domParser.h \
     propertyController.h \
     Param/colorCriterion.h \
@@ -37,16 +37,18 @@ HEADERS  += mainwindow.h \
     ImgProc/extractController.h \
     ImgProc/opencvBase.h \
     ImgProc/opencvManager.h \
-    ImgProc/opencvUtils.h
+    ImgProc/opencvUtils.h \
+    Param/colorExtractTolerance.h \
+    ImgProc/Service/contourService.h
 
 FORMS    += mainwindow.ui
 
 # OpenCV settings
 # for Windows
-win32:DEPENDPATH  += "C:\opencv\build\include"
-win32:INCLUDEPATH += "C:\opencv\build\include"
-win32:LIBS += -L"C:\opencv\build\x86\vc10\lib"
-win32:LIBS += -lopencv_core241 -lopencv_highgui241 -lopencv_imgproc241
+win32:DEPENDPATH  += "C:\opencv248\build\include"
+win32:INCLUDEPATH += "C:\opencv248\build\include"
+win32:LIBS += -L"C:\opencv248\build\x86\vc10\lib"
+win32:LIBS += -lopencv_core248 -lopencv_highgui248 -lopencv_imgproc248
 
 OTHER_FILES += \
     param.txt \
