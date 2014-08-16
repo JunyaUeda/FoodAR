@@ -3,38 +3,34 @@
 #include "opencv2\opencv.hpp"
 #include "extractController.h"
 
-//#ifdef _DEBUG
-//    //Debug mode
-//    #pragma comment(lib,"C:\\opencv\\build\\x86\\vc10\\lib\\opencv_core241d.lib")
-//    #pragma comment(lib,"C:\\opencv\\build\\x86\\vc10\\lib\\opencv_imgproc241d.lib")
-//    #pragma comment(lib,"C:\\opencv\\build\\x86\\vc10\\lib\\opencv_highgui241d.lib")
-//    #pragma comment(lib,"C:\\opencv\\build\\x86\\vc10\\lib\\opencv_objdetect241d.lib")
-//    #pragma comment(lib,"C:\\opencv\\build\\x86\\vc10\\lib\\opencv_contrib241d.lib")
-//    #pragma comment(lib,"C:\\opencv\\build\\x86\\vc10\\lib\\opencv_features2d241d.lib")
-//    #pragma comment(lib,"C:\\opencv\\build\\x86\\vc10\\lib\\opencv_flann241d.lib")
-//    #pragma comment(lib,"C:\\opencv\\build\\x86\\vc10\\lib\\opencv_gpu241d.lib")
-//   // #pragma comment(lib,"C:\\opencv\\build\\x86\\vc10\\lib\\opencv_haartraining_engined.lib")
-//    #pragma comment(lib,"C:\\opencv\\build\\x86\\vc10\\lib\\opencv_legacy241d.lib")
-//    #pragma comment(lib,"C:\\opencv\\build\\x86\\vc10\\lib\\opencv_ts241d.lib")
-//    #pragma comment(lib,"C:\\opencv\\build\\x86\\vc10\\lib\\opencv_video241d.lib")
-//    #pragma comment(lib,"C:\\opencv\\build\\x86\\vc10\\lib\\opencv_nonfree241d.lib")
+#define CV_VER CVAUX_STR(CV_MAJOR_VERSION) CVAUX_STR(CV_MINOR_VERSION) CVAUX_STR(CV_SUBMINOR_VERSION)
 
-//#else
-//    //Release mode
-//    #pragma comment(lib,"C:\\opencv\\build\\x86\\vc10\\lib\\opencv_core241.lib")
-//    #pragma comment(lib,"C:\\opencv\\build\\x86\\vc10\\lib\\opencv_imgproc241.lib")
-//    #pragma comment(lib,"C:\\opencv\\build\\x86\\vc10\\lib\\opencv_highgui241.lib")
-//    #pragma comment(lib,"C:\\opencv\\build\\x86\\vc10\\lib\\opencv_objdetect241.lib")
-//    #pragma comment(lib,"C:\\opencv\\build\\x86\\vc10\\lib\\opencv_contrib241.lib")
-//    #pragma comment(lib,"C:\\opencv\\build\\x86\\vc10\\lib\\opencv_features2d241.lib")
-//    #pragma comment(lib,"C:\\opencv\\build\\x86\\vc10\\lib\\opencv_flann241.lib")
-//    #pragma comment(lib,"C:\\opencv\\build\\x86\\vc10\\lib\\opencv_gpu241.lib")
-//   // #pragma comment(lib,"C:\\opencv\\build\\x86\\vc10\\lib\\opencv_haartraining_engined.lib")
-//    #pragma comment(lib,"C:\\opencv\\build\\x86\\vc10\\lib\\opencv_legacy241.lib")
-//    #pragma comment(lib,"C:\\opencv\\build\\x86\\vc10\\lib\\opencv_ts241.lib")
-//    #pragma comment(lib,"C:\\opencv\\build\\x86\\vc10\\lib\\opencv_video241.lib")
-//    #pragma comment(lib,"C:\\opencv\\build\\x86\\vc10\\lib\\opencv_nonfree241.lib")
-//#endif
+#ifdef _DEBUG
+#define CV_EXT "d.lib"
+#else
+#define CV_EXT ".lib"
+#endif
+
+#pragma comment(lib, "opencv_calib3d" CV_VER CV_EXT)
+#pragma comment(lib, "opencv_contrib" CV_VER CV_EXT)
+#pragma comment(lib, "opencv_core" CV_VER CV_EXT)
+#pragma comment(lib, "opencv_features2d" CV_VER CV_EXT)
+#pragma comment(lib, "opencv_flann" CV_VER CV_EXT)
+#pragma comment(lib, "opencv_gpu" CV_VER CV_EXT)
+#pragma comment(lib, "opencv_highgui" CV_VER CV_EXT)
+#pragma comment(lib, "opencv_imgproc" CV_VER CV_EXT)
+#pragma comment(lib, "opencv_legacy" CV_VER CV_EXT)
+#pragma comment(lib, "opencv_ml" CV_VER CV_EXT)
+#pragma comment(lib, "opencv_nonfree" CV_VER CV_EXT)
+#pragma comment(lib, "opencv_objdetect" CV_VER CV_EXT)
+#pragma comment(lib, "opencv_ocl" CV_VER CV_EXT)
+#pragma comment(lib, "opencv_photo" CV_VER CV_EXT)
+#pragma comment(lib, "opencv_stitching" CV_VER CV_EXT)
+#pragma comment(lib, "opencv_superres" CV_VER CV_EXT)
+#pragma comment(lib, "opencv_ts" CV_VER CV_EXT)
+#pragma comment(lib, "opencv_video" CV_VER CV_EXT)
+#pragma comment(lib, "opencv_videostab" CV_VER CV_EXT)
+
 
 class OpenCVManager {
 private:

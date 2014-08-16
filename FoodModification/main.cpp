@@ -4,7 +4,7 @@
 #include <iostream>
 #include <stdio.h>
 #include <fstream>
-#include <stdio.h>
+#include <vector>
 #include <QDebug>
 #include <QFile>
 #include <QLabel>
@@ -17,17 +17,15 @@
 #include "ImgProc\\opencvManager.h"
 #include <QtCore>
 #include "propertyController.h"
+#include "./ImgProc/opencvBase.h"
+
+#define FILEPATH ".\\ExtractParam.xml"
 
 int main(int argc, char *argv[])
 {
     QApplication app(argc, argv);
     MainWindow w;
 
-//    QLabel *label = new QLabel("HelloEveryone",0);
-//    label->show();
-//    QPushButton *button = new QPushButton("quit");
-//    QObject::connect(button,SIGNAL(clicked()),&app,SLOT(quit()));
-//    button->show();
     QWidget *window = new QWidget;
     window->setWindowTitle("Enter your feel");
 
@@ -47,12 +45,12 @@ int main(int argc, char *argv[])
     qDebug() << "Debug Message";
     qWarning() << "Warning Message";
     qCritical() << "Critical Error Message";
-    //qFatal() << "Fatal Error Message";
+    
 
     FindDialog *dialog = new FindDialog;
     dialog->show();
 
-    QString filePath ="C:\\cygwin64\\home\\ueda\\git\\VisualTextureC\\FoodModification\\FoodModification\\ExtractParam.xml";
+    QString filePath = FILEPATH;
     PropertyController* propertyController = new PropertyController(filePath);
 
     qDebug() << propertyController->getExtractParamManager()->criterion[0].getHue();
@@ -63,5 +61,7 @@ int main(int argc, char *argv[])
 
    OpenCVManager *manager = new OpenCVManager(propertyController->getExtractParamManager());
    manager->doConvertion();
-    return app.exec();
+
+   return app.exec();
+   
 }

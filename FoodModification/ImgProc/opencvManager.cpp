@@ -36,10 +36,12 @@ void OpenCVManager::doConvertion() {
 
         //cv::Mat grayImg (bgrImg.size(), CV_8UC1, cv::Scalar(0,0,0));
         cv::cvtColor(srcBGRImg, srcGrayImg, CV_BGR2GRAY);
+        //dstImg = srcBGRImg.clone();
+        dstImg = cv::Mat::zeros(srcBGRImg.size(), srcBGRImg.type());
         cv::threshold(srcGrayImg, srcGrayImg, 80, 255, cv::THRESH_BINARY);
         extractController->extractByContour(srcGrayImg, dstImg);
         cv::imshow("myWindow", srcBGRImg);
-       // cv::imshow("contourExtractedImg", dstImg);
+        cv::imshow("contourExtractedImg", dstImg);
 
 
         char ch = cv::waitKey(33);

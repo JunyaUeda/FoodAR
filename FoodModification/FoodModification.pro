@@ -47,8 +47,8 @@ FORMS    += mainwindow.ui
 # for Windows
 win32:DEPENDPATH  += "C:\opencv248\build\include"
 win32:INCLUDEPATH += "C:\opencv248\build\include"
-win32:LIBS += -L"C:\opencv248\build\x86\vc10\lib"
-win32:LIBS += -lopencv_core248 -lopencv_highgui248 -lopencv_imgproc248
+win32:LIBS += -L"C:\opencv248\build\x86\vc12\lib"
+#win32:LIBS += -lopencv_core248d -lopencv_highgui248d -lopencv_imgproc248d
 
 OTHER_FILES += \
     param.txt \
