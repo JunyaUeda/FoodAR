@@ -11,7 +11,8 @@ public:
     void extract(cv::Mat bgrImg, cv::Mat hsvImg,cv::Mat yCrCbImg, ExtractParamManager* extractParamManager);
     
 private:
-    void discriminate(int x, int y, cv::Mat bgrImg, cv::Mat hsvImg, cv::Mat yCrCbImg, ColorCriterion* colorCriterion, ColorExtractTolerance* extractTolerance);
+    void discriminate(int x, int y, cv::Mat srcBGRImg, cv::Mat srcHSVImg, cv::Mat srcYCrCbImg,
+     ColorCriterion* colorCriterion, ColorExtractTolerance* extractTolerance);
     bool isNearNormalPointA(int x, int y, cv::Mat hsvImg, ColorCriterion* colorCriterion) ;
 };
 

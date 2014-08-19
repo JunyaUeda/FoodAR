@@ -10,9 +10,11 @@ public:
     int criterionNum;
     ColorCriterion* criterion;
     ColorExtractTolerance* colorExtractTolerance;
+
+
 public:
     ExtractParamManager(int criterionNum);
-
+    
 };
 
 #endif // EXTRACTPARAMMANAGER_H

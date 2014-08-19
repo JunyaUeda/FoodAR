@@ -25,7 +25,9 @@ SOURCES += main.cpp\
     ImgProc/opencvManager.cpp \
     ImgProc/opencvUtils.cpp \
     Param/colorExtractTolerance.cpp \
-    ImgProc/Service/contourService.cpp
+    ImgProc/Service/contourService.cpp \
+    ImgProc/Service/edgeService.cpp \
+    ImgProc/Param/targetParam.cpp
 
 HEADERS  += mainwindow.h \
     finddialog.h \
@@ -39,7 +41,9 @@ HEADERS  += mainwindow.h \
     ImgProc/opencvManager.h \
     ImgProc/opencvUtils.h \
     Param/colorExtractTolerance.h \
-    ImgProc/Service/contourService.h
+    ImgProc/Service/contourService.h \
+    ImgProc/Service/edgeService.h \
+    ImgProc/Param/targetParam.h
 
 FORMS    += mainwindow.ui
 

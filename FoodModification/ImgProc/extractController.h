@@ -4,6 +4,7 @@
 #include "..\\extractParamManager.h"
 #include "colorExtractService.h"
 #include ".\\Service\\contourService.h"
+#include ".\\Param\\targetParam.h"
 
 class ExtractController
 {
@@ -11,10 +12,13 @@ private:
     ColorExtractService *extractService;
     ExtractParamManager *extractParamManager;
     ContourService* contourService;
+    TargetParam* targetParam;
 public:
     ExtractController(ExtractParamManager *extractParamManager);
-    void extractByColor(cv::Mat bgrImg, cv::Mat hsvImg, cv::Mat yCrCvImg);
-    void extractByContour(cv::Mat grayImg, cv::Mat extractedImg);
+    void ExtractController::extract(cv::Mat srcBGRImg, cv::Mat srcHSVImg, cv::Mat srcYCrCbImg, cv::Mat srcGrayImg,
+	cv::Mat dstImg);
+    void extractByColor(cv::Mat srcBGRImg, cv::Mat srcHSVImg, cv::Mat srcYCrCbImg);
+    void extractByContour(cv::Mat srcGrayImg, cv::Mat dstImg);
 };
 
 #endif // EXTRACTCONTROLLER_H

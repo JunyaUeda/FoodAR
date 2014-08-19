@@ -1,18 +1,22 @@
 #include "extractController.h"
 
 
-ExtractController::ExtractController(ExtractParamManager *extractParamManager)
-{
-   // this->extractService = new ColorExtractService;
+ExtractController::ExtractController(ExtractParamManager *extractParamManager) {
     this->extractParamManager = extractParamManager;
-   // this->contourService = new ContourService;
 }
 
-void ExtractController::extractByColor(cv::Mat bgrImg, cv::Mat hsvImg, cv::Mat yCrCbImg) {
-    this->extractService->extract(bgrImg, hsvImg, yCrCbImg, extractParamManager);
+void ExtractController::extract(cv::Mat srcBGRImg, cv::Mat srcHSVImg, cv::Mat srcYCrCbImg, cv::Mat srcGrayImg,
+	cv::Mat dstImg) {
+	//this.extractByColor(srcBGRImg, srcHSVImg, srcYCrCbImg);
+    this->targetParam->setContours(contourService->getTargetContours(srcGrayImg));
+	this->extractByContour(srcGrayImg, dstImg);
 }
 
-void ExtractController::extractByContour(cv::Mat grayImg, cv::Mat extractedImg) {
+void ExtractController::extractByColor(cv::Mat srcBGRImg, cv::Mat srcHSVImg, cv::Mat srcYCrCbImg) {
+    this->extractService->extract(srcBGRImg, srcHSVImg, srcYCrCbImg, extractParamManager);
+}
 
-        this->contourService->extractByContour(grayImg, extractedImg);
+void ExtractController::extractByContour(cv::Mat srcGrayImg, cv::Mat dstImg) {
+
+    this->contourService->extractByContour(srcGrayImg, dstImg);
 }
