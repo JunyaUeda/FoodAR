@@ -16,7 +16,7 @@ private:
 public:
     ExtractController(ExtractParamManager *extractParamManager);
     void ExtractController::extract(cv::Mat srcBGRImg, cv::Mat srcHSVImg, cv::Mat srcYCrCbImg, cv::Mat srcGrayImg,
-	cv::Mat dstImg);
+	cv::Mat dstImg, cv::Mat* BGRChannels);
     void extractByColor(cv::Mat srcBGRImg, cv::Mat srcHSVImg, cv::Mat srcYCrCbImg);
     void extractByContour(cv::Mat srcGrayImg, cv::Mat dstImg);
 };

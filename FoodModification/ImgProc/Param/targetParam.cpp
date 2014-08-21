@@ -1,21 +1,22 @@
 #include "targetParam.h"
-
+#include <QDebug>
 TargetParam::TargetParam()
 {
 }
 
 std::vector<std::vector<cv::Point>> TargetParam::getContours() {
-	return this->contours;
+	return *contours;
 }
 
-void TargetParam::setContours(std::vector<std::vector<cv::Point>> contours) {
-	this->contours = contours;
+void TargetParam::setContours(std::vector<std::vector<cv::Point>>* conturs) {
+	//std::vector<std::vector<cv::Point>>* cont = contours;
+	this->contours = conturs;
 }
 
 std::vector<cv::Point> TargetParam::getMaxSizeContour() {
-	return this->maxSizeContour;
+	return *maxSizeContour;
 }
 
-void TargetParam::setMaxSizeContour(std::vector<cv::Point> maxSizeContour) {
+void TargetParam::setMaxSizeContour(std::vector<cv::Point>* maxSizeContour) {
 	this->maxSizeContour = maxSizeContour;
 }

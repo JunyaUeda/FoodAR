@@ -1,4 +1,5 @@
 #include "opencvManager.h"
+#include "opencvUtils.h"
 #define THRESHOLD1 30.0
 #define THRESHOLD2 60.0
 #define APERTURE_SIZE 3
@@ -51,10 +52,11 @@ void OpenCVManager::doConvertion() {
         
         cv::imshow("result canny", BGREdges[0]);
         
+        
         //dstImg = srcBGRImg.clone();
         dstImg = cv::Mat::zeros(srcBGRImg.size(), srcBGRImg.type());
         cv::threshold(srcGrayImg, srcGrayImg, 80, 255, cv::THRESH_BINARY);
-        extractController->extractByContour(srcGrayImg, dstImg);
+        extractController->extract(srcBGRImg, srcHSVImg, srcYCrCbImg, srcGrayImg, dstImg, BGREdges);
         cv::imshow("myWindow", srcBGRImg);
         cv::imshow("contourExtractedImg", dstImg);
 
