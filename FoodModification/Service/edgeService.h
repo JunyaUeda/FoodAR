@@ -1,6 +1,6 @@
 #ifndef EDGESERVICE_H
 #define EDGESERVICE_H
-#include "../opencvBase.h"
+#include "../Utils/opencvBase.h"
 
 class EdgeService : public OpenCVBase
 {

@@ -5,6 +5,9 @@ class ColorCriterion {
 public:
     ColorCriterion();
 private:
+    int blue;
+    int green;
+    int red;
     int hue;
     int saturation;
     int value;
@@ -48,6 +51,12 @@ public:
     void setCb(int Cb) {
         this->Cb = Cb;
     }
+    int getBlue() const;
+    void setBlue(int value);
+    int getGreen() const;
+    void setGreen(int value);
+    int getRed() const;
+    void setRed(int value);
 };
 
 #endif // COLORCRITERION_H

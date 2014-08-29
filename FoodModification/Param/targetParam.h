@@ -1,6 +1,6 @@
 #ifndef TARGETPARAM_H
 #define TARGETPARAM_H
-#include "../opencvBase.h"
+#include "../Utils/opencvBase.h"
 
 class TargetParam : public OpenCVBase
 {

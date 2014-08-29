@@ -13,39 +13,46 @@ TEMPLATE = app
 
 
 SOURCES += main.cpp\
-        mainwindow.cpp \
-    finddialog.cpp \
     extractParamManager.cpp \
-    domParser.cpp \
-    propertyController.cpp \
     Param/colorCriterion.cpp \
-    ImgProc/colorExtractService.cpp \
-    ImgProc/extractController.cpp \
-    ImgProc/opencvBase.cpp \
-    ImgProc/opencvManager.cpp \
-    ImgProc/opencvUtils.cpp \
     Param/colorExtractTolerance.cpp \
-    ImgProc/Service/contourService.cpp \
-    ImgProc/Service/edgeService.cpp \
-    ImgProc/Param/targetParam.cpp
+    View/calibrateDialog.cpp \
+    Param/calibrateClickParam.cpp \
+    app.cpp \
+    Controller/extractController.cpp \
+    Param/targetParam.cpp \
+    Service/colorExtractService.cpp \
+    Service/contourService.cpp \
+    Service/edgeService.cpp \
+    Utils/opencvBase.cpp \
+    Utils/opencvUtils.cpp \
+    Controller/calibrationController.cpp \
+    Controller/propertyController.cpp \
+    View/mainWindow.cpp \
+    Controller/mainController.cpp
 
-HEADERS  += mainwindow.h \
-    finddialog.h \
+HEADERS  += \
     extractParamManager.h \
-    domParser.h \
-    propertyController.h \
     Param/colorCriterion.h \
-    ImgProc/colorExtractService.h \
-    ImgProc/extractController.h \
-    ImgProc/opencvBase.h \
-    ImgProc/opencvManager.h \
-    ImgProc/opencvUtils.h \
     Param/colorExtractTolerance.h \
-    ImgProc/Service/contourService.h \
-    ImgProc/Service/edgeService.h \
-    ImgProc/Param/targetParam.h
+    View/calibrateDialog.h \
+    Param/calibrateClickParam.h \
+    app.h \
+    Controller/extractController.h \
+    Param/targetParam.h \
+    Service/colorExtractService.h \
+    Service/contourService.h \
+    Service/edgeService.h \
+    Utils/opencvBase.h \
+    Utils/opencvUtils.h \
+    Controller/calibrationController.h \
+    Controller/propertyController.h \
+    View/mainWindow.h \
+    Controller/mainController.h
 
-FORMS    += mainwindow.ui
+FORMS    += \
+    View/calibrateDialog.ui \
+    View/mainWindow.ui
 
 # OpenCV settings
 # for Windows
@@ -55,5 +62,4 @@ win32:LIBS += -L"C:\opencv248\build\x86\vc12\lib"
 #win32:LIBS += -lopencv_core248d -lopencv_highgui248d -lopencv_imgproc248d
 
 OTHER_FILES += \
-    param.txt \
     ExtractParam.xml
