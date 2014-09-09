@@ -13,19 +13,85 @@
 #define SIGN_R(IMG,INDEX,X,Y) ((IMG).data[( (IMG).size[1]*(IMG).size[2]*(IMG).channels()*(INDEX) + (IMG).size[2]*(IMG).channels()*(Y) + (IMG).channels()*(X)) + 4])
 #define DIFF_R(IMG,INDEX,X,Y) ((IMG).data[( (IMG).size[1]*(IMG).size[2]*(IMG).channels()*(INDEX) + (IMG).size[2]*(IMG).channels()*(Y) + (IMG).channels()*(X)) + 5])
 
-ColorExtractService::ColorExtractService()
-{
+ColorExtractService::ColorExtractService() {
+
 }
 
 void ColorExtractService::extractByBGR(cv::Mat bgrImg, cv::Mat dstImg, ExtractParamManager* extractParamManager) {
 
     cv::Mat diffMap = getBGRDifferenceMap(bgrImg,extractParamManager->criterion);
-
     for(int y=0; y<bgrImg.rows; y++) {
         for(int x=0; x<bgrImg.cols; x++) {
             classifyByBGR(x,y,bgrImg,dstImg,extractParamManager,diffMap);
         }
     }
+
+}
+
+void ColorExtractService::extractByHSV(cv::Mat srcImg, cv::Mat dstImg, ExtractParamManager* extractParamManager) {
+
+   // cv::Mat diffMap = getHSVDifferenceMap(srcImg,extractParamManager->criterion);
+    //int tolerance[6] = {0};
+    // tolerance[0] = tolerance->getHueHighTolerance();
+    // tolerance[1] = tolerance->getHueLowTolerance();
+    // tolerance[2] = tolerance->getSaturationHighTolerance();
+    // tolerance[3] = tolerance->getSaturationLowTolerance();
+    // tolerance[4] = tolerance->getValueHighTolerance();
+    // tolerance[5] = tolerance->getValueLowTolerance();
+    int width = srcImg.cols;
+    int height = srcImg.rows;
+//    for(int y=0; y<height; y++) {
+//        for(int x=0; x<width; x++) {
+//            classifyByHSV(x,y,srcImg,dstImg,extractParamManager,diffMap);
+//        }
+//    }
+
+}
+
+void ColorExtractService::classifyByHSV(int x, int y, cv::Mat srcImg, cv::Mat dstImg, ExtractParamManager* extractParamManager, cv::Mat diffMap) {
+
+    //int indexOfCriterion = getIndexOfNearCriterionByValue(x,y,diffMap);
+    // int indexOfCriterion = 0;
+    // ColorExtractTolerance* tolerance = extractParamManager->colorExtractTolerance + indexOfCriterion;
+
+    // int diffB = DIFF_B(diffMap,indexOfCriterion,x,y);
+    // int diffG = DIFF_G(diffMap,indexOfCriterion,x,y);
+    // int diffR = DIFF_R(diffMap,indexOfCriterion,x,y);
+
+    // int toleranceB, toleranceG, toleranceR;
+
+    // if(SIGN_B(diffMap,indexOfCriterion,x,y)) {
+    //     toleranceB = tolerance->getHueHighTolerance();
+    // } else {
+    //     toleranceB = tolerance->getHueLowTolerance();
+    // }
+
+    // if(SIGN_G(diffMap,indexOfCriterion,x,y)) {
+    //     toleranceG = tolerance->getSaturationHighTolerance();
+    // } else {
+    //     toleranceG = tolerance->getSaturationLowTolerance();
+    // }
+
+    // if(SIGN_R(diffMap,indexOfCriterion,x,y)) {
+    //     toleranceR = tolerance->getValueHighTolerance();
+    // } else {
+    //     toleranceR = tolerance->getValueLowTolerance();
+    // }
+
+    // // toleranceB = tolerance->getHueHighTolerance();
+    // // toleranceG = tolerance->getSaturationHighTolerance();
+    // // toleranceR = tolerance->getValueHighTolerance();
+
+    // int factorB = toleranceB - diffB;
+    // int factorG = toleranceG - diffG;
+    // int factorR = toleranceR - diffR;
+
+    // if(factorB>0 && factorG>0 && factorR>0) {
+    //     OpenCVUtils::setPixelValue(dstImg,x,y,255);
+    // } else {
+    //     OpenCVUtils::setPixelValue(dstImg,x,y,0);
+    // }
+
 }
 
 void ColorExtractService::classifyByBGR(int x, int y, cv::Mat bgrImg, cv::Mat dstImg, ExtractParamManager* extractParamManager, cv::Mat diffMap) {
@@ -66,6 +132,7 @@ void ColorExtractService::classifyByBGR(int x, int y, cv::Mat bgrImg, cv::Mat ds
     } else {
         OpenCVUtils::setPixelValue(dstImg,x,y,0);
     }
+
 }
 
 int ColorExtractService::getIndexOfNearCriterion(int x, int y, cv::Mat diffMap) {
@@ -80,7 +147,18 @@ int ColorExtractService::getIndexOfNearCriterion(int x, int y, cv::Mat diffMap) 
 
 }
 
+int ColorExtractService::getIndexOfNearCriterionByValue(int x, int y, cv::Mat diffMap) {
+
+    if(DIFF_R(diffMap,0,x,y) < DIFF_R(diffMap,1,x,y)) {
+        return 0;
+    } else {
+        return 1;
+    }
+
+}
+
 cv::Mat ColorExtractService::getBGRDifferenceMap(cv::Mat srcImg, ColorCriterion* criterion) {
+
     const int sizes[] = {2, srcImg.size().width, srcImg.size().height};
     cv::Mat diffMap(3, sizes, CV_8UC(6));
     int HIGH = 1;
@@ -128,9 +206,63 @@ cv::Mat ColorExtractService::getBGRDifferenceMap(cv::Mat srcImg, ColorCriterion*
     }
 
     return diffMap;
+
+ }
+
+cv::Mat ColorExtractService::getHSVDifferenceMap(cv::Mat srcImg, ColorCriterion* criterion) {
+
+    const int sizes[] = {2, srcImg.size().width, srcImg.size().height};
+    cv::Mat diffMap(3, sizes, CV_8UC(6));
+    int HIGH = 1;
+    int LOW = 0;
+    for(int criterionIndex=0; criterionIndex<2; criterionIndex++) {
+       for(int y=0; y<srcImg.rows; y++) {
+            for(int x=0; x<srcImg.cols; x++) {
+                for(int colorIndex=0; colorIndex<3; colorIndex++) {
+                    int difference = 0;
+                    switch(colorIndex) {
+                        case 0:
+                            difference = B(srcImg,x,y) - (criterion+criterionIndex)->getHue();
+                            if(difference >= 0) {
+                                SIGN_B(diffMap,criterionIndex,x,y) = 1;
+                                DIFF_B(diffMap,criterionIndex,x,y) = difference;
+                            } else {
+                                SIGN_B(diffMap,criterionIndex,x,y) = 0;
+                                DIFF_B(diffMap,criterionIndex,x,y) = abs(difference);
+                            }
+                            break;
+                        case 1:
+                            difference = G(srcImg,x,y) - (criterion+criterionIndex)->getSaturation();
+                            if(difference >= 0) {
+                                SIGN_G(diffMap,criterionIndex,x,y) = 1;
+                                DIFF_G(diffMap,criterionIndex,x,y) = difference;
+                            } else {
+                                SIGN_G(diffMap,criterionIndex,x,y) = 0;
+                                DIFF_G(diffMap,criterionIndex,x,y) = abs(difference);
+                            }
+                            break;
+                        case 2:
+                            difference = R(srcImg,x,y) - (criterion+criterionIndex)->getValue();
+                            if(difference >= 0) {
+                                SIGN_R(diffMap,criterionIndex,x,y) = 1;
+                                DIFF_R(diffMap,criterionIndex,x,y) = difference;
+                            } else {
+                                SIGN_R(diffMap,criterionIndex,x,y) = 0;
+                                DIFF_R(diffMap,criterionIndex,x,y) = abs(difference);
+                            }
+                            break;
+                    } 
+                }
+            } 
+        }
+    }
+
+    return diffMap;
+
  }
 
 void ColorExtractService::extract(cv::Mat bgrImg, cv::Mat hsvImg,cv::Mat yCrCbImg, ExtractParamManager* extractParamManager) {
+
     for(int y=0; y<hsvImg.rows; y++) {
         for(int x=0; x<hsvImg.cols; x++) {
                 if(isNearNormalPointA(x, y, hsvImg, extractParamManager->criterion)) {
@@ -140,6 +272,7 @@ void ColorExtractService::extract(cv::Mat bgrImg, cv::Mat hsvImg,cv::Mat yCrCbIm
                 }
         }
     }
+
 }
 
 void ColorExtractService::discriminate(int x, int y, cv::Mat bgrImg, cv::Mat hsvImg, cv::Mat yCrCbImg, ColorCriterion* colorCriterion, ColorExtractTolerance* extractTolerance) {
@@ -159,6 +292,7 @@ void ColorExtractService::discriminate(int x, int y, cv::Mat bgrImg, cv::Mat hsv
     } else {
         OpenCVUtils::setPixelValue(bgrImg, x, y, 0);
     }
+
 }
 
 bool ColorExtractService::isNearNormalPointA(int x, int y, cv::Mat hsvImg, ColorCriterion* colorCriterion) {
@@ -169,7 +303,9 @@ bool ColorExtractService::isNearNormalPointA(int x, int y, cv::Mat hsvImg, Color
     if (absoluteValueDifferenceA <= absoluteValueDifferenceB) {
         return true;
     }
+
     return false;
+
 }
 
 

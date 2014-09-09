@@ -12,10 +12,13 @@ public:
     ColorCriterion* criterion;
     ColorExtractTolerance* colorExtractTolerance;
     cv::Mat referenceMat;
+    int extractColorSpace;
 
 public:
     ExtractParamManager(int criterionNum);
     
+    int getExtractColorSpace() const;
+    void setExtractColorSpace(int value);
 };
 
 #endif // EXTRACTPARAMMANAGER_H

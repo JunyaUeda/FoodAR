@@ -5,9 +5,10 @@
 #define APERTURE_SIZE 3
 #define L2_GRADIENT true
 
-MainController::MainController(ExtractParamManager *extractParamManager)
-{
+MainController::MainController(ExtractParamManager *extractParamManager) {
+
 	this->extractController = new ExtractController(extractParamManager);
+    
 }
 
 void MainController::doConvertion() {
@@ -33,22 +34,22 @@ void MainController::doConvertion() {
         videoCapture >> srcBGRImg;
 
         cv::cvtColor(srcBGRImg, srcHSVImg, CV_BGR2HSV);
-        cv::cvtColor(srcBGRImg, srcYCrCbImg,CV_BGR2YCrCb);
+        //cv::cvtColor(srcBGRImg, srcYCrCbImg,CV_BGR2YCrCb);
         cv::cvtColor(srcBGRImg, srcGrayImg, CV_BGR2GRAY);
         
         cv::split(srcBGRImg, BGRChannels);
         cv::split(srcBGRImg, HSVChannels);
-        cv::split(srcBGRImg, YCrCbChannels);
+        //cv::split(srcBGRImg, YCrCbChannels);
 
         cv::Canny(BGRChannels[0], BGREdges[0], THRESHOLD1, THRESHOLD2, APERTURE_SIZE, L2_GRADIENT);
         cv::Canny(BGRChannels[1], BGREdges[1], THRESHOLD1, THRESHOLD2, APERTURE_SIZE, L2_GRADIENT);
         cv::Canny(BGRChannels[2], BGREdges[2], THRESHOLD1, THRESHOLD2, APERTURE_SIZE, L2_GRADIENT);
-        cv::Canny(HSVChannels[0], HSVEdges[0], THRESHOLD1, THRESHOLD2, APERTURE_SIZE, L2_GRADIENT);
-        cv::Canny(HSVChannels[1], HSVEdges[1], THRESHOLD1, THRESHOLD2, APERTURE_SIZE, L2_GRADIENT);
-        cv::Canny(HSVChannels[2], HSVEdges[2], THRESHOLD1, THRESHOLD2, APERTURE_SIZE, L2_GRADIENT);
-        cv::Canny(YCrCbChannels[0], YCrCbEdges[0], THRESHOLD1, THRESHOLD2, APERTURE_SIZE, L2_GRADIENT);
-        cv::Canny(YCrCbChannels[1], YCrCbEdges[1], THRESHOLD1, THRESHOLD2, APERTURE_SIZE, L2_GRADIENT);
-        cv::Canny(YCrCbChannels[2], YCrCbEdges[2], THRESHOLD1, THRESHOLD2, APERTURE_SIZE, L2_GRADIENT);
+       // cv::Canny(HSVChannels[0], HSVEdges[0], THRESHOLD1, THRESHOLD2, APERTURE_SIZE, L2_GRADIENT);
+       // cv::Canny(HSVChannels[1], HSVEdges[1], THRESHOLD1, THRESHOLD2, APERTURE_SIZE, L2_GRADIENT);
+        //cv::Canny(HSVChannels[2], HSVEdges[2], THRESHOLD1, THRESHOLD2, APERTURE_SIZE, L2_GRADIENT);
+        //cv::Canny(YCrCbChannels[0], YCrCbEdges[0], THRESHOLD1, THRESHOLD2, APERTURE_SIZE, L2_GRADIENT);
+        //cv::Canny(YCrCbChannels[1], YCrCbEdges[1], THRESHOLD1, THRESHOLD2, APERTURE_SIZE, L2_GRADIENT);
+       // cv::Canny(YCrCbChannels[2], YCrCbEdges[2], THRESHOLD1, THRESHOLD2, APERTURE_SIZE, L2_GRADIENT);
         
         cv::imshow("result canny", BGREdges[0]);
         
@@ -64,4 +65,5 @@ void MainController::doConvertion() {
         char ch = cv::waitKey(33);
         if ( ch == 27 ) break;
     }
+
 }

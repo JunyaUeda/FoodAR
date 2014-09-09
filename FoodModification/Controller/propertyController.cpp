@@ -2,42 +2,42 @@
 #include <QtCore>
 #include <QtXml>
 
-PropertyController::PropertyController(QString filePath)
-{
+PropertyController::PropertyController(QString filePath) {
 
-     // Open a file for reading
      QFile file(filePath);
      if(!file.open(QIODevice::ReadOnly | QIODevice::Text)) {
         qDebug() << "Failed to open the file for reading1.";
         //return false;
      } else {
-        //loding
-         if (!this->document.setContent(&file)) {
+        if (!this->document.setContent(&file)) {
             qDebug() << "Failed to load the file for readingi2.";
           //  return false;
         }
         file.close();
     }
 
-    //Getting root element
     this->domRoot = document.firstChildElement();
 
-     this->extractParamManager = new ExtractParamManager(getColorCriterionNum());
+    this->extractParamManager = new ExtractParamManager(getColorCriterionNum());
 
      readParameters();
+
 }
 
 int PropertyController::getColorCriterionNum() {
 
     return getIntParamByTagName("CriterionNum", this->domRoot);
+
 }
 
 bool PropertyController::readParameters() {
 
     setColorCriterion(this->domRoot,  this->extractParamManager->criterion);
     setColorExtractTolerance(this->domRoot, this->extractParamManager->colorExtractTolerance);
+    readExtractColorSpace(this->domRoot);
+
     return true;
-    
+
 }
 
 int PropertyController::getIntParamByTagName(QString tag, QDomElement inElement) {
@@ -46,6 +46,15 @@ int PropertyController::getIntParamByTagName(QString tag, QDomElement inElement)
     QString text = element.text();
 
     return text.toInt();
+
+}
+
+QString PropertyController::getStringParamByTagName(QString tag, QDomElement inElement) {
+    
+    QDomElement element = inElement.firstChildElement(tag);
+    QString text = element.text();
+
+    return text;
 
 }
 
@@ -78,9 +87,23 @@ void PropertyController::setColorExtractTolerance(QDomElement root, ColorExtract
             //tolerance[i].setCrTolerance(getIntParamByTagName("crTolerance", element));
         }
     }
+
 }
 
 ExtractParamManager* PropertyController::getExtractParamManager() {
+
     return this->extractParamManager;
+
 }
 
+void PropertyController::readExtractColorSpace(QDomElement root) {
+ 
+    QString text = getStringParamByTagName("ExtractColorSpace", root);
+    if(text == "BGR") {
+        this->extractParamManager->setExtractColorSpace(0);
+    } else if (text == "HSV") {
+        this->extractParamManager->setExtractColorSpace(1);
+    }
+    qDebug() << "ExtractColorSpace =" << this->extractParamManager->getExtractColorSpace();
+
+}

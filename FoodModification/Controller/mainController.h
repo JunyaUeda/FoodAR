@@ -4,13 +4,15 @@
 #include "./extractController.h"
 #include "../Utils/opencvUtils.h"
 
-class MainController
-{
+class MainController {
+
 private:
     ExtractController *extractController;
+
 public:
     MainController(ExtractParamManager *extractParamManager);
     void doConvertion();
+    
 };
 
 #endif // MAINCONTROLLER_H

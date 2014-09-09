@@ -32,4 +32,7 @@
 		<valueTolerance>60</valueTolerance>
 		<crTolerance>60</crTolerance>
 	</ColorExtractTolerance>
+
+	<ExtractColorSpace>HSV</ExtractColorSpace>
+	
 </Params>

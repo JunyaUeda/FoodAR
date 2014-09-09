@@ -22,7 +22,7 @@
 #include "Utils/opencvBase.h"
 #include "extractParamManager.h"
 
-#define FILEPATH ".\\ExtractParam.xml"
+#define FILEPATH "ExtractParam.xml"
 class App
 {
 public:
