@@ -2,7 +2,7 @@
 #define COLOREXTRACTSERVICE_H
 
 #include "../Utils/opencvBase.h"
-#include "..\\extractParamManager.h"
+#include "../extractParamManager.h"
 
 class ColorExtractService : public OpenCVBase {
 
@@ -21,7 +21,7 @@ private:
     cv::Mat getHSVDifferenceMap(cv::Mat srcImg, ColorCriterion* criterion);
     void classifyByBGR(int x, int y, cv::Mat bgrImg, cv::Mat dstImg, ExtractParamManager* extractParamManager, cv::Mat diffMap);
     void classifyByHSV(int x, int y, cv::Mat srcImg, cv::Mat dstImg, ExtractParamManager* extractParamManager, cv::Mat diffMap);
-
+    int getHSVCriterionIndex(int x, int y, cv::Mat srcImg, ExtractParamManager* extractParamManager);
 };
 
 #endif // COLOREXTRACTSERVICE_H

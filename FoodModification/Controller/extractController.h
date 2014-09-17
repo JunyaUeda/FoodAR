@@ -5,12 +5,14 @@
 #include "../Service/colorExtractService.h"
 #include "../Service/contourService.h"
 #include "../Param/targetParam.h"
+#include "../Service/edgeService.h"
 
 class ExtractController {
 
 private:
-    ColorExtractService *extractService;
-    ExtractParamManager *extractParamManager;
+    ExtractParamManager* extractParamManager;
+    ColorExtractService* extractService;
+    EdgeService* edgeService;
     ContourService* contourService;
     TargetParam* targetParam;
 

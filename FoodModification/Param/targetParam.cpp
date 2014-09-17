@@ -20,3 +20,12 @@ std::vector<cv::Point> TargetParam::getMaxSizeContour() {
 void TargetParam::setMaxSizeContour(std::vector<cv::Point>* maxSizeContour) {
 	this->maxSizeContour = maxSizeContour;
 }
+cv::Mat TargetParam::getDstEdgeImg() const
+{
+    return dstEdgeImg;
+}
+
+void TargetParam::setDstEdgeImg(const cv::Mat &value)
+{
+    dstEdgeImg = value;
+}

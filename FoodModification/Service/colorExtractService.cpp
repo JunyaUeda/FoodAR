@@ -2,9 +2,9 @@
 
 #include "../Utils/opencvUtils.h"
 #include <math.h>
-#include "..\\Param\\colorCriterion.h"
-#include "..\\Param\\colorExtractTolerance.h"
-#include "..\\extractParamManager.h"
+#include "../Param/colorCriterion.h"
+#include "../Param/colorExtractTolerance.h"
+#include "../extractParamManager.h"
 //SIGN：DIFFの符号を表す 正1, 0, 負-1
 #define SIGN_B(IMG,INDEX,X,Y) ((IMG).data[( (IMG).size[1]*(IMG).size[2]*(IMG).channels()*(INDEX) + (IMG).size[2]*(IMG).channels()*(Y) + (IMG).channels()*(X)) + 0])
 #define DIFF_B(IMG,INDEX,X,Y) ((IMG).data[( (IMG).size[1]*(IMG).size[2]*(IMG).channels()*(INDEX) + (IMG).size[2]*(IMG).channels()*(Y) + (IMG).channels()*(X)) + 1])
@@ -30,67 +30,102 @@ void ColorExtractService::extractByBGR(cv::Mat bgrImg, cv::Mat dstImg, ExtractPa
 
 void ColorExtractService::extractByHSV(cv::Mat srcImg, cv::Mat dstImg, ExtractParamManager* extractParamManager) {
 
-   // cv::Mat diffMap = getHSVDifferenceMap(srcImg,extractParamManager->criterion);
-    //int tolerance[6] = {0};
-    // tolerance[0] = tolerance->getHueHighTolerance();
-    // tolerance[1] = tolerance->getHueLowTolerance();
-    // tolerance[2] = tolerance->getSaturationHighTolerance();
-    // tolerance[3] = tolerance->getSaturationLowTolerance();
-    // tolerance[4] = tolerance->getValueHighTolerance();
-    // tolerance[5] = tolerance->getValueLowTolerance();
-    int width = srcImg.cols;
-    int height = srcImg.rows;
-//    for(int y=0; y<height; y++) {
-//        for(int x=0; x<width; x++) {
-//            classifyByHSV(x,y,srcImg,dstImg,extractParamManager,diffMap);
-//        }
-//    }
+    for(int y=0; y<srcImg.rows; y++) {
+        for(int x=0; x<srcImg.cols; x++) {
+
+            int nearCriterionIndex = getHSVCriterionIndex(x, y, srcImg, extractParamManager);
+
+            ColorCriterion* criterion = extractParamManager->criterion + nearCriterionIndex;
+            ColorExtractTolerance* tolerance = extractParamManager->colorExtractTolerance + nearCriterionIndex;
+
+            int diffHue = H(srcImg,x,y) - criterion->getHue();
+            int diffSaturation = S(srcImg,x,y) - criterion->getSaturation();
+            int diffValue = V(srcImg,x,y) - criterion->getValue();
+
+            int factorH = 0; int factorS = 0; int factorV = 0;
+
+            if(diffHue > 0) {
+                factorH = tolerance->getHueHighTolerance() - abs(diffHue);
+            } else {
+                factorH = tolerance->getHueLowTolerance() - abs(diffHue);
+            }
+
+            if(diffSaturation > 0) {
+                factorS = tolerance->getSaturationHighTolerance() - abs(diffSaturation);
+            } else {
+                factorS = tolerance->getSaturationLowTolerance() - abs(diffSaturation);
+            }
+
+            if(diffValue > 0) {
+                factorV = tolerance->getValueHighTolerance() - abs(diffValue);
+            } else {
+                factorV = tolerance->getValueLowTolerance() - abs(diffValue);
+            }
+
+            /*ここの条件が色度値による抽出の精度に大きく影響するので、色々試して改善する必要がある*/
+            if( (factorH + factorS + factorV) >0) {
+                OpenCVUtils::setPixelValue(dstImg,x,y,255);
+            } else {
+                OpenCVUtils::setPixelValue(dstImg,x,y,0);
+            }     
+    
+        }   
+   }
+
+}
+
+int ColorExtractService::getHSVCriterionIndex(int x, int y, cv::Mat srcImg, ExtractParamManager* extractParamManager) {
+
+    int difference_V0 = V(srcImg,x,y) - (extractParamManager->criterion+0)->getValue();
+    int difference_V1 = V(srcImg,x,y) - (extractParamManager->criterion+1)->getValue();
+
+    if( ( abs(difference_V0) - abs(difference_V1) ) >= 0) {
+        return 1; 
+    } else {
+        return 0;
+    }
 
 }
 
 void ColorExtractService::classifyByHSV(int x, int y, cv::Mat srcImg, cv::Mat dstImg, ExtractParamManager* extractParamManager, cv::Mat diffMap) {
 
-    //int indexOfCriterion = getIndexOfNearCriterionByValue(x,y,diffMap);
-    // int indexOfCriterion = 0;
-    // ColorExtractTolerance* tolerance = extractParamManager->colorExtractTolerance + indexOfCriterion;
+    int indexOfCriterion = getIndexOfNearCriterionByValue(x,y,diffMap);
+    //int indexOfCriterion = 0;
+    ColorExtractTolerance* tolerance = extractParamManager->colorExtractTolerance + indexOfCriterion;
 
-    // int diffB = DIFF_B(diffMap,indexOfCriterion,x,y);
-    // int diffG = DIFF_G(diffMap,indexOfCriterion,x,y);
-    // int diffR = DIFF_R(diffMap,indexOfCriterion,x,y);
+    int diffB = DIFF_B(diffMap,indexOfCriterion,x,y);
+    int diffG = DIFF_G(diffMap,indexOfCriterion,x,y);
+    int diffR = DIFF_R(diffMap,indexOfCriterion,x,y);
 
-    // int toleranceB, toleranceG, toleranceR;
+    int toleranceB, toleranceG, toleranceR;
 
-    // if(SIGN_B(diffMap,indexOfCriterion,x,y)) {
-    //     toleranceB = tolerance->getHueHighTolerance();
-    // } else {
-    //     toleranceB = tolerance->getHueLowTolerance();
-    // }
+    if(SIGN_B(diffMap,indexOfCriterion,x,y)) {
+        toleranceB = tolerance->getHueHighTolerance();
+    } else {
+        toleranceB = tolerance->getHueLowTolerance();
+    }
 
-    // if(SIGN_G(diffMap,indexOfCriterion,x,y)) {
-    //     toleranceG = tolerance->getSaturationHighTolerance();
-    // } else {
-    //     toleranceG = tolerance->getSaturationLowTolerance();
-    // }
+    if(SIGN_G(diffMap,indexOfCriterion,x,y)) {
+        toleranceG = tolerance->getSaturationHighTolerance();
+    } else {
+        toleranceG = tolerance->getSaturationLowTolerance();
+    }
 
-    // if(SIGN_R(diffMap,indexOfCriterion,x,y)) {
-    //     toleranceR = tolerance->getValueHighTolerance();
-    // } else {
-    //     toleranceR = tolerance->getValueLowTolerance();
-    // }
+    if(SIGN_R(diffMap,indexOfCriterion,x,y)) {
+        toleranceR = tolerance->getValueHighTolerance();
+    } else {
+        toleranceR = tolerance->getValueLowTolerance();
+    }
 
-    // // toleranceB = tolerance->getHueHighTolerance();
-    // // toleranceG = tolerance->getSaturationHighTolerance();
-    // // toleranceR = tolerance->getValueHighTolerance();
+    int factorB = toleranceB - diffB;
+    int factorG = toleranceG - diffG;
+    int factorR = toleranceR - diffR;
 
-    // int factorB = toleranceB - diffB;
-    // int factorG = toleranceG - diffG;
-    // int factorR = toleranceR - diffR;
-
-    // if(factorB>0 && factorG>0 && factorR>0) {
-    //     OpenCVUtils::setPixelValue(dstImg,x,y,255);
-    // } else {
-    //     OpenCVUtils::setPixelValue(dstImg,x,y,0);
-    // }
+    if(factorB>0 && factorG>0 && factorR>0) {
+        OpenCVUtils::setPixelValue(dstImg,x,y,255);
+    } else {
+        OpenCVUtils::setPixelValue(dstImg,x,y,0);
+    }
 
 }
 

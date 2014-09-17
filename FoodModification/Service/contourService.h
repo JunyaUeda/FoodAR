@@ -9,7 +9,7 @@ public:
     int getMaxAreaContourIndex(std::vector<std::vector<cv::Point>> contours);
     std::vector<std::vector<cv::Point>> getTargetContours(cv::Mat srcBinaryImg);
 private:
-
+	
 };
 
 #endif // CONTOURSERVICE_H

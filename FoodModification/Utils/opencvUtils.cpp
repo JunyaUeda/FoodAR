@@ -9,3 +9,4 @@ void OpenCVUtils::setPixelValue(cv::Mat img, int x, int y, int value) {
     G(img,x,y) = value;
     R(img,x,y) = value;
 }
+
