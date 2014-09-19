@@ -67,12 +67,15 @@ void MainController::doConvertion() {
         
     
         //dstImg = srcBGRImg.clone();
-        dstImg = cv::Mat::zeros(srcBGRImg.size(), srcBGRImg.type());
+        dstImg = cv::Mat::zeros(srcBGRImg.size(), CV_8UC1);
+        std::vector<std::vector<cv::Point>> dstContours;
         //cv::threshold(srcGrayImg, srcGrayImg, 80, 255, cv::THRESH_BINARY);
-        extractController->extract(srcBGRImg, srcHSVImg, srcYCrCbImg, srcGrayImg, dstImg, YCrCbEdges);
+        extractController->extract(srcBGRImg, srcHSVImg, srcYCrCbImg, srcGrayImg, dstImg, dstContours, YCrCbEdges);
         cv::imshow("myWindow", srcBGRImg);
-        cv::imshow("contourExtractedImg", dstImg);
+        cv::imshow("FinalExtractedImg", dstImg);
 
+        cv::Mat textureImg = textureController->createTexture(dstContours, dstImg);
+        cv::imshow("textureImg", textureImg);
 
         char ch = cv::waitKey(33);
         if ( ch == 27 ) break;

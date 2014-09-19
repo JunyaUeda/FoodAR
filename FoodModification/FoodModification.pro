@@ -29,7 +29,9 @@ SOURCES += main.cpp\
     Controller/calibrationController.cpp \
     Controller/propertyController.cpp \
     View/mainWindow.cpp \
-    Controller/mainController.cpp
+    Controller/mainController.cpp \
+    Service/textureService.cpp \
+    Controller/textureController.cpp
 
 HEADERS  += \
     extractParamManager.h \
@@ -48,7 +50,9 @@ HEADERS  += \
     Controller/calibrationController.h \
     Controller/propertyController.h \
     View/mainWindow.h \
-    Controller/mainController.h
+    Controller/mainController.h \
+    Service/textureService.h \
+    Controller/textureController.h
 
 FORMS    += \
     View/calibrateDialog.ui \
@@ -62,4 +66,8 @@ win32:LIBS += -L"C:\opencv248\build\x86\vc12\lib"
 #win32:LIBS += -lopencv_core248d -lopencv_highgui248d -lopencv_imgproc248d
 
 OTHER_FILES += \
-    ExtractParam.xml
+    ExtractParam.xml \
+    Images/hamachi.jpg \
+    Images/otoro.jpg \
+    Images/sarmon.jpg \
+    Images/toro.jpg

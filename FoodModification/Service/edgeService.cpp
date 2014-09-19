@@ -17,7 +17,7 @@ void EdgeService::extractEdge(cv::Mat *channelEdgeImgs, cv::Mat dstEdgeImg) {
 			if(L(channelEdgeImgs[1],x,y) == 255) score++;
 			if(L(channelEdgeImgs[2],x,y) == 255) score++;
 
-			if(score >= 1) {
+			if(score >= 2) {
 				L(dstEdgeImg, x,y) = 255;
 			} else {
 				L(dstEdgeImg, x,y) = 0;
