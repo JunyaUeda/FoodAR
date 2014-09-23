@@ -6,19 +6,19 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>415</width>
-    <height>331</height>
+    <width>888</width>
+    <height>623</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Dialog</string>
+   <string>Calibration</string>
   </property>
   <widget class="QDialogButtonBox" name="buttonBox">
    <property name="geometry">
     <rect>
-     <x>30</x>
-     <y>240</y>
-     <width>351</width>
+     <x>410</x>
+     <y>530</y>
+     <width>201</width>
      <height>71</height>
     </rect>
    </property>
@@ -29,24 +29,11 @@
     <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
    </property>
   </widget>
-  <widget class="QLabel" name="label">
-   <property name="geometry">
-    <rect>
-     <x>160</x>
-     <y>20</y>
-     <width>111</width>
-     <height>16</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Calibration</string>
-   </property>
-  </widget>
   <widget class="QPushButton" name="videoInputButton">
    <property name="geometry">
     <rect>
      <x>30</x>
-     <y>110</y>
+     <y>550</y>
      <width>93</width>
      <height>28</height>
     </rect>
@@ -58,8 +45,8 @@
   <widget class="QPushButton" name="captureButton">
    <property name="geometry">
     <rect>
-     <x>160</x>
-     <y>110</y>
+     <x>150</x>
+     <y>550</y>
      <width>93</width>
      <height>28</height>
     </rect>
@@ -71,14 +58,33 @@
   <widget class="QPushButton" name="calculateButton">
    <property name="geometry">
     <rect>
-     <x>300</x>
-     <y>110</y>
+     <x>280</x>
+     <y>550</y>
      <width>93</width>
      <height>28</height>
     </rect>
    </property>
    <property name="text">
     <string>calculate</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_2">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>700</width>
+     <height>500</height>
+    </rect>
+   </property>
+   <property name="lineWidth">
+    <number>1</number>
+   </property>
+   <property name="text">
+    <string>TextLabel</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
    </property>
   </widget>
  </widget>

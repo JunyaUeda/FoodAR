@@ -1,8 +1,8 @@
 #ifndef EXTRACTPARAMMANAGER_H
 #define EXTRACTPARAMMANAGER_H
 #include <QString>
-#include "Param\\colorCriterion.h"
-#include "Param\\colorExtractTolerance.h"
+#include "Param/colorCriterion.h"
+#include "Param/colorExtractTolerance.h"
 #include "Utils/opencvUtils.h"
 
 class ExtractParamManager

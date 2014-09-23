@@ -17,3 +17,12 @@ void MainWindow::on_convertButton_clicked()
 {
     mainController->doConvertion();
 }
+
+
+void MainWindow::on_CalibrateButton_clicked()
+{
+	//calibrationController->calibrate();
+	CalibrateDialog* calibrateDialog = new CalibrateDialog();
+  	calibrateDialog->calibrationController = this->calibrationController;
+  	calibrateDialog->show();
+}

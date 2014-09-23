@@ -35,15 +35,15 @@ void mouseCallback(int event, int x, int y, int flags, void* param) {
 
 void CalibrationController::calibrate() {
 
-	cv::VideoCapture videoCapture = cv::VideoCapture(0);
-    cv::Mat srcBGRImg, srcHSVImg;
-    std::string windowName = "calibration";
+	VideoCapture videoCapture = VideoCapture(0);
+    Mat srcBGRImg, srcHSVImg;
+    string windowName = "Calibration";
 
     while(inputFlag) {
 
         videoCapture >> srcBGRImg;
-        cv::cvtColor(srcBGRImg, srcHSVImg, CV_BGR2HSV);
-        cv::imshow(windowName, srcBGRImg);
+        cvtColor(srcBGRImg, srcHSVImg, CV_BGR2HSV);
+        imshow(windowName, srcBGRImg);
         char ch = cv::waitKey(33);
 
         if ( ch == 27 ) break;
@@ -51,7 +51,7 @@ void CalibrationController::calibrate() {
     }
 
     this->clickParam->img = srcBGRImg.clone();
-    cv::setMouseCallback(windowName, mouseCallback, (void*)this->clickParam);
+    setMouseCallback(windowName, mouseCallback, (void*)this->clickParam);
     while(drawingFlag) {
 
     	cv::imshow(windowName, this->clickParam->img);
@@ -93,6 +93,7 @@ void CalibrationController::stopDrawing() {
 	this->drawingFlag = false;
 
 }
+
 
 void CalibrationController::setExtractParam(cv::Mat srcImg, cv::Mat refImg, int colorSpaceIndex) {
 
@@ -165,16 +166,6 @@ void CalibrationController::setExtractHSVParam(cv::Mat srcImg, cv::Mat refImg, c
     tolerace->setValueHighTolerance(valueTolerace[0]);
     tolerace->setValueLowTolerance(valueTolerace[1]);
 
-    qDebug() << "average H =" << average[0];
-    qDebug() << "average S =" << average[1];
-    qDebug() << "average V =" << average[2];
-    qDebug() << "highTolerance H =" << hueTolerace[0];
-    qDebug() << "lowTolerance H =" << hueTolerace[1];
-    qDebug() << "highTolerance S =" << saturationTolerance[0];
-    qDebug() << "lowTolerance S =" << saturationTolerance[1];
-    qDebug() << "highTolerance V =" << valueTolerace[0];
-    qDebug() << "lowTolerance V =" << valueTolerace[1];
-    
 }
 
 int CalibrationController::calculateAverages(cv::Mat srcImg, cv::Mat refImg, int* result, cv::Scalar color) {
@@ -316,3 +307,8 @@ cv::Mat CalibrationController::getDistribution(cv::Mat srcImg, cv::Mat refImg, i
 
 }
 
+void CalibrationController::autoCalibrate(Mat refImg, Mat maskImg, vector<Rect>& roiRects, ExtractParamManager* extractParamManager) {
+
+	calibrationService->calculateAverage(refImg, maskImg, roiRects, extractParamManager);
+	
+}

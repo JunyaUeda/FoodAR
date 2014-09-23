@@ -17,9 +17,9 @@ ColorExtractService::ColorExtractService() {
 
 }
 
-void ColorExtractService::extractByBGR(cv::Mat bgrImg, cv::Mat dstImg, ExtractParamManager* extractParamManager) {
+void ColorExtractService::extractByBGR(Mat bgrImg, Mat dstImg, ExtractParamManager* extractParamManager) {
 
-    cv::Mat diffMap = getBGRDifferenceMap(bgrImg,extractParamManager->criterion);
+    Mat diffMap = getBGRDifferenceMap(bgrImg,extractParamManager->criterion);
     for(int y=0; y<bgrImg.rows; y++) {
         for(int x=0; x<bgrImg.cols; x++) {
             classifyByBGR(x,y,bgrImg,dstImg,extractParamManager,diffMap);
@@ -28,7 +28,7 @@ void ColorExtractService::extractByBGR(cv::Mat bgrImg, cv::Mat dstImg, ExtractPa
 
 }
 
-void ColorExtractService::extractByHSV(cv::Mat srcImg, cv::Mat dstImg, ExtractParamManager* extractParamManager) {
+void ColorExtractService::extractByHSV(Mat srcImg, Mat dstImg, ExtractParamManager* extractParamManager) {
 
     for(int y=0; y<srcImg.rows; y++) {
         for(int x=0; x<srcImg.cols; x++) {
@@ -74,7 +74,7 @@ void ColorExtractService::extractByHSV(cv::Mat srcImg, cv::Mat dstImg, ExtractPa
 
 }
 
-int ColorExtractService::getHSVCriterionIndex(int x, int y, cv::Mat srcImg, ExtractParamManager* extractParamManager) {
+int ColorExtractService::getHSVCriterionIndex(int x, int y, Mat srcImg, ExtractParamManager* extractParamManager) {
 
     int difference_V0 = V(srcImg,x,y) - (extractParamManager->criterion+0)->getValue();
     int difference_V1 = V(srcImg,x,y) - (extractParamManager->criterion+1)->getValue();
@@ -87,7 +87,7 @@ int ColorExtractService::getHSVCriterionIndex(int x, int y, cv::Mat srcImg, Extr
 
 }
 
-void ColorExtractService::classifyByHSV(int x, int y, cv::Mat srcImg, cv::Mat dstImg, ExtractParamManager* extractParamManager, cv::Mat diffMap) {
+void ColorExtractService::classifyByHSV(int x, int y, Mat srcImg, Mat dstImg, ExtractParamManager* extractParamManager, Mat diffMap) {
 
     int indexOfCriterion = getIndexOfNearCriterionByValue(x,y,diffMap);
     //int indexOfCriterion = 0;
@@ -129,7 +129,7 @@ void ColorExtractService::classifyByHSV(int x, int y, cv::Mat srcImg, cv::Mat ds
 
 }
 
-void ColorExtractService::classifyByBGR(int x, int y, cv::Mat bgrImg, cv::Mat dstImg, ExtractParamManager* extractParamManager, cv::Mat diffMap) {
+void ColorExtractService::classifyByBGR(int x, int y, Mat bgrImg, Mat dstImg, ExtractParamManager* extractParamManager, Mat diffMap) {
 
     int indexOfCriterion = getIndexOfNearCriterion(x,y,diffMap);
     ColorExtractTolerance* tolerance = extractParamManager->colorExtractTolerance + indexOfCriterion;
@@ -170,7 +170,7 @@ void ColorExtractService::classifyByBGR(int x, int y, cv::Mat bgrImg, cv::Mat ds
 
 }
 
-int ColorExtractService::getIndexOfNearCriterion(int x, int y, cv::Mat diffMap) {
+int ColorExtractService::getIndexOfNearCriterion(int x, int y, Mat diffMap) {
 
     int sum0 = DIFF_R(diffMap,0,x,y) + DIFF_G(diffMap,0,x,y) + DIFF_B(diffMap,0,x,y);
     int sum1 = DIFF_R(diffMap,1,x,y) + DIFF_G(diffMap,1,x,y) + DIFF_B(diffMap,1,x,y);
@@ -182,7 +182,7 @@ int ColorExtractService::getIndexOfNearCriterion(int x, int y, cv::Mat diffMap) 
 
 }
 
-int ColorExtractService::getIndexOfNearCriterionByValue(int x, int y, cv::Mat diffMap) {
+int ColorExtractService::getIndexOfNearCriterionByValue(int x, int y, Mat diffMap) {
 
     if(DIFF_R(diffMap,0,x,y) < DIFF_R(diffMap,1,x,y)) {
         return 0;
@@ -192,10 +192,10 @@ int ColorExtractService::getIndexOfNearCriterionByValue(int x, int y, cv::Mat di
 
 }
 
-cv::Mat ColorExtractService::getBGRDifferenceMap(cv::Mat srcImg, ColorCriterion* criterion) {
+Mat ColorExtractService::getBGRDifferenceMap(Mat srcImg, ColorCriterion* criterion) {
 
     const int sizes[] = {2, srcImg.size().width, srcImg.size().height};
-    cv::Mat diffMap(3, sizes, CV_8UC(6));
+    Mat diffMap(3, sizes, CV_8UC(6));
     int HIGH = 1;
     int LOW = 0;
     for(int criterionIndex=0; criterionIndex<2; criterionIndex++) {
@@ -244,10 +244,10 @@ cv::Mat ColorExtractService::getBGRDifferenceMap(cv::Mat srcImg, ColorCriterion*
 
  }
 
-cv::Mat ColorExtractService::getHSVDifferenceMap(cv::Mat srcImg, ColorCriterion* criterion) {
+Mat ColorExtractService::getHSVDifferenceMap(Mat srcImg, ColorCriterion* criterion) {
 
     const int sizes[] = {2, srcImg.size().width, srcImg.size().height};
-    cv::Mat diffMap(3, sizes, CV_8UC(6));
+    Mat diffMap(3, sizes, CV_8UC(6));
     int HIGH = 1;
     int LOW = 0;
     for(int criterionIndex=0; criterionIndex<2; criterionIndex++) {
@@ -296,7 +296,7 @@ cv::Mat ColorExtractService::getHSVDifferenceMap(cv::Mat srcImg, ColorCriterion*
 
  }
 
-void ColorExtractService::extract(cv::Mat bgrImg, cv::Mat hsvImg,cv::Mat yCrCbImg, ExtractParamManager* extractParamManager) {
+void ColorExtractService::extract(Mat bgrImg, Mat hsvImg,Mat yCrCbImg, ExtractParamManager* extractParamManager) {
 
     for(int y=0; y<hsvImg.rows; y++) {
         for(int x=0; x<hsvImg.cols; x++) {

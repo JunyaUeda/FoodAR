@@ -9,6 +9,7 @@ public:
     int leftClickedCounts = 0;
     int rightClickedCounts = 0; 
     cv::Mat img;
+    Mat RGBImg;
 public:
     CalibrateClickParam();
 };

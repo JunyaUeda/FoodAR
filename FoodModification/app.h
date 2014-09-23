@@ -14,7 +14,6 @@
 #include <QHBoxLayout>
 #include <QSlider>
 #include <QSpinBox>
-#include "View/calibrateDialog.h"
 #include "View/mainWindow.h"
 #include "Controller/mainController.h"
 #include <QtCore>

@@ -11,7 +11,6 @@ Mat srcHSVImg;//クリックポイントの色度値を取得するためにグ�
 MainController::MainController(ExtractParamManager *extractParamManager) {
 
 	this->extractController = new ExtractController(extractParamManager);
-    
 }
 void mouseCallback1(int event, int x, int y, int flags, void* param) {
  
@@ -83,6 +82,7 @@ void MainController::doConvertion() {
         dstBGRImg = srcBGRImg.clone();
         convertController->convert(srcBGRImg,srcHSVImg, dstBGRImg, textureImg, maskImg, rects);
         imshow("dstImg",dstBGRImg);
+
 
         char ch = waitKey(33);
         if ( ch == 27 ) break;
