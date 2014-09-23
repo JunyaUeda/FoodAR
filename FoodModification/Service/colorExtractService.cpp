@@ -63,7 +63,7 @@ void ColorExtractService::extractByHSV(cv::Mat srcImg, cv::Mat dstImg, ExtractPa
             }
 
             /*ここの条件が色度値による抽出の精度に大きく影響するので、色々試して改善する必要がある*/
-            if( factorH>0 && factorS >-40 && factorV>-60) {//(factorH + factorS + factorV) >0
+            if( factorH>-10 && factorS >-40 && factorV>-60) {//(factorH + factorS + factorV) >0
                 L(dstImg,x,y) = 255;
             } else {
                 L(dstImg,x,y) = 0;
@@ -162,7 +162,7 @@ void ColorExtractService::classifyByBGR(int x, int y, cv::Mat bgrImg, cv::Mat ds
     int factorG = toleranceG - diffG;
     int factorR = toleranceR - diffR;
 
-    if(factorB>0 && factorG>0 && factorR>0) {
+    if(factorB>0 && factorG>-10 && factorR>-30) {
         OpenCVUtils::setPixelValue(dstImg,x,y,255);
     } else {
         OpenCVUtils::setPixelValue(dstImg,x,y,0);

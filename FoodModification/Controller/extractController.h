@@ -7,6 +7,9 @@
 #include "../Param/targetParam.h"
 #include "../Service/edgeService.h"
 
+using namespace cv;
+using namespace std;
+
 class ExtractController {
 
 private:
@@ -18,15 +21,20 @@ private:
 
 public:
     ExtractController(ExtractParamManager *extractParamManager);
-    void ExtractController::extract(cv::Mat srcBGRImg, cv::Mat srcHSVImg, cv::Mat srcYCrCbImg, cv::Mat srcGrayImg,
-	cv::Mat dstImg, std::vector<std::vector<cv::Point>>& dstContours, cv::Mat* BGRChannels);
-    void extractByColor(cv::Mat srcBGRImg, cv::Mat srcHSVImg, cv::Mat dstImg);
-    void extractByContour(cv::Mat srcGrayImg, cv::Mat dstImg);
+    void ExtractController::extract(Mat srcBGRImg, Mat srcHSVImg, Mat srcYCrCbImg, Mat srcGrayImg,
+	Mat dstImg, vector<vector<Point>>& dstContours, Mat* BGRChannels);
+    void extractByColor(Mat srcBGRImg, Mat srcHSVImg, Mat dstImg);
+    void extractByContour(Mat srcGrayImg, Mat dstImg);
 private:    
-    void fillContours(cv::Mat filledImg, std::vector<std::vector<cv::Point> >& contours, int minSize);
-    void calcurateCenter(std::vector<std::vector<cv::Point>>& contours, std::vector<cv::Point>& mCenters);
-    void getROI(cv::Size size, cv::Rect rect, cv::Rect roi, double scaleRatio);
-    
+    void fillContours(Mat filledImg, vector<vector<Point> >& contours, int lineType, int minSize);
+    void calcurateCenter(vector<vector<Point>>& contours, vector<Point>& mCenters);
+    void getROI(Size size, Rect rect, Rect roi, double scaleRatio);
+    void getIntegratedImage(Mat dstImg, Mat dstEdgeImg, Mat *Edges, vector<vector<Point> >& contours);
+    void getAreaAndCenters(vector<vector<Point> >& contours, vector<double>& areas, vector<Point>& mCenters);
+    void compAndFill(Mat dstImg, Mat dstEdgeImg, Mat *Edges, vector<vector<Point> >& contours, int lineType, int minSize);
+    void selectContoursWithPoints(Mat srcImg, vector<vector<Point> >& selectedContours, vector<Point>& points, int minSize);
+    void drawEdge(Mat srcImg, Mat edgeImg, int luminance);
+
 };
 
 #endif // EXTRACTCONTROLLER_H

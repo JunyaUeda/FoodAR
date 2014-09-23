@@ -4,12 +4,17 @@
 #include "./extractController.h"
 #include "../Utils/opencvUtils.h"
 #include "./textureController.h"
+#include "./convertController.h"
+
+using namespace cv;
+using namespace std;
 
 class MainController {
 
 private:
     ExtractController* extractController;
     TextureController* textureController;
+    ConvertController* convertController;
 
 public:
     MainController(ExtractParamManager *extractParamManager);

@@ -7,9 +7,9 @@ EdgeService::EdgeService() {
 
 void EdgeService::extractEdge(cv::Mat *channelEdgeImgs, cv::Mat dstEdgeImg) {
 
-	cv::imshow("edge img0 before", channelEdgeImgs[0]);
-	cv::imshow("edge img1 before", channelEdgeImgs[1]);
-	cv::imshow("edge img2 before", channelEdgeImgs[2]);
+	// cv::imshow("edge img0 before", channelEdgeImgs[0]);
+	// cv::imshow("edge img1 before", channelEdgeImgs[1]);
+	// cv::imshow("edge img2 before", channelEdgeImgs[2]);
 	for(int y=0; y<channelEdgeImgs[0].rows; y++) {
 		for(int x=0; x<channelEdgeImgs[0].cols; x++) {
 			int score = 0;

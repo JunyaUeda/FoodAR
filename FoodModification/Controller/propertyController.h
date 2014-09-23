@@ -3,8 +3,8 @@
 #include <QString>
 #include <QDomElement>
 #include "../extractParamManager.h"
-#include "../Param\\colorCriterion.h"
-#include "../Param\\colorExtractTolerance.h"
+#include "../Param/colorCriterion.h"
+#include "../Param/colorExtractTolerance.h"
 
 class PropertyController {
     

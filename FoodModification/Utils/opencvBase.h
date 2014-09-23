@@ -48,6 +48,9 @@
 #define X(IMG,Y) ((IMG).data[(IMG).step*(Y) + (IMG).channels() + 3])
 #define Y(IMG,Y) ((IMG).data[(IMG).step*(Y) + (IMG).channels() + 4])
 
+using namespace cv;
+using namespace std;
+
 class OpenCVBase
 {
 public:

@@ -31,7 +31,8 @@ SOURCES += main.cpp\
     View/mainWindow.cpp \
     Controller/mainController.cpp \
     Service/textureService.cpp \
-    Controller/textureController.cpp
+    Controller/textureController.cpp \
+    Controller/convertController.cpp
 
 HEADERS  += \
     extractParamManager.h \
@@ -52,7 +53,8 @@ HEADERS  += \
     View/mainWindow.h \
     Controller/mainController.h \
     Service/textureService.h \
-    Controller/textureController.h
+    Controller/textureController.h \
+    Controller/convertController.h
 
 FORMS    += \
     View/calibrateDialog.ui \

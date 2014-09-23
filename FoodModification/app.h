@@ -23,6 +23,7 @@
 #include "extractParamManager.h"
 
 #define FILEPATH "ExtractParam.xml"
+
 class App
 {
 public:

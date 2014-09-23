@@ -11,93 +11,96 @@ ExtractController::ExtractController(ExtractParamManager *extractParamManager) {
 
 }
 
-void ExtractController::extract(cv::Mat srcBGRImg, cv::Mat srcHSVImg, cv::Mat srcYCrCbImg, cv::Mat srcGrayImg,
-	cv::Mat dstImg,std::vector<std::vector<cv::Point>>& dstContours, cv::Mat* BGREdges) {
+void ExtractController::extract(Mat srcBGRImg, Mat srcHSVImg, Mat srcYCrCbImg, Mat srcGrayImg,
+	Mat dstImg, vector<vector<Point>>& dstContours, Mat* BGREdges) {
 
-    cv::Mat colorExtractedImg;
+    Mat colorExtractedImg;
     colorExtractedImg = dstImg.clone();
     this->extractByColor(srcBGRImg, srcHSVImg, colorExtractedImg);
-    cv::imshow("extractByColor",colorExtractedImg);
+   // imshow("extractByColor",colorExtractedImg);
 
     //縮退膨張処理    
-    cv::Point ANCHOR = cv::Point(-1,-1);//構造要素内のアンカー位置。デフォルト値の(-1,-1)はアンカーが構造要素の中心にあることを意味する
+    Point ANCHOR = Point(-1,-1);//構造要素内のアンカー位置。デフォルト値の(-1,-1)はアンカーが構造要素の中心にあることを意味する
     int ITERATIONS = 1;
-    //cv::erode(colorExtractedImg, colorExtractedImg, cv::Mat(), ANCHOR, ITERATIONS);
-    //cv::imshow("after erode",colorExtractedImg);
-    cv::dilate(colorExtractedImg, colorExtractedImg, cv::Mat(), ANCHOR, ITERATIONS);//element = cv::Mat()の場合　3×3の矩形構造要素が使われる
-    cv::imshow("after dilate",colorExtractedImg);
+    //erode(colorExtractedImg, colorExtractedImg, cv::Mat(), ANCHOR, ITERATIONS);
+    //imshow("after erode",colorExtractedImg);
+    dilate(colorExtractedImg, colorExtractedImg, Mat(), ANCHOR, ITERATIONS);//element = cv::Mat()の場合　3×3の矩形構造要素が使われる
+    imshow("after dilate",colorExtractedImg);
 
-    //cv::cvtColor(colorExtractedImg, colorExtractedImg, CV_BGR2GRAY);
 
-    std::vector<std::vector<cv::Point>> colorExtractedContours;
-    cv::findContours(colorExtractedImg, colorExtractedContours, CV_RETR_LIST, CV_CHAIN_APPROX_NONE);
+    vector<vector<Point>> colorExtractedContours;
+    findContours(colorExtractedImg, colorExtractedContours, CV_RETR_LIST, CV_CHAIN_APPROX_NONE);
 
     int MINSIZE = 200; int lineType = LINK_EIGHT;
-    fillContours(colorExtractedImg, colorExtractedContours, MINSIZE);
-    cv::imshow("after drawContours",colorExtractedImg);
+    fillContours(colorExtractedImg, colorExtractedContours, lineType, MINSIZE);
+   // imshow("after drawContours",colorExtractedImg);
 
-    std::vector< std::vector<cv::Point> > contours2;
-    cv::findContours(colorExtractedImg, contours2, CV_RETR_LIST, CV_CHAIN_APPROX_NONE);
+    vector< vector<Point> > contours2;
+    findContours(colorExtractedImg, contours2, CV_RETR_LIST, CV_CHAIN_APPROX_NONE);
 
-    //色による抽出領域の面積を求める
-    std::vector<double> areas(contours2.size());
-    for(int i=0; i<contours2.size(); i++) {
-        areas[i] = cv::contourArea(contours2[i]);
-    }
-
-    //色による抽出領域の重心を求める
-    std::vector<cv::Point> mCenters(contours2.size());
-    calcurateCenter(contours2,mCenters);
+    vector<double> areas(contours2.size());
+    vector<Point> mCenters(contours2.size());
+    getAreaAndCenters(contours2, areas, mCenters);
     
-    //エッジ画像を取得する
-    cv::Mat dstEdgeImg;
-    dstEdgeImg.create(srcBGRImg.size(), CV_8UC1);
-    this->edgeService->extractEdge(BGREdges,dstEdgeImg);
+    Mat dstEdgeImg, dstFilledEdgeImg;
+    dstEdgeImg = Mat::zeros(dstImg.size(), CV_8UC1);
+    dstFilledEdgeImg = Mat::zeros(dstImg.size(), CV_8UC1);
+    compAndFill(dstFilledEdgeImg, dstEdgeImg, BGREdges, contours2, lineType, MINSIZE);
+    imshow("dstFilledEdgeImg",dstFilledEdgeImg);
+    
+    
+
+    // vector<vector<Point> > selectedContours;
+    // selectContoursWithPoints(dstFilledEdgeImg, selectedContours, mCenters, 200);
+    // qDebug() << "selectedContours" << selectedContours.size();
+
+    // Mat extractedImg;
+    // extractedImg = Mat::zeros(dstImg.size(), CV_8UC1);
+    // fillContours(extractedImg, selectedContours, lineType, MINSIZE);
+    // imshow("fillContours", extractedImg);
+
+    // drawEdge(extractedImg, dstEdgeImg, 0);
+    // imshow("draw Edge with black", extractedImg);
+
+    // vector<vector<Point>> contours5;
+    // findContours(extractedImg, contours5, CV_RETR_LIST, CV_CHAIN_APPROX_NONE);
+    // fillContours(extractedImg, contours5, lineType, MINSIZE);
+  
+    dstFilledEdgeImg.copyTo(dstImg);
+    findContours(dstFilledEdgeImg, dstContours,CV_RETR_LIST, CV_CHAIN_APPROX_NONE);
 
 
-    cv::Mat dstEdgeImg2;
-    dstEdgeImg2= cv::Mat::zeros(dstEdgeImg.size(), dstEdgeImg.type());
+  //   qDebug() << "last contours size" << dstContours.size();
+  //   imshow("fill last", dstEdgeColorImg);
+   
+}
 
-    std::vector<cv::Rect> rois(contours2.size());
+void ExtractController::drawEdge(Mat srcImg, Mat edgeImg, int luminace) {
 
-    for(int i=0; i<contours2.size(); i++) {
-        cv::Rect rect = cv::boundingRect(contours2[i]);
-        double SCALE_RATIO = 1.2;
-        getROI(dstEdgeImg.size(), rect, rois[i], SCALE_RATIO);
-        
-        //色による抽出領域の近辺だけエッジを残す
-        for(int y=rois[i].y; y<rois[i].y+rois[i].height; y++){     
-            for(int x=rois[i].x; x<rois[i].x+rois[i].width; x++){ 
-                if(L(dstEdgeImg,x,y) == 255) {
-                    L(dstEdgeImg2,x,y) = 255;
-                }
+    for(int y=0; y<srcImg.rows; y++){
+        for(int x=0; x<srcImg.cols; x++) {
+            if(L(edgeImg,x,y) == 255) {
+                L(srcImg,x,y) = luminace;
             }
         }
-
-        //残ったエッジ画像と色による抽出画像を合成する
-        cv::drawContours(dstEdgeImg2, contours2, i, cv::Scalar(255, 255, 255), CV_FILLED, lineType);
     }
-    cv::imshow("dstEdgeImg2",dstEdgeImg2);
-    
-    std::vector< std::vector<cv::Point> > contours3;
-    cv::findContours(dstEdgeImg2, contours3,CV_RETR_LIST, CV_CHAIN_APPROX_NONE);//手を近づけるとruntimeエラーになる
-    for(int i=0; i<contours3.size(); i++) {
-        cv::drawContours(dstEdgeImg2, contours3, i, cv::Scalar(255, 255, 255), CV_FILLED, lineType);
-    }
-    cv::imshow("dstEdgeImg2_2",dstEdgeImg2);
 
-    std::vector<std::vector<cv::Point> > contours4;
-    for(int i=0; i<contours3.size(); ++i) {
-        size_t count = contours3[i].size();
-        if(count < 400) {
+}
+
+void ExtractController::selectContoursWithPoints(Mat srcImg, vector<vector<Point> >& selectedContours, vector<Point>& points, int minSize ) {
+
+    vector<vector<Point>> srcContours;
+    findContours(srcImg, srcContours, CV_RETR_LIST, CV_CHAIN_APPROX_NONE);
+
+    for(int i=0; i<srcContours.size(); ++i) {
+        size_t count = srcContours[i].size();
+        if(count < minSize) {
             continue;
         } else {
-            for(int j=0; j<contours2.size(); j++) {
-                if(cv::pointPolygonTest(contours3[i],mCenters[j], false)) {
-                    contours4.push_back(contours3[i]);
-                    // if(areas[j] < cv::contourArea(contours3[i])) {
-                    //     contours4.push_back(contours3[i]);
-                    // }
+            for(int j=0; j<points.size(); j++) {
+                if(pointPolygonTest(srcContours[i], points[j], false)) {
+                    selectedContours.push_back(srcContours[i]);
+                   
                 }
             }
             
@@ -105,90 +108,105 @@ void ExtractController::extract(cv::Mat srcBGRImg, cv::Mat srcHSVImg, cv::Mat sr
         
     }
 
-    cv::Mat dstEdgeColorImg;
-    dstEdgeColorImg = cv::Mat::zeros(dstImg.size(), dstImg.type());
-    
+}
 
+void ExtractController::compAndFill(Mat dstImg, Mat dstEdgeImg, Mat *Edges, vector<vector<Point> >& contours, int lineType, int minSize) {
 
-    if(contours4.size() > 0) {
-        for(int i=0; i<contours4.size(); i++) {
-            size_t count = contours4[i].size();
-            cv::drawContours(dstEdgeColorImg, contours4, i, cv::Scalar(255, 255, 255), CV_FILLED, lineType);        
-        } 
-    } 
-    cv::imshow("filled only contours with color centers", dstEdgeColorImg);
-    
-    cv::Mat dstEdgeImg3;
-    dstEdgeImg3 = dstEdgeImg.clone();
-    for(int y=0; y<dstEdgeImg3.rows; y++){
-        for(int x=0; x<dstEdgeImg3.cols; x++) {
-            if(L(dstEdgeImg3,x,y) == 255) {
-                L(dstEdgeColorImg,x,y) = 0;
-            }
-        }
-    }
+    getIntegratedImage(dstImg, dstEdgeImg, Edges, contours);
 
-    // for(int i=0; i<contours2.size(); i++) {
-    //     cv::circle(dstEdgeColorImg, mCenters[i], 20, cv::Scalar(255,255,255), 5, lineType, 0);
-    // }
-    cv::imshow("draw Edge with black and draw centers", dstEdgeColorImg);
-    std::vector<std::vector<cv::Point>> contours5;
-    cv::findContours(colorExtractedImg, contours5, CV_RETR_LIST, CV_CHAIN_APPROX_NONE);
-    if(contours5.size() > 0) {
-        for(int i=0; i<contours4.size(); i++) {
-            cv::drawContours(dstEdgeColorImg, contours5, i, cv::Scalar(255, 255, 255), CV_FILLED, lineType);        
-        } 
-    } 
-    dstEdgeColorImg.copyTo(dstImg);
-    cv::findContours(dstEdgeColorImg, dstContours,CV_RETR_LIST, CV_CHAIN_APPROX_NONE);
-    qDebug() << "last contours size" << dstContours.size();
-    cv::imshow("fill last", dstEdgeColorImg);
-   
-
+    fillContours(dstImg, contours, lineType,  minSize);
 
 }
 
-void ExtractController::fillContours(cv::Mat filledImg, std::vector<std::vector<cv::Point> >& contours, int minSize) {
+void ExtractController::getAreaAndCenters(vector<vector<Point> >& contours, vector<double>& areas, vector<Point>& mCenters){
+
+    if(contours.size() == areas.size() && contours.size() == mCenters.size()) {
+        return;
+    }
+
+    //色による抽出領域の面積を求める
+    for(int i=0; i<contours.size(); i++) {
+        areas[i] = contourArea(contours[i]);
+    }
+
+    //色による抽出領域の重心を求める
+    calcurateCenter(contours,mCenters);
+
+}
+
+void ExtractController::getIntegratedImage(Mat dstImg, Mat dstEdgeImg, Mat *Edges, vector<vector<Point> >& contours) {
+
+    //エッジ画像を取得する
+    this->edgeService->extractEdge(Edges,dstEdgeImg);
 
     int lineType = LINK_EIGHT;
+
+    vector<Rect> rois(contours.size());
+    for(int i=0; i<contours.size(); i++) {
+        Rect rect = boundingRect(contours[i]);
+        double SCALE_RATIO = 1.2;
+        getROI(dstImg.size(), rect, rois[i], SCALE_RATIO);
+        
+        //色による抽出領域の近辺だけエッジを残す
+        for(int y=rois[i].y; y<rois[i].y+rois[i].height; y++){     
+            for(int x=rois[i].x; x<rois[i].x+rois[i].width; x++){ 
+                if(L(dstEdgeImg,x,y) == 255) {
+                    L(dstImg,x,y) = 255;
+                }
+            }
+        }
+
+        //残ったエッジ画像と色による抽出画像を合成する
+        drawContours(dstImg, contours, i, Scalar(255, 255, 255), CV_FILLED, lineType);
+    }
+
+}
+
+void ExtractController::fillContours(Mat filledImg, vector<vector<Point> >& contours, int lineType, int minSize) {
+
+    if(!contours.empty()) {
+        return;
+    }
+
     for(int i=0; i<contours.size(); ++i) {
 
         size_t count = contours[i].size();
         if(count < minSize) {
-            cv::drawContours(filledImg, contours, i, cv::Scalar(0, 0, 0), CV_FILLED, lineType);
+            drawContours(filledImg, contours, i, Scalar(0, 0, 0), CV_FILLED, lineType);
         } else {
-            cv::drawContours(filledImg, contours, i, cv::Scalar(255, 255, 255), CV_FILLED, lineType);
+            drawContours(filledImg, contours, i, Scalar(255, 255, 255), CV_FILLED, lineType);
         }
         
     }
 
 }
 
-void ExtractController::calcurateCenter(std::vector<std::vector<cv::Point> >& contours, std::vector<cv::Point> &mCenters) {
+
+void ExtractController::calcurateCenter(vector<vector<Point> >& contours, vector<Point> &mCenters) {
 
     if(contours.size() != mCenters.size()) {
 
     }
 
-    std::vector<cv::Moments> mu(contours.size());
+    vector<Moments> mu(contours.size());
     for(int i=0; i<contours.size(); i++) {
-        mu[i] = cv::moments(contours[i], false);
+        mu[i] = moments(contours[i], false);
     }
     //std::vector<cv::Point> mCenters(contours2.size());
     for(int i=0; i<contours.size(); i++) {
-        mCenters[i] = cv::Point(mu[i].m10/mu[i].m00, mu[i].m01/mu[i].m00);
+        mCenters[i] = Point(mu[i].m10/mu[i].m00, mu[i].m01/mu[i].m00);
     }
 
 }
 
-void ExtractController::getROI(cv::Size size, cv::Rect rect, cv::Rect roi, double scaleRatio) {
+void ExtractController::getROI(Size size, Rect rect, Rect roi, double scaleRatio) {
 
     int x = (int)rect.x-(rect.width/2.0)*(scaleRatio-1.0);
     int y = (int)rect.y-(rect.height/2.0)*(scaleRatio-1.0);
     int w = rect.width*scaleRatio;
     int h = rect.height*scaleRatio;
 
-    cv::Rect scaleRect = cv::Rect(x, y, w, h);
+    Rect scaleRect = Rect(x, y, w, h);
 
     int roi_x=0, roi_y=0, roi_w=0, roi_h=0;
 
@@ -204,11 +222,11 @@ void ExtractController::getROI(cv::Size size, cv::Rect rect, cv::Rect roi, doubl
     if( (scaleRect.y+scaleRect.height) > size.height ) roi_h = size.height - scaleRect.y;
     else roi_h = scaleRect.height;
 
-    rect = cv::Rect(roi_x, roi_y, roi_w, roi_h);
+    rect = Rect(roi_x, roi_y, roi_w, roi_h);
 
 }
 
-void ExtractController::extractByColor(cv::Mat srcBGRImg, cv::Mat srcHSVImg, cv::Mat dstImg) {
+void ExtractController::extractByColor(Mat srcBGRImg, Mat srcHSVImg, Mat dstImg) {
 
     //this->extractService->extract(srcBGRImg, srcHSVImg, srcYCrCbImg, extractParamManager);
     int extractColorSpace = extractParamManager->getExtractColorSpace();
@@ -221,6 +239,6 @@ void ExtractController::extractByColor(cv::Mat srcBGRImg, cv::Mat srcHSVImg, cv:
     
 }
 
-void ExtractController::extractByContour(cv::Mat srcGrayImg, cv::Mat dstImg) {
+void ExtractController::extractByContour(Mat srcGrayImg, Mat dstImg) {
 
 }

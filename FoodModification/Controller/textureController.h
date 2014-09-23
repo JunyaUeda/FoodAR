@@ -7,11 +7,12 @@ class TextureController {
 public:
 
 private:
-	std::vector<std::vector<cv::Point>> contours;
-	std::vector<cv::Size> rectSizes;
+	vector<vector<Point>> contours;
+	vector<Size> rectSizes;
+	
 public:
     TextureController();
-    cv::Mat createTexture(std::vector<std::vector<cv::Point>>& contours, cv::Mat maskImg);
+    Mat createTexture(vector<vector<Point>>& contours, Mat maskImg, vector<Rect>& rects);
 };
 
 #endif // TEXTURECONTROLLER_H
