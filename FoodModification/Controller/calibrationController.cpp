@@ -4,81 +4,82 @@
 #define BGR_SPACE 0
 #define HSV_SPACE 1
 
-CalibrationController::CalibrationController(ExtractParamManager* extractParamManager){
+CalibrationController::CalibrationController() {
 
 	this->clickParam = new CalibrateClickParam;
-	this->extractParamManager = extractParamManager;
-	
 }
 
-
-void mouseCallback(int event, int x, int y, int flags, void* param) {
-
-	CalibrateClickParam *clickParam = static_cast<CalibrateClickParam*>(param);
-
-    switch(event) {
-
-	    case cv::EVENT_LBUTTONDOWN:
-	        clickParam->leftClickedCounts++;
-	        clickParam->clickedPoints[0][clickParam->leftClickedCounts-1] = cv::Point(x,y);
-	        cv::fillConvexPoly(clickParam->img, clickParam->clickedPoints[0], clickParam->leftClickedCounts, cv::Scalar(0,0,255));
-	    	break;
-	    case cv::EVENT_RBUTTONDOWN:
-	    	clickParam->rightClickedCounts++;
-	        clickParam->clickedPoints[1][clickParam->rightClickedCounts-1] = cv::Point(x,y);
-	        cv::fillConvexPoly(clickParam->img, clickParam->clickedPoints[1], clickParam->rightClickedCounts, cv::Scalar(0,255,0));
-	    	break;
-
-    }
-
+CalibrationController& CalibrationController::getInstance() {
+	static CalibrationController instance;
+	return instance;
 }
+// void mouseCallback(int event, int x, int y, int flags, void* param) {
 
-void CalibrationController::calibrate() {
+// 	CalibrateClickParam *clickParam = static_cast<CalibrateClickParam*>(param);
 
-	VideoCapture videoCapture = VideoCapture(0);
-    Mat srcBGRImg, srcHSVImg;
-    string windowName = "Calibration";
+//     switch(event) {
 
-    while(inputFlag) {
+// 	    case cv::EVENT_LBUTTONDOWN:
+// 	        clickParam->leftClickedCounts++;
+// 	        clickParam->clickedPoints[0][clickParam->leftClickedCounts-1] = cv::Point(x,y);
+// 	        cv::fillConvexPoly(clickParam->img, clickParam->clickedPoints[0], clickParam->leftClickedCounts, cv::Scalar(0,0,255));
+// 	    	break;
+// 	    case cv::EVENT_RBUTTONDOWN:
+// 	    	clickParam->rightClickedCounts++;
+// 	        clickParam->clickedPoints[1][clickParam->rightClickedCounts-1] = cv::Point(x,y);
+// 	        cv::fillConvexPoly(clickParam->img, clickParam->clickedPoints[1], clickParam->rightClickedCounts, cv::Scalar(0,255,0));
+// 	    	break;
 
-        videoCapture >> srcBGRImg;
-        cvtColor(srcBGRImg, srcHSVImg, CV_BGR2HSV);
-        imshow(windowName, srcBGRImg);
-        char ch = cv::waitKey(33);
+//     }
 
-        if ( ch == 27 ) break;
+// }
 
-    }
+// void CalibrationController::calibrate_old() {
 
-    this->clickParam->img = srcBGRImg.clone();
-    setMouseCallback(windowName, mouseCallback, (void*)this->clickParam);
-    while(drawingFlag) {
+// 	VideoCapture videoCapture = VideoCapture(0);
+//     Mat srcBGRImg, srcHSVImg;
+//     string windowName = "Calibration";
 
-    	cv::imshow(windowName, this->clickParam->img);
-    	char ch = cv::waitKey(33);
+//     while(inputFlag) {
 
-        if ( ch == 27 ) break;
+//         videoCapture >> srcBGRImg;
+//         cvtColor(srcBGRImg, srcHSVImg, CV_BGR2HSV);
+//         imshow(windowName, srcBGRImg);
+//         char ch = cv::waitKey(33);
 
-    }
-    cv::destroyWindow(windowName);
+//         if ( ch == 27 ) break;
 
-    int extractColorSpace = this->extractParamManager->getExtractColorSpace();
-    if(extractColorSpace == BGR_SPACE) {
+//     }
 
-    	setExtractParam(srcBGRImg, this->clickParam->img, extractColorSpace);
+//     this->clickParam->img = srcBGRImg.clone();
+//     setMouseCallback(windowName, mouseCallback, (void*)this->clickParam);
+//     while(drawingFlag) {
 
-    } else if (extractColorSpace == HSV_SPACE) {
+//     	cv::imshow(windowName, this->clickParam->img);
+//     	char ch = cv::waitKey(33);
 
-    	setExtractParam(srcHSVImg, this->clickParam->img, extractColorSpace);
+//         if ( ch == 27 ) break;
 
-    }
+//     }
+//     cv::destroyWindow(windowName);
+
+//     int extractColorSpace = this->extractParamManager->getExtractColorSpace();
+//     if(extractColorSpace == BGR_SPACE) {
+
+//     	setExtractParam(srcBGRImg, this->clickParam->img, extractColorSpace);
+
+//     } else if (extractColorSpace == HSV_SPACE) {
+
+//     	setExtractParam(srcHSVImg, this->clickParam->img, extractColorSpace);
+
+//     }
     
 
-}
+// }
 
 void CalibrationController::videoInput() {
 
-	this->calibrate();
+	//this->calibrate();
 
 }
 
@@ -94,25 +95,40 @@ void CalibrationController::stopDrawing() {
 
 }
 
+void CalibrationController::calibrate(CalibrateClickParam* param) {
 
-void CalibrationController::setExtractParam(cv::Mat srcImg, cv::Mat refImg, int colorSpaceIndex) {
+    int extractColorSpace = extractParamManager.getExtractColorSpace();
+
+    if(extractColorSpace == BGR_SPACE) {
+
+    	setExtractParam(param->srcBGRImg, param->refImg, extractColorSpace);
+
+    } else if (extractColorSpace == HSV_SPACE) {
+
+    	setExtractParam(param->srcHSVImg, param->refImg, extractColorSpace);
+
+    }
+
+}
+
+void CalibrationController::setExtractParam(Mat srcImg, Mat refImg, int colorSpaceIndex) {
 
 	switch(colorSpaceIndex) {
 
 		case 0:
-			setExtractBGRParam(srcImg, refImg, cv::Scalar(0,0,255), 0);
-			setExtractBGRParam(srcImg, refImg, cv::Scalar(0,255,0), 1);
+			setExtractBGRParam(srcImg, refImg, Scalar(0,0,255), 0);
+			setExtractBGRParam(srcImg, refImg, Scalar(0,255,0), 1);
 			break;
 		case 1:
-			setExtractHSVParam(srcImg, refImg, cv::Scalar(0,0,255), 0);
-			setExtractHSVParam(srcImg, refImg, cv::Scalar(0,255,0), 1);
+			setExtractHSVParam(srcImg, refImg, Scalar(0,0,255), 0);
+			setExtractHSVParam(srcImg, refImg, Scalar(0,255,0), 1);
 			break;
 			
 	}
 
 }
 
-void CalibrationController::setExtractBGRParam(cv::Mat srcImg, cv::Mat refImg, cv::Scalar color, int paramIndex) {
+void CalibrationController::setExtractBGRParam(Mat srcImg, Mat refImg, Scalar color, int paramIndex) {
 
 	int average[3] = {0};
     int blueTolerance[2] = {0}, greenTolerance[2] = {0}, redTolerance[2] = {0};
@@ -124,13 +140,13 @@ void CalibrationController::setExtractBGRParam(cv::Mat srcImg, cv::Mat refImg, c
     setTolerance(srcImg, refImg, average, pixcelNum, GREEN, greenTolerance, color);
     setTolerance(srcImg, refImg, average, pixcelNum, RED, redTolerance, color);
 
-    ColorCriterion* criterion = this->extractParamManager->criterion+paramIndex;
-    ColorExtractTolerance* tolerace = this->extractParamManager->colorExtractTolerance+paramIndex;
+    ColorCriterion* criterion = (extractParamManager.criterion)+paramIndex;
+    ColorExtractTolerance* tolerace = (extractParamManager.colorExtractTolerance)+paramIndex;
 
     criterion->setBlue(average[0]);
     criterion->setGreen(average[1]);
     criterion->setRed(average[2]);
-    this->extractParamManager->referenceMat = getDistribution(srcImg, refImg, pixcelNum,color);
+    extractParamManager.referenceMat = getDistribution(srcImg, refImg, pixcelNum,color);
     tolerace->setBlueHighTolerance(blueTolerance[0]);
     tolerace->setBlueLowTolerance(blueTolerance[1]);
     tolerace->setGreenHighTolerance(greenTolerance[0]);
@@ -140,7 +156,7 @@ void CalibrationController::setExtractBGRParam(cv::Mat srcImg, cv::Mat refImg, c
 
 }
 
-void CalibrationController::setExtractHSVParam(cv::Mat srcImg, cv::Mat refImg, cv::Scalar color, int paramIndex) {
+void CalibrationController::setExtractHSVParam(Mat srcImg, Mat refImg, Scalar color, int paramIndex) {
 
 	int average[3] = {0};
 	int hueTolerace[2] = {0}, saturationTolerance[2] = {0}, valueTolerace[2] = {0};
@@ -152,8 +168,8 @@ void CalibrationController::setExtractHSVParam(cv::Mat srcImg, cv::Mat refImg, c
     setTolerance(srcImg, refImg, average, pixcelNum, SATURATION, saturationTolerance, color);
     setTolerance(srcImg, refImg, average, pixcelNum, VALUE, valueTolerace, color);
 
-    ColorCriterion* criterion = this->extractParamManager->criterion+paramIndex;
-    ColorExtractTolerance* tolerace = this->extractParamManager->colorExtractTolerance+paramIndex;
+    ColorCriterion* criterion = (extractParamManager.criterion)+paramIndex;
+    ColorExtractTolerance* tolerace = (extractParamManager.colorExtractTolerance)+paramIndex;
 
     criterion->setHue(average[0]);
     criterion->setSaturation(average[1]);
@@ -166,9 +182,11 @@ void CalibrationController::setExtractHSVParam(cv::Mat srcImg, cv::Mat refImg, c
     tolerace->setValueHighTolerance(valueTolerace[0]);
     tolerace->setValueLowTolerance(valueTolerace[1]);
 
+    qDebug() << "setTolerance3";
+
 }
 
-int CalibrationController::calculateAverages(cv::Mat srcImg, cv::Mat refImg, int* result, cv::Scalar color) {
+int CalibrationController::calculateAverages(Mat srcImg, Mat refImg, int* result, Scalar color) {
 
 	int samplingPixcelNum = 0;
     int *sumOfValue = new int[srcImg.channels()];
@@ -197,7 +215,7 @@ int CalibrationController::calculateAverages(cv::Mat srcImg, cv::Mat refImg, int
 
 }
 
-void CalibrationController::setHistogramArray(cv::Mat srcImg, cv::Mat refImg, int colorIndex, int* histogram, int histogramSize, cv::Scalar color) {
+void CalibrationController::setHistogramArray(Mat srcImg, Mat refImg, int colorIndex, int* histogram, int histogramSize, Scalar color) {
 
 	int BITE = 256;
 	if(histogramSize != srcImg.elemSize1()*BITE) {
@@ -263,7 +281,7 @@ void CalibrationController::calculateTolerance(int* tolerance, int average, int 
 
 }
 
-int CalibrationController::setTolerance(cv::Mat srcImg, cv::Mat refImg,int* average,int pixcelNum,int colorIndex, int* tolerance, cv::Scalar color) {
+int CalibrationController::setTolerance(Mat srcImg, Mat refImg,int* average,int pixcelNum,int colorIndex, int* tolerance, Scalar color) {
 
 	if(colorIndex<0 || colorIndex >2) {
         qWarning() << "ColorIndex is not inappropriate.";
@@ -285,7 +303,7 @@ int CalibrationController::setTolerance(cv::Mat srcImg, cv::Mat refImg,int* aver
 
 }
 
-cv::Mat CalibrationController::getDistribution(cv::Mat srcImg, cv::Mat refImg, int pixcelNum, cv::Scalar color){
+Mat CalibrationController::getDistribution(Mat srcImg, Mat refImg, int pixcelNum, cv::Scalar color){
 
 	cv::Mat m1(pixcelNum,1, CV_64FC(5));
 	int rows=0;

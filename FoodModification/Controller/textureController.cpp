@@ -6,6 +6,11 @@ TextureController::TextureController() {
 
 }
 
+TextureController& TextureController::getInstance() {
+	static TextureController instance;
+	return instance;
+}
+
 Mat TextureController::createTexture(vector<vector<Point>>& contours, Mat maskImg, vector<Rect>& rects) {
 	
 	Mat allTextureImg = Mat::zeros(maskImg.size(), CV_8UC3);

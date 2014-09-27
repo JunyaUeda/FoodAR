@@ -33,7 +33,9 @@ SOURCES += main.cpp\
     Service/textureService.cpp \
     Controller/textureController.cpp \
     Controller/convertController.cpp \
-    Service/calibrationService.cpp
+    Service/calibrationService.cpp \
+    View/colorDialog.cpp \
+    Param/textureParam.cpp
 
 HEADERS  += \
     extractParamManager.h \
@@ -56,11 +58,14 @@ HEADERS  += \
     Service/textureService.h \
     Controller/textureController.h \
     Controller/convertController.h \
-    Service/calibrationService.h
+    Service/calibrationService.h \
+    View/colorDialog.h \
+    Param/textureParam.h
 
 FORMS    += \
     View/calibrateDialog.ui \
-    View/mainWindow.ui
+    View/mainWindow.ui \
+    View/colorDialog.ui
 
 # OpenCV settings
 # for Windows

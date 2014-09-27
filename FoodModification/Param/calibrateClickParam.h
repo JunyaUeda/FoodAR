@@ -2,16 +2,19 @@
 #define CALIBRATECLICKPARAM_H
 #include "../Utils/opencvUtils.h"
 
-class CalibrateClickParam
-{
+class CalibrateClickParam {
+
 public:
-    cv::Point clickedPoints[2][30];
+    vector<vector<Point>> clickedPoints;
     int leftClickedCounts = 0;
     int rightClickedCounts = 0; 
-    cv::Mat img;
-    Mat RGBImg;
+    Mat srcBGRImg;
+    Mat srcHSVImg;
+    Mat refImg;
 public:
     CalibrateClickParam();
+    void setImgsByBGRImg(Mat srcBGRImg);
+
 };
 
 #endif // CALIBRATECLICKPARAM_H

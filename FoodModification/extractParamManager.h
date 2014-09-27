@@ -14,11 +14,14 @@ public:
     cv::Mat referenceMat;
     int extractColorSpace;
 
-public:
-    ExtractParamManager(int criterionNum);
-    
+    static ExtractParamManager& getInstance();
     int getExtractColorSpace() const;
     void setExtractColorSpace(int value);
+
+private:
+	ExtractParamManager();
+	ExtractParamManager(const ExtractParamManager&);
+
 };
 
 #endif // EXTRACTPARAMMANAGER_H

@@ -5,14 +5,15 @@
 class TextureController {
 
 public:
-
+	static TextureController& getInstance();
+    Mat createTexture(vector<vector<Point>>& contours, Mat maskImg, vector<Rect>& rects);
 private:
+	TextureController();
+	TextureController(const TextureController&);
 	vector<vector<Point>> contours;
 	vector<Size> rectSizes;
 	
-public:
-    TextureController();
-    Mat createTexture(vector<vector<Point>>& contours, Mat maskImg, vector<Rect>& rects);
+
 };
 
 #endif // TEXTURECONTROLLER_H

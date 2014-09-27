@@ -7,18 +7,12 @@ CalibrateDialog::CalibrateDialog(QWidget *parent) :
     QDialog(parent), 
     ui(new Ui::CalibrateDialog)
 {
-	this->clickParam = new CalibrateClickParam;
+
+	clickParam = new CalibrateClickParam;
+    videoCapture = VideoCapture(0);
     ui->setupUi(this);
-    this->videoCapture = VideoCapture(0);
-     //Mat srcBGRImg, srcHSVImg;
-
-    videoCapture >> srcBGRImg;
-    cvtColor(srcBGRImg, srcHSVImg, CV_BGR2HSV);
-    QImage image(srcBGRImg.data, srcBGRImg.cols, srcBGRImg.rows, QImage::Format_RGB888);
-    image = image.rgbSwapped();
-    ui->label_2->setPixmap(QPixmap::fromImage(image));
-
-    this->timerId = startTimer(33);
+    
+    timerId = startTimer(33);
 
 }
 
@@ -28,24 +22,28 @@ CalibrateDialog::~CalibrateDialog() {
 
 }
 
-void CalibrateDialog::on_videoInputButton_clicked() {
+void CalibrateDialog::show(Mat img) {
 
-    calibrationController->videoInput();
+    Mat RGBImg;
+    cvtColor(img, RGBImg, CV_BGR2RGB);
+    QImage image(RGBImg.data, RGBImg.cols, RGBImg.rows, QImage::Format_RGB888);
+    ui->label_2->setPixmap(QPixmap::fromImage(image));
 
 }
 
 void CalibrateDialog::on_captureButton_clicked() {
 
-    // calibrationController->capture();
-    clickParam->img = srcBGRImg.clone();
-    killTimer(this->timerId);
-
-}
-
-void CalibrateDialog::on_calculateButton_clicked() {
-
-    calibrationController->stopDrawing();
-
+    if(captureStatus) {
+        clickParam->setImgsByBGRImg(srcBGRImg);
+        killTimer(timerId);
+        captureStatus = false;
+        ui->captureButton->setText("START");
+    } else {
+        timerId = startTimer(33);
+        captureStatus = true;
+        ui->captureButton->setText("STOP");
+    }
+    
 }
 
 /**
@@ -54,12 +52,8 @@ void CalibrateDialog::on_calculateButton_clicked() {
 */
 void CalibrateDialog::timerEvent(QTimerEvent *event) {
 
-	//Mat srcBGRImg, srcRGBImg, srcHSVImg;
-	this->videoCapture >> srcBGRImg;
-	cvtColor(srcBGRImg, srcHSVImg, CV_BGR2HSV);
-	cvtColor(srcBGRImg, srcRGBImg, CV_BGR2RGB);
-    QImage image(srcRGBImg.data, srcRGBImg.cols, srcRGBImg.rows, QImage::Format_RGB888);
-    ui->label_2->setPixmap(QPixmap::fromImage(image));
+	videoCapture >> srcBGRImg;
+    show(srcBGRImg);
 
 }
 
@@ -68,27 +62,58 @@ void CalibrateDialog::timerEvent(QTimerEvent *event) {
 */
 void CalibrateDialog::mousePressEvent(QMouseEvent* event) {
 
-	QPoint clickedPoint = event->pos();
-	qDebug() << "x =" << clickedPoint.x();
-	qDebug() << "y =" << clickedPoint.y();
+    if(captureStatus) {
+        return;
+    }
 
+	QPoint clickedPoint = event->pos();
+	Point* pts;
 	switch(event->button()) {
 
 	    case Qt::LeftButton:
 	        clickParam->leftClickedCounts++;
-	        clickParam->clickedPoints[0][clickParam->leftClickedCounts-1] = cv::Point(clickedPoint.x(),clickedPoint.y());
-	        cv::fillConvexPoly(clickParam->img, clickParam->clickedPoints[0], clickParam->leftClickedCounts, cv::Scalar(0,0,255));
+            clickParam->clickedPoints[0].push_back(Point(clickedPoint.x(),clickedPoint.y()));
+            pts = &clickParam->clickedPoints[0][0];
+            fillConvexPoly(clickParam->refImg, pts, clickParam->leftClickedCounts, Scalar(0,0,255));
+	        // clickParam->clickedPoints[0][clickParam->leftClickedCounts-1] = Point(clickedPoint.x(),clickedPoint.y());
+	        // fillConvexPoly(clickParam->refImg, clickParam->clickedPoints[0], clickParam->leftClickedCounts, Scalar(0,0,255));
 	    	break;
+
 	    case Qt::RightButton:
 	    	clickParam->rightClickedCounts++;
-	        clickParam->clickedPoints[1][clickParam->rightClickedCounts-1] = cv::Point(clickedPoint.x(),clickedPoint.y());
-	        cv::fillConvexPoly(clickParam->img, clickParam->clickedPoints[1], clickParam->rightClickedCounts, cv::Scalar(0,255,0));
+            clickParam->clickedPoints[1].push_back(Point(clickedPoint.x(),clickedPoint.y()));
+            pts = &clickParam->clickedPoints[1][0];
+            fillConvexPoly(clickParam->refImg, pts, clickParam->rightClickedCounts, Scalar(0,255,0));
+	        // clickParam->clickedPoints[1][clickParam->rightClickedCounts-1] = Point(clickedPoint.x(),clickedPoint.y());
+	        // fillConvexPoly(clickParam->refImg, clickParam->clickedPoints[1], clickParam->rightClickedCounts, Scalar(0,255,0));
 	    	break;
 
     }
 
-	cvtColor(clickParam->img, clickParam->RGBImg, CV_BGR2RGB);
-    QImage image(clickParam->RGBImg.data, clickParam->RGBImg.cols, clickParam->RGBImg.rows, QImage::Format_RGB888);
-    ui->label_2->setPixmap(QPixmap::fromImage(image));
+    show(clickParam->refImg);
+
 }
 
+void CalibrateDialog::on_buttonBox_accepted() {
+
+    if(!captureStatus) {
+        calibrationController.calibrate(clickParam);
+    }
+    
+}
+
+void CalibrateDialog::on_buttonBox_rejected() {
+
+}
+
+void CalibrateDialog::on_resetButton_clicked() {
+
+    clickParam->refImg = clickParam->srcBGRImg.clone();
+    clickParam->clickedPoints.clear();
+    clickParam->leftClickedCounts = 0;
+    clickParam->rightClickedCounts = 0;
+    vector<vector<Point>> points(2);
+    clickParam->clickedPoints = points;
+    show(clickParam->refImg);
+    
+}

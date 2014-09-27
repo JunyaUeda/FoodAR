@@ -5,10 +5,13 @@
 #define LINK_FOUR 4
 #define LINK_CVAA CV_AA
 
-ExtractController::ExtractController(ExtractParamManager *extractParamManager) {
+ExtractController::ExtractController() {
 
-    this->extractParamManager = extractParamManager;
+}
 
+ExtractController& ExtractController::getInstance() {
+    static ExtractController instance;
+    return instance;
 }
 
 void ExtractController::extract(Mat srcBGRImg, Mat srcHSVImg, Mat srcYCrCbImg, Mat srcGrayImg,
@@ -229,12 +232,12 @@ void ExtractController::getROI(Size size, Rect rect, Rect roi, double scaleRatio
 void ExtractController::extractByColor(Mat srcBGRImg, Mat srcHSVImg, Mat dstImg) {
 
     //this->extractService->extract(srcBGRImg, srcHSVImg, srcYCrCbImg, extractParamManager);
-    int extractColorSpace = extractParamManager->getExtractColorSpace();
+    int extractColorSpace = extractParamManager.getExtractColorSpace();
 
     if(extractColorSpace == 0) {
-        this->extractService->extractByBGR(srcBGRImg, dstImg, extractParamManager);
+        this->extractService->extractByBGR(srcBGRImg, dstImg, &extractParamManager);
     } else if(extractColorSpace == 1) {
-        this->extractService->extractByHSV(srcHSVImg, dstImg, extractParamManager);
+        this->extractService->extractByHSV(srcHSVImg, dstImg, &extractParamManager);
     }
     
 }

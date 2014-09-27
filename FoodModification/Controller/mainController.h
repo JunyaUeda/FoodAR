@@ -7,21 +7,23 @@
 #include "./convertController.h"
 #include "./calibrationController.h"
 
-using namespace cv;
-using namespace std;
-
 class MainController {
 
 public:
-	CalibrationController* calibrationController;
-private:
-    ExtractController* extractController;
-    TextureController* textureController;
-    ConvertController* convertController;
-    
-public:
-    MainController(ExtractParamManager *extractParamManager);
+	VideoCapture videoCapture;
+
+	static MainController& getInstance();
     void doConvertion();
+	void setVCaptureSize(int width, int height);
+
+private:
+    ExtractController& extractController = ExtractController::getInstance();
+    CalibrationController& calibrationController = CalibrationController::getInstance();
+    TextureController& textureController = TextureController::getInstance();
+    ConvertController& convertController = ConvertController::getInstance();
+
+    MainController();
+    MainController(const MainController&);
     
 };
 

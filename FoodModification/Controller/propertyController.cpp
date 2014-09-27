@@ -2,8 +2,13 @@
 #include <QtCore>
 #include <QtXml>
 
-PropertyController::PropertyController(QString filePath) {
+PropertyController::PropertyController() {
+    readFile();
+}
 
+void PropertyController::readFile() {
+
+    QString filePath = "ExtractParam.xml";
      QFile file(filePath);
      if(!file.open(QIODevice::ReadOnly | QIODevice::Text)) {
         qDebug() << "Failed to open the file for reading1.";
@@ -18,10 +23,14 @@ PropertyController::PropertyController(QString filePath) {
 
     this->domRoot = document.firstChildElement();
 
-    this->extractParamManager = new ExtractParamManager(getColorCriterionNum());
 
      readParameters();
 
+}
+
+PropertyController& PropertyController::getInstance() {
+    static PropertyController instance;
+    return instance;
 }
 
 int PropertyController::getColorCriterionNum() {
@@ -32,8 +41,8 @@ int PropertyController::getColorCriterionNum() {
 
 bool PropertyController::readParameters() {
 
-    setColorCriterion(this->domRoot,  this->extractParamManager->criterion);
-    setColorExtractTolerance(this->domRoot, this->extractParamManager->colorExtractTolerance);
+    setColorCriterion(this->domRoot,  extractParamManager.criterion);
+    setColorExtractTolerance(this->domRoot, extractParamManager.colorExtractTolerance);
     readExtractColorSpace(this->domRoot);
 
     return true;
@@ -92,7 +101,7 @@ void PropertyController::setColorExtractTolerance(QDomElement root, ColorExtract
 
 ExtractParamManager* PropertyController::getExtractParamManager() {
 
-    return this->extractParamManager;
+    return &extractParamManager;
 
 }
 
@@ -100,10 +109,10 @@ void PropertyController::readExtractColorSpace(QDomElement root) {
  
     QString text = getStringParamByTagName("ExtractColorSpace", root);
     if(text == "BGR") {
-        this->extractParamManager->setExtractColorSpace(0);
+        this->extractParamManager.setExtractColorSpace(0);
     } else if (text == "HSV") {
-        this->extractParamManager->setExtractColorSpace(1);
+        this->extractParamManager.setExtractColorSpace(1);
     }
-    qDebug() << "ExtractColorSpace =" << this->extractParamManager->getExtractColorSpace();
+    qDebug() << "ExtractColorSpace =" << this->extractParamManager.getExtractColorSpace();
 
 }

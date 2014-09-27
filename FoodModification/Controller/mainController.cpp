@@ -8,33 +8,39 @@
 
 Mat srcHSVImg;//クリックポイントの色度値を取得するためにグローバルにしている。
 
-MainController::MainController(ExtractParamManager *extractParamManager) {
+MainController::MainController() {
 
-	this->extractController = new ExtractController(extractParamManager);
+
 }
+
+MainController& MainController::getInstance() {
+    static MainController instance;
+    return instance;
+}
+
 void mouseCallback1(int event, int x, int y, int flags, void* param) {
  
     switch(event) {
-    case cv::EVENT_LBUTTONDOWN:
-        qDebug() << " H =" << B(srcHSVImg, x,y);
-        qDebug() << " S =" << G(srcHSVImg, x,y);
-        qDebug() << " V =" << R(srcHSVImg, x,y);
+        case cv::EVENT_LBUTTONDOWN:
+            qDebug() << " H =" << B(srcHSVImg, x,y);
+            qDebug() << " S =" << G(srcHSVImg, x,y);
+            qDebug() << " V =" << R(srcHSVImg, x,y);
         break;
-    case cv::EVENT_RBUTTONDOWN:
+        case cv::EVENT_RBUTTONDOWN:
         
-    break;
+        break;
     }
 
 }
 
 void MainController::doConvertion() {
 
-    VideoCapture videoCapture = cv::VideoCapture(0);
+    videoCapture = cv::VideoCapture(0);
     Mat srcBGRImg, /*srcHSVImg, */srcYCrCbImg, srcGrayImg, dstBGRImg;
     Mat BGRChannels[3], HSVChannels[3], YCrCbChannels[3];
     Mat BGREdges[3], HSVEdges[3], YCrCbEdges[3];
     Mat maskImg;
-
+    
     videoCapture >> srcBGRImg;
     if ( srcBGRImg.empty() ) {
      cerr << "Image can't be loaded!" << endl;
@@ -71,21 +77,28 @@ void MainController::doConvertion() {
         maskImg = Mat::zeros(srcBGRImg.size(), CV_8UC1);
         vector<vector<Point>> dstContours;
         //cv::threshold(srcGrayImg, srcGrayImg, 80, 255, cv::THRESH_BINARY);
-        extractController->extract(srcBGRImg, srcHSVImg, srcYCrCbImg, srcGrayImg, maskImg, dstContours, YCrCbEdges);
+        extractController.extract(srcBGRImg, srcHSVImg, srcYCrCbImg, srcGrayImg, maskImg, dstContours, YCrCbEdges);
         imshow("myWindow", srcBGRImg);
         imshow("FinalExtractedImg", maskImg);
 
         vector<Rect> rects;
-        Mat textureImg = textureController->createTexture(dstContours, maskImg, rects);
+        Mat textureImg = textureController.createTexture(dstContours, maskImg, rects);
         imshow("textureImg", textureImg);
 
         dstBGRImg = srcBGRImg.clone();
-        convertController->convert(srcBGRImg,srcHSVImg, dstBGRImg, textureImg, maskImg, rects);
+        convertController.convert(srcBGRImg,srcHSVImg, dstBGRImg, textureImg, maskImg, rects);
         imshow("dstImg",dstBGRImg);
 
 
         char ch = waitKey(33);
         if ( ch == 27 ) break;
     }
+
+}
+
+void MainController::setVCaptureSize(int width, int height) {
+
+    videoCapture.set(CV_CAP_PROP_FRAME_WIDTH, 1280);
+    videoCapture.set(CV_CAP_PROP_FRAME_HEIGHT, 720);
 
 }

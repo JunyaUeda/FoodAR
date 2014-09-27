@@ -14,10 +14,11 @@
 #include <QHBoxLayout>
 #include <QSlider>
 #include <QSpinBox>
+#include <QtCore>
 #include "View/mainWindow.h"
 #include "Controller/mainController.h"
-#include <QtCore>
 #include "Controller/propertyController.h"
+#include "Controller/calibrationController.h"
 #include "Utils/opencvBase.h"
 #include "extractParamManager.h"
 
@@ -26,13 +27,19 @@
 class App
 {
 public:
-	ExtractParamManager* extractParamManager;
-	PropertyController* propertyController;
-	CalibrationController* calibrationController;
-    MainController* mainController;
-public:
     App();
+    static QString getParamFilePath() {
+        return FILEPATH;
+	}
     int start(int argc, char *argv[]);
+
+private:
+    QString paramFilePath = FILEPATH;
+    PropertyController& propertyController = PropertyController::getInstance();
+    ExtractParamManager& extractParamManager = ExtractParamManager::getInstance();
+	CalibrationController& calibrationController = CalibrationController::getInstance();
+    MainController& mainController = MainController::getInstance();
+    
 };
 
 #endif // APP_H

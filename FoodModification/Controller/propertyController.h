@@ -8,25 +8,27 @@
 
 class PropertyController {
     
-private:
-    ExtractParamManager * extractParamManager;
-    QDomDocument document; //create a document to write XML
-    QDomElement domRoot;
-
 public:
-
-private:
-    int getColorCriterionNum();
-    int getIntParamByTagName(QString tag, QDomElement inElement);
-
-public:
-    PropertyController(QString filePath);
+    static PropertyController& getInstance();
+    void readFile();
     bool readParameters();
     void setColorCriterion(QDomElement root, ColorCriterion* criterion);
     void setColorExtractTolerance(QDomElement root, ColorExtractTolerance* tolerance);
     ExtractParamManager* getExtractParamManager();
-    QString PropertyController::getStringParamByTagName(QString tag, QDomElement inElement);
-    void PropertyController::readExtractColorSpace(QDomElement root);
+    QString getStringParamByTagName(QString tag, QDomElement inElement);
+    void readExtractColorSpace(QDomElement root);
+
+
+private:
+    ExtractParamManager& extractParamManager = ExtractParamManager::getInstance();
+    QDomDocument document; //create a document to write XML
+    QDomElement domRoot;
+
+    PropertyController();
+    PropertyController(const PropertyController&);
+    int getColorCriterionNum();
+    int getIntParamByTagName(QString tag, QDomElement inElement);
+
 
  };
 

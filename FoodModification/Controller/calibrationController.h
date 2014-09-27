@@ -9,31 +9,32 @@
 
 class CalibrationController {
 
-private:
-	bool inputFlag = true;
-	bool drawingFlag = true;
-    CalibrateClickParam* clickParam;
-    ExtractParamManager* extractParamManager;
-    CalibrationService* calibrationService;
-
 public:
-    CalibrationController(ExtractParamManager* extractParamManager);
-    void calibrate();
+    static CalibrationController& getInstance();
+    void calibrate_old();
+    void calibrate(CalibrateClickParam* param);
     void autoCalibrate(Mat refImg, Mat maskImg, vector<Rect>& roiRects, ExtractParamManager* extractParamManager);
     void videoInput();
     void capture();
     void stopDrawing();
-
-
+    
 private:
-    int calculateAverages(cv::Mat srcImg, cv::Mat refImg, int* result, cv::Scalar color);
-    void setHistogramArray(cv::Mat srcImg, cv::Mat refImg, int colorIndex, int* histogram, int histogramSize, cv::Scalar color);
+    bool inputFlag = true;
+    bool drawingFlag = true;
+    CalibrateClickParam* clickParam;
+    ExtractParamManager& extractParamManager = ExtractParamManager::getInstance();
+    CalibrationService* calibrationService;
+
+    CalibrationController();
+    CalibrationController(const CalibrationController&);
+    int calculateAverages(Mat srcImg, Mat refImg, int* result, Scalar color);
+    void setHistogramArray(Mat srcImg, Mat refImg, int colorIndex, int* histogram, int histogramSize, Scalar color);
     void calculateTolerance(int* tolerance, int average, int pixcelNum, int* histogram);
-    int setTolerance(cv::Mat srcImg, cv::Mat refImg,int* average,int pixcelNum,int colorIndex, int* tolerance, cv::Scalar color);
-    cv::Mat getDistribution(cv::Mat srcImg, cv::Mat refImg, int pixelNum, cv::Scalar color);
-    void CalibrationController::setExtractParam(cv::Mat srcImg, cv::Mat refImg, int colorSpaceIndex);
-    void CalibrationController::setExtractBGRParam(cv::Mat srcImg, cv::Mat refImg, cv::Scalar color, int paramIndex);
-    void CalibrationController::setExtractHSVParam(cv::Mat srcImg, cv::Mat refImg, cv::Scalar color, int paramIndex);
+    int setTolerance(Mat srcImg, Mat refImg,int* average,int pixcelNum, int colorIndex, int* tolerance, Scalar color);
+    Mat getDistribution(Mat srcImg, Mat refImg, int pixelNum, Scalar color);
+    void CalibrationController::setExtractParam(Mat srcImg, Mat refImg, int colorSpaceIndex);
+    void CalibrationController::setExtractBGRParam(Mat srcImg, Mat refImg, Scalar color, int paramIndex);
+    void CalibrationController::setExtractHSVParam(Mat srcImg, Mat refImg, Scalar color, int paramIndex);
     //void my_button_cb(int state, void* userdata);
     
 };

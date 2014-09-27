@@ -1,12 +1,19 @@
 #include "convertController.h"
+#include <QDebug>
 
 ConvertController::ConvertController() {
+	
+}
 
+ConvertController& ConvertController::getInstance() {
+	static ConvertController instance;
+	return instance;
 }
 
 void ConvertController::convert(Mat srcBGRImg, Mat srcHSVImg, Mat dstBGRImg, Mat textureImg, Mat maskImg, vector<Rect>& rects) {
 
-	const double ALPHA = 0.9;
+	const double ALPHA = textureParam->getAlpha();
+	//const double ALPHA = 0.5;
 	overlapTexture(dstBGRImg, maskImg, textureImg, rects, ALPHA);
 	convertHSV(dstBGRImg, maskImg, rects);
 
@@ -32,15 +39,16 @@ void ConvertController::overlapTexture(Mat srcBGRImg, Mat maskImg, Mat textureIm
 
 void ConvertController::convertHSV(Mat srcBGRImg, Mat maskImg, vector<Rect>& rects) {
 
+	
 	Mat dstHSVImg;
 	cvtColor(srcBGRImg, dstHSVImg, CV_BGR2HSV);
 	for(int i=0; i<rects.size(); i++) {
 		for(int y=rects[i].y; y<(rects[i].y+rects[i].height); y++) {
 			for(int x=rects[i].x; x<(rects[i].x+rects[i].width); x++){
 				if(L(maskImg,x,y) == 255) {
-					H(dstHSVImg,x,y) = H(dstHSVImg,x,y) + 10;
-					S(dstHSVImg,x,y) = S(dstHSVImg,x,y) + 10;
-					V(dstHSVImg,x,y) = V(dstHSVImg,x,y) + 10;
+					H(dstHSVImg,x,y) = H(dstHSVImg,x,y) + textureParam->getH_shift();
+					S(dstHSVImg,x,y) = S(dstHSVImg,x,y) + textureParam->getS_shift();
+					V(dstHSVImg,x,y) = V(dstHSVImg,x,y) + textureParam->getV_shift();
 				}
 			}
 		}
@@ -49,3 +57,38 @@ void ConvertController::convertHSV(Mat srcBGRImg, Mat maskImg, vector<Rect>& rec
 
 }
 
+/**
+* colorDialogの色の編集によって呼び出される.
+*　@param HSVのシフト量
+*/
+void ConvertController::changeShiftValue(int hShift, int sShift, int vShift) {
+
+	textureParam->setShift(hShift, sShift, vShift);
+	
+}
+
+void ConvertController::changeShiftValue(int value, int colorIndex) {
+	
+	const int HUE = 0;
+	const int SATURATION = 1;
+	const int VALUE = 2;
+
+	switch(colorIndex) {
+		case HUE:
+			textureParam->setH_shift(value);
+			break;
+		case SATURATION:
+			textureParam->setS_shift(value);
+			break;
+		case VALUE:
+			textureParam->setV_shift(value);
+			break;
+	}
+
+}
+
+void ConvertController::setAlpha(double value) {
+
+	textureParam->setAlpha(value);
+
+}

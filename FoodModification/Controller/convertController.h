@@ -2,15 +2,23 @@
 #define CONVERTCONTROLLER_H
 
 #include "../Utils/opencvBase.h"
+#include "../Param/textureParam.h"
 
 class ConvertController
-{
+{	
 public:
-    ConvertController();
+    static ConvertController& getInstance();
     void convert(Mat srcBGRImg, Mat srcHSVImg, Mat dstBGRImg, Mat textureImg, Mat maskImg, vector<Rect>& rects);
+    void changeShiftValue(int hShift, int sShift, int vShift);
+    void changeShiftValue(int value, int colorIndex);
+    void setAlpha(double value);
 private:
+	TextureParam* textureParam = new TextureParam();
+	ConvertController();
+	ConvertController(const ConvertController&);
 	void overlapTexture(Mat srcBGRImg, Mat maskImg, Mat textureImg, vector<Rect>& rects, double alpha);
     void convertHSV(Mat srcBGRImg, Mat maskImg, vector<Rect>& rects);
+    
 };
 
 #endif // CONVERTCONTROLLER_H
