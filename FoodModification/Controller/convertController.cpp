@@ -17,7 +17,16 @@ void ConvertController::convert(Mat srcBGRImg, Mat srcHSVImg, Mat dstBGRImg, Mat
     	overlapTexture(dstBGRImg, maskImg, textureParam->getImg(), rects, ALPHA);
 	} 
 	
-	convertHSV(dstBGRImg, maskImg, rects, textureParam);
+
+	if(_illuminationParam->intensityChange()) {
+		convertHSVAndIllumination(dstBGRImg, maskImg, rects, textureParam, _illuminationParam->intensityFactor());
+	} else {
+		convertHSV(dstBGRImg, maskImg, rects, textureParam);
+	}
+
+	if(_illuminationParam->ZChange()) {
+		convertZ(dstBGRImg, _illuminationParam->ZFactor());
+	}
 
 }
 
@@ -59,38 +68,72 @@ void ConvertController::convertHSV(Mat srcBGRImg, Mat maskImg, vector<Rect>& rec
 
 }
 
-// /**
-// * colorDialogの色の編集によって呼び出される.
-// *　@param HSVのシフト量
-// */
-// void ConvertController::changeShiftValue(int hShift, int sShift, int vShift) {
+void ConvertController::convertHSVAndIllumination(Mat srcBGRImg, Mat maskImg, vector<Rect>& rects, TextureParam* textureParam, double intensityFactor) {
 
-// 	textureParam->setShift(hShift, sShift, vShift);
 	
-// }
+	Mat dstHSVImg;
+	cvtColor(srcBGRImg, dstHSVImg, CV_BGR2HSV);
+	for(int i=0; i<rects.size(); i++) {
+		for(int y=rects[i].y; y<(rects[i].y+rects[i].height); y++) {
+			for(int x=rects[i].x; x<(rects[i].x+rects[i].width); x++){
+				if(L(maskImg,x,y) == 255) {
+					H(dstHSVImg,x,y) = H(dstHSVImg,x,y) + textureParam->getH_shift();
+					S(dstHSVImg,x,y) = S(dstHSVImg,x,y) + textureParam->getS_shift();
+					V(dstHSVImg,x,y) = V(dstHSVImg,x,y) + textureParam->getV_shift();
+				}
+			}
+		}
+	}
 
-// void ConvertController::changeShiftValue(int value, int colorIndex) {
-	
-// 	const int HUE = 0;
-// 	const int SATURATION = 1;
-// 	const int VALUE = 2;
+	for(int y=0; y<srcBGRImg.rows; y++) {
+		for(int x=0; x<srcBGRImg.cols; x++) {
+			V(dstHSVImg,x,y) = changeIllumination(V(dstHSVImg,x,y), intensityFactor);
+		}
+	}
+	cvtColor(dstHSVImg, srcBGRImg, CV_HSV2BGR);
 
-// 	switch(colorIndex) {
-// 		case HUE:
-// 			textureParam->setH_shift(value);
-// 			break;
-// 		case SATURATION:
-// 			textureParam->setS_shift(value);
-// 			break;
-// 		case VALUE:
-// 			textureParam->setV_shift(value);
-// 			break;
-// 	}
+}
 
-// }
 
-// void ConvertController::setAlpha(double value) {
+int ConvertController::changeIllumination(int currentValue, double intensityFactor) {
 
-// 	textureParam->setAlpha(value);
+	if(currentValue * intensityFactor > 255) {
+		return 255;
+	} else {
+		return (int)currentValue * intensityFactor;
+	}
 
-// }
+}
+
+void ConvertController::convertZ(Mat srcBGRImg, double ZFactor) {
+
+	Mat dstXYZImg;
+	cvtColor(srcBGRImg, dstXYZImg, CV_BGR2XYZ);
+	for(int y=0; y<srcBGRImg.rows; y++) {
+		for(int x=0; x<srcBGRImg.cols; x++) {
+			if(V(dstXYZImg,x,y) * ZFactor > 255) {
+				V(dstXYZImg,x,y) =  255;
+			} else {
+				V(dstXYZImg,x,y) = V(dstXYZImg,x,y) * ZFactor;
+			}
+		}
+	}
+	cvtColor(dstXYZImg, srcBGRImg, CV_XYZ2BGR);
+}
+
+
+void ConvertController::changeIntensityParam(bool change, int intensityFactor) {
+
+	double d_IntensityFactor = (double)intensityFactor/100.0;
+	_illuminationParam->setIntensityChange(change);
+	_illuminationParam->setIntensityFactor(d_IntensityFactor);
+
+}
+
+void ConvertController::changeZParam(bool change, int ZFactor) {
+
+	double d_ZFactor = (double)ZFactor/100.0;
+	_illuminationParam->setZChange(change);
+	_illuminationParam->setZFactor(d_ZFactor);
+
+}

@@ -34,6 +34,10 @@ private slots:
     void on_radioButton_dstSizeLarge_clicked();
     void on_textureComboBox_currentIndexChanged(const QString &arg1);
 
+    void on_illuminationSlider_valueChanged(int value);
+
+    void on_horizontalSlider_valueChanged(int value);
+
 private:
     Ui::MainWindow *ui;
     MainController& mainController = MainController::getInstance();

@@ -36,7 +36,8 @@ SOURCES += main.cpp\
     Service/calibrationService.cpp \
     View/colorDialog.cpp \
     Param/textureParam.cpp \
-    Utils/xmlUtils.cpp
+    Utils/xmlUtils.cpp \
+    Param/illuminationParam.cpp
 
 HEADERS  += \
     extractParamManager.h \
@@ -62,7 +63,8 @@ HEADERS  += \
     Service/calibrationService.h \
     View/colorDialog.h \
     Param/textureParam.h \
-    Utils/xmlUtils.h
+    Utils/xmlUtils.h \
+    Param/illuminationParam.h
 
 FORMS    += \
     View/calibrateDialog.ui \

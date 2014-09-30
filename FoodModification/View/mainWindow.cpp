@@ -103,3 +103,13 @@ void MainWindow::on_textureComboBox_currentIndexChanged(const QString &arg1)
 		mainController.setNoTexture(true);
 	}
 }
+
+void MainWindow::on_illuminationSlider_valueChanged(int value)
+{
+	convertController.changeIntensityParam(true, value);
+}
+
+void MainWindow::on_horizontalSlider_valueChanged(int value)
+{
+	convertController.changeZParam(true, value);
+}
