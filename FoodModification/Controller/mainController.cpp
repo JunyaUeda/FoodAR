@@ -10,7 +10,6 @@ Mat srcHSVImg;//クリックポイントの色度値を取得するためにグ�
 
 MainController::MainController() {
 
-
 }
 
 MainController& MainController::getInstance() {
@@ -50,6 +49,9 @@ void MainController::doConvertion() {
     srcGrayImg.create(srcBGRImg.size(), CV_8UC1);
     maskImg.create(srcBGRImg.size(), CV_8UC3);
     setMouseCallback("myWindow", mouseCallback1);
+
+    textureParam->setPicturePath("../FoodModification/Images/toro.jpg");
+
     while (1) {
 
         videoCapture >> srcBGRImg;
@@ -81,12 +83,22 @@ void MainController::doConvertion() {
         imshow("myWindow", srcBGRImg);
         imshow("FinalExtractedImg", maskImg);
 
+        
         vector<Rect> rects;
-        Mat textureImg = textureController.createTexture(dstContours, maskImg, rects);
-        imshow("textureImg", textureImg);
+        if(textureParam->isNoTexture()) {
+            textureController.setROI(dstContours, rects);
+        } else {
+            Mat textureImg = textureController.createTexture(dstContours, maskImg, rects, textureParam->getPicturePath());
+            textureParam->setImg(textureImg);
+            imshow("textureImg", textureImg);
+        }
+        
 
         dstBGRImg = srcBGRImg.clone();
-        convertController.convert(srcBGRImg,srcHSVImg, dstBGRImg, textureImg, maskImg, rects);
+        convertController.convert(srcBGRImg,srcHSVImg, dstBGRImg, maskImg, rects, textureParam);
+        if(resizeFlag) {
+            resize(dstBGRImg, dstBGRImg, dstSize, 0, 0, INTER_LINEAR);
+        }
         imshow("dstImg",dstBGRImg);
 
 
@@ -96,9 +108,94 @@ void MainController::doConvertion() {
 
 }
 
-void MainController::setVCaptureSize(int width, int height) {
+/**
+* mainWindowのサイズ設定によって呼び出される.
+*　@param cv::Size
+*/
+void MainController::setVCaptureSize(Size size) {
 
-    videoCapture.set(CV_CAP_PROP_FRAME_WIDTH, 1280);
-    videoCapture.set(CV_CAP_PROP_FRAME_HEIGHT, 720);
+    videoCapture.set(CV_CAP_PROP_FRAME_WIDTH, size.width);
+    videoCapture.set(CV_CAP_PROP_FRAME_HEIGHT, size.height);
 
+}
+
+/**
+* mainWindowのサイズ設定によって呼び出される.
+*　@param cv::Size
+*/
+void MainController::setDstSize(Size size) {
+
+    dstSize = size;
+    resizeFlag = true;
+
+}
+
+/**
+* mainWindowのサイズ設定によって呼び出される.入力と出力画像のリサイズを行うかどうかのフラグを設定
+*　@param cv::Size
+*/
+void MainController::setResizeFlag(bool flag) {
+    resizeFlag = flag;
+}
+
+/**
+* colorDialogの色の編集によって呼び出される.
+*　@param HSVのシフト量
+*/
+void MainController::changeShiftValue(int hShift, int sShift, int vShift) {
+
+    textureParam->setShift(hShift, sShift, vShift);
+    
+}
+
+/**
+* colorDialogの色の編集によって呼び出される.
+*　@param shift量と色チャンネルを示すindex
+*/
+void MainController::changeShiftValue(int value, int colorIndex) {
+    
+    const int HUE = 0;
+    const int SATURATION = 1;
+    const int VALUE = 2;
+
+    switch(colorIndex) {
+        case HUE:
+            textureParam->setH_shift(value);
+            break;
+        case SATURATION:
+            textureParam->setS_shift(value);
+            break;
+        case VALUE:
+            textureParam->setV_shift(value);
+            break;
+    }
+
+}
+
+/**
+* alpha値のセットを行う。colorDialogの色の編集によって呼び出される.
+*　@param value:double
+*/
+void MainController::setAlpha(double value) {
+
+    textureParam->setAlpha(value);
+
+}
+
+/**
+* mainWindowのテクスチャ選択によって呼び出される
+*　@param textureのImageのパス
+*/
+void MainController::setPicturePath(String path) {
+
+    textureParam->setPicturePath(path);
+
+}
+
+/**
+* mainWindowのテクスチャ選択によって呼び出される。テクスチャなしかどうかのフラグを設定する。
+*　@param textureありなしのフラグ
+*/
+void MainController::setNoTexture(bool flag) {
+    textureParam->setNoTexture(flag);
 }

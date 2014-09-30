@@ -109,6 +109,8 @@ void CalibrationController::calibrate(CalibrateClickParam* param) {
 
     }
 
+    propertyController.save();
+
 }
 
 void CalibrationController::setExtractParam(Mat srcImg, Mat refImg, int colorSpaceIndex) {
@@ -181,8 +183,6 @@ void CalibrationController::setExtractHSVParam(Mat srcImg, Mat refImg, Scalar co
     tolerace->setSaturationLowTolerance(saturationTolerance[1]);
     tolerace->setValueHighTolerance(valueTolerace[0]);
     tolerace->setValueLowTolerance(valueTolerace[1]);
-
-    qDebug() << "setTolerance3";
 
 }
 

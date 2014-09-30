@@ -10,12 +10,14 @@ ConvertController& ConvertController::getInstance() {
 	return instance;
 }
 
-void ConvertController::convert(Mat srcBGRImg, Mat srcHSVImg, Mat dstBGRImg, Mat textureImg, Mat maskImg, vector<Rect>& rects) {
+void ConvertController::convert(Mat srcBGRImg, Mat srcHSVImg, Mat dstBGRImg, Mat maskImg, vector<Rect>& rects, TextureParam* textureParam) {
 
-	const double ALPHA = textureParam->getAlpha();
-	//const double ALPHA = 0.5;
-	overlapTexture(dstBGRImg, maskImg, textureImg, rects, ALPHA);
-	convertHSV(dstBGRImg, maskImg, rects);
+	if(!textureParam->isNoTexture()) {
+		const double ALPHA = textureParam->getAlpha();
+    	overlapTexture(dstBGRImg, maskImg, textureParam->getImg(), rects, ALPHA);
+	} 
+	
+	convertHSV(dstBGRImg, maskImg, rects, textureParam);
 
 }
 
@@ -37,7 +39,7 @@ void ConvertController::overlapTexture(Mat srcBGRImg, Mat maskImg, Mat textureIm
 
 }
 
-void ConvertController::convertHSV(Mat srcBGRImg, Mat maskImg, vector<Rect>& rects) {
+void ConvertController::convertHSV(Mat srcBGRImg, Mat maskImg, vector<Rect>& rects, TextureParam* textureParam) {
 
 	
 	Mat dstHSVImg;
@@ -57,38 +59,38 @@ void ConvertController::convertHSV(Mat srcBGRImg, Mat maskImg, vector<Rect>& rec
 
 }
 
-/**
-* colorDialogの色の編集によって呼び出される.
-*　@param HSVのシフト量
-*/
-void ConvertController::changeShiftValue(int hShift, int sShift, int vShift) {
+// /**
+// * colorDialogの色の編集によって呼び出される.
+// *　@param HSVのシフト量
+// */
+// void ConvertController::changeShiftValue(int hShift, int sShift, int vShift) {
 
-	textureParam->setShift(hShift, sShift, vShift);
+// 	textureParam->setShift(hShift, sShift, vShift);
 	
-}
+// }
 
-void ConvertController::changeShiftValue(int value, int colorIndex) {
+// void ConvertController::changeShiftValue(int value, int colorIndex) {
 	
-	const int HUE = 0;
-	const int SATURATION = 1;
-	const int VALUE = 2;
+// 	const int HUE = 0;
+// 	const int SATURATION = 1;
+// 	const int VALUE = 2;
 
-	switch(colorIndex) {
-		case HUE:
-			textureParam->setH_shift(value);
-			break;
-		case SATURATION:
-			textureParam->setS_shift(value);
-			break;
-		case VALUE:
-			textureParam->setV_shift(value);
-			break;
-	}
+// 	switch(colorIndex) {
+// 		case HUE:
+// 			textureParam->setH_shift(value);
+// 			break;
+// 		case SATURATION:
+// 			textureParam->setS_shift(value);
+// 			break;
+// 		case VALUE:
+// 			textureParam->setV_shift(value);
+// 			break;
+// 	}
 
-}
+// }
 
-void ConvertController::setAlpha(double value) {
+// void ConvertController::setAlpha(double value) {
 
-	textureParam->setAlpha(value);
+// 	textureParam->setAlpha(value);
 
-}
+// }

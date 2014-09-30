@@ -2,117 +2,180 @@
 #include <QtCore>
 #include <QtXml>
 
+#define FILEPATH "../FoodModification/ExtractParam.xml"
+
 PropertyController::PropertyController() {
-    readFile();
-}
 
-void PropertyController::readFile() {
-
-    QString filePath = "ExtractParam.xml";
-     QFile file(filePath);
-     if(!file.open(QIODevice::ReadOnly | QIODevice::Text)) {
-        qDebug() << "Failed to open the file for reading1.";
-        //return false;
-     } else {
-        if (!this->document.setContent(&file)) {
-            qDebug() << "Failed to load the file for readingi2.";
-          //  return false;
-        }
-        file.close();
-    }
-
-    this->domRoot = document.firstChildElement();
-
-
-     readParameters();
+    readFile(FILEPATH);
 
 }
 
 PropertyController& PropertyController::getInstance() {
+
     static PropertyController instance;
     return instance;
-}
-
-int PropertyController::getColorCriterionNum() {
-
-    return getIntParamByTagName("CriterionNum", this->domRoot);
 
 }
 
-bool PropertyController::readParameters() {
+void PropertyController::readFile(QString filePath) {
 
-    setColorCriterion(this->domRoot,  extractParamManager.criterion);
-    setColorExtractTolerance(this->domRoot, extractParamManager.colorExtractTolerance);
-    readExtractColorSpace(this->domRoot);
+    _document = XmlUtils::getQDomDoc(filePath);
 
-    return true;
-
-}
-
-int PropertyController::getIntParamByTagName(QString tag, QDomElement inElement) {
-
-    QDomElement element = inElement.firstChildElement(tag);
-    QString text = element.text();
-
-    return text.toInt();
-
-}
-
-QString PropertyController::getStringParamByTagName(QString tag, QDomElement inElement) {
+    readExtractColorSpace();
+    readColorCriterion();
+    readColorExtractTolerance();
     
-    QDomElement element = inElement.firstChildElement(tag);
-    QString text = element.text();
-
-    return text;
 
 }
 
-void PropertyController::setColorCriterion(QDomElement root, ColorCriterion* criterion) {
-    
-    QDomNodeList nodes = root.elementsByTagName("Criterion");
-    for(int i =0;  i<nodes.count(); i++ ) {
-        QDomNode node = nodes.at(i);
-        if (node.hasChildNodes()) {
-            QDomElement element = node.toElement();
-            criterion[i].setHue( getIntParamByTagName("hue", element));
-            criterion[i].setSaturation( getIntParamByTagName("saturation", element));
-            criterion[i].setValue(getIntParamByTagName("value", element));
-            criterion[i].setCr(getIntParamByTagName("cr", element));
-        }
-       // criterion++;
+void PropertyController::readExtractColorSpace() {
+ 
+    QString colorSpace_txt = XmlUtils::getAttr(_document, "ExtractColorSpace", "value");
+
+    if(colorSpace_txt == "BGR") {
+        _extractParamManager.setExtractColorSpace(0);
+    } else if (colorSpace_txt == "HSV") {
+        _extractParamManager.setExtractColorSpace(1);
     }
+    qDebug() << "ExtractColorSpace =" << _extractParamManager.getExtractColorSpace();
+
+}
+
+void PropertyController::readColorCriterion() {
+    
+    QDomElement root = _document.firstChildElement();
+    ColorCriterion* criterion = _extractParamManager.criterion;
+
+    QDomNodeList nodes = root.elementsByTagName("Criterion");
+
+    for(int i =0;  i<nodes.count(); i++ ) {
+
+        QDomElement element = nodes.at(i).toElement();
+
+        criterion[i].setHue(XmlUtils::getAttr(element, "hue").toInt());
+        criterion[i].setSaturation(XmlUtils::getAttr(element, "saturation").toInt());
+        criterion[i].setValue(XmlUtils::getAttr(element, "value").toInt());
+        criterion[i].setBlue(XmlUtils::getAttr(element, "blue").toInt());
+        criterion[i].setGreen(XmlUtils::getAttr(element, "green").toInt());
+        criterion[i].setRed(XmlUtils::getAttr(element, "red").toInt());
+        criterion[i].setY(XmlUtils::getAttr(element, "Y").toInt());
+        criterion[i].setCr(XmlUtils::getAttr(element, "Cr").toInt());
+        criterion[i].setCb(XmlUtils::getAttr(element, "Cb").toInt());
+
+    }
+
  }
 
-void PropertyController::setColorExtractTolerance(QDomElement root, ColorExtractTolerance* tolerance) {
+void PropertyController::readColorExtractTolerance() {
+
+    QDomElement root = _document.firstChildElement();
+    ColorExtractTolerance* tolerance = _extractParamManager.colorExtractTolerance;
 
     QDomNodeList nodes = root.elementsByTagName("ColorExtractTolerance");
+
     for(int i=0; i<nodes.count(); i++) {
-        QDomNode node = nodes.at(i);
-        if(node.hasChildNodes()){
-            QDomElement element = node.toElement();
-            tolerance[i].setHueHighTolerance(getIntParamByTagName("hueTolerance", element));
-            tolerance[i].setSaturationHighTolerance(getIntParamByTagName("saturationTolerance", element));
-            tolerance[i].setValueHighTolerance(getIntParamByTagName("valueTolerance", element));
-            //tolerance[i].setCrTolerance(getIntParamByTagName("crTolerance", element));
-        }
+
+        QDomElement element = nodes.at(i).toElement();
+        
+        tolerance[i].setHueHighTolerance(XmlUtils::getAttr(element, "hue", "high").toInt());
+        tolerance[i].setSaturationHighTolerance(XmlUtils::getAttr(element, "saturation", "high").toInt());
+        tolerance[i].setValueHighTolerance(XmlUtils::getAttr(element, "value", "high").toInt());
+        tolerance[i].setHueLowTolerance(XmlUtils::getAttr(element, "hue", "low").toInt());
+        tolerance[i].setSaturationLowTolerance(XmlUtils::getAttr(element, "saturation", "low").toInt());
+        tolerance[i].setValueLowTolerance(XmlUtils::getAttr(element, "value", "low").toInt());
+
+        tolerance[i].setBlueHighTolerance(XmlUtils::getAttr(element, "blue", "high").toInt());
+        tolerance[i].setGreenHighTolerance(XmlUtils::getAttr(element, "green", "high").toInt());
+        tolerance[i].setRedHighTolerance(XmlUtils::getAttr(element, "red", "high").toInt());
+        tolerance[i].setBlueLowTolerance(XmlUtils::getAttr(element, "blue", "low").toInt());
+        tolerance[i].setGreenLowTolerance(XmlUtils::getAttr(element, "green", "low").toInt());
+        tolerance[i].setRedLowTolerance(XmlUtils::getAttr(element, "red", "low").toInt());
+
     }
 
 }
 
-ExtractParamManager* PropertyController::getExtractParamManager() {
 
-    return &extractParamManager;
+
+
+void PropertyController::save() {
+    
+    QFile file(FILEPATH);
+    if (file.open(QFile::WriteOnly| QFile::Truncate)) {
+
+        QDomDocument dstDoc = _document.cloneNode(true).toDocument(); 
+        QDomElement root = dstDoc.firstChildElement();
+
+        writeExtractColorSpace(&root);
+        writeColorCriterion(&root);
+        writeColorExtractTolerance(&root);
+        
+        QTextStream out(&file);
+        const int Indent = 4;
+        dstDoc.save(out, Indent);
+    } else {
+        qDebug() << "not Open";
+        
+    }
 
 }
 
-void PropertyController::readExtractColorSpace(QDomElement root) {
- 
-    QString text = getStringParamByTagName("ExtractColorSpace", root);
-    if(text == "BGR") {
-        this->extractParamManager.setExtractColorSpace(0);
-    } else if (text == "HSV") {
-        this->extractParamManager.setExtractColorSpace(1);
+void PropertyController::writeExtractColorSpace(QDomElement* root) {
+
+    int colorSpace_int = _extractParamManager.getExtractColorSpace();
+    QDomElement element = (*root).firstChildElement("ExtractColorSpace");
+    if(colorSpace_int == 0) {
+        element.setAttribute("value", "BGR");
+    } else if (colorSpace_int == 1) {
+        element.setAttribute("value", "HSV");
     }
-    qDebug() << "ExtractColorSpace =" << this->extractParamManager.getExtractColorSpace();
+    
+}
+
+void PropertyController::writeColorCriterion(QDomElement* root) {
+
+    QDomNodeList nodes = (*root).elementsByTagName("Criterion");
+    ColorCriterion* criterion = _extractParamManager.criterion;
+
+    for(int i =0;  i<nodes.count(); i++ ) {
+        QDomElement element = nodes.at(i).toElement();
+        element.setAttribute("hue", QString::number(criterion[i].getHue()));
+        element.setAttribute("saturation", QString::number(criterion[i].getSaturation()));
+        element.setAttribute("value", QString::number(criterion[i].getValue()));
+        element.setAttribute("blue", QString::number(criterion[i].getBlue()));
+        element.setAttribute("green", QString::number(criterion[i].getGreen()));
+        element.setAttribute("red", QString::number(criterion[i].getRed()));
+        element.setAttribute("Y", QString::number(criterion[i].getY()));
+        element.setAttribute("Cr", QString::number(criterion[i].getCr()));
+        element.setAttribute("Cb", QString::number(criterion[i].getCb()));
+
+    }
+
+
+}
+
+void PropertyController::writeColorExtractTolerance(QDomElement* root) {
+
+    ColorExtractTolerance* tolerance = _extractParamManager.colorExtractTolerance;
+
+    QDomNodeList nodes = (*root).elementsByTagName("ColorExtractTolerance");
+
+    for(int i=0; i<nodes.count(); i++) {
+
+        QDomElement element = nodes.at(i).toElement();
+        
+        XmlUtils::setAttr(element, "hue", "high", tolerance[i].getHueHighTolerance() );
+        XmlUtils::setAttr(element, "saturation", "high", tolerance[i].getSaturationHighTolerance() );
+        XmlUtils::setAttr(element, "value", "high", tolerance[i].getValueHighTolerance() );
+        XmlUtils::setAttr(element, "hue", "low", tolerance[i].getHueLowTolerance() );
+        XmlUtils::setAttr(element, "saturation", "low", tolerance[i].getSaturationLowTolerance() );
+        XmlUtils::setAttr(element, "value", "low", tolerance[i].getValueLowTolerance() );
+        XmlUtils::setAttr(element, "blue", "high", tolerance[i].getBlueHighTolerance() );
+        XmlUtils::setAttr(element, "green", "high", tolerance[i].getGreenHighTolerance() );
+        XmlUtils::setAttr(element, "red", "high", tolerance[i].getRedHighTolerance() );
+        XmlUtils::setAttr(element, "blue", "low", tolerance[i].getBlueLowTolerance() );
+        XmlUtils::setAttr(element, "green", "low", tolerance[i].getGreenLowTolerance() );
+        XmlUtils::setAttr(element, "red", "low", tolerance[i].getRedLowTolerance() );
+    }
 
 }

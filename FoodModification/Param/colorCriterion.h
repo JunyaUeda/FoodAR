@@ -2,8 +2,7 @@
 #define COLORCRITERION_H
 
 class ColorCriterion {
-public:
-    ColorCriterion();
+
 private:
     int blue;
     int green;
@@ -15,48 +14,25 @@ private:
     int Cr;
     int Cb;
 public:
-    int getHue() {
-        return this->hue;
-    }
-    void setHue(int hue) {
-        this->hue = hue;
-    }
-    int getSaturation() {
-        return this->saturation;
-    }
-    void setSaturation(int saturation) {
-        this->saturation = saturation;
-    }
-    int getValue() {
-        return this->value;
-    }
-    void setValue(int value) {
-        this->value = value;
-    }
-    int getY() {
-        return this->Y;
-    }
-    void setY(int Y){
-        this->Y = Y;
-    }
-    int getCr() {
-        return Cr;
-    }
-    void setCr(int Cr) {
-        this->Cr = Cr;
-    }
-    int getCb() {
-        return Cb;
-    }
-    void setCb(int Cb) {
-        this->Cb = Cb;
-    }
+    ColorCriterion();
     int getBlue() const;
     void setBlue(int value);
     int getGreen() const;
     void setGreen(int value);
     int getRed() const;
     void setRed(int value);
+    int getHue() const;
+    void setHue(int value);
+    int getSaturation() const;
+    void setSaturation(int value);
+    int getValue() const;
+    void setValue(int value);
+    int getY() const;
+    void setY(int value);
+    int getCr() const;
+    void setCr(int value);
+    int getCb() const;
+    void setCb(int value);
 };
 
 #endif // COLORCRITERION_H

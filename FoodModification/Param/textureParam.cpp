@@ -52,3 +52,33 @@ void TextureParam::setAlpha(double value)
 {
     alpha = value;
 }
+
+String TextureParam::getPicturePath() const
+{
+    return picturePath;
+}
+
+void TextureParam::setPicturePath(const String &value)
+{
+    picturePath = value;
+}
+
+Mat TextureParam::getImg() const
+{
+    return img;
+}
+
+void TextureParam::setImg(const Mat &value)
+{
+    img = value;
+}
+
+bool TextureParam::isNoTexture() const
+{
+    return noTexture;
+}
+
+void TextureParam::setNoTexture(bool value)
+{
+    noTexture = value;
+}

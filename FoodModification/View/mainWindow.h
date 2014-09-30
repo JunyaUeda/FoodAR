@@ -2,9 +2,13 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QDir>
 #include "../Controller/mainController.h"
 #include "./calibrateDialog.h"
 #include "./colorDialog.h"
+#include "../Utils/opencvUtils.h"
+
+#define DIRPATH "../FoodModification/Images/"
 
 namespace Ui {
 class MainWindow;
@@ -24,14 +28,18 @@ private slots:
     void on_CalibrateButton_clicked();
     void on_colorMapButton_clicked();
     void on_alphaSlider_actionTriggered(int action);
-
     void on_radioButton_captureSizeLarge_clicked();
+    void on_radioButton_captureSizeSmall_clicked();
+    void on_radioButton_dstSizeSmall_clicked();
+    void on_radioButton_dstSizeLarge_clicked();
+    void on_textureComboBox_currentIndexChanged(const QString &arg1);
 
 private:
     Ui::MainWindow *ui;
     MainController& mainController = MainController::getInstance();
     CalibrationController& calibrationController = CalibrationController::getInstance();
     ConvertController& convertController = ConvertController::getInstance();
+    
 };
 
 #endif // MAINWINDOW_H

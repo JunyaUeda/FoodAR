@@ -18,9 +18,12 @@ public:
     int getExtractColorSpace() const;
     void setExtractColorSpace(int value);
 
+    int getCriterionNum() const;
+    void setCriterionNum(int value);
+
 private:
-	ExtractParamManager();
-	ExtractParamManager(const ExtractParamManager&);
+    ExtractParamManager();
+    ExtractParamManager(const ExtractParamManager&);
 
 };
 

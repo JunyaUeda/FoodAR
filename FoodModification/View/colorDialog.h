@@ -3,7 +3,7 @@
 
 #include <QDialog>
 #include "../Utils/opencvUtils.h"
-#include "../Controller/convertController.h"
+#include "../Controller/mainController.h"
 
 namespace Ui {
 class ColorDialog;
@@ -26,7 +26,7 @@ private slots:
 
 private:
     Ui::ColorDialog *ui;
-    ConvertController& convertController = ConvertController::getInstance();
+    MainController& mainController = MainController::getInstance();
 
 };
 

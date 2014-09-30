@@ -6,6 +6,7 @@
 #include "../Param/colorExtractTolerance.h"
 #include "../extractParamManager.h"
 #include "../Service/calibrationService.h"
+#include "./propertyController.h"
 
 class CalibrationController {
 
@@ -23,6 +24,7 @@ private:
     bool drawingFlag = true;
     CalibrateClickParam* clickParam;
     ExtractParamManager& extractParamManager = ExtractParamManager::getInstance();
+    PropertyController& propertyController = PropertyController::getInstance();
     CalibrationService* calibrationService;
 
     CalibrationController();

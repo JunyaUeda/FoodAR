@@ -1,6 +1,8 @@
 #ifndef TEXTUREPARAM_H
 #define TEXTUREPARAM_H
 
+#include "../Utils/opencvUtils.h"
+
 class TextureParam
 {
 public:
@@ -20,11 +22,24 @@ public:
     double getAlpha() const;
     void setAlpha(double value);
 
+    String getPicturePath() const;
+    void setPicturePath(const String &value);
+
+    Mat getImg() const;
+    void setImg(const Mat &value);
+
+    bool isNoTexture() const;
+    void setNoTexture(bool value);
+
 private:
     int h_shift = 0;
     int s_shift = 0;
     int v_shift = 0;
     double alpha = 0.4;
+    String picturePath;
+    Mat img;
+    bool noTexture = true;
+
 };
 
 #endif // TEXTUREPARAM_H

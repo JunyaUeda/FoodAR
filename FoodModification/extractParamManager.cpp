@@ -22,3 +22,14 @@ void ExtractParamManager::setExtractColorSpace(int value)
 {
     extractColorSpace = value;
 }
+
+
+int ExtractParamManager::getCriterionNum() const
+{
+    return criterionNum;
+}
+
+void ExtractParamManager::setCriterionNum(int value)
+{
+    criterionNum = value;
+}

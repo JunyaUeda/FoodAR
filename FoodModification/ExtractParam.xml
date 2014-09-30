@@ -1,38 +1,23 @@
-<?xml version="1.0" encoding="UTF-8" ?>
+<?xml version='1.0' encoding='UTF-8'?>
 <Params>
-	<CriterionNum>2</CriterionNum>
-	<Criterion ID="0">
-		<hue>152</hue>
-		<saturation>3</saturation>
-		<value>254</value>
-		<y>125</y>
-		<cr>129</cr>
-		<cb>127</cb>
-	</Criterion>
-
-	<Criterion ID="1">
-		<hue>130</hue>
-		<saturation>140</saturation>
-		<value>160</value>
-		<y>125</y>
-		<cr>125</cr>
-		<cb>125</cb>
-	</Criterion>
-
-	<ColorExtractTolerance>
-		<hueTolerance>50</hueTolerance>
-		<saturationTolerance>50</saturationTolerance>
-		<valueTolerance>50</valueTolerance>
-		<crTolerance>50</crTolerance>
-	</ColorExtractTolerance>
-
-	<ColorExtractTolerance>
-		<hueTolerance>60</hueTolerance>
-		<saturationTolerance>60</saturationTolerance>
-		<valueTolerance>60</valueTolerance>
-		<crTolerance>60</crTolerance>
-	</ColorExtractTolerance>
-
-	<ExtractColorSpace>HSV</ExtractColorSpace>
-	
+    <ExtractColorSpace value="HSV"/>
+    <CriterionNum value="2"/>
+    <Criterion hue="175" red="175" id="0" value="132" Y="175" blue="175" green="175" saturation="216" Cr="175" Cb="175"/>
+    <Criterion hue="122" red="176" id="1" value="108" Y="176" blue="176" green="176" saturation="130" Cr="176" Cb="176"/>
+    <ColorExtractTolerance ID="0">
+        <hue high="1" low="1"/>
+        <saturation high="9" low="9"/>
+        <value high="3" low="3"/>
+        <blue high="12" low="13"/>
+        <green high="15" low="14"/>
+        <red high="17" low="3"/>
+    </ColorExtractTolerance>
+    <ColorExtractTolerance ID="1">
+        <hue high="1" low="1"/>
+        <saturation high="115" low="115"/>
+        <value high="15" low="15"/>
+        <blue high="12" low="13"/>
+        <green high="15" low="14"/>
+        <red high="17" low="3"/>
+    </ColorExtractTolerance>
 </Params>

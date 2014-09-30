@@ -6,6 +6,7 @@
 #include "./textureController.h"
 #include "./convertController.h"
 #include "./calibrationController.h"
+#include "../Param/textureParam.h"
 
 class MainController {
 
@@ -14,16 +15,27 @@ public:
 
 	static MainController& getInstance();
     void doConvertion();
-	void setVCaptureSize(int width, int height);
+	void setVCaptureSize(Size size);
+	void setResizeFlag(bool flag);
+	void setDstSize(Size size);
+	void changeShiftValue(int hShift, int sShift, int vShift);
+    void changeShiftValue(int value, int colorIndex);
+    void setAlpha(double value);
+    void setPicturePath(String path);
+    void setNoTexture(bool flag);
 
 private:
     ExtractController& extractController = ExtractController::getInstance();
     CalibrationController& calibrationController = CalibrationController::getInstance();
     TextureController& textureController = TextureController::getInstance();
     ConvertController& convertController = ConvertController::getInstance();
+    TextureParam* textureParam = new TextureParam();
+    bool resizeFlag = false;
+    Size dstSize;
 
     MainController();
     MainController(const MainController&);
+
     
 };
 

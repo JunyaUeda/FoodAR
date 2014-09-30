@@ -1,6 +1,5 @@
 #include "textureController.h"
 #include <QDebug>
-#define IMG_SRC "../FoodModification/Images/toro.jpg"
 
 TextureController::TextureController() {
 
@@ -11,14 +10,11 @@ TextureController& TextureController::getInstance() {
 	return instance;
 }
 
-Mat TextureController::createTexture(vector<vector<Point>>& contours, Mat maskImg, vector<Rect>& rects) {
+Mat TextureController::createTexture(vector<vector<Point>>& contours, Mat maskImg, vector<Rect>& rects, String picturePath) {
 	
 	Mat allTextureImg = Mat::zeros(maskImg.size(), CV_8UC3);
-	Mat srcImg = imread(IMG_SRC, 1);
-	if(srcImg.empty()) {
-		qDebug() << "srcImg is empty";
-		return allTextureImg;
-	}
+	Mat srcImg = imread(picturePath, 1);
+	
 	if(contours.empty()) {
 		qDebug() << "contours is empty in textureController";
 		return allTextureImg;
@@ -35,6 +31,7 @@ Mat TextureController::createTexture(vector<vector<Point>>& contours, Mat maskIm
 		
 		Rect rect = rotatedRect.boundingRect();
 		rects.push_back(rect);
+
 		resize(srcImg, srcImg, rotatedRect.size, 0, 0, INTER_NEAREST);
 		Point2f vertices[4];
 		rotatedRect.points(vertices);
@@ -60,3 +57,15 @@ Mat TextureController::createTexture(vector<vector<Point>>& contours, Mat maskIm
 
 }
 
+void TextureController::setROI(vector<vector<Point>>& contours, vector<Rect>& rects) {
+	for(int i=0; i<contours.size(); i++) {
+
+		size_t count = contours[i].size();
+        if(count < 300) {
+            continue;
+        }
+		RotatedRect rotatedRect = minAreaRect(contours[i]);
+		Rect rect = rotatedRect.boundingRect();
+		rects.push_back(rect);
+	}
+}
