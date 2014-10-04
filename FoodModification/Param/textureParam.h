@@ -3,8 +3,7 @@
 
 #include "../Utils/opencvUtils.h"
 
-class TextureParam
-{
+class TextureParam {
 public:
     TextureParam();
 
@@ -22,9 +21,6 @@ public:
     double getAlpha() const;
     void setAlpha(double value);
 
-    String getPicturePath() const;
-    void setPicturePath(const String &value);
-
     Mat getImg() const;
     void setImg(const Mat &value);
 
@@ -36,10 +32,8 @@ private:
     int s_shift = 0;
     int v_shift = 0;
     double alpha = 0.4;
-    String picturePath;
     Mat img;
     bool noTexture = true;
-
 };
 
 #endif // TEXTUREPARAM_H

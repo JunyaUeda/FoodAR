@@ -34,51 +34,34 @@ void mouseCallback1(int event, int x, int y, int flags, void* param) {
 
 void MainController::doConvertion() {
 
-    videoCapture = cv::VideoCapture(0);
-    Mat srcBGRImg, /*srcHSVImg, */srcYCrCbImg, srcGrayImg, dstBGRImg;
+    srcController.bindSrc();
+    
+    Mat srcBGRImg, srcHSVImg, srcYCrCbImg, srcGrayImg, dstBGRImg;
     Mat BGRChannels[3], HSVChannels[3], YCrCbChannels[3];
     Mat BGREdges[3], HSVEdges[3], YCrCbEdges[3];
     Mat maskImg;
     
-    videoCapture >> srcBGRImg;
-    if ( srcBGRImg.empty() ) {
-     cerr << "Image can't be loaded!" << endl;
-    }
-
     namedWindow("myWindow",CV_WINDOW_AUTOSIZE);
-    srcGrayImg.create(srcBGRImg.size(), CV_8UC1);
-    maskImg.create(srcBGRImg.size(), CV_8UC3);
     setMouseCallback("myWindow", mouseCallback1);
 
-    textureParam->setPicturePath("../FoodModification/Images/toro.jpg");
+    Size srcSize = srcController.srcParam()->cameraSize();
+    srcBGRImg.create(srcSize, CV_8UC3);
+    srcYCrCbImg.create(srcSize, CV_8UC3);
+    srcHSVImg.create(srcSize, CV_8UC3);
+    srcGrayImg.create(srcSize, CV_8UC1);
+    maskImg.create(srcSize, CV_8UC3);
+    
+
 
     while (1) {
 
-        videoCapture >> srcBGRImg;
-
-        cvtColor(srcBGRImg, srcHSVImg, CV_BGR2HSV);
-        cvtColor(srcBGRImg, srcYCrCbImg,CV_BGR2YCrCb);
-        cvtColor(srcBGRImg, srcGrayImg, CV_BGR2GRAY);
+        srcController.loadSrc(srcBGRImg, srcHSVImg, srcYCrCbImg, srcGrayImg, YCrCbChannels);
         
-        //cv::split(srcBGRImg, BGRChannels);
-        //cv::split(srcBGRImg, HSVChannels);
-        split(srcBGRImg, YCrCbChannels);
-
-        // cv::Canny(BGRChannels[0], BGREdges[0], THRESHOLD1, THRESHOLD2, APERTURE_SIZE, L2_GRADIENT);
-        // cv::Canny(BGRChannels[1], BGREdges[1], THRESHOLD1, THRESHOLD2, APERTURE_SIZE, L2_GRADIENT);
-        // cv::Canny(BGRChannels[2], BGREdges[2], THRESHOLD1, THRESHOLD2, APERTURE_SIZE, L2_GRADIENT);
-       // cv::Canny(HSVChannels[0], HSVEdges[0], THRESHOLD1, THRESHOLD2, APERTURE_SIZE, L2_GRADIENT);
-       // cv::Canny(HSVChannels[1], HSVEdges[1], THRESHOLD1, THRESHOLD2, APERTURE_SIZE, L2_GRADIENT);
-        //cv::Canny(HSVChannels[2], HSVEdges[2], THRESHOLD1, THRESHOLD2, APERTURE_SIZE, L2_GRADIENT);
-        Canny(YCrCbChannels[0], YCrCbEdges[0], THRESHOLD1, THRESHOLD2, APERTURE_SIZE, L2_GRADIENT);
-        Canny(YCrCbChannels[1], YCrCbEdges[1], THRESHOLD1, THRESHOLD2, APERTURE_SIZE, L2_GRADIENT);
-        Canny(YCrCbChannels[2], YCrCbEdges[2], THRESHOLD1, THRESHOLD2, APERTURE_SIZE, L2_GRADIENT);
+        edgeController.calculateEdges(YCrCbChannels, YCrCbEdges);
         
     
-        //maskImg = srcBGRImg.clone();
         maskImg = Mat::zeros(srcBGRImg.size(), CV_8UC1);
         vector<vector<Point>> dstContours;
-        //cv::threshold(srcGrayImg, srcGrayImg, 80, 255, cv::THRESH_BINARY);
         extractController.extract(srcBGRImg, srcHSVImg, srcYCrCbImg, srcGrayImg, maskImg, dstContours, YCrCbEdges);
         imshow("myWindow", srcBGRImg);
         imshow("FinalExtractedImg", maskImg);
@@ -88,7 +71,7 @@ void MainController::doConvertion() {
         if(textureParam->isNoTexture()) {
             textureController.setROI(dstContours, rects);
         } else {
-            Mat textureImg = textureController.createTexture(dstContours, maskImg, rects, textureParam->getPicturePath());
+            Mat textureImg = textureController.createTexture(dstContours, maskImg, rects, srcController.srcParam()->textureImg() );
             textureParam->setImg(textureImg);
             imshow("textureImg", textureImg);
         }
@@ -108,16 +91,6 @@ void MainController::doConvertion() {
 
 }
 
-/**
-* mainWindowのサイズ設定によって呼び出される.
-*　@param cv::Size
-*/
-void MainController::setVCaptureSize(Size size) {
-
-    videoCapture.set(CV_CAP_PROP_FRAME_WIDTH, size.width);
-    videoCapture.set(CV_CAP_PROP_FRAME_HEIGHT, size.height);
-
-}
 
 /**
 * mainWindowのサイズ設定によって呼び出される.
@@ -182,15 +155,6 @@ void MainController::setAlpha(double value) {
 
 }
 
-/**
-* mainWindowのテクスチャ選択によって呼び出される
-*　@param textureのImageのパス
-*/
-void MainController::setPicturePath(String path) {
-
-    textureParam->setPicturePath(path);
-
-}
 
 /**
 * mainWindowのテクスチャ選択によって呼び出される。テクスチャなしかどうかのフラグを設定する。

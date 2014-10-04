@@ -6,22 +6,22 @@
 #include "./textureController.h"
 #include "./convertController.h"
 #include "./calibrationController.h"
+#include "./edgeController.h"
+#include "./srcController.h"
 #include "../Param/textureParam.h"
 
 class MainController {
 
 public:
-	VideoCapture videoCapture;
+	//VideoCapture videoCapture;
 
 	static MainController& getInstance();
     void doConvertion();
-	void setVCaptureSize(Size size);
 	void setResizeFlag(bool flag);
 	void setDstSize(Size size);
 	void changeShiftValue(int hShift, int sShift, int vShift);
     void changeShiftValue(int value, int colorIndex);
     void setAlpha(double value);
-    void setPicturePath(String path);
     void setNoTexture(bool flag);
 
 private:
@@ -29,6 +29,8 @@ private:
     CalibrationController& calibrationController = CalibrationController::getInstance();
     TextureController& textureController = TextureController::getInstance();
     ConvertController& convertController = ConvertController::getInstance();
+    EdgeController& edgeController = EdgeController::getInstance();
+    SrcController& srcController = SrcController::getInstance();
     TextureParam* textureParam = new TextureParam();
     bool resizeFlag = false;
     Size dstSize;

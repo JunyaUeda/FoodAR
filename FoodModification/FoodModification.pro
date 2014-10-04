@@ -37,7 +37,11 @@ SOURCES += main.cpp\
     View/colorDialog.cpp \
     Param/textureParam.cpp \
     Utils/xmlUtils.cpp \
-    Param/illuminationParam.cpp
+    Param/illuminationParam.cpp \
+    Controller/edgeController.cpp \
+    Param/edgeParam.cpp \
+    Controller/srcController.cpp \
+    Param/srcParam.cpp
 
 HEADERS  += \
     extractParamManager.h \
@@ -64,7 +68,12 @@ HEADERS  += \
     View/colorDialog.h \
     Param/textureParam.h \
     Utils/xmlUtils.h \
-    Param/illuminationParam.h
+    Param/illuminationParam.h \
+    Controller/edgeController.h \
+    Param/edgeParam.h \
+    definition.h \
+    Controller/srcController.h \
+    Param/srcParam.h
 
 FORMS    += \
     View/calibrateDialog.ui \

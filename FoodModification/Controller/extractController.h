@@ -17,6 +17,7 @@ public:
 	Mat dstImg, vector<vector<Point>>& dstContours, Mat* BGRChannels);
     void extractByColor(Mat srcBGRImg, Mat srcHSVImg, Mat dstImg);
     void extractByContour(Mat srcGrayImg, Mat dstImg);
+    
 private:
     ExtractController();
     ExtractController(const ExtractController&);    

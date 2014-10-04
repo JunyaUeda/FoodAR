@@ -49,26 +49,22 @@ void MainWindow::on_colorMapButton_clicked() {
 	colorDialog->QWidget::show();
 }
 
-void MainWindow::on_alphaSlider_actionTriggered(int action)
-{
+void MainWindow::on_alphaSlider_actionTriggered(int action) {
 	int value = ui->alphaSlider->value();
 	double alpha = (double)value/100.0;
 	ui->alphaValueLabel->setText(QString::number(alpha));
     mainController.setAlpha(alpha);
 }
 
-void MainWindow::on_radioButton_captureSizeLarge_clicked()
-{
-	mainController.setVCaptureSize(SIZE_LARGE);
+void MainWindow::on_radioButton_captureSizeLarge_clicked() {
+	srcController.setVCaptureSize(SIZE_LARGE);
 }
 
-void MainWindow::on_radioButton_captureSizeSmall_clicked()
-{
-	mainController.setVCaptureSize(SIZE_SMALL);
+void MainWindow::on_radioButton_captureSizeSmall_clicked() {
+	srcController.setVCaptureSize(SIZE_SMALL);
 }
 
-void MainWindow::on_radioButton_dstSizeSmall_clicked()
-{
+void MainWindow::on_radioButton_dstSizeSmall_clicked() {
 	if(ui->radioButton_captureSizeSmall->isChecked()) {
 		mainController.setResizeFlag(false);
 	} else {
@@ -77,8 +73,7 @@ void MainWindow::on_radioButton_dstSizeSmall_clicked()
 	}
 }
 
-void MainWindow::on_radioButton_dstSizeLarge_clicked()
-{
+void MainWindow::on_radioButton_dstSizeLarge_clicked() {
 	if(ui->radioButton_captureSizeSmall->isChecked()){
 		mainController.setResizeFlag(true);
 		mainController.setDstSize(SIZE_LARGE);
@@ -88,28 +83,37 @@ void MainWindow::on_radioButton_dstSizeLarge_clicked()
 	
 }
 
-void MainWindow::on_textureComboBox_currentIndexChanged(const QString &arg1)
-{
+void MainWindow::on_textureComboBox_currentIndexChanged(const QString &arg1) {
     if(arg1.contains(".")) {
         QString path = DIRPATH;
         path.append(arg1);
         qDebug() << "changed" << path;
 		String cStr = path.toLocal8Bit();
-		mainController.setPicturePath(cStr);
+		srcController.changeTextureImg(cStr);
 		mainController.setNoTexture(false);
 	} else {
 		String cStr = "noTexture";
-		mainController.setPicturePath(cStr);
+		srcController.changeTextureImg(cStr);
 		mainController.setNoTexture(true);
 	}
 }
 
-void MainWindow::on_illuminationSlider_valueChanged(int value)
-{
+void MainWindow::on_illuminationSlider_valueChanged(int value) {
 	convertController.changeIntensityParam(true, value);
 }
 
-void MainWindow::on_horizontalSlider_valueChanged(int value)
-{
+void MainWindow::on_horizontalSlider_valueChanged(int value) {
 	convertController.changeZParam(true, value);
+}
+
+void MainWindow::on_edgeThresholdSlider_1_valueChanged(int value) {
+	ui->edgeThresholdLineEdit_1->setText(QString::number(value));
+	int value_2 = ui->edgeThresholdSlider_2->value();
+	edgeController.changeThreshold(value, value_2);
+}
+
+void MainWindow::on_edgeThresholdSlider_2_valueChanged(int value) {
+	ui->edgeThresholdLineEdit_2->setText(QString::number(value));
+	int value_1 = ui->edgeThresholdSlider_2->value();
+	edgeController.changeThreshold(value_1, value);
 }

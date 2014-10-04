@@ -30,7 +30,7 @@
      <enum>QTabWidget::Triangular</enum>
     </property>
     <property name="currentIndex">
-     <number>2</number>
+     <number>0</number>
     </property>
     <property name="iconSize">
      <size>
@@ -162,6 +162,91 @@
         <string>テクスチャなし</string>
        </property>
       </item>
+     </widget>
+     <widget class="QLineEdit" name="edgeThresholdLineEdit_1">
+      <property name="geometry">
+       <rect>
+        <x>130</x>
+        <y>220</y>
+        <width>113</width>
+        <height>21</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="edgeThresholdLineEdit_2">
+      <property name="geometry">
+       <rect>
+        <x>140</x>
+        <y>350</y>
+        <width>113</width>
+        <height>21</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_2">
+      <property name="geometry">
+       <rect>
+        <x>150</x>
+        <y>150</y>
+        <width>62</width>
+        <height>15</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>エッジ</string>
+      </property>
+     </widget>
+     <widget class="QSlider" name="edgeThresholdSlider_1">
+      <property name="geometry">
+       <rect>
+        <x>110</x>
+        <y>250</y>
+        <width>160</width>
+        <height>19</height>
+       </rect>
+      </property>
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
+      </property>
+     </widget>
+     <widget class="QSlider" name="edgeThresholdSlider_2">
+      <property name="geometry">
+       <rect>
+        <x>110</x>
+        <y>380</y>
+        <width>160</width>
+        <height>19</height>
+       </rect>
+      </property>
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
+      </property>
+     </widget>
+     <widget class="QLabel" name="edgeThresholdLabel_1">
+      <property name="geometry">
+       <rect>
+        <x>150</x>
+        <y>200</y>
+        <width>62</width>
+        <height>15</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>閾値1</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="edgeThresholdLabel_2">
+      <property name="geometry">
+       <rect>
+        <x>160</x>
+        <y>320</y>
+        <width>62</width>
+        <height>15</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>閾値2</string>
+      </property>
      </widget>
     </widget>
     <widget class="QWidget" name="tab_2">
@@ -381,7 +466,7 @@
  <resources/>
  <connections/>
  <buttongroups>
-  <buttongroup name="buttonGroup_dstSize"/>
   <buttongroup name="buttonGroup_captureSize"/>
+  <buttongroup name="buttonGroup_dstSize"/>
  </buttongroups>
 </ui>

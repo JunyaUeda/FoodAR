@@ -1,7 +1,6 @@
 #include "textureParam.h"
 
-TextureParam::TextureParam()
-{
+TextureParam::TextureParam() {
 }
 
 void TextureParam::setShift(int h_shift, int s_shift, int v_shift) {
@@ -13,72 +12,49 @@ void TextureParam::setShift(int h_shift, int s_shift, int v_shift) {
 }
 
 int TextureParam::getH_shift() {
-
     return h_shift;
-
 }
 
-void TextureParam::setH_shift(int value)
-{
+void TextureParam::setH_shift(int value) {
     h_shift = value;
 }
 
-int TextureParam::getS_shift()
-{
+int TextureParam::getS_shift() {
     return s_shift;
 }
 
-void TextureParam::setS_shift(int value)
-{
+void TextureParam::setS_shift(int value) {
     s_shift = value;
 }
 
-int TextureParam::getV_shift()
-{
+int TextureParam::getV_shift() {
     return v_shift;
 }
 
-void TextureParam::setV_shift(int value)
-{
+void TextureParam::setV_shift(int value) {
     v_shift = value;
 }
 
-double TextureParam::getAlpha() const
-{
+double TextureParam::getAlpha() const {
     return alpha;
 }
 
-void TextureParam::setAlpha(double value)
-{
+void TextureParam::setAlpha(double value) {
     alpha = value;
 }
 
-String TextureParam::getPicturePath() const
-{
-    return picturePath;
-}
-
-void TextureParam::setPicturePath(const String &value)
-{
-    picturePath = value;
-}
-
-Mat TextureParam::getImg() const
-{
+Mat TextureParam::getImg() const {
     return img;
 }
 
-void TextureParam::setImg(const Mat &value)
-{
+void TextureParam::setImg(const Mat &value) {
     img = value;
 }
 
-bool TextureParam::isNoTexture() const
-{
+bool TextureParam::isNoTexture() const {
     return noTexture;
 }
 
-void TextureParam::setNoTexture(bool value)
-{
+void TextureParam::setNoTexture(bool value) {
     noTexture = value;
 }
