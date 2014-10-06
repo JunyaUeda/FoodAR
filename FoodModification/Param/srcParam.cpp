@@ -41,3 +41,13 @@ void SrcParam::setTextureType(int textureType)
 {
 	_textureType = textureType;
 }
+
+int SrcParam::splitColorSpace() const
+{
+	return _splitColorSpace;
+}
+
+void SrcParam::setSplitColorSpace(int splitColorSpace)
+{
+	_splitColorSpace = splitColorSpace;
+}

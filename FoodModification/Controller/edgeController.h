@@ -7,7 +7,8 @@
 class EdgeController {
 public:
 	static EdgeController& getInstance();
-	void changeThreshold(int value_1, int value_2);
+
+	void changeCannyThreshold(int channelIndex, CannyThreshold* novel);
 	void calculateEdges(Mat* channels, Mat* dstEdges);
 
 private:

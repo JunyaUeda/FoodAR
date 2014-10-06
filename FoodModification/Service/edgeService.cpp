@@ -44,3 +44,23 @@ void EdgeService::dillateEdge(cv::Mat *channelEdgeImgs) {
 	cv::imshow("after edge", channelEdgeImgs[0]);
 
 }
+
+
+/**
+*エッジ画像を参照しエッジの線を出力画像に描画する.
+*@param cv::Mat
+*@param luminance:描画するエッジ線の明度
+*@note 
+*/
+void EdgeService::drawEdge(Mat srcEdgeImg, Mat dstDrawnImg, int luminace) {
+
+    for(int y=0; y<srcEdgeImg.rows; y++){
+        for(int x=0; x<srcEdgeImg.cols; x++) {
+            if(L(srcEdgeImg,x,y) == 255) {
+                L(dstDrawnImg,x,y) = luminace;
+            }
+        }
+    }
+
+}
+

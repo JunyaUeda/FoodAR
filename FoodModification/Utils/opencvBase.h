@@ -51,8 +51,8 @@
 using namespace cv;
 using namespace std;
 
-class OpenCVBase
-{
+class OpenCVBase {
+	
 public:
     OpenCVBase();
 };

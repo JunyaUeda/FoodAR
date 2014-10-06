@@ -1,5 +1,4 @@
 #include "colorExtractService.h"
-
 #include "../Utils/opencvUtils.h"
 #include <math.h>
 #include "../Param/colorCriterion.h"
@@ -30,6 +29,8 @@ void ColorExtractService::extractByBGR(Mat bgrImg, Mat dstImg, ExtractParamManag
 
 void ColorExtractService::extractByHSV(Mat srcImg, Mat dstImg, ExtractParamManager* extractParamManager) {
 
+	vector<int> shift = extractParamManager->toleranceShift();
+    
     for(int y=0; y<srcImg.rows; y++) {
         for(int x=0; x<srcImg.cols; x++) {
 
@@ -38,9 +39,9 @@ void ColorExtractService::extractByHSV(Mat srcImg, Mat dstImg, ExtractParamManag
             ColorCriterion* criterion = extractParamManager->criterion + nearCriterionIndex;
             ColorExtractTolerance* tolerance = extractParamManager->colorExtractTolerance + nearCriterionIndex;
 
-            int diffHue = H(srcImg,x,y) - criterion->getHue();
+            int diffHue        = H(srcImg,x,y) - criterion->getHue();
             int diffSaturation = S(srcImg,x,y) - criterion->getSaturation();
-            int diffValue = V(srcImg,x,y) - criterion->getValue();
+            int diffValue      = V(srcImg,x,y) - criterion->getValue();
 
             int factorH = 0; int factorS = 0; int factorV = 0;
 
@@ -63,14 +64,14 @@ void ColorExtractService::extractByHSV(Mat srcImg, Mat dstImg, ExtractParamManag
             }
 
             /*ここの条件が色度値による抽出の精度に大きく影響するので、色々試して改善する必要がある*/
-            if( factorH>-10 && factorS >-40 && factorV>-60) {//(factorH + factorS + factorV) >0
+            if( factorH>(-10+shift[0]) && factorS >(-40+shift[1]) && factorV>(-60+shift[2]) ) {//(factorH + factorS + factorV) >0
                 L(dstImg,x,y) = 255;
             } else {
                 L(dstImg,x,y) = 0;
             }     
     
         }   
-   }
+    }
 
 }
 
@@ -296,51 +297,17 @@ Mat ColorExtractService::getHSVDifferenceMap(Mat srcImg, ColorCriterion* criteri
 
  }
 
-void ColorExtractService::extract(Mat bgrImg, Mat hsvImg,Mat yCrCbImg, ExtractParamManager* extractParamManager) {
+void ColorExtractService::dilate_erode(Mat src, Mat dst, vector<int> combinations) {
 
-    for(int y=0; y<hsvImg.rows; y++) {
-        for(int x=0; x<hsvImg.cols; x++) {
-                if(isNearNormalPointA(x, y, hsvImg, extractParamManager->criterion)) {
-                    discriminate(x, y, bgrImg, hsvImg, yCrCbImg, extractParamManager->criterion, extractParamManager->colorExtractTolerance);
-                } else {
-                    discriminate(x, y, bgrImg, hsvImg, yCrCbImg, extractParamManager->criterion+1, extractParamManager->colorExtractTolerance+1);
-                }
+    Point ANCHOR = Point(-1,-1);//構造要素内のアンカー位置。デフォルト値の(-1,-1)はアンカーが構造要素の中心にあることを意味する
+    int ITERATIONS = 1;
+
+    for(int operation : combinations) {
+        switch(operation) {
+            case JU_ERODE:
+                erode(src, dst, cv::Mat(), ANCHOR, ITERATIONS);
+            case JU_DILATE:
+                dilate(src, dst, Mat(), ANCHOR, ITERATIONS);//element = cv::Mat()の場合　3×3の矩形構造要素が使われる
         }
     }
-
 }
-
-void ColorExtractService::discriminate(int x, int y, cv::Mat bgrImg, cv::Mat hsvImg, cv::Mat yCrCbImg, ColorCriterion* colorCriterion, ColorExtractTolerance* extractTolerance) {
-
-    int hueDifference = abs(B(hsvImg,x,y) - colorCriterion->getHue());
-    int saturationDifference = abs(G(hsvImg,x,y) - colorCriterion->getSaturation());
-    int valueDifference = abs(R(hsvImg,x,y) - colorCriterion->getValue());
-   // int crDifference = abs(G(yCrCbImg,x,y) - colorCriterion->getCr());
-
-    int tmpA = extractTolerance->getHueHighTolerance() - hueDifference;
-    int tmpB = extractTolerance->getSaturationHighTolerance() - saturationDifference;
-    int tmpC = extractTolerance->getValueHighTolerance() - valueDifference;
-    //int tmpD = extractTolerance->getCrTolerance() - crDifference;
-
-    if(tmpA>0 && tmpB>0 && tmpC>0 ) {
-        OpenCVUtils::setPixelValue(bgrImg, x, y, 255);
-    } else {
-        OpenCVUtils::setPixelValue(bgrImg, x, y, 0);
-    }
-
-}
-
-bool ColorExtractService::isNearNormalPointA(int x, int y, cv::Mat hsvImg, ColorCriterion* colorCriterion) {
-
-    int absoluteValueDifferenceA = abs(R(hsvImg,x,y) - colorCriterion->getValue());
-    int absoluteValueDifferenceB = abs(R(hsvImg,x,y) - (colorCriterion+1)->getValue());
-
-    if (absoluteValueDifferenceA <= absoluteValueDifferenceB) {
-        return true;
-    }
-
-    return false;
-
-}
-
-

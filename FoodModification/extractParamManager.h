@@ -5,13 +5,12 @@
 #include "Param/colorExtractTolerance.h"
 #include "Utils/opencvUtils.h"
 
-class ExtractParamManager
-{
+class ExtractParamManager {
 public:
     int criterionNum;
     ColorCriterion* criterion;
     ColorExtractTolerance* colorExtractTolerance;
-    cv::Mat referenceMat;
+    Mat referenceMat;
     int extractColorSpace;
 
     static ExtractParamManager& getInstance();
@@ -21,9 +20,13 @@ public:
     int getCriterionNum() const;
     void setCriterionNum(int value);
 
+	vector<int> toleranceShift() const;
+	void setToleranceShift(const vector<int> &toleranceShift);
+
 private:
-    ExtractParamManager();
-    ExtractParamManager(const ExtractParamManager&);
+	vector<int> _toleranceShift;
+	ExtractParamManager();
+	ExtractParamManager(const ExtractParamManager&);
 
 };
 

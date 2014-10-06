@@ -1,13 +1,13 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
-
-#include <QMainWindow>
 #include <QDir>
+#include <QMainWindow>
+#include "../Utils/opencvUtils.h"
+#include "./colorDialog.h"
+#include "./calibrateDialog.h"
 #include "../Controller/mainController.h"
 #include "../Controller/edgeController.h"
-#include "./calibrateDialog.h"
-#include "./colorDialog.h"
-#include "../Utils/opencvUtils.h"
+#include "../Param/cannyThreshold.h"
 
 #define DIRPATH "../FoodModification/Images/"
 
@@ -35,9 +35,28 @@ private slots:
     void on_textureComboBox_currentIndexChanged(const QString &arg1);
     void on_illuminationSlider_valueChanged(int value);
     void on_horizontalSlider_valueChanged(int value);
-    void on_edgeThresholdSlider_1_valueChanged(int value);
 
-	void on_edgeThresholdSlider_2_valueChanged(int value);
+    
+	void on_toleranceShiftSlider_0_valueChanged(int value);
+	void on_toleranceShiftSlider_1_valueChanged(int value);
+	void on_toleranceShiftSlider_2_valueChanged(int value);
+
+	void on_splitColorSpaceComboBox_currentIndexChanged(int index);
+
+    //edgeの閾値UIのイベント処理
+    void changeThreshold(int channelIndex, int value1, int value2);
+    void on_ch0EdgeThreshold1_LineEdit_textChanged(const QString &arg1);
+    void on_ch0EdgeThreshold2_LineEdit_textChanged(const QString &arg1);
+	void on_ch1EdgeThreshold1_LineEdit_textChanged(const QString &arg1);
+	void on_ch1EdgeThreshold2_LineEdit_textChanged(const QString &arg1);
+    void on_ch2EdgeThreshold1_LineEdit_textChanged(const QString &arg1);
+    void on_ch2EdgeThreshold2_LineEdit_textChanged(const QString &arg1);
+    void on_ch0EdgeThreshold1_Slider_valueChanged(int value);
+    void on_ch0EdgeThreshold2_Slider_valueChanged(int value);
+	void on_ch1EdgeThreshold1_Slider_valueChanged(int value);
+	void on_ch1EdgeThreshold2_Slider_valueChanged(int value);
+	void on_ch2EdgeThreshold1_Slider_valueChanged(int value);
+    void on_ch2EdgeThreshold2_Slider_valueChanged(int value);
 
 private:
     Ui::MainWindow *ui;
@@ -46,6 +65,7 @@ private:
     ConvertController& convertController = ConvertController::getInstance();
     EdgeController& edgeController = EdgeController::getInstance();
     SrcController& srcController = SrcController::getInstance();
+    ExtractParamManager& extractParamManager = ExtractParamManager::getInstance();
     
 };
 

@@ -19,7 +19,11 @@ public:
 	int textureType() const;
 	void setTextureType(int textureType);
 
+	int splitColorSpace() const;
+	void setSplitColorSpace(int splitColorSpace);
+
 private:
+	int _splitColorSpace = YCrCb;
 	String _srcPath;
 	Size _cameraSize;
 	Mat _textureImg;

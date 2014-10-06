@@ -106,14 +106,91 @@ void MainWindow::on_horizontalSlider_valueChanged(int value) {
 	convertController.changeZParam(true, value);
 }
 
-void MainWindow::on_edgeThresholdSlider_1_valueChanged(int value) {
-	ui->edgeThresholdLineEdit_1->setText(QString::number(value));
-	int value_2 = ui->edgeThresholdSlider_2->value();
-	edgeController.changeThreshold(value, value_2);
+void MainWindow::on_toleranceShiftSlider_0_valueChanged(int value) {
+	vector<int> shift = extractParamManager.toleranceShift();
+	shift[0] = value;
+	extractParamManager.setToleranceShift(shift);
 }
 
-void MainWindow::on_edgeThresholdSlider_2_valueChanged(int value) {
-	ui->edgeThresholdLineEdit_2->setText(QString::number(value));
-	int value_1 = ui->edgeThresholdSlider_2->value();
-	edgeController.changeThreshold(value_1, value);
+void MainWindow::on_toleranceShiftSlider_1_valueChanged(int value) {
+	vector<int> shift = extractParamManager.toleranceShift();
+	shift[1] = value;
+	extractParamManager.setToleranceShift(shift);
+}
+
+void MainWindow::on_toleranceShiftSlider_2_valueChanged(int value) {
+	vector<int> shift = extractParamManager.toleranceShift();
+	shift[2] = value;
+	extractParamManager.setToleranceShift(shift);
+}
+
+void MainWindow::on_splitColorSpaceComboBox_currentIndexChanged(int index) {
+	srcController.changeSplitColorSpace(index);
+}
+
+
+//Edge Event 
+void MainWindow::changeThreshold(int channelIndex, int value1, int value2) {
+	CannyThreshold* novel = new CannyThreshold(value1, value2);
+	edgeController.changeCannyThreshold(channelIndex, novel);
+}
+
+void MainWindow::on_ch0EdgeThreshold1_LineEdit_textChanged(const QString &arg1) {
+	changeThreshold(0, arg1.toInt(), ui->ch0EdgeThreshold2_Slider->value());
+	ui->ch0EdgeThreshold1_Slider->setSliderPosition(arg1.toInt());
+}
+
+void MainWindow::on_ch0EdgeThreshold2_LineEdit_textChanged(const QString &arg1) {
+	changeThreshold(0, ui->ch0EdgeThreshold1_Slider->value(), arg1.toInt());
+	ui->ch0EdgeThreshold2_Slider->setSliderPosition(arg1.toInt());
+}
+
+void MainWindow::on_ch1EdgeThreshold1_LineEdit_textChanged(const QString &arg1) {
+	changeThreshold(1, arg1.toInt(), ui->ch1EdgeThreshold2_Slider->value());
+	ui->ch1EdgeThreshold1_Slider->setSliderPosition(arg1.toInt());
+}
+
+void MainWindow::on_ch1EdgeThreshold2_LineEdit_textChanged(const QString &arg1) {
+	changeThreshold(1, ui->ch1EdgeThreshold1_Slider->value(), arg1.toInt());
+	ui->ch1EdgeThreshold2_Slider->setSliderPosition(arg1.toInt());
+}
+
+void MainWindow::on_ch2EdgeThreshold1_LineEdit_textChanged(const QString &arg1) {
+	changeThreshold(2, arg1.toInt(), ui->ch2EdgeThreshold2_Slider->value());
+	ui->ch2EdgeThreshold1_Slider->setSliderPosition(arg1.toInt());
+}
+
+void MainWindow::on_ch2EdgeThreshold2_LineEdit_textChanged(const QString &arg1) {
+	changeThreshold(2, ui->ch2EdgeThreshold1_Slider->value(), arg1.toInt());
+	ui->ch2EdgeThreshold2_Slider->setSliderPosition(arg1.toInt());
+}
+
+void MainWindow::on_ch0EdgeThreshold1_Slider_valueChanged(int value) {
+	changeThreshold(0, value, ui->ch0EdgeThreshold2_Slider->value());
+	ui->ch0EdgeThreshold1_LineEdit->setText(QString::number(value));
+}
+
+void MainWindow::on_ch0EdgeThreshold2_Slider_valueChanged(int value) {
+	changeThreshold(0, ui->ch0EdgeThreshold1_Slider->value(),value);
+	ui->ch0EdgeThreshold2_LineEdit->setText(QString::number(value));
+}
+
+void MainWindow::on_ch1EdgeThreshold1_Slider_valueChanged(int value) {
+	changeThreshold(1, value, ui->ch1EdgeThreshold2_Slider->value());
+	ui->ch1EdgeThreshold1_LineEdit->setText(QString::number(value));
+}
+
+void MainWindow::on_ch1EdgeThreshold2_Slider_valueChanged(int value) {
+	changeThreshold(1, ui->ch1EdgeThreshold1_Slider->value(),value);
+	ui->ch1EdgeThreshold2_LineEdit->setText(QString::number(value));
+}
+
+void MainWindow::on_ch2EdgeThreshold1_Slider_valueChanged(int value) {
+	changeThreshold(2, value, ui->ch2EdgeThreshold2_Slider->value());
+	ui->ch2EdgeThreshold1_LineEdit->setText(QString::number(value));
+}
+
+void MainWindow::on_ch2EdgeThreshold2_Slider_valueChanged(int value) {
+	changeThreshold(2, ui->ch2EdgeThreshold1_Slider->value(),value);
+	ui->ch2EdgeThreshold2_LineEdit->setText(QString::number(value));
 }

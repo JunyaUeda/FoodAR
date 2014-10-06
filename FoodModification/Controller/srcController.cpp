@@ -45,9 +45,18 @@ void SrcController::loadSrc(Mat srcBGRImg, Mat srcHSVImg, Mat srcYCrCbImg, Mat s
     cvtColor(srcBGRImg, srcYCrCbImg,CV_BGR2YCrCb);
     cvtColor(srcBGRImg, srcGrayImg, CV_BGR2GRAY);
 
-    //cv::split(srcBGRImg, BGRChannels);
-    //cv::split(srcBGRImg, HSVChannels);
-    split(srcBGRImg, splitChannels);
+    switch(_srcParam->splitColorSpace()) {
+        case BGR:
+            split(srcBGRImg, splitChannels);
+            break;
+        case HSV:
+            split(srcHSVImg, splitChannels);
+            break;
+        case YCrCb:
+            split(srcYCrCbImg, splitChannels);
+            break;
+    }
+    
 
     
     if(_srcParam->textureType() == JU_MOVIE) {
@@ -118,4 +127,14 @@ void SrcController::changeTextureImg(String path) {
     	}
     }
     
+}
+
+
+/**
+* mainWindowの抽出タグのsplitColorのcomboBoxによって呼び出される
+*　@param splitするcolorSpace:int
+* @note uiにおけるcomboBoxのindexとdefinition.hのcolorSpaceIndexが一致している必要がある
+*/
+void SrcController::changeSplitColorSpace(int colorSpaceIndex) {
+    _srcParam->setSplitColorSpace(colorSpaceIndex);
 }

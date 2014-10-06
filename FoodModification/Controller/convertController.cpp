@@ -6,10 +6,8 @@ ConvertController::ConvertController() {
 }
 
 ConvertController& ConvertController::getInstance() {
-
 	static ConvertController instance;
 	return instance;
-	
 }
 
 void ConvertController::convert(Mat srcBGRImg, Mat srcHSVImg, Mat dstBGRImg, Mat maskImg, vector<Rect>& rects, TextureParam* textureParam) {

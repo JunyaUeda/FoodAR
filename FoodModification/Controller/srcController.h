@@ -5,14 +5,18 @@
 #include "../definition.h"
 
 class SrcController {
+	
 public:
 	static SrcController& getInstance();
 	bool bindSrc();
 	void loadSrc(Mat srcBGRImg, Mat srcHSVImg, Mat srcYCrCbImg, Mat srcGrayImg, Mat* splitChannels);
-	void setVCaptureSize(Size size);
-	void changeTextureImg(String path);
+	
 	SrcParam *srcParam() const;
 	void setSrcParam(SrcParam *srcParam);
+
+	void setVCaptureSize(Size size);
+	void changeTextureImg(String path);
+	void changeSplitColorSpace(int colorSpaceIndex);
 
 private:
 	VideoCapture _videoCapture_camera;

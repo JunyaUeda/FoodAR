@@ -41,7 +41,8 @@ SOURCES += main.cpp\
     Controller/edgeController.cpp \
     Param/edgeParam.cpp \
     Controller/srcController.cpp \
-    Param/srcParam.cpp
+    Param/srcParam.cpp \
+    Param/cannyThreshold.cpp
 
 HEADERS  += \
     extractParamManager.h \
@@ -73,7 +74,8 @@ HEADERS  += \
     Param/edgeParam.h \
     definition.h \
     Controller/srcController.h \
-    Param/srcParam.h
+    Param/srcParam.h \
+    Param/cannyThreshold.h
 
 FORMS    += \
     View/calibrateDialog.ui \

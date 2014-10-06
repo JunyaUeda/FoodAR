@@ -6,6 +6,10 @@ ExtractParamManager::ExtractParamManager()
     this->criterionNum = criterionNum;
     this->criterion = new ColorCriterion[criterionNum];
     this->colorExtractTolerance = new ColorExtractTolerance[criterionNum];
+    for(int i=0; i<3; i++) {
+        _toleranceShift.push_back(0);
+    }
+    
 }
 
 ExtractParamManager& ExtractParamManager::getInstance() {
@@ -32,4 +36,14 @@ int ExtractParamManager::getCriterionNum() const
 void ExtractParamManager::setCriterionNum(int value)
 {
     criterionNum = value;
+}
+
+vector<int> ExtractParamManager::toleranceShift() const
+{
+    return _toleranceShift;
+}
+
+void ExtractParamManager::setToleranceShift(const vector<int> &toleranceShift)
+{
+    _toleranceShift = toleranceShift;
 }
