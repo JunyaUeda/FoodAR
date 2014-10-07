@@ -30,8 +30,13 @@ void ExtractController::extract(Mat srcBGRImg, Mat srcHSVImg, Mat srcYCrCbImg, M
     vector<vector<Point>> colorExtractedContours;
     findContours(colorExtractedImg, colorExtractedContours, CV_RETR_LIST, CV_CHAIN_APPROX_NONE);
 
+    int maxAreaIndex = _contourService->getMaxAreaContourIndex(colorExtractedContours);
+    
     int MINSIZE = 200; int lineType = LINK_EIGHT;
-    _contourService->fillContours(colorExtractedImg, colorExtractedContours, lineType, MINSIZE);
+    colorExtractedImg = Mat::zeros(dstImg.size(), CV_8UC1);
+    // _contourService->fillContours(colorExtractedImg, contours, lineType, MINSIZE);
+    // _contourService->fillSpecifiedContour(colorExtractedImg, colorExtractedContours, lineType, MINSIZE, maxAreaIndex);
+    drawContours(colorExtractedImg, colorExtractedContours, maxAreaIndex, Scalar(255, 255, 255), CV_FILLED, lineType);
     imshow("find&drawContours",colorExtractedImg);
 
     vector< vector<Point> > contours2;
@@ -117,9 +122,9 @@ void ExtractController::extractByColor(Mat srcBGRImg, Mat srcHSVImg, Mat dstImg)
 
     int extractColorSpace = extractParamManager.getExtractColorSpace();
 
-    if(extractColorSpace == BGR) {
+    if(extractColorSpace == JU_BGR) {
         _extractService->extractByBGR(srcBGRImg, dstImg, &extractParamManager);
-    } else if(extractColorSpace == HSV) {
+    } else if(extractColorSpace == JU_HSV) {
         _extractService->extractByHSV(srcHSVImg, dstImg, &extractParamManager);
     }
     

@@ -1,6 +1,8 @@
 #ifndef OPENCVUTILS_H
 #define OPENCVUTILS_H
 #include "opencvBase.h"
+#include <map>
+#include <unordered_set>
 #include <QDebug>
 
 #define VALUE(IMG, X,Y) ((IMG).data[(IMG).cols*(Y) + (X)])

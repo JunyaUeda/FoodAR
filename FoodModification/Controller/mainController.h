@@ -13,8 +13,6 @@
 class MainController {
 
 public:
-	//VideoCapture videoCapture;
-
 	static MainController& getInstance();
     void doConvertion();
 	void setResizeFlag(bool flag);
@@ -25,20 +23,20 @@ public:
     void setNoTexture(bool flag);
 
 private:
-    ExtractController& extractController = ExtractController::getInstance();
+    ExtractController& extractController         = ExtractController::getInstance();
     CalibrationController& calibrationController = CalibrationController::getInstance();
-    TextureController& textureController = TextureController::getInstance();
-    ConvertController& convertController = ConvertController::getInstance();
-    EdgeController& edgeController = EdgeController::getInstance();
-    SrcController& srcController = SrcController::getInstance();
+    TextureController& textureController         = TextureController::getInstance();
+    ConvertController& convertController         = ConvertController::getInstance();
+    EdgeController& edgeController               = EdgeController::getInstance();
+    SrcController& srcController                 = SrcController::getInstance();
+
     TextureParam* textureParam = new TextureParam();
     bool resizeFlag = false;
     Size dstSize;
 
     MainController();
     MainController(const MainController&);
-
-    
+ 
 };
 
 #endif // MAINCONTROLLER_H

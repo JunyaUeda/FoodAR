@@ -46,13 +46,13 @@ void SrcController::loadSrc(Mat srcBGRImg, Mat srcHSVImg, Mat srcYCrCbImg, Mat s
     cvtColor(srcBGRImg, srcGrayImg, CV_BGR2GRAY);
 
     switch(_srcParam->splitColorSpace()) {
-        case BGR:
+        case JU_BGR:
             split(srcBGRImg, splitChannels);
             break;
-        case HSV:
+        case JU_HSV:
             split(srcHSVImg, splitChannels);
             break;
-        case YCrCb:
+        case JU_YCrCb:
             split(srcYCrCbImg, splitChannels);
             break;
     }
@@ -64,6 +64,52 @@ void SrcController::loadSrc(Mat srcBGRImg, Mat srcHSVImg, Mat srcYCrCbImg, Mat s
 		_videoCapture_file  >> textureImg;
 		_srcParam->setTextureImg(textureImg);
 	}
+    
+}
+
+void SrcController::loadSrc(Mat srcBGRImg, Mat srcHSVImg, Mat srcYCrCbImg, Mat srcGrayImg, map<int,Mat>* channels) {
+
+    _videoCapture_camera >> srcBGRImg;
+    cvtColor(srcBGRImg, srcHSVImg, CV_BGR2HSV);
+    cvtColor(srcBGRImg, srcYCrCbImg,CV_BGR2YCrCb);
+    cvtColor(srcBGRImg, srcGrayImg, CV_BGR2GRAY);
+
+    Mat BGRChannels[3];
+    Mat HSVChannels[3];
+    Mat YCrCbChannels[3];
+
+    split(srcBGRImg, BGRChannels);
+    (*channels).insert( map<int,Mat>::value_type(JU_B, BGRChannels[0]) );
+    (*channels).insert( map<int,Mat>::value_type(JU_G, BGRChannels[1]) );
+    (*channels).insert( map<int,Mat>::value_type(JU_R, BGRChannels[2]) );
+
+    split(srcHSVImg, HSVChannels);
+    (*channels).insert( map<int,Mat>::value_type(JU_H, HSVChannels[0]) );
+    (*channels).insert( map<int,Mat>::value_type(JU_S, HSVChannels[1]) );
+    (*channels).insert( map<int,Mat>::value_type(JU_V, HSVChannels[2]) );
+
+    split(srcYCrCbImg, YCrCbChannels);
+    (*channels).insert( map<int,Mat>::value_type(JU_Y, YCrCbChannels[0]) );
+    (*channels).insert( map<int,Mat>::value_type(JU_Cr, YCrCbChannels[1]) );
+    (*channels).insert( map<int,Mat>::value_type(JU_Cb, YCrCbChannels[2]) );
+    // switch(_srcParam->splitColorSpace()) {
+    //     case JU_BGR:
+    //         split(srcBGRImg, BGRChannels);
+    //         break;
+    //     case JU_HSV:
+    //         split(srcHSVImg, HSVChannels);
+    //         break;
+    //     case JU_YCrCb:
+    //         split(srcYCrCbImg, YCrCbChannels);
+    //         break;
+    // }
+    
+    
+    if(_srcParam->textureType() == JU_MOVIE) {
+        Mat textureImg;
+        _videoCapture_file  >> textureImg;
+        _srcParam->setTextureImg(textureImg);
+    }
     
 }
 

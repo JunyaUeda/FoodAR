@@ -45,9 +45,9 @@ Mat TextureController::createTexture(vector<vector<Point>>& contours, Mat maskIm
   		Mat affine_matrix = getAffineTransform(src_pt, dst_pt);
 		warpAffine(textureSrcImg, textureImg, affine_matrix, textureImg.size() , INTER_LINEAR, BORDER_CONSTANT, Scalar::all(0) );
 
-		circle(textureImg, rotatedRect.center, 10, cv::Scalar(0,200,0), 8, 8);
-		rectangle(textureImg, rect.tl(), rect.br(), Scalar(255,0,255), 2);
-		for (int i = 0; i < 4; i++) line(textureImg, vertices[i], vertices[(i+1)%4], Scalar(0,255,0), 4, 8, 0);
+		// circle(textureImg, rotatedRect.center, 10, cv::Scalar(0,200,0), 8, 8);
+		// rectangle(textureImg, rect.tl(), rect.br(), Scalar(255,0,255), 2);
+		// for (int i = 0; i < 4; i++) line(textureImg, vertices[i], vertices[(i+1)%4], Scalar(0,255,0), 4, 8, 0);
  		
  		add(allTextureImg, textureImg, allTextureImg);
 	}

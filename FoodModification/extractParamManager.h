@@ -4,14 +4,17 @@
 #include "Param/colorCriterion.h"
 #include "Param/colorExtractTolerance.h"
 #include "Utils/opencvUtils.h"
+//#include "./Param/edgeParam.h"
 
 class ExtractParamManager {
+
 public:
     int criterionNum;
     ColorCriterion* criterion;
     ColorExtractTolerance* colorExtractTolerance;
     Mat referenceMat;
     int extractColorSpace;
+    
 
     static ExtractParamManager& getInstance();
     int getExtractColorSpace() const;

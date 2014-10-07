@@ -1,20 +1,20 @@
 #include "edgeParam.h"
 
 EdgeParam::EdgeParam() {
-	for(int i=0; i<3; i++) {
-		_cannyThresholds.push_back(new CannyThreshold());
-	}
+	_channelThresholdMap.insert( make_pair(JU_S, new CannyThreshold()) );
+	_channelThresholdMap.insert( make_pair(JU_Cr, new CannyThreshold()) );
+	_channelThresholdMap.insert( make_pair(JU_V, new CannyThreshold()) );
 }
 
-vector<CannyThreshold *> EdgeParam::cannyThresholds() const {
-	return _cannyThresholds;
+map<int, CannyThreshold *> EdgeParam::channelThresholdMap() const {
+	return _channelThresholdMap;
 }
 
-void EdgeParam::setCannyThresholds(const vector<CannyThreshold *> &cannyThresholds) {
-	_cannyThresholds = cannyThresholds;
+void EdgeParam::setChannelThresholdMap(const map<int, CannyThreshold *> &channelThresholdMap) {
+	_channelThresholdMap = channelThresholdMap;
 }
 
 void EdgeParam::changeCannyThreshold(int channelIndex, CannyThreshold* novel) {
-	_cannyThresholds[channelIndex] = novel;
-
+	map<int, CannyThreshold*>::iterator it = _channelThresholdMap.find(channelIndex);
+	(*it).second = novel;
 }

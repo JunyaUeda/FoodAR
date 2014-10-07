@@ -23,7 +23,7 @@ public:
 	void setSplitColorSpace(int splitColorSpace);
 
 private:
-	int _splitColorSpace = YCrCb;
+	int _splitColorSpace = JU_YCrCb;
 	String _srcPath;
 	Size _cameraSize;
 	Mat _textureImg;

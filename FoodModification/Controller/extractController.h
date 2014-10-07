@@ -2,8 +2,8 @@
 #define EXTRACTCONTROLLER_H
 #include "../Utils/opencvBase.h"
 #include "../extractParamManager.h"
-#include "../Service/colorExtractService.h"
 #include "../Service/contourService.h"
+#include "../Service/colorExtractService.h"
 #include "../Param/targetParam.h"
 #include "../Service/edgeService.h"
 #include "../definition.h"
@@ -13,9 +13,8 @@ class ExtractController {
 
 public:
     static ExtractController& getInstance();
-    ExtractController(ExtractParamManager *extractParamManager);
     void ExtractController::extract(Mat srcBGRImg, Mat srcHSVImg, Mat srcYCrCbImg, Mat srcGrayImg,
-	Mat dstImg, vector<vector<Point>>& dstContours, Mat* edgeImgs);
+	                                   Mat dstImg, vector<vector<Point>>& dstContours, Mat* edgeImgs);
     void extractByColor(Mat srcBGRImg, Mat srcHSVImg, Mat dstImg);
     void extractByContour(Mat srcGrayImg, Mat dstImg);
     

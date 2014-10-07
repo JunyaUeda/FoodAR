@@ -21,7 +21,7 @@ void ConvertController::convert(Mat srcBGRImg, Mat srcHSVImg, Mat dstBGRImg, Mat
 	if(_illuminationParam->intensityChange()) {
 		convertHSVAndIllumination(dstBGRImg, maskImg, rects, textureParam, _illuminationParam->intensityFactor());
 	} else {
-		convertHSV(dstBGRImg, maskImg, rects, textureParam);
+		convertHSV(dstBGRImg, srcHSVImg, maskImg, rects, textureParam);
 	}
 
 	if(_illuminationParam->ZChange()) {
@@ -48,7 +48,7 @@ void ConvertController::overlapTexture(Mat srcBGRImg, Mat maskImg, Mat textureIm
 
 }
 
-void ConvertController::convertHSV(Mat srcBGRImg, Mat maskImg, vector<Rect>& rects, TextureParam* textureParam) {
+void ConvertController::convertHSV(Mat srcBGRImg, Mat srcHSVImg, Mat maskImg, vector<Rect>& rects, TextureParam* textureParam) {
 
 	
 	Mat dstHSVImg;
@@ -59,7 +59,7 @@ void ConvertController::convertHSV(Mat srcBGRImg, Mat maskImg, vector<Rect>& rec
 				if(L(maskImg,x,y) == 255) {
 					H(dstHSVImg,x,y) = H(dstHSVImg,x,y) + textureParam->getH_shift();
 					S(dstHSVImg,x,y) = S(dstHSVImg,x,y) + textureParam->getS_shift();
-					V(dstHSVImg,x,y) = V(dstHSVImg,x,y) + textureParam->getV_shift();
+					V(dstHSVImg,x,y) = V(srcHSVImg,x,y) + textureParam->getV_shift();
 				}
 			}
 		}

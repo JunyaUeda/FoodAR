@@ -39,6 +39,9 @@ void MainController::doConvertion() {
     Mat srcBGRImg, srcHSVImg, srcYCrCbImg, srcGrayImg, dstBGRImg;
     Mat BGRChannels[3], HSVChannels[3], YCrCbChannels[3];
     Mat BGREdges[3], HSVEdges[3], YCrCbEdges[3];
+
+    
+    map<int, Mat> edges;
     Mat maskImg;
     
     namedWindow("myWindow",CV_WINDOW_AUTOSIZE);
@@ -54,12 +57,10 @@ void MainController::doConvertion() {
 
 
     while (1) {
+        map<int, Mat> channels;
+        srcController.loadSrc(srcBGRImg, srcHSVImg, srcYCrCbImg, srcGrayImg, &channels);
+        edgeController.calculateEdges(&channels, YCrCbEdges);
 
-        srcController.loadSrc(srcBGRImg, srcHSVImg, srcYCrCbImg, srcGrayImg, YCrCbChannels);
-        
-        edgeController.calculateEdges(YCrCbChannels, YCrCbEdges);
-        
-    
         maskImg = Mat::zeros(srcBGRImg.size(), CV_8UC1);
         vector<vector<Point>> dstContours;
         extractController.extract(srcBGRImg, srcHSVImg, srcYCrCbImg, srcGrayImg, maskImg, dstContours, YCrCbEdges);

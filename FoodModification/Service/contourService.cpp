@@ -4,7 +4,7 @@ ContourService::ContourService()
 {
 }
 
-int ContourService::getMaxAreaContourIndex(std::vector<std::vector<cv::Point>> contours) {
+int ContourService::getMaxAreaContourIndex(vector<vector<Point>> contours) {
 	
 	size_t max=0;
 	int indexForMaxArea=0;
@@ -44,6 +44,29 @@ void ContourService::fillContours(Mat filledImg, vector<vector<Point> >& contour
             drawContours(filledImg, contours, i, Scalar(0, 0, 0), CV_FILLED, lineType);
         } else {
             drawContours(filledImg, contours, i, Scalar(255, 255, 255), CV_FILLED, lineType);
+        }
+        
+    }
+
+}
+
+/**
+*特定の輪郭を塗りつぶし、それ以外を黒にする.
+*@note 
+*/
+void ContourService::fillSpecifiedContour(Mat filledImg, vector<vector<Point> >& contours, int lineType, int minSize, int specifiedIndex) {
+
+    if(!contours.empty()) {
+        return;
+    }
+
+    for(int i=0; i<contours.size(); ++i) {
+
+        size_t count = contours[i].size();
+        if( i== specifiedIndex) {
+            drawContours(filledImg, contours, i, Scalar(255, 255, 255), CV_FILLED, lineType);
+        } else {
+            drawContours(filledImg, contours, i, Scalar(0, 0, 0), CV_FILLED, lineType);
         }
         
     }

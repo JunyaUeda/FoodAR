@@ -1,21 +1,23 @@
 #ifndef EDGEPARAM_H
 #define EDGEPARAM_H
 #include "./cannyThreshold.h"
-#include "../Utils/opencvBase.h"
+#include "../Utils/opencvUtils.h"
+#include "../definition.h"
 
 class EdgeParam {
 
 public:
 	EdgeParam();
 
-	vector<CannyThreshold *> cannyThresholds() const;
-	void setCannyThresholds(const vector<CannyThreshold *> &cannyThresholds);
+	//getter setter
+	map<int, CannyThreshold *> channelThresholdMap() const;
+	void setChannelThresholdMap(const map<int, CannyThreshold *> &channelThresholdMap);
 
 	//mainwindowから呼ばれる
 	void changeCannyThreshold(int channelIndex, CannyThreshold* novel);
 
 private:
-	vector<CannyThreshold*> _cannyThresholds;
+	map<int, CannyThreshold*> _channelThresholdMap;
 
 };
 

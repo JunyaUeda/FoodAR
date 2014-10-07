@@ -521,7 +521,7 @@
        <string>エッジ</string>
       </property>
      </widget>
-     <widget class="QGroupBox" name="groupBox">
+     <widget class="QGroupBox" name="ch1EdgeThreshold_groupBox">
       <property name="geometry">
        <rect>
         <x>290</x>
@@ -624,7 +624,7 @@
        </property>
       </widget>
      </widget>
-     <widget class="QGroupBox" name="groupBox_2">
+     <widget class="QGroupBox" name="ch2EdgeThreshold_groupBox">
       <property name="geometry">
        <rect>
         <x>540</x>
@@ -727,7 +727,7 @@
        </property>
       </widget>
      </widget>
-     <widget class="QGroupBox" name="groupBox_3">
+     <widget class="QGroupBox" name="ch0EdgeThreshold_groupBox">
       <property name="geometry">
        <rect>
         <x>30</x>

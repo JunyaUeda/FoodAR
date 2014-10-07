@@ -18,7 +18,7 @@ private:
 	ConvertController();
 	ConvertController(const ConvertController&);
 	void overlapTexture(Mat srcBGRImg, Mat maskImg, Mat textureImg, vector<Rect>& rects, double alpha);
-    void convertHSV(Mat srcBGRImg, Mat maskImg, vector<Rect>& rects, TextureParam* textureParam);
+    void convertHSV(Mat srcBGRImg, Mat srcHSVImg, Mat maskImg, vector<Rect>& rects, TextureParam* textureParam);
     int changeIllumination(int currentValue, double intensityFactor);
     void convertHSVAndIllumination(Mat srcBGRImg, Mat maskImg, vector<Rect>& rects, TextureParam* textureParam, double intensityFactor);
     void convertZ(Mat srcBGRImg, double ZFactor);

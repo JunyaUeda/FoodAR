@@ -20,6 +20,11 @@ MainWindow::MainWindow(QWidget *parent) :
     	if(s == "." || s== "..") continue;
     	ui->textureComboBox->addItem(s);
     }
+
+    _edgeWidgetChannelMap.insert(make_pair(0, JU_S));
+    _edgeWidgetChannelMap.insert(make_pair(1, JU_Cr));
+    _edgeWidgetChannelMap.insert(make_pair(2, JU_V));
+    //ui->ch0EdgeThreshold_groupBox->setTitle
     
 }
 
@@ -80,7 +85,6 @@ void MainWindow::on_radioButton_dstSizeLarge_clicked() {
 	} else {
 		mainController.setResizeFlag(false);
 	}
-	
 }
 
 void MainWindow::on_textureComboBox_currentIndexChanged(const QString &arg1) {
@@ -130,9 +134,10 @@ void MainWindow::on_splitColorSpaceComboBox_currentIndexChanged(int index) {
 
 
 //Edge Event 
-void MainWindow::changeThreshold(int channelIndex, int value1, int value2) {
+void MainWindow::changeThreshold(int widgetIndex, int value1, int value2) {
 	CannyThreshold* novel = new CannyThreshold(value1, value2);
-	edgeController.changeCannyThreshold(channelIndex, novel);
+	int channelKey = _edgeWidgetChannelMap.find(widgetIndex)->second;
+	edgeController.changeCannyThreshold(channelKey, novel);
 }
 
 void MainWindow::on_ch0EdgeThreshold1_LineEdit_textChanged(const QString &arg1) {

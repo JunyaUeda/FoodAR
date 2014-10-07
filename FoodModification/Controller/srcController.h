@@ -10,6 +10,7 @@ public:
 	static SrcController& getInstance();
 	bool bindSrc();
 	void loadSrc(Mat srcBGRImg, Mat srcHSVImg, Mat srcYCrCbImg, Mat srcGrayImg, Mat* splitChannels);
+	void loadSrc(Mat srcBGRImg, Mat srcHSVImg, Mat srcYCrCbImg, Mat srcGrayImg, map<int,Mat> *splitChannels);
 	
 	SrcParam *srcParam() const;
 	void setSrcParam(SrcParam *srcParam);
