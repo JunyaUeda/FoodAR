@@ -10,7 +10,7 @@ TextureController& TextureController::getInstance() {
 	return instance;
 }
 
-Mat TextureController::createTexture(vector<vector<Point>>& contours, Mat maskImg, vector<Rect>& rects, Mat textureSrcImg) {
+Mat TextureController::createTexture(vector<vector<Point> >& contours, Mat maskImg, vector<Rect>& rects, Mat textureSrcImg) {
 	
 	Mat allTextureImg = Mat::zeros(maskImg.size(), CV_8UC3);
 	//Mat textureSrcImg = imread(picturePath, 1);
@@ -57,7 +57,7 @@ Mat TextureController::createTexture(vector<vector<Point>>& contours, Mat maskIm
 
 }
 
-void TextureController::setROI(vector<vector<Point>>& contours, vector<Rect>& rects) {
+void TextureController::setROI(vector<vector<Point> >& contours, vector<Rect>& rects) {
 
 	for(int i=0; i<contours.size(); i++) {
 

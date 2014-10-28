@@ -62,7 +62,7 @@ void MainController::doConvertion() {
         edgeController.calculateEdges(&channels, YCrCbEdges);
 
         maskImg = Mat::zeros(srcBGRImg.size(), CV_8UC1);
-        vector<vector<Point>> dstContours;
+        vector<vector<Point> > dstContours;
         extractController.extract(srcBGRImg, srcHSVImg, srcYCrCbImg, srcGrayImg, maskImg, dstContours, YCrCbEdges);
         imshow("myWindow", srcBGRImg);
         imshow("FinalExtractedImg", maskImg);

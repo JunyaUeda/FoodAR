@@ -6,12 +6,12 @@ class TextureController {
 
 public:
 	static TextureController& getInstance();
-    Mat createTexture(vector<vector<Point>>& contours, Mat maskImg, vector<Rect>& rects, Mat textureSrcImg);
-    void setROI(vector<vector<Point>>& contours, vector<Rect>& rects);
+    Mat createTexture(vector<vector<Point> >& contours, Mat maskImg, vector<Rect>& rects, Mat textureSrcImg);
+    void setROI(vector<vector<Point> >& contours, vector<Rect>& rects);
 private:
 	TextureController();
 	TextureController(const TextureController&);
-	vector<vector<Point>> contours;
+    vector<vector<Point> > contours;
 	vector<Size> rectSizes;
 	
 

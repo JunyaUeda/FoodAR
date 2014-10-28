@@ -5,7 +5,7 @@
 class CalibrateClickParam {
 
 public:
-    vector<vector<Point>> clickedPoints;
+    vector<vector<Point> > clickedPoints;
     int leftClickedCounts = 0;
     int rightClickedCounts = 0; 
     Mat srcBGRImg;

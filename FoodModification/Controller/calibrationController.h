@@ -34,9 +34,9 @@ private:
     void calculateTolerance(int* tolerance, int average, int pixcelNum, int* histogram);
     int setTolerance(Mat srcImg, Mat refImg,int* average,int pixcelNum, int colorIndex, int* tolerance, Scalar color);
     Mat getDistribution(Mat srcImg, Mat refImg, int pixelNum, Scalar color);
-    void CalibrationController::setExtractParam(Mat srcImg, Mat refImg, int colorSpaceIndex);
-    void CalibrationController::setExtractBGRParam(Mat srcImg, Mat refImg, Scalar color, int paramIndex);
-    void CalibrationController::setExtractHSVParam(Mat srcImg, Mat refImg, Scalar color, int paramIndex);
+    void setExtractParam(Mat srcImg, Mat refImg, int colorSpaceIndex);
+    void setExtractBGRParam(Mat srcImg, Mat refImg, Scalar color, int paramIndex);
+    void setExtractHSVParam(Mat srcImg, Mat refImg, Scalar color, int paramIndex);
     //void my_button_cb(int state, void* userdata);
     
 };

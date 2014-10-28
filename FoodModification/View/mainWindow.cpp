@@ -92,8 +92,8 @@ void MainWindow::on_textureComboBox_currentIndexChanged(const QString &arg1) {
         QString path = DIRPATH;
         path.append(arg1);
         qDebug() << "changed" << path;
-		String cStr = path.toLocal8Bit();
-		srcController.changeTextureImg(cStr);
+        QByteArray cStr = path.toLocal8Bit();
+        srcController.changeTextureImg(cStr.data());
 		mainController.setNoTexture(false);
 	} else {
 		String cStr = "noTexture";

@@ -8,6 +8,7 @@ QT       += core gui
 QT += xml
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
+QMAKE_MACOSX_DEPLOYMENT_TARGET = 10.9
 TARGET = FoodModification
 TEMPLATE = app
 
@@ -84,10 +85,18 @@ FORMS    += \
 
 # OpenCV settings
 # for Windows
-win32:DEPENDPATH  += "C:\opencv248\build\include"
-win32:INCLUDEPATH += "C:\opencv248\build\include"
-win32:LIBS += -L"C:\opencv248\build\x86\vc12\lib"
-#win32:LIBS += -lopencv_core248d -lopencv_highgui248d -lopencv_imgproc248d
+#win32:DEPENDPATH  += "C:\opencv248\build\include"
+#win32:INCLUDEPATH += "C:\opencv248\build\include"
+#win32:LIBS += -L"C:\opencv248\build\x86\vc12\lib"
+# for Mac
+INCLUDEPATH += /usr/local/include
+DEPENDPATH += /usr/local/include
+LIBS += -L/usr/local/lib \
+    -lopencv_core \
+    -lopencv_imgproc \
+    -lopencv_highgui \
+    -lopencv_objdetect \
+    -lopencv_calib3d
 
 OTHER_FILES += \
     ExtractParam.xml \

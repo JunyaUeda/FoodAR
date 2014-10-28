@@ -1,8 +1,11 @@
 #include "srcController.h"
 #include <QDebug>
 #include <QtCore>
-
+#include <cctype>
+#include <string>
+#include <functional>
 SrcController::SrcController() {
+
 }
 
 SrcController& SrcController::getInstance() {
@@ -13,7 +16,8 @@ SrcController& SrcController::getInstance() {
 bool SrcController::bindSrc() {
 
 	_videoCapture_camera = VideoCapture(0);
-
+    _videoCapture_camera.set(CV_CAP_PROP_FRAME_WIDTH, 480);
+    _videoCapture_camera.set(CV_CAP_PROP_FRAME_HEIGHT, 320);
 	Mat srcImg;
 	_videoCapture_camera >> srcImg;
 	
@@ -146,11 +150,17 @@ void SrcController::changeTextureImg(String path) {
 
     string uppercase_path;
     uppercase_path.resize(path.size());
-    transform(path.cbegin(), path.cend(), uppercase_path.begin(), toupper);
+    std::transform(path.cbegin(), path.cend(), uppercase_path.begin(), (int (*)(int))std::toupper);
 
-    vector<string> imgExtensions{".JPG", ".JPEG", ".PNG"};
-	vector<string> movieExtensions{".AVI", ".MP4", ".WMV"};
-    
+    vector<string> imgExtensions;
+    imgExtensions.push_back(".JPG");
+    imgExtensions.push_back(".JPEG");
+    imgExtensions.push_back(".PNG");
+    vector<string> movieExtensions;
+    movieExtensions.push_back(".AVI");
+    movieExtensions.push_back(".MP4");
+    movieExtensions.push_back(".WMV");
+
     for(string e : imgExtensions) {
     	unsigned int result = uppercase_path.find(e);
     	if(result != String::npos) {

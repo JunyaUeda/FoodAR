@@ -2,7 +2,7 @@
 
 CalibrateClickParam::CalibrateClickParam() {
 
-	vector<vector<Point>> points(2);
+    vector<vector<Point> > points(2);
 	clickedPoints = points;
 	
 }

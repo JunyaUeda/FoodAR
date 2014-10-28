@@ -15,7 +15,7 @@ public:
 
 private:
     int getIndexOfNearCriterion(int x, int y, Mat diffMap);
-    int ColorExtractService::getIndexOfNearCriterionByValue(int x, int y, Mat diffMap);
+    int getIndexOfNearCriterionByValue(int x, int y, Mat diffMap);
     Mat getBGRDifferenceMap(Mat srcImg, ColorCriterion* criterion);
     Mat getHSVDifferenceMap(Mat srcImg, ColorCriterion* criterion);
     void classifyByBGR(int x, int y, Mat bgrImg, Mat dstImg, ExtractParamManager* extractParamManager, Mat diffMap);

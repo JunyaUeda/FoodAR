@@ -4,7 +4,7 @@ ContourService::ContourService()
 {
 }
 
-int ContourService::getMaxAreaContourIndex(vector<vector<Point>> contours) {
+int ContourService::getMaxAreaContourIndex(vector<vector<Point> > contours) {
 	
 	size_t max=0;
 	int indexForMaxArea=0;
@@ -21,8 +21,8 @@ int ContourService::getMaxAreaContourIndex(vector<vector<Point>> contours) {
 	return indexForMaxArea;
 }
 
-vector<vector<Point>> ContourService::getTargetContours(Mat srcBinaryImg) {
-	vector<vector<Point>> contours;
+vector<vector<Point> > ContourService::getTargetContours(Mat srcBinaryImg) {
+    vector<vector<Point> > contours;
     findContours(srcBinaryImg, contours, CV_RETR_LIST, CV_CHAIN_APPROX_NONE);
     return contours;
 }
@@ -75,16 +75,16 @@ void ContourService::fillSpecifiedContour(Mat filledImg, vector<vector<Point> >&
 
 vector<vector<Point> > ContourService::extractContoursWithPoints(Mat srcImg, vector<Point>& points, int minSize ) {
 
-    vector<vector<Point>> srcContours;
+    vector<vector<Point> > srcContours;
     findContours(srcImg, srcContours, CV_RETR_LIST, CV_CHAIN_APPROX_NONE);
 
     return extractContoursWithPoints(srcContours, points, minSize);
 
 }
 
-vector<vector<Point>> ContourService::extractContoursWithPoints(vector<vector<Point> >& srcContours, vector<Point>& points, int minSize ) {
+vector<vector<Point> > ContourService::extractContoursWithPoints(vector<vector<Point> >& srcContours, vector<Point>& points, int minSize ) {
 
-    vector<vector<Point>> dstContours;
+    vector<vector<Point> > dstContours;
     
     for(int i=0; i<srcContours.size(); ++i) {
         size_t count = srcContours[i].size();

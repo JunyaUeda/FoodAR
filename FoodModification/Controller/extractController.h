@@ -13,8 +13,8 @@ class ExtractController {
 
 public:
     static ExtractController& getInstance();
-    void ExtractController::extract(Mat srcBGRImg, Mat srcHSVImg, Mat srcYCrCbImg, Mat srcGrayImg,
-	                                   Mat dstImg, vector<vector<Point>>& dstContours, Mat* edgeImgs);
+    void extract(Mat srcBGRImg, Mat srcHSVImg, Mat srcYCrCbImg, Mat srcGrayImg,
+                                       Mat dstImg, vector<vector<Point> >& dstContours, Mat* edgeImgs);
     void extractByColor(Mat srcBGRImg, Mat srcHSVImg, Mat dstImg);
     void extractByContour(Mat srcGrayImg, Mat dstImg);
     

@@ -15,7 +15,7 @@ ExtractController& ExtractController::getInstance() {
 }
 
 void ExtractController::extract(Mat srcBGRImg, Mat srcHSVImg, Mat srcYCrCbImg, Mat srcGrayImg,
-	Mat dstImg, vector<vector<Point>>& dstContours, Mat* edgeImgs) {
+    Mat dstImg, vector<vector<Point> >& dstContours, Mat* edgeImgs) {
 
     Mat colorExtractedImg;
     colorExtractedImg = dstImg.clone();
@@ -23,11 +23,15 @@ void ExtractController::extract(Mat srcBGRImg, Mat srcHSVImg, Mat srcYCrCbImg, M
     imshow("extractByColor",colorExtractedImg);
 
     //縮退膨張処理
-    vector<int> combinations{JU_ERODE, JU_ERODE, JU_ERODE, JU_ERODE};
+    vector<int> combinations;
+    combinations.push_back(JU_ERODE);
+    combinations.push_back(JU_ERODE);
+    combinations.push_back(JU_ERODE);
+    combinations.push_back(JU_ERODE);
     _extractService->dilate_erode(colorExtractedImg,colorExtractedImg, combinations);    
     imshow("dilate_erode",colorExtractedImg);
 
-    vector<vector<Point>> colorExtractedContours;
+    vector<vector<Point> > colorExtractedContours;
     findContours(colorExtractedImg, colorExtractedContours, CV_RETR_LIST, CV_CHAIN_APPROX_NONE);
 
     int maxAreaIndex = _contourService->getMaxAreaContourIndex(colorExtractedContours);

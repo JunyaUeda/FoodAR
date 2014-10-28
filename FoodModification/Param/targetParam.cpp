@@ -4,11 +4,11 @@ TargetParam::TargetParam()
 {
 }
 
-std::vector<std::vector<cv::Point>> TargetParam::getContours() {
+std::vector<std::vector<cv::Point> > TargetParam::getContours() {
 	return *contours;
 }
 
-void TargetParam::setContours(std::vector<std::vector<cv::Point>>* conturs) {
+void TargetParam::setContours(std::vector<std::vector<cv::Point> >* conturs) {
 	//std::vector<std::vector<cv::Point>>* cont = contours;
 	this->contours = conturs;
 }

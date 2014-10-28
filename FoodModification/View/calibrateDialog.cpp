@@ -112,7 +112,7 @@ void CalibrateDialog::on_resetButton_clicked() {
     clickParam->clickedPoints.clear();
     clickParam->leftClickedCounts = 0;
     clickParam->rightClickedCounts = 0;
-    vector<vector<Point>> points(2);
+    vector<vector<Point> > points(2);
     clickParam->clickedPoints = points;
     show(clickParam->refImg);
     
