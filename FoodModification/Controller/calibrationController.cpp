@@ -1,11 +1,12 @@
 #include "calibrationController.h"
 #include <stdio.h>
+
+
 #define RATIO_OF_REGION 0.95
 #define BGR_SPACE 0
 #define HSV_SPACE 1
 
 CalibrationController::CalibrationController() {
-
 	this->clickParam = new CalibrateClickParam;
 }
 
@@ -13,107 +14,39 @@ CalibrationController& CalibrationController::getInstance() {
 	static CalibrationController instance;
 	return instance;
 }
-// void mouseCallback(int event, int x, int y, int flags, void* param) {
-
-// 	CalibrateClickParam *clickParam = static_cast<CalibrateClickParam*>(param);
-
-//     switch(event) {
-
-// 	    case cv::EVENT_LBUTTONDOWN:
-// 	        clickParam->leftClickedCounts++;
-// 	        clickParam->clickedPoints[0][clickParam->leftClickedCounts-1] = cv::Point(x,y);
-// 	        cv::fillConvexPoly(clickParam->img, clickParam->clickedPoints[0], clickParam->leftClickedCounts, cv::Scalar(0,0,255));
-// 	    	break;
-// 	    case cv::EVENT_RBUTTONDOWN:
-// 	    	clickParam->rightClickedCounts++;
-// 	        clickParam->clickedPoints[1][clickParam->rightClickedCounts-1] = cv::Point(x,y);
-// 	        cv::fillConvexPoly(clickParam->img, clickParam->clickedPoints[1], clickParam->rightClickedCounts, cv::Scalar(0,255,0));
-// 	    	break;
-
-//     }
-
-// }
-
-// void CalibrationController::calibrate_old() {
-
-// 	VideoCapture videoCapture = VideoCapture(0);
-//     Mat srcBGRImg, srcHSVImg;
-//     string windowName = "Calibration";
-
-//     while(inputFlag) {
-
-//         videoCapture >> srcBGRImg;
-//         cvtColor(srcBGRImg, srcHSVImg, CV_BGR2HSV);
-//         imshow(windowName, srcBGRImg);
-//         char ch = cv::waitKey(33);
-
-//         if ( ch == 27 ) break;
-
-//     }
-
-//     this->clickParam->img = srcBGRImg.clone();
-//     setMouseCallback(windowName, mouseCallback, (void*)this->clickParam);
-//     while(drawingFlag) {
-
-//     	cv::imshow(windowName, this->clickParam->img);
-//     	char ch = cv::waitKey(33);
-
-//         if ( ch == 27 ) break;
-
-//     }
-//     cv::destroyWindow(windowName);
-
-//     int extractColorSpace = this->extractParamManager->getExtractColorSpace();
-//     if(extractColorSpace == BGR_SPACE) {
-
-//     	setExtractParam(srcBGRImg, this->clickParam->img, extractColorSpace);
-
-//     } else if (extractColorSpace == HSV_SPACE) {
-
-//     	setExtractParam(srcHSVImg, this->clickParam->img, extractColorSpace);
-
-//     }
-    
-
-// }
-
-void CalibrationController::videoInput() {
-
-	//this->calibrate();
-
-}
 
 void CalibrationController::capture() {
-
 	this->inputFlag = false;
-
 }
 
 void CalibrationController::stopDrawing() {
-
 	this->drawingFlag = false;
-
 }
 
+
+/**
+* calibrationの制御メソッド
+*
+*/
 void CalibrationController::calibrate(CalibrateClickParam* param) {
 
     int extractColorSpace = extractParamManager.getExtractColorSpace();
 
-    if(extractColorSpace == BGR_SPACE) {
 
-    	setExtractParam(param->srcBGRImg, param->refImg, extractColorSpace);
-
-    } else if (extractColorSpace == HSV_SPACE) {
-
-    	setExtractParam(param->srcHSVImg, param->refImg, extractColorSpace);
-
-    }
+     if(extractColorSpace == BGR_SPACE) {
+        setExtractParam(param->srcBGRImg, param->refImg, extractColorSpace);
+     } else if (extractColorSpace == HSV_SPACE) {
+        setExtractParam(param->srcHSVImg, param->refImg, extractColorSpace);
+     }
+    //Features features = calibrationService.calcurateFeatures(param);
 
     propertyController.save();
 
 }
 
+
 void CalibrationController::setExtractParam(Mat srcImg, Mat refImg, int colorSpaceIndex) {
+//void CalibrationController::setExtractParam(CalibrateClickParam* param) {
 
 	switch(colorSpaceIndex) {
 

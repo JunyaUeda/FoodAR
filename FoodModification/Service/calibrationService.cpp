@@ -4,6 +4,9 @@ CalibrationService::CalibrationService() {
 
 }
 
+void CalibrationService::calculateFeatures() {
+
+}
 void CalibrationService::calculateAverage(Mat refImg, Mat maskImg, vector<Rect>& roiRects, ExtractParamManager* extractParamManager) {
 
 	int sum[2][3] = {0};

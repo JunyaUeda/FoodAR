@@ -1,7 +1,6 @@
 #include "xmlUtils.h"
 
-XmlUtils::XmlUtils()
-{
+XmlUtils::XmlUtils() {
 }
 
 QDomDocument XmlUtils::getQDomDoc(QString filePath) {
@@ -9,10 +8,17 @@ QDomDocument XmlUtils::getQDomDoc(QString filePath) {
 	QFile file(filePath);
 	QDomDocument document;
     if(!file.open(QIODevice::ReadOnly | QIODevice::Text)) {
+    //if(!file.open(QFile::ReadOnly | QFile::Text)) {
         qDebug() << "Failed to open the file for reading1.";
     } else {
-        if (!document.setContent(&file)) {
-            qDebug() << "Failed to load the file for readingi2.";
+        QString err;
+        int errL, errC;
+        if(!document.setContent(&file,false, &err, &errL, &errC)) {
+        //if(!document.setContent(&file)) {
+            qDebug() << err;
+            qDebug() << errL;
+            qDebug() << errC;
+            qDebug() << "Failed to load the file for reading2.";
         }
         file.close();
     }

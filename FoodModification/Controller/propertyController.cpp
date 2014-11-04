@@ -2,7 +2,7 @@
 #include <QtCore>
 #include <QtXml>
 
-#define FILEPATH "../FoodModification/ExtractParam.xml"
+#define FILEPATH "../ExtractParam.xml"
 
 PropertyController::PropertyController() {
 
@@ -20,12 +20,12 @@ PropertyController& PropertyController::getInstance() {
 void PropertyController::readFile(QString filePath) {
 
     _document = XmlUtils::getQDomDoc(filePath);
-
+    qDebug() << "start to loadFromFile";
+    _featureReference->loadFeaturesFromFile(_document);
     readExtractColorSpace();
     readColorCriterion();
     readColorExtractTolerance();
     
-
 }
 
 void PropertyController::readExtractColorSpace() {
@@ -37,8 +37,7 @@ void PropertyController::readExtractColorSpace() {
     } else if (colorSpace_txt == "HSV") {
         _extractParamManager.setExtractColorSpace(1);
     }
-    qDebug() << "ExtractColorSpace =" << _extractParamManager.getExtractColorSpace();
-
+    
 }
 
 void PropertyController::readColorCriterion() {
@@ -150,7 +149,6 @@ void PropertyController::writeColorCriterion(QDomElement* root) {
         element.setAttribute("Cb", QString::number(criterion[i].getCb()));
 
     }
-
 
 }
 

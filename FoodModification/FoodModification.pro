@@ -43,7 +43,21 @@ SOURCES += main.cpp\
     Param/edgeParam.cpp \
     Controller/srcController.cpp \
     Param/srcParam.cpp \
-    Param/cannyThreshold.cpp
+    Param/cannyThreshold.cpp \
+    Param/Features/feature.cpp \
+    Param/References/reference.cpp \
+    Controller/baseController.cpp \
+    Controller/File/fileController.cpp \
+    Controller/singleton.cpp \
+    Model/features.cpp \
+    Model/Param/color.cpp \
+    Model/Param/channel.cpp \
+    Model/extractParam.cpp \
+    Model/xmlReader.cpp \
+    Model/featureReference.cpp \
+    Model/Param/threshold.cpp \
+    Model/Param/channelThreshold.cpp \
+    Model/Param/channelType.cpp
 
 HEADERS  += \
     extractParamManager.h \
@@ -76,7 +90,21 @@ HEADERS  += \
     definition.h \
     Controller/srcController.h \
     Param/srcParam.h \
-    Param/cannyThreshold.h
+    Param/cannyThreshold.h \
+    Param/Features/feature.h \
+    Param/References/reference.h \
+    Controller/baseController.h \
+    Controller/File/fileController.h \
+    Controller/singleton.h \
+    Model/features.h \
+    Model/Param/color.h \
+    Model/Param/channel.h \
+    Model/extractParam.h \
+    Model/xmlReader.h \
+    Model/featureReference.h \
+    Model/Param/threshold.h \
+    Model/Param/channelThreshold.h \
+    Model/Param/channelType.h
 
 FORMS    += \
     View/calibrateDialog.ui \

@@ -7,6 +7,7 @@ class CalibrationService {
 
 public:
     CalibrationService();
+    void calculateFeatures();
     void calculateAverage(Mat refImg, Mat maskImg, vector<Rect>& roiRects, ExtractParamManager* extractParamManager);
 };
 

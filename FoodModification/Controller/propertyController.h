@@ -6,6 +6,7 @@
 #include "../Param/colorCriterion.h"
 #include "../Param/colorExtractTolerance.h"
 #include "../Utils/xmlUtils.h"
+#include "../Model/featureReference.h"
 
 class PropertyController {
     
@@ -16,6 +17,7 @@ public:
 private:
     ExtractParamManager& _extractParamManager = ExtractParamManager::getInstance();
     QDomDocument _document; //create a document to write XML
+    FeatureReference* _featureReference = new FeatureReference();
     
     PropertyController();
     PropertyController(const PropertyController&);

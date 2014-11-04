@@ -1,4 +1,4 @@
-#ifndef CONVERTCONTROLLER_H
+    #ifndef CONVERTCONTROLLER_H
 #define CONVERTCONTROLLER_H
 
 #include "../Utils/opencvBase.h"

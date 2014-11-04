@@ -16,8 +16,8 @@ SrcController& SrcController::getInstance() {
 bool SrcController::bindSrc() {
 
 	_videoCapture_camera = VideoCapture(0);
-    _videoCapture_camera.set(CV_CAP_PROP_FRAME_WIDTH, 480);
-    _videoCapture_camera.set(CV_CAP_PROP_FRAME_HEIGHT, 320);
+    _videoCapture_camera.set(CV_CAP_PROP_FRAME_WIDTH, 640);
+    _videoCapture_camera.set(CV_CAP_PROP_FRAME_HEIGHT, 480);
 	Mat srcImg;
 	_videoCapture_camera >> srcImg;
 	
