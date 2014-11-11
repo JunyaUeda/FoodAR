@@ -14,7 +14,7 @@ public:
     RegionService();
     QVector<int> calculateAverage(const MatSet* matSet, QList<Point> region);
     QVector<int> calculateAverage(Mat srcBGRImg, QList<Point> region);
-    QVector<int> calculateTolerance(Mat srcBGRImg, QList<Point> region);
+    QVector<int> calculateTolerance(const MatSet* matSet, QList<Point> region, QVector<int> averages);
     QList<Point> toPointList(Mat refImg, Scalar refColor);
 private:
 	QVector<int> countSum(const MatSet* matSet, QList<Point> region);
@@ -22,5 +22,6 @@ private:
 	QVector<int> countSum(Mat srcBGRImg, Mat refImg, Scalar refColor);
     QVector<QVector<int> > createHistogram(const MatSet* matSet, QList<Point> region);
 	QVector<QVector<int> > createHistogram(Mat srcBGRImg, QList<Point> region);
+    int findTolerance(int average, QVector<int> histogram, int pixcelNum);
 };
 #endif // REGIONSERVICE_H

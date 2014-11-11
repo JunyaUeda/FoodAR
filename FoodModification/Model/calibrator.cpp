@@ -20,6 +20,11 @@ bool Calibrator::calibrate(Mat srcImg, Mat refImg, Scalar refColor) {
  	for(it = averages.begin(); it != averages.end(); ++it) {
  		qDebug() << "average =" << (*it);
  	}
- 	
+
+    QVector<int> tolerance = _regionService->calculateTolerance(&matSet, region, averages);
+ 	QVector<int>::iterator ite;
+    for(ite = tolerance.begin(); ite != tolerance.end(); ++ite) {
+        qDebug() << "tolerance =" << (*ite);
+    }
 	return true;
 }

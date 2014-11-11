@@ -22,6 +22,15 @@ QList<Point> RegionService::toPointList(Mat refImg, Scalar refColor) {
 	return region;
 }
 
+/**
+* 指定領域の9チャンネルの平均値を返す
+*
+*/
+QVector<int> RegionService::calculateAverage(Mat srcBGRImg, QList<Point> region) {
+    MatSet matSet(srcBGRImg);
+    return calculateAverage(&matSet, region);
+}
+
 QVector<int> RegionService::calculateAverage(const MatSet* matSet, QList<Point> region) {
     QVector<int> averages(9,0);
    
@@ -41,15 +50,6 @@ QVector<int> RegionService::calculateAverage(const MatSet* matSet, QList<Point> 
 }
 
 /**
-* 指定領域の9チャンネルの平均値を返す
-*
-*/
-QVector<int> RegionService::calculateAverage(Mat srcBGRImg, QList<Point> region) {
-    MatSet matSet(srcBGRImg);
-    return calculateAverage(&matSet, region);
-}
-
-/**
 * BGR, HSV, YCrCbの9チャンネルの指定領域のピクセル値の合計を求める
 *
 */
@@ -59,10 +59,6 @@ QVector<int> RegionService::countSum(Mat srcBGRImg, Mat refImg, Scalar refColor)
 	  return countSum(srcBGRImg, region);
 }
 
-/**
-* BGR, HSV, YCrCbの9チャンネルの指定領域のピクセル値の合計を求める
-*
-*/
 QVector<int> RegionService::countSum(Mat srcBGRImg, QList<Point> region) {
     MatSet matSet(srcBGRImg);
     return countSum(&matSet, region);
@@ -95,10 +91,33 @@ QVector<int> RegionService::countSum(const MatSet* matSet, QList<Point> region) 
 * 指定領域の9チャンネルのToleranceを返す
 *
 */
-QVector<int> RegionService::calculateTolerance(Mat srcBGRImg, QList<Point> region) {
+QVector<int> RegionService::calculateTolerance(const MatSet* matSet, QList<Point> region, QVector<int> averages) {
+
+    QVector<QVector<int> > histograms = createHistogram(matSet, region);
     QVector<int> tolerance(9,0);
+    for(int i=0; i<9; i++) {
+      tolerance[i] = findTolerance(averages[i], histograms[i], region.size());
+    }
     
     return tolerance;
+}
+
+int RegionService::findTolerance(int average, QVector<int> histogram, int pixcelNum) {
+    int sum =0;
+    bool maxFlag = false;
+    bool minFlag = false;
+    int result =0;
+    for(result=0; sum < pixcelNum*0.8; result++) {
+        if((average+result) > 255) {
+            return 255 - average;
+        } else if((average-result) < 0) {
+            return average;
+        } else {
+            sum = sum + histogram[average+result] + histogram[average-result];
+        }
+        
+    }
+    return result;
 }
 
 /**
