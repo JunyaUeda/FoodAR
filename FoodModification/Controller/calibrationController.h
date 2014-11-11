@@ -8,6 +8,7 @@
 #include "../Service/calibrationService.h"
 #include "./propertyController.h"
 #include "../Model/Service/regionService.h"
+#include "../Model/calibrator.h"
 
 class CalibrationController {
 
@@ -28,6 +29,8 @@ private:
     PropertyController& propertyController = PropertyController::getInstance();
     CalibrationService* calibrationService;
     RegionService* _regionService;
+    Calibrator* _calibrator;
+
 
     CalibrationController();
     CalibrationController(const CalibrationController&);

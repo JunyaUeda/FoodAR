@@ -1,15 +1,14 @@
 #include "calibrator.h"
+#include <qDebug>
 
 Calibrator::Calibrator() {
 }
 
 bool Calibrator::calibrate(Mat srcImg, Mat refImg, Scalar refColor) {
-//    Color request;
-//    request._channels.push_back(ChannelType::H);
-//    request._channels.push_back(ChannelType::S);
-//    request._channels.push_back(ChannelType::V);
-   
-//	Color* averages;
-//    averages = _regionService->calculateAverage(srcImg, refImg, refColor, &request);
+
+	QList<Point> region = _regionService->toPointList(refImg, refColor);
+	//QVector<int>* averages = _regionService->calculateAverage(srcImg, region);
+	
+ 	//qDebug() << "average =" << (*averages)[0];
 	return true;
 }
