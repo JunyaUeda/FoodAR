@@ -28,8 +28,8 @@ private:
     ExtractParamManager& extractParamManager = ExtractParamManager::getInstance();
     PropertyController& propertyController = PropertyController::getInstance();
     CalibrationService* calibrationService;
-    RegionService* _regionService;
-    Calibrator* _calibrator;
+    //RegionService* _regionService;
+    Calibrator& _calibrator = Calibrator::getInstance();
 
 
     CalibrationController();

@@ -123,11 +123,7 @@ void CalibrationController::setExtractHSVParam(Mat srcImg, Mat refImg, Scalar co
     tolerace->setValueHighTolerance(valueTolerace[0]);
     tolerace->setValueLowTolerance(valueTolerace[1]);
 
-    QList<Point> regionList = _regionService->toPointList(refImg, color);
-    QList<Point>::iterator it;
-    for(it = regionList.begin(); it != regionList.end(); ++it) {
-           qDebug() << (*it).x << "   " << (*it).y;
-    }
+    _calibrator.calibrate(srcImg, refImg, color);
 }
 
 int CalibrationController::calculateAverages(Mat srcImg, Mat refImg, int* result, Scalar color) {

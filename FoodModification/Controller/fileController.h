@@ -3,6 +3,7 @@
 
 #include <QString>
 #include <QDomElement>
+#include "baseController.h"
 
 class FileController : public BaseController {
 

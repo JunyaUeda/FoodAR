@@ -1,5 +1,5 @@
 #include "regionService.h"
-
+#include <qDebug>
 RegionService::RegionService() {
 }
 
@@ -9,129 +9,130 @@ RegionService::RegionService() {
 * @param refColor 指定した色
 */
 QList<Point> RegionService::toPointList(Mat refImg, Scalar refColor) {
+
 	QList<Point> region;
 	for(int y=0; y<refImg.rows; y++) {
 		for(int x=0; x<refImg.cols; x++) {
 			Scalar hereColor(B(refImg,x,y), G(refImg,x,y), R(refImg,x,y));
 			if(hereColor == refColor) {
-                region.push_back(Point(x,y));
-            }
+        region.push_back(Point(x,y));
+      }
 		}
 	}
 	return region;
+}
+
+QVector<int> RegionService::calculateAverage(const MatSet* matSet, QList<Point> region) {
+    QVector<int> averages(9,0);
+   
+    if(!region.size()) {
+        qDebug() << "region.count()=0";
+        return averages;
+    }
+
+    QVector<int> sumOfValue = countSum(matSet, region);
+
+    for(int i=0; i<9; i++) {
+
+      averages[i] = sumOfValue[i] / region.count();
+    }
+
+    return averages;
 }
 
 /**
 * 指定領域の9チャンネルの平均値を返す
 *
 */
-QVector<int>* RegionService::calculateAverage(Mat srcBGRImg, QList<Point>& region) {
-	QVector<int> averages(9);
-   	QVector<int>::iterator it;
-   	for(it = averages.begin(); it != averages.end(); ++it) {
-   		(*it) = 0;
-   	}
-
-   	QVector<int>* sumOfValue = countSum(srcBGRImg, region);
-
-   	if(region.count() > 0) {
-   		return &averages;
-   	}
-
-   	for(int i=0; i<9; i++) {
-
-   		averages[i] = (*sumOfValue)[i] / region.count();
-   	}
-
-   return &averages;
+QVector<int> RegionService::calculateAverage(Mat srcBGRImg, QList<Point> region) {
+    MatSet matSet(srcBGRImg);
+    return calculateAverage(&matSet, region);
 }
 
 /**
 * BGR, HSV, YCrCbの9チャンネルの指定領域のピクセル値の合計を求める
 *
 */
-QVector<int>* RegionService::countSum(Mat srcBGRImg, Mat refImg, Scalar refColor) {
+QVector<int> RegionService::countSum(Mat srcBGRImg, Mat refImg, Scalar refColor) {
 	
-    QVector<int> sumOfValue(9);
-    QVector<int>::iterator it;
-    for(it = sumOfValue.begin(); it != sumOfValue.end(); ++it) {
-    	(*it) = 0;
-    }
-
-    Mat srcHSVImg, srcYCrCbImg;
-    cvtColor(srcBGRImg, srcHSVImg, CV_BGR2HSV);
-    cvtColor(srcBGRImg, srcYCrCbImg,CV_BGR2YCrCb);
-
-	for(int y=0; y<refImg.rows; y++) {
-		for(int x=0; x<refImg.cols; x++) {
-			Scalar hereColor(B(refImg,x,y), G(refImg,x,y), R(refImg,x,y));
-			if(hereColor == refColor) {
-                sumOfValue[0] = sumOfValue[0] + B(srcBGRImg,x,y);
-                sumOfValue[1] = sumOfValue[1] + G(srcBGRImg,x,y);
-                sumOfValue[2] = sumOfValue[2] + R(srcBGRImg,x,y);
-				sumOfValue[3] = sumOfValue[3] + B(srcHSVImg,x,y);
-				sumOfValue[4] = sumOfValue[4] + G(srcHSVImg,x,y);
-				sumOfValue[5] = sumOfValue[5] + R(srcHSVImg,x,y);
-				sumOfValue[6] = sumOfValue[6] + B(srcYCrCbImg,x,y);
-				sumOfValue[7] = sumOfValue[7] + G(srcYCrCbImg,x,y);
-				sumOfValue[8] = sumOfValue[8] + R(srcYCrCbImg,x,y);
-			}
-		}
-	}
-	return &sumOfValue;
+    QList<Point> region = toPointList(refImg, refColor);
+	  return countSum(srcBGRImg, region);
 }
 
 /**
 * BGR, HSV, YCrCbの9チャンネルの指定領域のピクセル値の合計を求める
 *
 */
-QVector<int>* RegionService::countSum(Mat srcBGRImg, QList<Point>& region) {
-	
-   QVector<int> sumOfValue(9);
-    QVector<int>::iterator it;
-    for(it = sumOfValue.begin(); it != sumOfValue.end(); ++it) {
-    	(*it) = 0;
+QVector<int> RegionService::countSum(Mat srcBGRImg, QList<Point> region) {
+    MatSet matSet(srcBGRImg);
+    return countSum(&matSet, region);
+}
+
+
+QVector<int> RegionService::countSum(const MatSet* matSet, QList<Point> region) {
+  
+     QVector<int> sumOfValue(9,0);
+
+    for(Point point : region) {
+
+      sumOfValue[0] = sumOfValue[0] + B(matSet->bgr(), point.x, point.y);
+      sumOfValue[1] = sumOfValue[1] + G(matSet->bgr(), point.x, point.y);
+      sumOfValue[2] = sumOfValue[2] + R(matSet->bgr(), point.x, point.y);
+      sumOfValue[3] = sumOfValue[3] + B(matSet->hsv(), point.x, point.y);
+      sumOfValue[4] = sumOfValue[4] + G(matSet->hsv(), point.x, point.y);
+      sumOfValue[5] = sumOfValue[5] + R(matSet->hsv(), point.x, point.y);
+      sumOfValue[6] = sumOfValue[6] + B(matSet->ycrcb(), point.x, point.y);
+      sumOfValue[7] = sumOfValue[7] + G(matSet->ycrcb(), point.x, point.y);
+      sumOfValue[8] = sumOfValue[8] + R(matSet->ycrcb(), point.x, point.y);
+
     }
 
-    Mat srcHSVImg, srcYCrCbImg;
-    cvtColor(srcBGRImg, srcHSVImg, CV_BGR2HSV);
-    cvtColor(srcBGRImg, srcYCrCbImg,CV_BGR2YCrCb);
+    return sumOfValue;
+}
 
-    QList<Point>::iterator point;
-    for(point = region.begin(); point != region.end(); ++point) {
 
-        sumOfValue[0] = sumOfValue[0] + B(srcBGRImg, (*point).x, (*point).y);
-        sumOfValue[1] = sumOfValue[1] + G(srcBGRImg, (*point).x, (*point).y);
-        sumOfValue[2] = sumOfValue[2] + R(srcBGRImg, (*point).x, (*point).y);
-		sumOfValue[3] = sumOfValue[3] + B(srcHSVImg, (*point).x, (*point).y);
-		sumOfValue[4] = sumOfValue[4] + G(srcHSVImg, (*point).x, (*point).y);
-		sumOfValue[5] = sumOfValue[5] + R(srcHSVImg, (*point).x, (*point).y);
-		sumOfValue[6] = sumOfValue[6] + B(srcYCrCbImg, (*point).x, (*point).y);
-		sumOfValue[7] = sumOfValue[7] + G(srcYCrCbImg, (*point).x, (*point).y);
-		sumOfValue[8] = sumOfValue[8] + R(srcYCrCbImg, (*point).x, (*point).y);
-
-	}
-	return &sumOfValue;
+/**
+* 指定領域の9チャンネルのToleranceを返す
+*
+*/
+QVector<int> RegionService::calculateTolerance(Mat srcBGRImg, QList<Point> region) {
+    QVector<int> tolerance(9,0);
+    
+    return tolerance;
 }
 
 /**
-* BGR, HSV, YCrCbの9チャンネルの指定領域のピクセル値の合計を求める
+* 指定領域の9チャンネルのHistogramを作成して返す
 *
 */
-QVector<int>* RegionService::countSum(Source imgs, QList<Point>& region) {
-	
-    QVector<int> sumOfValue(9);
-    QVector<int>::iterator it;
-    for(it = sumOfValue.begin(); it != sumOfValue.end(); ++it) {
-    	(*it) = 0;
-    }
+QVector<QVector<int> > RegionService::createHistogram(Mat srcBGRImg, QList<Point> region) {
+  
+    MatSet matSet(srcBGRImg);
+    return createHistogram(&matSet, region);
+}
 
-    QList<Point>::iterator ite;
-    for(ite = region.begin(); ite != region.end(); ++ite) {
-    	for(it = sumOfValue.begin(); it != sumOfValue.end(); ++it) {
-    		//(*it) = (*it);
-    	}
-    }
+QVector<QVector<int> > RegionService::createHistogram(const MatSet* matSet, QList<Point> region) {
+  
+  QVector<QVector<int> > histograms(9);
 
-	return &sumOfValue;
+  for(int i=0; i<9; i++) {
+    int BITE = 256;
+    QVector<int> channelHistogram(matSet->bgr().elemSize1()*BITE, 0);
+    histograms[i] = channelHistogram;
+  }
+
+    for(Point point : region) {
+        histograms.value(0)[B(matSet->bgr(), point.x, point.y)]++;
+        histograms.value(1)[G(matSet->bgr(), point.x, point.y)]++;
+        histograms.value(2)[R(matSet->bgr(), point.x, point.y)]++;
+        histograms.value(3)[B(matSet->hsv(), point.x, point.y)]++;
+        histograms.value(4)[G(matSet->hsv(), point.x, point.y)]++;
+        histograms.value(5)[R(matSet->hsv(), point.x, point.y)]++;
+        histograms.value(6)[B(matSet->ycrcb(), point.x, point.y)]++;
+        histograms.value(7)[G(matSet->ycrcb(), point.x, point.y)]++;
+        histograms.value(8)[R(matSet->ycrcb(), point.x, point.y)]++;
+    }
+  
+
+  return histograms;
 }

@@ -6,6 +6,9 @@
 class RedType : public ChannelType {
 public:
     RedType();
+    int value(Mat img, int x, int y);
+    int value(MatSet* matSet, int x, int y);
+    
 };
 
 #endif // REDTYPE_H

@@ -3,10 +3,12 @@
 
 #include "./channelType.h"
 
-class ValueType : public ChannelType
-{
+class ValueType : public ChannelType {
 public:
     ValueType();
+    int value(Mat img, int x, int y);
+    int value(MatSet* matSet, int x, int y);
+    
 };
 
 #endif // VALUETYPE_H

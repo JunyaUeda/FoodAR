@@ -2,7 +2,7 @@
 #include <QtCore>
 #include <QtXml>
 
-#define FILEPATH "../ExtractParam.xml"
+#define FILEPATH "../FoodModification/ExtractParam.xml"
 
 PropertyController::PropertyController() {
 

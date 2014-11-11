@@ -8,7 +8,7 @@ QT       += core gui
 QT += xml
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
-QMAKE_MACOSX_DEPLOYMENT_TARGET = 10.9
+#QMAKE_MACOSX_DEPLOYMENT_TARGET = 10.9
 TARGET = FoodModification
 TEMPLATE = app
 
@@ -74,7 +74,9 @@ SOURCES += main.cpp\
     Model/Param/spaceType/ycrcbType.cpp \
     Model/Param/channel.cpp \
     Model/Param/channelType/redType.cpp \
-    Model/Param/source.cpp
+    Model/Param/source.cpp \
+    Model/Param/channelHistogram.cpp \
+    Model/Param/matSet.cpp
 
 HEADERS  += \
     extractParamManager.h \
@@ -141,7 +143,9 @@ HEADERS  += \
     Model/Param/spaceType/ycrcbType.h \
     Model/Param/channel.h \
     Model/Param/channelType/redType.h \
-    Model/Param/source.h
+    Model/Param/source.h \
+    Model/Param/channelHistogram.h \
+    Model/Param/matSet.h
 
 FORMS    += \
     View/calibrateDialog.ui \
@@ -150,18 +154,18 @@ FORMS    += \
 
 # OpenCV settings
 # for Windows
-#win32:DEPENDPATH  += "C:\opencv248\build\include"
-#win32:INCLUDEPATH += "C:\opencv248\build\include"
-#win32:LIBS += -L"C:\opencv248\build\x86\vc12\lib"
+win32:DEPENDPATH  += "C:\opencv248\build\include"
+win32:INCLUDEPATH += "C:\opencv248\build\include"
+win32:LIBS += -L"C:\opencv248\build\x86\vc12\lib"
 # for Mac
-INCLUDEPATH += /usr/local/include
-DEPENDPATH += /usr/local/include
-LIBS += -L/usr/local/lib \
-    -lopencv_core \
-    -lopencv_imgproc \
-    -lopencv_highgui \
-    -lopencv_objdetect \
-    -lopencv_calib3d
+#INCLUDEPATH += /usr/local/include
+#DEPENDPATH += /usr/local/include
+#LIBS += -L/usr/local/lib \
+#    -lopencv_core \
+#    -lopencv_imgproc \
+#    -lopencv_highgui \
+#    -lopencv_objdetect \
+#    -lopencv_calib3d
 
 OTHER_FILES += \
     ExtractParam.xml \

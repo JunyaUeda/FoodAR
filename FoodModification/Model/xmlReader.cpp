@@ -7,9 +7,9 @@ XmlReader::XmlReader(QDomDocument document) {
 	_document = document;
 }
 
-bool XmlReader::read(QDomDocument document) {
-	readExtractColorSpace();
-}
+//bool XmlReader::read(QDomDocument document) {
+//	readExtractColorSpace();
+//}
 
 void XmlReader::readExtractColorSpace() {
 	QString colorSpace_txt = XmlUtils::getAttr(_document, "ExtractColorSpace", "value");
