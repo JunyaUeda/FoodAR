@@ -1,23 +1,24 @@
 #ifndef COLOR_H
 #define COLOR_H
 
+#include "./channel.h"
+#include "./channelType/channelType.h"
+#include "./spaceType/colorSpaceType.h"
+#include <QVector>
+
+using namespace std;
+
 class Color {
 
 /*property*/
-private:
-	int value0;
-	int value1;
-	int value2;
+public:
+    QVector<Channel> _channels;
 
 /*method*/
 public:
     Color();
-    int getValue0() const;
-    void setValue0(int value);
-    int getValue1() const;
-    void setValue1(int value);
-    int getValue2() const;
-    void setValue2(int value);
+    Color(int channelNum);
+    bool hasColorSpaceType(ColorSpaceType type);
 };
 
 #endif // COLOR_H

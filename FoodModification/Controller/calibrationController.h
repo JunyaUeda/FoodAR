@@ -7,6 +7,7 @@
 #include "../extractParamManager.h"
 #include "../Service/calibrationService.h"
 #include "./propertyController.h"
+#include "../Model/Service/regionService.h"
 
 class CalibrationController {
 
@@ -26,6 +27,7 @@ private:
     ExtractParamManager& extractParamManager = ExtractParamManager::getInstance();
     PropertyController& propertyController = PropertyController::getInstance();
     CalibrationService* calibrationService;
+    RegionService* _regionService;
 
     CalibrationController();
     CalibrationController(const CalibrationController&);

@@ -89,6 +89,12 @@ void CalibrationController::setExtractBGRParam(Mat srcImg, Mat refImg, Scalar co
     tolerace->setRedHighTolerance(redTolerance[0]);
     tolerace->setRedLowTolerance(redTolerance[1]);
 
+    QList<Point> regionList = _regionService->toPointList(refImg, color);
+    QList<Point>::iterator it;
+    for(it = regionList.begin(); it != regionList.end(); ++it) {
+           qDebug() << (*it).x << "   " << (*it).y;
+    }
+
 }
 
 void CalibrationController::setExtractHSVParam(Mat srcImg, Mat refImg, Scalar color, int paramIndex) {
@@ -117,6 +123,11 @@ void CalibrationController::setExtractHSVParam(Mat srcImg, Mat refImg, Scalar co
     tolerace->setValueHighTolerance(valueTolerace[0]);
     tolerace->setValueLowTolerance(valueTolerace[1]);
 
+    QList<Point> regionList = _regionService->toPointList(refImg, color);
+    QList<Point>::iterator it;
+    for(it = regionList.begin(); it != regionList.end(); ++it) {
+           qDebug() << (*it).x << "   " << (*it).y;
+    }
 }
 
 int CalibrationController::calculateAverages(Mat srcImg, Mat refImg, int* result, Scalar color) {

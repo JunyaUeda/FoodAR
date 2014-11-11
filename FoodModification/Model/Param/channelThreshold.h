@@ -1,14 +1,14 @@
 #ifndef CHANNELTHRESHOLD_H
 #define CHANNELTHRESHOLD_H
 
-#include "./channelType.h"
+#include "./channelType/channelType.h"
 #include "../../Utils/xmlUtils.h"
 
 class ChannelThreshold {
 
 /*property*/
 private:
-	const ChannelType _channelType;
+	ChannelType _channelType;
 	int _average;
 	int _tolerance;
 	int _upper;

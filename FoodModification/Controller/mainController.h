@@ -1,5 +1,6 @@
 #ifndef MAINCONTROLLER_H
 #define MAINCONTROLLER_H
+
 #include "opencv2/opencv.hpp"
 #include "./extractController.h"
 #include "../Utils/opencvUtils.h"
@@ -9,6 +10,7 @@
 #include "./edgeController.h"
 #include "./srcController.h"
 #include "../Param/textureParam.h"
+
 
 class MainController {
 

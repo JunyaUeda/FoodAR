@@ -51,13 +51,30 @@ SOURCES += main.cpp\
     Controller/singleton.cpp \
     Model/features.cpp \
     Model/Param/color.cpp \
-    Model/Param/channel.cpp \
     Model/extractParam.cpp \
     Model/xmlReader.cpp \
     Model/featureReference.cpp \
     Model/Param/threshold.cpp \
     Model/Param/channelThreshold.cpp \
-    Model/Param/channelType.cpp
+    Model/calibrator.cpp \
+    Model/Service/regionService.cpp \
+    Model/SDK/opencv/opencvApi.cpp \
+    Model/Param/channelType/channelType.cpp \
+    Model/Param/channelType/blueType.cpp \
+    Model/Param/channelType/greenType.cpp \
+    Model/Param/channelType/hueType.cpp \
+    Model/Param/channelType/saturationType.cpp \
+    Model/Param/channelType/valueType.cpp \
+    Model/Param/channelType/yType.cpp \
+    Model/Param/channelType/crType.cpp \
+    Model/Param/channelType/cbType.cpp \
+    Model/Param/spaceType/colorSpaceType.cpp \
+    Model/Param/spaceType/bgrType.cpp \
+    Model/Param/spaceType/hsvType.cpp \
+    Model/Param/spaceType/ycrcbType.cpp \
+    Model/Param/channel.cpp \
+    Model/Param/channelType/redType.cpp \
+    Model/Param/source.cpp
 
 HEADERS  += \
     extractParamManager.h \
@@ -104,7 +121,27 @@ HEADERS  += \
     Model/featureReference.h \
     Model/Param/threshold.h \
     Model/Param/channelThreshold.h \
-    Model/Param/channelType.h
+    Model/Param/channelType.h \
+    Model/calibrator.h \
+    Model/Service/regionService.h \
+    Model/SDK/opencv/opencvApi.h \
+    Model/Param/colorSpaceType.h \
+    Model/Param/channelType/channelType.h \
+    Model/Param/channelType/blueType.h \
+    Model/Param/channelType/greenType.h \
+    Model/Param/channelType/hueType.h \
+    Model/Param/channelType/saturationType.h \
+    Model/Param/channelType/valueType.h \
+    Model/Param/channelType/yType.h \
+    Model/Param/channelType/crType.h \
+    Model/Param/channelType/cbType.h \
+    Model/Param/spaceType/colorSpaceType.h \
+    Model/Param/spaceType/bgrType.h \
+    Model/Param/spaceType/hsvType.h \
+    Model/Param/spaceType/ycrcbType.h \
+    Model/Param/channel.h \
+    Model/Param/channelType/redType.h \
+    Model/Param/source.h
 
 FORMS    += \
     View/calibrateDialog.ui \

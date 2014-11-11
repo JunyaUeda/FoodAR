@@ -1,23 +1,16 @@
 #ifndef CHANNEL_H
 #define CHANNEL_H
 
+#include "./channelType/channelType.h"
+
 class Channel {
 
 /*property*/
 private:
-	int _value;
-	int _type;
-
-/*method*/
+    ChannelType _channelType;
+    int _value;
 public:
-	Channel();
-    Channel(int type);
-    Channel(int type, int value);
-    /*getter setter*/
-    int value() const;
-    void setValue(int value);
-    int type() const;
-    void setType(int type);
+    Channel();
 };
 
 #endif // CHANNEL_H
