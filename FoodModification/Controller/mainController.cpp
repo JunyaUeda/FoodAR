@@ -44,9 +44,12 @@ void MainController::doConvertion() {
     map<int, Mat> edges;
     Mat maskImg;
     
-    namedWindow("myWindow",CV_WINDOW_AUTOSIZE);
-    setMouseCallback("myWindow", mouseCallback1);
+    //namedWindow("myWindow", 0);
+    //setWindowProperty("myWindow",CV_WND_PROP_FULLSCREEN,CV_WINDOW_FULLSCREEN);
 
+    namedWindow("myWindow", CV_WINDOW_AUTOSIZE);
+    setMouseCallback("myWindow", mouseCallback1);
+    
     Size srcSize = srcController.srcParam()->cameraSize();
     srcBGRImg.create(srcSize, CV_8UC3);
     srcYCrCbImg.create(srcSize, CV_8UC3);

@@ -1,6 +1,13 @@
 #include "featureReference.h"
 
 FeatureReference::FeatureReference() {
+    _colorThresholds.push_back((*new ColorThreshold()));
+    _colorThresholds.push_back((*new ColorThreshold()));
+}
+
+FeatureReference& FeatureReference::getInstance() {
+	static FeatureReference instance;
+    return instance;
 }
 
 void FeatureReference::loadFeaturesFromFile(QDomDocument doc) {
@@ -30,5 +37,11 @@ void FeatureReference::loadAverage(QDomDocument doc) {
 
         _threshold->loadThreshold(element);
         qDebug() << "loadThreshold";
+    }
+}
+
+void FeatureReference::updateThresholds(QVis averages, QVis tolerances) {
+    for(int i=0; i<tolerances.size(); i++) {
+        _colorThresholds[i].updateThresholds(averages[i], tolerances[i]);
     }
 }

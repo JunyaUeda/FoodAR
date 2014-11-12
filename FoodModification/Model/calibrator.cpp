@@ -1,6 +1,4 @@
 #include "calibrator.h"
-#include <qDebug>
-
 
 Calibrator::Calibrator() {
 }
@@ -10,21 +8,16 @@ Calibrator& Calibrator::getInstance() {
 	return instance;
 }
 
-bool Calibrator::calibrate(Mat srcImg, Mat refImg, Scalar refColor) {
+bool Calibrator::calibrate(Mat srcImg, Mat refImg, QVS refColor) {
 
-	QList<Point> region = _regionService->toPointList(refImg, refColor);
-	MatSet matSet(srcImg);
-	QVector<int> averages = _regionService->calculateAverage(&matSet, region);
-	
- 	QVector<int>::iterator it;
- 	for(it = averages.begin(); it != averages.end(); ++it) {
- 		qDebug() << "average =" << (*it);
- 	}
+    MatSet matSet(srcImg);
 
-    QVector<int> tolerance = _regionService->calculateTolerance(&matSet, region, averages);
- 	QVector<int>::iterator ite;
-    for(ite = tolerance.begin(); ite != tolerance.end(); ++ite) {
-        qDebug() << "tolerance =" << (*ite);
-    }
+	QLPs regions    = _regionService->toPointList(refImg, refColor);
+	QVis averages   = _regionService->calcAverages(&matSet, regions);
+    QVis tolerances = _regionService->calcTolerances(&matSet, regions, averages);
+
+    _featureReference.updateThresholds(averages, tolerances);
+
+
 	return true;
 }

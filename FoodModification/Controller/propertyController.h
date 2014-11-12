@@ -17,7 +17,7 @@ public:
 private:
     ExtractParamManager& _extractParamManager = ExtractParamManager::getInstance();
     QDomDocument _document; //create a document to write XML
-    FeatureReference* _featureReference = new FeatureReference();
+	FeatureReference&  _featureReference = FeatureReference::getInstance();
     
     PropertyController();
     PropertyController(const PropertyController&);

@@ -60,6 +60,8 @@ void CalibrationController::setExtractParam(Mat srcImg, Mat refImg, int colorSpa
 			break;
 			
 	}
+    QVector<Scalar> color = QVector<Scalar>() << Scalar(0,0,255) << Scalar(0,255,0);
+    _calibrator.calibrate(srcImg, refImg, color);
 
 }
 
@@ -123,7 +125,7 @@ void CalibrationController::setExtractHSVParam(Mat srcImg, Mat refImg, Scalar co
     tolerace->setValueHighTolerance(valueTolerace[0]);
     tolerace->setValueLowTolerance(valueTolerace[1]);
 
-    _calibrator.calibrate(srcImg, refImg, color);
+    
 }
 
 int CalibrationController::calculateAverages(Mat srcImg, Mat refImg, int* result, Scalar color) {

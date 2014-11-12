@@ -21,7 +21,7 @@ void PropertyController::readFile(QString filePath) {
 
     _document = XmlUtils::getQDomDoc(filePath);
     qDebug() << "start to loadFromFile";
-    _featureReference->loadFeaturesFromFile(_document);
+	_featureReference.loadFeaturesFromFile(_document);
     readExtractColorSpace();
     readColorCriterion();
     readColorExtractTolerance();

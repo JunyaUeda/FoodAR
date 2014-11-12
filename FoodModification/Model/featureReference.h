@@ -2,21 +2,29 @@
 #define FEATUREREFERENCE_H
 
 #include "./Param/threshold.h"
+#include "./Param/colorThreshold.h"
 #include "../Utils/xmlUtils.h"
 #include "../extractParamManager.h"
+#include "./Param/channelType/channelType.h"
+#include "./TypeDef.h"
 
 class FeatureReference {
 
 /*property*/
 private:
- Threshold* _threshold = new Threshold();
- ExtractParamManager& _extractParamManager = ExtractParamManager::getInstance();
+    QList<ColorThreshold> _colorThresholds;
+    Threshold* _threshold = new Threshold();
+    ExtractParamManager& _extractParamManager = ExtractParamManager::getInstance();
 
 /*method*/
 public:
-    FeatureReference();
+    static FeatureReference& getInstance();
     void loadFeaturesFromFile(QDomDocument doc);
+    void updateThresholds(QVis averages, QVis tolerances);
+    ChannelThreshold getChannelThreshold(ChannelType channelType);
 private:
+    FeatureReference();
+    FeatureReference(const FeatureReference&);
 	void loadExtractColorSpace(QDomDocument doc);
 	void loadAverage(QDomDocument doc);
 	void loadTolerance(QDomDocument doc);

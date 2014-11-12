@@ -8,42 +8,57 @@ RegionService::RegionService() {
 * @param refImg ユーザーがマウスで指定した領域に色が塗られた画像
 * @param refColor 指定した色
 */
-QList<Point> RegionService::toPointList(Mat refImg, Scalar refColor) {
+QLPs RegionService::toPointList(Mat refImg, QVS refColor) {
+    QLPs regions;
+    for(Scalar color : refColor) {
+        regions.push_back(toPointList(refImg, color));
+    }
+    return regions;
+}
 
-	QList<Point> region;
-	for(int y=0; y<refImg.rows; y++) {
-		for(int x=0; x<refImg.cols; x++) {
-			Scalar hereColor(B(refImg,x,y), G(refImg,x,y), R(refImg,x,y));
-			if(hereColor == refColor) {
-        region.push_back(Point(x,y));
-      }
-		}
-	}
-	return region;
+QLP RegionService::toPointList(Mat refImg, Scalar refColor) {
+    QLP region;
+    for(int y=0; y<refImg.rows; y++) {
+        for(int x=0; x<refImg.cols; x++) {
+            Scalar hereColor(B(refImg,x,y), G(refImg,x,y), R(refImg,x,y));
+            if(hereColor == refColor) {
+                region.push_back(Point(x,y));
+            }
+        }
+    }
+    return region;
 }
 
 /**
 * 指定領域の9チャンネルの平均値を返す
 *
 */
-QVector<int> RegionService::calculateAverage(Mat srcBGRImg, QList<Point> region) {
-    MatSet matSet(srcBGRImg);
-    return calculateAverage(&matSet, region);
+
+QVis RegionService::calcAverages(const MatSet* matSet, QLPs regions) {
+    QVis averages;
+    for(QLP region : regions) {
+        averages.push_back(calcAverage(matSet, region));
+    }
+    return averages;
 }
 
-QVector<int> RegionService::calculateAverage(const MatSet* matSet, QList<Point> region) {
-    QVector<int> averages(9,0);
+QVi RegionService::calcAverage(Mat srcBGRImg, QLP region) {
+    MatSet matSet(srcBGRImg);
+    return calcAverage(&matSet, region);
+}
+
+QVi RegionService::calcAverage(const MatSet* matSet, QLP region) {
+    QVi averages(9,0);
    
     if(!region.size()) {
         qDebug() << "region.count()=0";
         return averages;
     }
 
-    QVector<int> sumOfValue = countSum(matSet, region);
+    QVi sumOfValue = countSum(matSet, region);
 
     for(int i=0; i<9; i++) {
-
-      averages[i] = sumOfValue[i] / region.count();
+        averages[i] = sumOfValue[i] / region.count();
     }
 
     return averages;
@@ -53,21 +68,21 @@ QVector<int> RegionService::calculateAverage(const MatSet* matSet, QList<Point> 
 * BGR, HSV, YCrCbの9チャンネルの指定領域のピクセル値の合計を求める
 *
 */
-QVector<int> RegionService::countSum(Mat srcBGRImg, Mat refImg, Scalar refColor) {
+QVi RegionService::countSum(Mat srcBGRImg, Mat refImg, Scalar refColor) {
 	
-    QList<Point> region = toPointList(refImg, refColor);
+    QLP region = toPointList(refImg, refColor);
 	  return countSum(srcBGRImg, region);
 }
 
-QVector<int> RegionService::countSum(Mat srcBGRImg, QList<Point> region) {
+QVi RegionService::countSum(Mat srcBGRImg, QLP region) {
     MatSet matSet(srcBGRImg);
     return countSum(&matSet, region);
 }
 
 
-QVector<int> RegionService::countSum(const MatSet* matSet, QList<Point> region) {
+QVi RegionService::countSum(const MatSet* matSet, QLP region) {
   
-     QVector<int> sumOfValue(9,0);
+     QVi sumOfValue(9,0);
 
     for(Point point : region) {
 
@@ -91,10 +106,19 @@ QVector<int> RegionService::countSum(const MatSet* matSet, QList<Point> region) 
 * 指定領域の9チャンネルのToleranceを返す
 *
 */
-QVector<int> RegionService::calculateTolerance(const MatSet* matSet, QList<Point> region, QVector<int> averages) {
 
-    QVector<QVector<int> > histograms = createHistogram(matSet, region);
-    QVector<int> tolerance(9,0);
+QVis RegionService::calcTolerances(const MatSet* matSet, QLPs regions, QVis averages) {
+    QVis tolerances;
+    for(int i=0; i<regions.size(); i++) {
+        tolerances.push_back(calcTolerance(matSet, regions[i], averages[i]));
+    }
+    return tolerances;
+}
+
+QVi RegionService::calcTolerance(const MatSet* matSet, QLP region, QVi averages) {
+
+    QVis histograms = createHistogram(matSet, region);
+    QVi tolerance(9,0);
     for(int i=0; i<9; i++) {
       tolerance[i] = findTolerance(averages[i], histograms[i], region.size());
     }
@@ -102,7 +126,7 @@ QVector<int> RegionService::calculateTolerance(const MatSet* matSet, QList<Point
     return tolerance;
 }
 
-int RegionService::findTolerance(int average, QVector<int> histogram, int pixcelNum) {
+int RegionService::findTolerance(int average, QVi histogram, int pixcelNum) {
     int sum =0;
     bool maxFlag = false;
     bool minFlag = false;
@@ -124,19 +148,19 @@ int RegionService::findTolerance(int average, QVector<int> histogram, int pixcel
 * 指定領域の9チャンネルのHistogramを作成して返す
 *
 */
-QVector<QVector<int> > RegionService::createHistogram(Mat srcBGRImg, QList<Point> region) {
+QVis RegionService::createHistogram(Mat srcBGRImg, QLP region) {
   
     MatSet matSet(srcBGRImg);
     return createHistogram(&matSet, region);
 }
 
-QVector<QVector<int> > RegionService::createHistogram(const MatSet* matSet, QList<Point> region) {
+QVis RegionService::createHistogram(const MatSet* matSet, QLP region) {
   
-  QVector<QVector<int> > histograms(9);
+  QVis histograms(9);
 
   for(int i=0; i<9; i++) {
     int BITE = 256;
-    QVector<int> channelHistogram(matSet->bgr().elemSize1()*BITE, 0);
+    QVi channelHistogram(matSet->bgr().elemSize1()*BITE, 0);
     histograms[i] = channelHistogram;
   }
 

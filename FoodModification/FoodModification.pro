@@ -76,7 +76,8 @@ SOURCES += main.cpp\
     Model/Param/channelType/redType.cpp \
     Model/Param/source.cpp \
     Model/Param/channelHistogram.cpp \
-    Model/Param/matSet.cpp
+    Model/Param/matSet.cpp \
+    Model/Param/colorThreshold.cpp
 
 HEADERS  += \
     extractParamManager.h \
@@ -145,7 +146,9 @@ HEADERS  += \
     Model/Param/channelType/redType.h \
     Model/Param/source.h \
     Model/Param/channelHistogram.h \
-    Model/Param/matSet.h
+    Model/Param/matSet.h \
+    Model/TypeDef.h \
+    Model/Param/colorThreshold.h
 
 FORMS    += \
     View/calibrateDialog.ui \
