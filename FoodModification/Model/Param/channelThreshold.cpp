@@ -6,10 +6,6 @@ ChannelThreshold::ChannelThreshold() {
 ChannelThreshold::ChannelThreshold(ChannelType type) : _channelType(type) {
 }
 
-//bool ChannelThreshold::loadAverage(QDomElement element) {
-//        _average = XmlUtils::getAttr(element, _channelType.toString()).toInt();
-//}
-
 void ChannelThreshold::setThreshold(int average, int tolerance) {
     _average   = average;
     _tolerance = tolerance;

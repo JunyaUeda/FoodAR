@@ -77,7 +77,8 @@ SOURCES += main.cpp\
     Model/Param/source.cpp \
     Model/Param/channelHistogram.cpp \
     Model/Param/matSet.cpp \
-    Model/Param/colorThreshold.cpp
+    Model/Param/colorThreshold.cpp \
+    Model/extractor.cpp
 
 HEADERS  += \
     extractParamManager.h \
@@ -148,7 +149,8 @@ HEADERS  += \
     Model/Param/channelHistogram.h \
     Model/Param/matSet.h \
     Model/TypeDef.h \
-    Model/Param/colorThreshold.h
+    Model/Param/colorThreshold.h \
+    Model/extractor.h
 
 FORMS    += \
     View/calibrateDialog.ui \
