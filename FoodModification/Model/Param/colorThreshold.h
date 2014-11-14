@@ -14,6 +14,9 @@ private:
 public:
 	ColorThreshold();
     void updateThresholds(QVi averages, QVi tolerances);
+    QList<ChannelThreshold> channelThresholds() const;
+    void setChannelThresholds(const QList<ChannelThreshold> &channelThresholds);
+    bool isWithinThreshold(int h, int s, int v);
 };
 
 #endif // COLORTHRESHOLD_H

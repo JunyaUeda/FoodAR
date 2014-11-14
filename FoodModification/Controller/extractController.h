@@ -7,6 +7,7 @@
 #include "../Param/targetParam.h"
 #include "../Service/edgeService.h"
 #include "../definition.h"
+#include "../Model/extractor.h"
 
 
 class ExtractController {
@@ -24,10 +25,12 @@ private:
     void getIntegratedImage(Mat dstImg, Mat dstEdgeImg, Mat *Edges, vector<vector<Point> >& contours);
     
     ExtractParamManager& extractParamManager = ExtractParamManager::getInstance();
+    Extractor& _extractor = Extractor::getInstance();
     ColorExtractService* _extractService;
     EdgeService* _edgeService;
     ContourService* _contourService;
     TargetParam* targetParam;
+
 
 };
 

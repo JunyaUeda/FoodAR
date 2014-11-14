@@ -10,6 +10,8 @@ private:
 	Mat _hsv;
 	Mat _ycrcb;
 	Mat _gray;
+	int _width;
+	int _height;
 /*method*/
 public:
 	MatSet(const Mat &bgr);
@@ -18,6 +20,8 @@ public:
 	Mat hsv() const;
 	Mat ycrcb() const;
 	Mat gray() const;
+	int width() const;
+	int height() const;
 };
 
 #endif // MATSET_H

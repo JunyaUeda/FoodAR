@@ -5,6 +5,8 @@ MatSet::MatSet(const Mat &bgr) {
 	cvtColor(_bgr, _hsv, CV_BGR2HSV);
     cvtColor(_bgr, _ycrcb, CV_BGR2YCrCb);
     cvtColor(_bgr, _gray, CV_BGR2GRAY);
+    _width = bgr.cols;
+    _height = bgr.rows;
 }
 
 
@@ -17,6 +19,8 @@ void MatSet::setBgr(const Mat &bgr) {
 	cvtColor(_bgr, _hsv, CV_BGR2HSV);
     cvtColor(_bgr, _ycrcb, CV_BGR2YCrCb);
     cvtColor(_bgr, _gray, CV_BGR2GRAY);
+    _width = bgr.cols;
+    _height = bgr.rows;
 }
 
 Mat MatSet::hsv() const {
@@ -31,3 +35,10 @@ Mat MatSet::gray() const {
 	return _gray;
 }
 
+int MatSet::width() const {
+	return _width;
+}
+
+int MatSet::height() const {
+	return _height;
+}

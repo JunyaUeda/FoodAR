@@ -45,3 +45,20 @@ void FeatureReference::updateThresholds(QVis averages, QVis tolerances) {
         _colorThresholds[i].updateThresholds(averages[i], tolerances[i]);
     }
 }
+
+ColorThreshold* FeatureReference::getColorThreshold(int value) {
+
+    ColorThreshold* colorThreshold;
+    int minDiff = 256;
+
+    for(ColorThreshold c : _colorThresholds) {
+        int diff = abs(value - c.channelThresholds()[5].average());
+        if(minDiff > diff) {
+            minDiff = diff;
+            colorThreshold = &c;
+        }
+    }
+
+    return colorThreshold;
+
+}

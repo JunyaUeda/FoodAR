@@ -17,10 +17,12 @@ ExtractController& ExtractController::getInstance() {
 void ExtractController::extract(Mat srcBGRImg, Mat srcHSVImg, Mat srcYCrCbImg, Mat srcGrayImg,
     Mat dstImg, vector<vector<Point> >& dstContours, Mat* edgeImgs) {
 
+    MatSet srcSet(srcBGRImg);
+    _extractor.extract(&srcSet);
     Mat colorExtractedImg;
     colorExtractedImg = dstImg.clone();
     extractByColor(srcBGRImg, srcHSVImg, colorExtractedImg);
-    imshow("extractByColor",colorExtractedImg);
+   // imshow("extractByColor",colorExtractedImg);
 
     //縮退膨張処理
     vector<int> combinations;
@@ -29,7 +31,7 @@ void ExtractController::extract(Mat srcBGRImg, Mat srcHSVImg, Mat srcYCrCbImg, M
     combinations.push_back(JU_ERODE);
     combinations.push_back(JU_ERODE);
     _extractService->dilate_erode(colorExtractedImg,colorExtractedImg, combinations);    
-    imshow("dilate_erode",colorExtractedImg);
+    // imshow("dilate_erode",colorExtractedImg);
 
     vector<vector<Point> > colorExtractedContours;
     findContours(colorExtractedImg, colorExtractedContours, CV_RETR_LIST, CV_CHAIN_APPROX_NONE);
@@ -41,7 +43,7 @@ void ExtractController::extract(Mat srcBGRImg, Mat srcHSVImg, Mat srcYCrCbImg, M
     // _contourService->fillContours(colorExtractedImg, contours, lineType, MINSIZE);
     // _contourService->fillSpecifiedContour(colorExtractedImg, colorExtractedContours, lineType, MINSIZE, maxAreaIndex);
     drawContours(colorExtractedImg, colorExtractedContours, maxAreaIndex, Scalar(255, 255, 255), CV_FILLED, lineType);
-    imshow("find&drawContours",colorExtractedImg);
+   // imshow("find&drawContours",colorExtractedImg);
 
     vector< vector<Point> > contours2;
     findContours(colorExtractedImg, contours2, CV_RETR_LIST, CV_CHAIN_APPROX_NONE);
@@ -55,7 +57,7 @@ void ExtractController::extract(Mat srcBGRImg, Mat srcHSVImg, Mat srcYCrCbImg, M
     
 
     getIntegratedImage(colorExtractedImg, dstEdgeImg, edgeImgs, contours2);
-    imshow("+Edge",colorExtractedImg);
+   // imshow("+Edge",colorExtractedImg);
 
     vector< vector<Point> > contours3;
     Mat refImg = colorExtractedImg.clone();
@@ -64,7 +66,7 @@ void ExtractController::extract(Mat srcBGRImg, Mat srcHSVImg, Mat srcYCrCbImg, M
     //dstFilledEdgeImg = Mat::zeros(dstImg.size(), CV_8UC1);
     int minsize = 0;
     _contourService->fillContours(colorExtractedImg, contours3, lineType,  minsize);
-    imshow("FilledEdgeImg",colorExtractedImg);
+   // imshow("FilledEdgeImg",colorExtractedImg);
     
     
 

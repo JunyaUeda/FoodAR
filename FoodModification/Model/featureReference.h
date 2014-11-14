@@ -22,6 +22,7 @@ public:
     void loadFeaturesFromFile(QDomDocument doc);
     void updateThresholds(QVis averages, QVis tolerances);
     ChannelThreshold getChannelThreshold(ChannelType channelType);
+    ColorThreshold* getColorThreshold(int value);
 private:
     FeatureReference();
     FeatureReference(const FeatureReference&);
