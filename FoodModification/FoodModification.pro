@@ -82,7 +82,21 @@ SOURCES += main.cpp\
     Model/Param/region.cpp \
     Model/Param/edge.cpp \
     Model/Service/colorService.cpp \
-    Model/Service/extractService.cpp
+    Model/Service/extractService.cpp \
+    Model/Param/channelFunc/channelFunc.cpp \
+    Model/Param/channelFunc/blueFunc.cpp \
+    Model/Param/channelFunc/cbFunc.cpp \
+    Model/Param/channelFunc/crFunc.cpp \
+    Model/Param/channelFunc/greenFunc.cpp \
+    Model/Param/channelFunc/hueFunc.cpp \
+    Model/Param/channelFunc/redFunc.cpp \
+    Model/Param/channelFunc/saturationFunc.cpp \
+    Model/Param/channelFunc/valueFunc.cpp \
+    Model/Param/channelFunc/yFunc.cpp \
+    Model/Param/spaceFunc/colorSpaceFunc.cpp \
+    Model/Param/spaceFunc/bgrFunc.cpp \
+    Model/Param/spaceFunc/hsvFunc.cpp \
+    Model/Param/spaceFunc/ycrcbFunc.cpp
 
 HEADERS  += \
     extractParamManager.h \
@@ -158,7 +172,21 @@ HEADERS  += \
     Model/Param/region.h \
     Model/Param/edge.h \
     Model/Service/colorService.h \
-    Model/Service/extractService.h
+    Model/Service/extractService.h \
+    Model/Param/channelFunc/channelFunc.h \
+    Model/Param/channelFunc/blueFunc.h \
+    Model/Param/channelFunc/cbFunc.h \
+    Model/Param/channelFunc/crFunc.h \
+    Model/Param/channelFunc/greenFunc.h \
+    Model/Param/channelFunc/hueFunc.h \
+    Model/Param/channelFunc/redFunc.h \
+    Model/Param/channelFunc/saturationFunc.h \
+    Model/Param/channelFunc/valueFunc.h \
+    Model/Param/channelFunc/yFunc.h \
+    Model/Param/spaceFunc/colorSpaceFunc.h \
+    Model/Param/spaceFunc/bgrFunc.h \
+    Model/Param/spaceFunc/hsvFunc.h \
+    Model/Param/spaceFunc/ycrcbFunc.h
 
 FORMS    += \
     View/calibrateDialog.ui \
