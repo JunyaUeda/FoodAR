@@ -59,10 +59,6 @@ SOURCES += main.cpp\
     Model/calibrator.cpp \
     Model/Service/regionService.cpp \
     Model/SDK/opencv/opencvApi.cpp \
-    Model/Param/spaceType/colorSpaceType.cpp \
-    Model/Param/spaceType/bgrType.cpp \
-    Model/Param/spaceType/hsvType.cpp \
-    Model/Param/spaceType/ycrcbType.cpp \
     Model/Param/channel.cpp \
     Model/Param/source.cpp \
     Model/Param/channelHistogram.cpp \
@@ -138,10 +134,6 @@ HEADERS  += \
     Model/Service/regionService.h \
     Model/SDK/opencv/opencvApi.h \
     Model/Param/colorSpaceType.h \
-    Model/Param/spaceType/colorSpaceType.h \
-    Model/Param/spaceType/bgrType.h \
-    Model/Param/spaceType/hsvType.h \
-    Model/Param/spaceType/ycrcbType.h \
     Model/Param/channel.h \
     Model/Param/source.h \
     Model/Param/channelHistogram.h \
