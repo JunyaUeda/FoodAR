@@ -2,8 +2,8 @@
 #define COLOR_H
 
 #include "./channel.h"
-#include "./channelType/channelType.h"
-#include "./spaceType/colorSpaceType.h"
+#include "./channelFunc/channelFunc.h"
+#include "./spaceFunc/colorSpaceFunc.h"
 #include <QVector>
 
 using namespace std;
@@ -18,7 +18,7 @@ public:
 public:
     Color();
     Color(int channelNum);
-    bool hasColorSpaceType(ColorSpaceType type);
+    bool hasColorSpaceFunc(ColorSpaceFunc type);
 };
 
 #endif // COLOR_H

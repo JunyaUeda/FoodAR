@@ -3,7 +3,7 @@
 ChannelThreshold::ChannelThreshold() {
 }
 
-ChannelThreshold::ChannelThreshold(ChannelType type) : _channelType(type) {
+ChannelThreshold::ChannelThreshold(ChannelFunc type) : _channelFunc(type) {
 }
 
 void ChannelThreshold::setThreshold(int average, int tolerance) {
@@ -16,15 +16,15 @@ void ChannelThreshold::setThreshold(int average, int tolerance) {
 QList<ChannelThreshold> ChannelThreshold::createAllChannelThreshold() {
     QList<ChannelThreshold> channelThresholds;
 
-    ChannelThreshold th0(*(new BlueType() ));
-    ChannelThreshold th1(*(new GreenType() ));
-    ChannelThreshold th2(*(new RedType() ));
-    ChannelThreshold th3(*(new HueType() ));
-    ChannelThreshold th4(*(new SaturationType() ));
-    ChannelThreshold th5(*(new ValueType() ));
-    ChannelThreshold th6(*(new YType() ));
-    ChannelThreshold th7(*(new CrType() ));
-    ChannelThreshold th8(*(new CbType() ));
+    ChannelThreshold th0(*(new BlueFunc() ));
+    ChannelThreshold th1(*(new GreenFunc() ));
+    ChannelThreshold th2(*(new RedFunc() ));
+    ChannelThreshold th3(*(new HueFunc() ));
+    ChannelThreshold th4(*(new SaturationFunc() ));
+    ChannelThreshold th5(*(new ValueFunc() ));
+    ChannelThreshold th6(*(new YFunc() ));
+    ChannelThreshold th7(*(new CrFunc() ));
+    ChannelThreshold th8(*(new CbFunc() ));
     channelThresholds.push_back(th0);
     channelThresholds.push_back(th1);
     channelThresholds.push_back(th2);
@@ -39,8 +39,8 @@ QList<ChannelThreshold> ChannelThreshold::createAllChannelThreshold() {
 }
 
 //getter setter
-ChannelType ChannelThreshold::channelType() const {
-    return _channelType;
+ChannelFunc ChannelThreshold::channelFunc() const {
+    return _channelFunc;
 }
 
 int ChannelThreshold::average() const {

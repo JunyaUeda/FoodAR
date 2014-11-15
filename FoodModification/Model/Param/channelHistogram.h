@@ -2,13 +2,13 @@
 #define CHANNELHISTOGRAM_H
 
 #include <QVector>
-#include "./channelType/channelType.h"
+#include "./channelFunc/channelFunc.h"
 
 class channelHistogram {
 
 /*property*/
 private:
-	ChannelType _channeType;
+    ChannelFunc _channeFunc;
 	QVector<int> _histogramArray;
 public:
 	channelHistogram();

@@ -1,13 +1,13 @@
 #ifndef CHANNEL_H
 #define CHANNEL_H
 
-#include "./channelType/channelType.h"
+#include "./channelFunc/channelFunc.h"
 
 class Channel {
 
 /*property*/
 private:
-    ChannelType _channelType;
+    ChannelFunc _channelFunc;
     int _value;
 public:
     Channel();

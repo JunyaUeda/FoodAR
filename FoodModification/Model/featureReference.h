@@ -5,7 +5,7 @@
 #include "./Param/colorThreshold.h"
 #include "../Utils/xmlUtils.h"
 #include "../extractParamManager.h"
-#include "./Param/channelType/channelType.h"
+#include "./Param/channelFunc/channelFunc.h"
 #include "./TypeDef.h"
 
 class FeatureReference {
@@ -21,7 +21,7 @@ public:
     static FeatureReference& getInstance();
     void loadFeaturesFromFile(QDomDocument doc);
     void updateThresholds(QVis averages, QVis tolerances);
-    ChannelThreshold getChannelThreshold(ChannelType channelType);
+    ChannelThreshold getChannelThreshold(ChannelFunc channelFunc);
     ColorThreshold* getColorThreshold(int value);
 private:
     FeatureReference();

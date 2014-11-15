@@ -1,24 +1,24 @@
 #ifndef CHANNELTHRESHOLD_H
 #define CHANNELTHRESHOLD_H
 
-#include "./channelType/channelType.h"
+#include "./channelFunc/channelFunc.h"
 #include "../../Utils/xmlUtils.h"
-#include "./channelType/blueType.h"
-#include "./channelType/greenType.h"
-#include "./channelType/redType.h"
-#include "./channelType/hueType.h"
-#include "./channelType/saturationType.h"
-#include "./channelType/valueType.h"
-#include "./channelType/yType.h"
-#include "./channelType/crType.h"
-#include "./channelType/cbType.h"
+#include "./channelFunc/blueFunc.h"
+#include "./channelFunc/greenFunc.h"
+#include "./channelFunc/redFunc.h"
+#include "./channelFunc/hueFunc.h"
+#include "./channelFunc/saturationFunc.h"
+#include "./channelFunc/valueFunc.h"
+#include "./channelFunc/yFunc.h"
+#include "./channelFunc/crFunc.h"
+#include "./channelFunc/cbFunc.h"
 
 
 class ChannelThreshold {
 
 /*property*/
 private:
-	ChannelType _channelType;
+    ChannelFunc _channelFunc;
 	int _average;
 	int _tolerance;
 	int _upper;
@@ -27,12 +27,12 @@ private:
 /*method*/
 public:
     ChannelThreshold();
-    ChannelThreshold(ChannelType type);
+    ChannelThreshold(ChannelFunc type);
     bool loadAverage(QDomElement element);
     void setThreshold(int average, int tolerance);
     static QList<ChannelThreshold> createAllChannelThreshold();
     //getter setter
-    ChannelType channelType() const;
+    ChannelFunc channelFunc() const;
     int average() const;
     void setAverage(int average);
     int tolerance() const;

@@ -7,6 +7,6 @@ Color::Color(int channelNum) {
 
 }
 
-bool Color::hasColorSpaceType(ColorSpaceType type) {
+bool Color::hasColorSpaceFunc(ColorSpaceFunc type) {
 	return true;
 }
