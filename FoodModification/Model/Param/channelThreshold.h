@@ -12,7 +12,7 @@
 #include "./channelFunc/yFunc.h"
 #include "./channelFunc/crFunc.h"
 #include "./channelFunc/cbFunc.h"
-
+#include "./matSet.h"
 
 class ChannelThreshold {
 
@@ -31,6 +31,7 @@ public:
     bool loadAverage(QDomElement element);
     void setThreshold(int average, int tolerance);
     static QList<ChannelThreshold> createAllChannelThreshold();
+    bool isWithinThreshold(MatSet* matSet, Point point);
     //getter setter
     ChannelFunc channelFunc() const;
     int average() const;

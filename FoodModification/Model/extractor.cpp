@@ -9,6 +9,6 @@ Extractor& Extractor::getInstance() {
 }
 
 void Extractor::extract(MatSet* srcSet) {
-      Region* region = _extractService.extractRegionByColor(srcSet, &_featureReference);
+      Region* region = _extractService.extractRegionByColor(srcSet);
       imshow("new extract", region->maskImg());
 }

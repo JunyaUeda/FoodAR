@@ -4,6 +4,7 @@ ChannelThreshold::ChannelThreshold() {
 }
 
 ChannelThreshold::ChannelThreshold(ChannelFunc type) : _channelFunc(type) {
+
 }
 
 void ChannelThreshold::setThreshold(int average, int tolerance) {
@@ -36,6 +37,14 @@ QList<ChannelThreshold> ChannelThreshold::createAllChannelThreshold() {
     channelThresholds.push_back(th8);
 
     return channelThresholds;
+}
+
+bool ChannelThreshold::isWithinThreshold(MatSet* matSet, Point point) {
+    int value = _channelFunc.value(matSet, point);
+    if( value <= _upper && value >= _under ) {
+        return true;
+    }
+    return false;
 }
 
 //getter setter

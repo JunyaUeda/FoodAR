@@ -11,3 +11,7 @@ int SaturationFunc::value(Mat img, int x, int y) {
 int SaturationFunc::value(MatSet* matSet, int x, int y) {
 	return value(matSet->hsv(),x,y);
 }
+
+int SaturationFunc::value(MatSet* matSet, Point point) {
+    value(matSet, point.x, point.y);
+}

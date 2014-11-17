@@ -82,7 +82,8 @@ SOURCES += main.cpp\
     Model/Param/spaceFunc/colorSpaceFunc.cpp \
     Model/Param/spaceFunc/bgrFunc.cpp \
     Model/Param/spaceFunc/hsvFunc.cpp \
-    Model/Param/spaceFunc/ycrcbFunc.cpp
+    Model/Param/spaceFunc/ycrcbFunc.cpp \
+    Model/condition.cpp
 
 HEADERS  += \
     extractParamManager.h \
@@ -158,7 +159,9 @@ HEADERS  += \
     Model/Param/spaceFunc/colorSpaceFunc.h \
     Model/Param/spaceFunc/bgrFunc.h \
     Model/Param/spaceFunc/hsvFunc.h \
-    Model/Param/spaceFunc/ycrcbFunc.h
+    Model/Param/spaceFunc/ycrcbFunc.h \
+    Model/condition.h \
+    Model/Param/channelFunc.h
 
 FORMS    += \
     View/calibrateDialog.ui \

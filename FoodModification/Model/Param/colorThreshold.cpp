@@ -18,15 +18,17 @@ void ColorThreshold::updateThresholds(QVi averages, QVi tolerances) {
     }
 }
 
-bool ColorThreshold::isWithinThreshold(int h, int s, int v) {
-	if(_channelThresholds[3].under() > h || h > _channelThresholds[3].upper() ) {
-		return false;
-	}
-	if(_channelThresholds[4].under() > s || s > _channelThresholds[4].upper()) {
-		return false;
-	}
-	if(_channelThresholds[5].under() > v || v > _channelThresholds[5].upper()) {
-		return false;
+void ColorThreshold::addUsedChannelThreshold(ChannelThreshold threshold) {
+	_usedChannelThresholds.push_back(threshold);
+}
+
+bool ColorThreshold::isWithinThreshold(MatSet* matSet, Point point) {
+
+	for(ChannelThreshold thr : _channelThresholds) {
+		if(!thr.isWithinThreshold(matSet, point)) {
+			return  false;
+		}
 	}
 	return true;
+	
 }
