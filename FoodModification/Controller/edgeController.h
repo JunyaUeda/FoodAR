@@ -11,6 +11,7 @@ public:
 	static EdgeController& getInstance();
 
 	void calculateEdges(map<int, Mat>* channels, Mat* dstEdges);
+    void calculateEdges(map<int, Mat>* channels, QVector<Mat> dstEdges);
 	void changeCannyThreshold(int channelIndex, CannyThreshold* novel);
 	void addEdgeChannel(int channelIndex, CannyThreshold* threshold);
 

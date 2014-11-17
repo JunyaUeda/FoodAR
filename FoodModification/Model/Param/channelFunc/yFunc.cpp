@@ -12,5 +12,5 @@ int YFunc::value(MatSet* matSet, int x, int y) {
 }
 
 int YFunc::value(MatSet* matSet, Point point) {
-    value(matSet, point.x, point.y);
+	return value(matSet, point.x, point.y);
 }

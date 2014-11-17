@@ -30,6 +30,23 @@ void EdgeController::calculateEdges(map<int, Mat>* channels, Mat* dstEdges) {
 	
 }
 
+void EdgeController::calculateEdges(map<int, Mat>* channels, QVector<Mat> dstEdges) {
+
+	int i=0;
+	for(const auto& elem :  _edgeParam->channelThresholdMap()) { 
+		
+		int key = elem.first;
+		CannyThreshold* threshold = elem.second;
+		int threshold1 = threshold->value1();
+		int threshold2 = threshold->value2();
+		Mat edgeImg;
+		Canny((*channels)[key], edgeImg, threshold1, threshold2, APERTURE_SIZE, L2_GRADIENT);
+		dstEdges.push_back(edgeImg);
+		i++;
+	}
+	
+}
+
 /**
 * mainWindowのエッジの閾値変更によって呼び出される
 *　@param 変更するチャンネルindexと新しい閾値

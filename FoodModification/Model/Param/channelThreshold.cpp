@@ -3,7 +3,7 @@
 ChannelThreshold::ChannelThreshold() {
 }
 
-ChannelThreshold::ChannelThreshold(ChannelFunc type) : _channelFunc(type) {
+ChannelThreshold::ChannelThreshold(ChannelFunc* type) : _channelFunc(type) {
 
 }
 
@@ -17,15 +17,15 @@ void ChannelThreshold::setThreshold(int average, int tolerance) {
 QList<ChannelThreshold> ChannelThreshold::createAllChannelThreshold() {
     QList<ChannelThreshold> channelThresholds;
 
-    ChannelThreshold th0(*(new BlueFunc() ));
-    ChannelThreshold th1(*(new GreenFunc() ));
-    ChannelThreshold th2(*(new RedFunc() ));
-    ChannelThreshold th3(*(new HueFunc() ));
-    ChannelThreshold th4(*(new SaturationFunc() ));
-    ChannelThreshold th5(*(new ValueFunc() ));
-    ChannelThreshold th6(*(new YFunc() ));
-    ChannelThreshold th7(*(new CrFunc() ));
-    ChannelThreshold th8(*(new CbFunc() ));
+    ChannelThreshold th0(new BlueFunc());
+    ChannelThreshold th1(new GreenFunc());
+    ChannelThreshold th2(new RedFunc());
+    ChannelThreshold th3(new HueFunc());
+    ChannelThreshold th4(new SaturationFunc());
+    ChannelThreshold th5(new ValueFunc());
+    ChannelThreshold th6(new YFunc());
+    ChannelThreshold th7(new CrFunc());
+    ChannelThreshold th8(new CbFunc());
     channelThresholds.push_back(th0);
     channelThresholds.push_back(th1);
     channelThresholds.push_back(th2);
@@ -40,7 +40,7 @@ QList<ChannelThreshold> ChannelThreshold::createAllChannelThreshold() {
 }
 
 bool ChannelThreshold::isWithinThreshold(MatSet* matSet, Point point) {
-    int value = _channelFunc.value(matSet, point);
+    int value = _channelFunc->value(matSet, point);
     if( value <= _upper && value >= _under ) {
         return true;
     }
@@ -48,7 +48,7 @@ bool ChannelThreshold::isWithinThreshold(MatSet* matSet, Point point) {
 }
 
 //getter setter
-ChannelFunc ChannelThreshold::channelFunc() const {
+ChannelFunc* ChannelThreshold::channelFunc() const {
     return _channelFunc;
 }
 

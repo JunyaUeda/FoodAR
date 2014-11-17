@@ -10,9 +10,9 @@ class ChannelFunc {
 
 /*property*/
 public:
-  	int value(Mat img, int x, int y);
-  	int value(MatSet* matSet, int x, int y);
-  	int value(MatSet* matSet, Point point);
+  	virtual int value(Mat img, int x, int y);
+  	virtual int value(MatSet* matSet, int x, int y);
+  	virtual int value(MatSet* matSet, Point point);
 private:
     QString _name;
 

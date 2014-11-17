@@ -41,26 +41,40 @@ void FeatureReference::loadAverage(QDomDocument doc) {
 }
 
 void FeatureReference::updateThresholds(QVis averages, QVis tolerances) {
+
+    QList<ChannelType> types;
+    types.push_back(ChannelType::hue);
+    types.push_back(ChannelType::saturation);
+    types.push_back(ChannelType::value);
+
     for(int i=0; i<tolerances.size(); i++) {
         _colorThresholds[i].updateThresholds(averages[i], tolerances[i]);
+        _colorThresholds[i].updateUsedChannels(types);
     }
+
+    
+
 }
 
-ColorThreshold* FeatureReference::getColorThreshold(int value) {
+inline ColorThreshold* FeatureReference::getColorThreshold(int value) {
 
     ColorThreshold* colorThreshold;
     int minDiff = 256;
 
-    for(ColorThreshold c : _colorThresholds) {
-        int diff = abs(value - c.channelThresholds()[5].average());
-        if(minDiff > diff) {
-            minDiff = diff;
-            colorThreshold = &c;
-        }
+    // for(ColorThreshold c : _colorThresholds) {
+    //     int diff = abs(value - c.channelThresholds()[5].average());
+    //     if(minDiff > diff) {
+    //         minDiff = diff;
+    //         colorThreshold = &c;
+    //     }
+    // }
+    //じぶんでluminance持っておいた方がよりはやい
+     if(abs(value - _colorThresholds[0].luminance()) > abs(value - _colorThresholds[1].luminance() ) ){
+        return  &_colorThresholds[1];
     }
 
-    return colorThreshold;
-
+    //return colorThreshold;
+    return &_colorThresholds[0];
 }
 bool FeatureReference::isWithinThreshold(MatSet* matSet, Point point) {
 

@@ -1,49 +1,51 @@
 #include "extractService.h"
+#define LINK_EIGHT 8
+#define LINK_FOUR 4
+#define LINK_CVAA CV_AA
 
 ExtractService::ExtractService() {
 }
 
+// Region ExtractService::extractRegionByColor(MatSet* srcSet) {
 
-// class ExtractByColor {
-// public:
-// 	void operator()(int x, int y) {
+//     Region region(Size(srcSet->width(), srcSet->height()) );
+//     for(int y=0; y<srcSet->height(); y++) {
+//         for(int x=0; x<srcSet->width(); x++) {
 
-// 	}
+//             if(_featureReference.isWithinThreshold(srcSet, Point(x,y))) {
+//                 L(region.maskImg(),x,y) = 255;
+//             }
 
-// 	void operator()(int x, int y, MatSet* srcSet, Region* region, FeatureReference featureReference) {
-
-// 		ColorThreshold* threshold = featureReference.getColorThreshold( V(srcSet->hsv(),x,y) );
-//         if(threshold->isWithinThreshold(H(srcSet->hsv(),x,y), S(srcSet->hsv(),x,y), V(srcSet->hsv(),x,y))) {
-//         		L(region->maskImg(),x,y) = 255;
 //         }
-// 	}
-// };
+//     }
 
-// Region* extractRegionByColor(const MatSet* srcSet, FeatureReference featureReference) {
-// 	Size size(srcSet->width(), srcSet->height());
-// 	Region region(size);
-// 	ExtractByColor extractByColor;
-
-// 	OpenCVApi::raster(size, extractByColor(src))
-//     return &region;
+//     region.calcContours();
+  
+//     return region;
 // }
 
- Region* ExtractService::extractRegionByColor(MatSet* srcSet) {
+void ExtractService::extractRegionByColor(MatSet* srcSet, Region* result) {
 
-	 Region region(Size(srcSet->width(), srcSet->height()) );
-
-	for(int y=0; y<srcSet->height(); y++) {
+    for(int y=0; y<srcSet->height(); y++) {
         for(int x=0; x<srcSet->width(); x++) {
 
-         //    if(_featureReference.isWithinThreshold(srcSet, Point(x,y))) {
-        	// 	L(region.maskImg(),x,y) = 255;
-        	// }
+            if(_featureReference.isWithinThreshold(srcSet, Point(x,y))) {
+                L(result->maskImg(),x,y) = 255;
+            }
 
         }
     }
 
-      region.calcContours();
-    
-    return &region;
+    result->calcContours();
 }
 
+
+Region ExtractService::acquireMaxAreaRegion(Region* region) {
+    Region result(Size(region->maskImg().cols, region->maskImg().rows ) );
+    int maxAreaIndex = _contourService->getMaxAreaContourIndex(region->contours());
+    int MINSIZE = 200; int lineType = LINK_EIGHT;
+    drawContours(result.maskImg(), region->contours(), maxAreaIndex, Scalar(255, 255, 255), CV_FILLED, lineType);
+    result.calcContours();
+
+    return result;
+} 

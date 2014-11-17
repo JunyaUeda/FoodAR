@@ -5,7 +5,7 @@
 #include "../Service/contourService.h"
 #include "../Service/colorExtractService.h"
 #include "../Param/targetParam.h"
-#include "../Service/edgeService.h"
+#include "../Model/Service/edgeService.h"
 #include "../definition.h"
 #include "../Model/extractor.h"
 

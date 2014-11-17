@@ -14,4 +14,15 @@ typedef QList<QList<Point> >    QLPs;
 typedef QVector<Scalar>         QVS;
 typedef vector<vector<Point> >  vPs;
 
+enum ChannelType {
+    blue = 0,
+    green = 1,
+    red = 2,
+    hue = 3,
+    saturation = 4,
+    value = 5,
+    y = 6,
+    cr = 7,
+    cb = 8,
+};
 #endif // TYPEDEF_H

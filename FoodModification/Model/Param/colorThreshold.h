@@ -11,6 +11,7 @@ class ColorThreshold {
 private:
     QList<ChannelThreshold> _channelThresholds;
     QList<ChannelThreshold> _usedChannelThresholds;
+    int _luminance;
 
 /*method*/
 public:
@@ -20,6 +21,9 @@ public:
     void setChannelThresholds(const QList<ChannelThreshold> &channelThresholds);
     void addUsedChannelThreshold(ChannelThreshold threshold);
     bool isWithinThreshold(MatSet* matSet, Point point);
+    void updateUsedChannels(QList<ChannelType> channelTypes);
+    int luminance();
+
 };
 
 #endif // COLORTHRESHOLD_H

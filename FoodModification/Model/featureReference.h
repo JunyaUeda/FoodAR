@@ -21,15 +21,15 @@ public:
     static FeatureReference& getInstance();
     void loadFeaturesFromFile(QDomDocument doc);
     void updateThresholds(QVis averages, QVis tolerances);
-    ChannelThreshold getChannelThreshold(ChannelFunc channelFunc);
     bool isWithinThreshold(MatSet* matSet, Point point);
+
 private:
     FeatureReference();
     FeatureReference(const FeatureReference&);
 	void loadExtractColorSpace(QDomDocument doc);
 	void loadAverage(QDomDocument doc);
 	void loadTolerance(QDomDocument doc);
-    ColorThreshold* getColorThreshold(int value);
+    inline ColorThreshold* getColorThreshold(int value);
 
 };
 

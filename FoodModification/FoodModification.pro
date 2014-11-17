@@ -24,7 +24,6 @@ SOURCES += main.cpp\
     Param/targetParam.cpp \
     Service/colorExtractService.cpp \
     Service/contourService.cpp \
-    Service/edgeService.cpp \
     Utils/opencvBase.cpp \
     Utils/opencvUtils.cpp \
     Controller/calibrationController.cpp \
@@ -83,7 +82,8 @@ SOURCES += main.cpp\
     Model/Param/spaceFunc/bgrFunc.cpp \
     Model/Param/spaceFunc/hsvFunc.cpp \
     Model/Param/spaceFunc/ycrcbFunc.cpp \
-    Model/condition.cpp
+    Model/condition.cpp \
+    Model/Service/edgeService.cpp
 
 HEADERS  += \
     extractParamManager.h \
@@ -96,7 +96,6 @@ HEADERS  += \
     Param/targetParam.h \
     Service/colorExtractService.h \
     Service/contourService.h \
-    Service/edgeService.h \
     Utils/opencvBase.h \
     Utils/opencvUtils.h \
     Controller/calibrationController.h \
@@ -161,7 +160,8 @@ HEADERS  += \
     Model/Param/spaceFunc/hsvFunc.h \
     Model/Param/spaceFunc/ycrcbFunc.h \
     Model/condition.h \
-    Model/Param/channelFunc.h
+    Model/Param/channelFunc.h \
+    Model/Service/edgeService.h
 
 FORMS    += \
     View/calibrateDialog.ui \
@@ -170,19 +170,19 @@ FORMS    += \
 
 # OpenCV settings
 # for Windows
-#win32:DEPENDPATH  += "C:\opencv248\build\include"
-#win32:INCLUDEPATH += "C:\opencv248\build\include"
-#win32:LIBS += -L"C:\opencv248\build\x86\vc12\lib"
+win32:DEPENDPATH  += "C:\opencv248\build\include"
+win32:INCLUDEPATH += "C:\opencv248\build\include"
+win32:LIBS += -L"C:\opencv248\build\x86\vc12\lib"
 
 # for Mac
 INCLUDEPATH += /usr/local/include
 DEPENDPATH += /usr/local/include
-LIBS += -L/usr/local/lib \
-    -lopencv_core \
-    -lopencv_imgproc \
-    -lopencv_highgui \
-    -lopencv_objdetect \
-    -lopencv_calib3d
+#LIBS += -L/usr/local/lib \
+#    -lopencv_core \
+#    -lopencv_imgproc \
+#    -lopencv_highgui \
+#    -lopencv_objdetect \
+#    -lopencv_calib3d
 
 OTHER_FILES += \
     ExtractParam.xml \

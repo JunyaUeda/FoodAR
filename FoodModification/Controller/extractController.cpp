@@ -17,8 +17,6 @@ ExtractController& ExtractController::getInstance() {
 void ExtractController::extract(Mat srcBGRImg, Mat srcHSVImg, Mat srcYCrCbImg, Mat srcGrayImg,
     Mat dstImg, vector<vector<Point> >& dstContours, Mat* edgeImgs) {
 
-    MatSet srcSet(srcBGRImg);
-    _extractor.extract(&srcSet);
     Mat colorExtractedImg;
     colorExtractedImg = dstImg.clone();
     extractByColor(srcBGRImg, srcHSVImg, colorExtractedImg);

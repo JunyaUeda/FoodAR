@@ -39,7 +39,7 @@ void MainController::doConvertion() {
     Mat srcBGRImg, srcHSVImg, srcYCrCbImg, srcGrayImg, dstBGRImg;
     Mat BGRChannels[3], HSVChannels[3], YCrCbChannels[3];
     Mat BGREdges[3], HSVEdges[3], YCrCbEdges[3];
-
+    QVector<Mat> edgeImgs;
     
     map<int, Mat> edges;
     Mat maskImg;
@@ -62,31 +62,33 @@ void MainController::doConvertion() {
     while (1) {
         map<int, Mat> channels;
         srcController.loadSrc(srcBGRImg, srcHSVImg, srcYCrCbImg, srcGrayImg, &channels);
-        edgeController.calculateEdges(&channels, YCrCbEdges);
+        //edgeController.calculateEdges(&channels, YCrCbEdges);
+        edgeController.calculateEdges(&channels, edgeImgs);
+        // maskImg = Mat::zeros(srcBGRImg.size(), CV_8UC1);
+        // vector<vector<Point> > dstContours;
+        // extractController.extract(srcBGRImg, srcHSVImg, srcYCrCbImg, srcGrayImg, maskImg, dstContours, YCrCbEdges);
+         imshow("myWindow", srcBGRImg);
+        // imshow("FinalExtractedImg", maskImg);
 
-        maskImg = Mat::zeros(srcBGRImg.size(), CV_8UC1);
-        vector<vector<Point> > dstContours;
-        extractController.extract(srcBGRImg, srcHSVImg, srcYCrCbImg, srcGrayImg, maskImg, dstContours, YCrCbEdges);
-        imshow("myWindow", srcBGRImg);
-        imshow("FinalExtractedImg", maskImg);
-
+         MatSet srcSet(srcBGRImg);
+        _extractor.extract(&srcSet, edgeImgs);
         
-        vector<Rect> rects;
-        if(textureParam->isNoTexture()) {
-            textureController.setROI(dstContours, rects);
-        } else {
-            Mat textureImg = textureController.createTexture(dstContours, maskImg, rects, srcController.srcParam()->textureImg() );
-            textureParam->setImg(textureImg);
-            imshow("textureImg", textureImg);
-        }
+        // vector<Rect> rects;
+        // if(textureParam->isNoTexture()) {
+        //     textureController.setROI(dstContours, rects);
+        // } else {
+        //     Mat textureImg = textureController.createTexture(dstContours, maskImg, rects, srcController.srcParam()->textureImg() );
+        //     textureParam->setImg(textureImg);
+        //     imshow("textureImg", textureImg);
+        // }
         
 
-        dstBGRImg = srcBGRImg.clone();
-        convertController.convert(srcBGRImg,srcHSVImg, dstBGRImg, maskImg, rects, textureParam);
-        if(resizeFlag) {
-            resize(dstBGRImg, dstBGRImg, dstSize, 0, 0, INTER_LINEAR);
-        }
-        imshow("dstImg",dstBGRImg);
+        // dstBGRImg = srcBGRImg.clone();
+        // convertController.convert(srcBGRImg,srcHSVImg, dstBGRImg, maskImg, rects, textureParam);
+        // if(resizeFlag) {
+        //     resize(dstBGRImg, dstBGRImg, dstSize, 0, 0, INTER_LINEAR);
+        // }
+        // imshow("dstImg",dstBGRImg);
 
 
         char ch = waitKey(33);

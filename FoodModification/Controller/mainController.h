@@ -31,6 +31,7 @@ private:
     ConvertController& convertController         = ConvertController::getInstance();
     EdgeController& edgeController               = EdgeController::getInstance();
     SrcController& srcController                 = SrcController::getInstance();
+    Extractor& _extractor = Extractor::getInstance();
 
     TextureParam* textureParam = new TextureParam();
     bool resizeFlag = false;
