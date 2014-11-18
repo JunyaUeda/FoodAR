@@ -20,7 +20,7 @@ public:
     QList<ChannelThreshold> channelThresholds() const;
     void setChannelThresholds(const QList<ChannelThreshold> &channelThresholds);
     void addUsedChannelThreshold(ChannelThreshold threshold);
-    bool isWithinThreshold(MatSet* matSet, Point point);
+    bool isWithinThreshold(MatSet& matSet, Point point);
     void updateUsedChannels(QList<ChannelType> channelTypes);
     int luminance();
 

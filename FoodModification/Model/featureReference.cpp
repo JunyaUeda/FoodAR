@@ -76,9 +76,9 @@ inline ColorThreshold* FeatureReference::getColorThreshold(int value) {
     //return colorThreshold;
     return &_colorThresholds[0];
 }
-bool FeatureReference::isWithinThreshold(MatSet* matSet, Point point) {
+bool FeatureReference::isWithinThreshold(MatSet& matSet, Point point) {
 
-    ColorThreshold* colorThreshold = getColorThreshold( V(matSet->hsv(), point.x, point.y) );
+    ColorThreshold* colorThreshold = getColorThreshold( V(matSet.hsv(), point.x, point.y) );
     if(colorThreshold->isWithinThreshold(matSet, point)) {
         return true;
     }

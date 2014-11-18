@@ -21,7 +21,7 @@ public:
     static FeatureReference& getInstance();
     void loadFeaturesFromFile(QDomDocument doc);
     void updateThresholds(QVis averages, QVis tolerances);
-    bool isWithinThreshold(MatSet* matSet, Point point);
+    bool isWithinThreshold(MatSet& matSet, Point point);
 
 private:
     FeatureReference();

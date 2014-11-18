@@ -24,28 +24,30 @@ ExtractService::ExtractService() {
 //     return region;
 // }
 
-void ExtractService::extractRegionByColor(MatSet* srcSet, Region* result) {
+void ExtractService::extractRegionByColor(MatSet& srcSet, Region& result) {
 
-    for(int y=0; y<srcSet->height(); y++) {
-        for(int x=0; x<srcSet->width(); x++) {
+    for(int y=0; y<srcSet.height(); y++) {
+        for(int x=0; x<srcSet.width(); x++) {
 
             if(_featureReference.isWithinThreshold(srcSet, Point(x,y))) {
-                L(result->maskImg(),x,y) = 255;
+                L(result.maskImg(),x,y) = 255;
             }
 
         }
     }
 
-    result->calcContours();
+    result.calcContours();
 }
 
 
-Region ExtractService::acquireMaxAreaRegion(Region* region) {
-    Region result(Size(region->maskImg().cols, region->maskImg().rows ) );
-    int maxAreaIndex = _contourService->getMaxAreaContourIndex(region->contours());
-    int MINSIZE = 200; int lineType = LINK_EIGHT;
-    drawContours(result.maskImg(), region->contours(), maxAreaIndex, Scalar(255, 255, 255), CV_FILLED, lineType);
+Region ExtractService::acquireMaxAreaRegion(Region& region) {
+    
+    Region result(region.size() );
+    int maxAreaIndex = _contourService->getMaxAreaContourIndex(region.contours());
+    int lineType = LINK_EIGHT;
+    drawContours(result.maskImg(), region.contours(), maxAreaIndex, Scalar(255, 255, 255), CV_FILLED, lineType);
     result.calcContours();
+    result.calcRois();
 
     return result;
 } 

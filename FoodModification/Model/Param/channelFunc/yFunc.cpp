@@ -7,10 +7,10 @@ int YFunc::value(Mat img, int x, int y) {
 	return B(img, x, y);
 }
 
-int YFunc::value(MatSet* matSet, int x, int y) {
-	return value(matSet->ycrcb(),x,y);
+int YFunc::value(MatSet& matSet, int x, int y) {
+	return value(matSet.ycrcb(),x,y);
 }
 
-int YFunc::value(MatSet* matSet, Point point) {
+int YFunc::value(MatSet& matSet, Point point) {
 	return value(matSet, point.x, point.y);
 }

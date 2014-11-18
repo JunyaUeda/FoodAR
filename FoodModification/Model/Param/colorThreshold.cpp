@@ -27,7 +27,7 @@ void ColorThreshold::addUsedChannelThreshold(ChannelThreshold threshold) {
 	_usedChannelThresholds.push_back(threshold);
 }
 
-bool ColorThreshold::isWithinThreshold(MatSet* matSet, Point point) {
+bool ColorThreshold::isWithinThreshold(MatSet& matSet, Point point) {
 
 	for(ChannelThreshold thr : _usedChannelThresholds) {
 		if(!thr.isWithinThreshold(matSet, point)) {

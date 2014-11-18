@@ -10,6 +10,7 @@
 #include "./edgeController.h"
 #include "./srcController.h"
 #include "../Param/textureParam.h"
+#include "../Model/sourcer.h"
 
 
 class MainController {
@@ -32,6 +33,7 @@ private:
     EdgeController& edgeController               = EdgeController::getInstance();
     SrcController& srcController                 = SrcController::getInstance();
     Extractor& _extractor = Extractor::getInstance();
+    Sourcer& _sourcer = Sourcer::getInstance();
 
     TextureParam* textureParam = new TextureParam();
     bool resizeFlag = false;

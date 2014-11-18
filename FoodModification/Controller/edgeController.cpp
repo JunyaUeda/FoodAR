@@ -30,20 +30,21 @@ void EdgeController::calculateEdges(map<int, Mat>* channels, Mat* dstEdges) {
 	
 }
 
-void EdgeController::calculateEdges(map<int, Mat>* channels, QVector<Mat> dstEdges) {
+void EdgeController::calculateEdges(map<ChannelType, Mat>& channels, QVector<Mat>& dstEdges) {
 
-	int i=0;
-	for(const auto& elem :  _edgeParam->channelThresholdMap()) { 
+	// dstEdges.clear();
+	// int i=0;
+	// for(const auto& elem :  _edgeParam->channelThresholdMap()) { 
 		
-		int key = elem.first;
-		CannyThreshold* threshold = elem.second;
-		int threshold1 = threshold->value1();
-		int threshold2 = threshold->value2();
-		Mat edgeImg;
-		Canny((*channels)[key], edgeImg, threshold1, threshold2, APERTURE_SIZE, L2_GRADIENT);
-		dstEdges.push_back(edgeImg);
-		i++;
-	}
+	// 	int key = elem.first;
+	// 	CannyThreshold* threshold = elem.second;
+	// 	int threshold1 = threshold->value1();
+	// 	int threshold2 = threshold->value2();
+	// 	Mat edgeImg;
+	// 	Canny(channels[key], edgeImg, threshold1, threshold2, APERTURE_SIZE, L2_GRADIENT);
+	// 	dstEdges.push_back(edgeImg);
+	// 	i++;
+	// }
 	
 }
 

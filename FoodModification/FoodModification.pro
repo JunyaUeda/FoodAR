@@ -23,7 +23,6 @@ SOURCES += main.cpp\
     Controller/extractController.cpp \
     Param/targetParam.cpp \
     Service/colorExtractService.cpp \
-    Service/contourService.cpp \
     Utils/opencvBase.cpp \
     Utils/opencvUtils.cpp \
     Controller/calibrationController.cpp \
@@ -41,7 +40,6 @@ SOURCES += main.cpp\
     Controller/edgeController.cpp \
     Param/edgeParam.cpp \
     Controller/srcController.cpp \
-    Param/srcParam.cpp \
     Param/cannyThreshold.cpp \
     Param/Features/feature.cpp \
     Param/References/reference.cpp \
@@ -83,7 +81,11 @@ SOURCES += main.cpp\
     Model/Param/spaceFunc/hsvFunc.cpp \
     Model/Param/spaceFunc/ycrcbFunc.cpp \
     Model/condition.cpp \
-    Model/Service/edgeService.cpp
+    Model/Service/edgeService.cpp \
+    Model/Service/contourService.cpp \
+    Model/sourcer.cpp \
+    Model/cameraManager.cpp \
+    Model/textureManager.cpp
 
 HEADERS  += \
     extractParamManager.h \
@@ -95,7 +97,6 @@ HEADERS  += \
     Controller/extractController.h \
     Param/targetParam.h \
     Service/colorExtractService.h \
-    Service/contourService.h \
     Utils/opencvBase.h \
     Utils/opencvUtils.h \
     Controller/calibrationController.h \
@@ -114,7 +115,6 @@ HEADERS  += \
     Param/edgeParam.h \
     definition.h \
     Controller/srcController.h \
-    Param/srcParam.h \
     Param/cannyThreshold.h \
     Param/Features/feature.h \
     Param/References/reference.h \
@@ -161,7 +161,11 @@ HEADERS  += \
     Model/Param/spaceFunc/ycrcbFunc.h \
     Model/condition.h \
     Model/Param/channelFunc.h \
-    Model/Service/edgeService.h
+    Model/Service/edgeService.h \
+    Model/Service/contourService.h \
+    Model/sourcer.h \
+    Model/cameraManager.h \
+    Model/textureManager.h
 
 FORMS    += \
     View/calibrateDialog.ui \

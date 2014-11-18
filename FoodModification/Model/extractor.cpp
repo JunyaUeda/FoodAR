@@ -1,5 +1,9 @@
 #include "extractor.h"
 
+#define LINK_EIGHT 8
+#define LINK_FOUR 4
+#define LINK_CVAA CV_AA
+
 Extractor::Extractor() {
 }
 
@@ -8,39 +12,27 @@ Extractor& Extractor::getInstance() {
     return instance;
 }
 
-void Extractor::extract(MatSet* srcSet, QVector<Mat> edges) {
-    Region region(Size(srcSet->width(), srcSet->height()) );
-    //コピーの速度をきにしないなら上のほうが読みやすい
-	// Region region = _extractService.extractRegionByColor(srcSet);
-    _extractService.extractRegionByColor(srcSet, &region);
+void Extractor::extract(MatSet& srcSet, QVector<Mat>& edges) {
+    Region region(srcSet.size() );
+    //コピーの速度をきにしないなら右のほうが読みやすい
+    _extractService.extractRegionByColor(srcSet, region);// Region region = _extractService.extractRegionByColor(srcSet);
     imshow("new extract", region.maskImg());
 
-    Region areamaxRegion = _extractService.acquireMaxAreaRegion(&region);
+    Region areamaxRegion = _extractService.acquireMaxAreaRegion(region);
 
     // //エッジ画像を取得する
-    Mat dstEdgeImg;
-    _edgeService.extractEdge(edges, dstEdgeImg);
+    Mat dstEdgeImg = _edgeService.extractEdge(edges, areamaxRegion.rois()[0]);
+    imshow("edge", dstEdgeImg);
 
-    // int lineType = LINK_EIGHT;
 
-    // vector<Rect> rois(contours.size());
-    // for(int i=0; i<contours.size(); i++) {
+    //残ったエッジ画像と色による抽出画像を合成する
+    bitwise_or(areamaxRegion.maskImg(), dstEdgeImg, dstEdgeImg);
+    //drawContours(dstEdgeImg, areamaxRegion.contours(), 0, Scalar(255, 255, 255), CV_FILLED, LINK_EIGHT);
 
-    //     Rect rect = boundingRect(contours[i]);
-    //     double SCALE_RATIO = 1.0;
-    //     rois[i] = OpenCVUtils::calculateROI(dstImg.size(), rect, SCALE_RATIO);
-        
-    //     //色による抽出領域の近辺だけエッジを残す
-    //     for(int y=rois[i].y; y<rois[i].y+rois[i].height; y++){     
-    //         for(int x=rois[i].x; x<rois[i].x+rois[i].width; x++){ 
-    //             if(L(dstEdgeImg,x,y) == 255) {
-    //                 L(dstImg,x,y) = 255;
-    //             }
-    //         }
-    //     }
+    int minSize = 200;
+	_contourService.fillContours(dstEdgeImg, minSize);
+    imshow("merge", dstEdgeImg);
 
-    //     //残ったエッジ画像と色による抽出画像を合成する
-    //     drawContours(dstImg, contours, i, Scalar(255, 255, 255), CV_FILLED, lineType);
-    // }
-
+    Region result(dstEdgeImg);
+    result.calcContours();
 }

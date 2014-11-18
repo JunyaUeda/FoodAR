@@ -2,7 +2,7 @@
 #define EXTRACTCONTROLLER_H
 #include "../Utils/opencvBase.h"
 #include "../extractParamManager.h"
-#include "../Service/contourService.h"
+#include "../Model/Service/contourService.h"
 #include "../Service/colorExtractService.h"
 #include "../Param/targetParam.h"
 #include "../Model/Service/edgeService.h"

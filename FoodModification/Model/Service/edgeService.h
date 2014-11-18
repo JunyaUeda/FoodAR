@@ -2,6 +2,7 @@
 #define EDGESERVICE_H
 
 #include "../SDK/opencv/opencvApi.h"
+#include "../Param/region.h"
 #include <QVector>
 
 class EdgeService {
@@ -12,7 +13,8 @@ class EdgeService {
 public:
 	EdgeService();
     void aqcuireEdgeImgs();
-    void extractEdge(QVector<Mat> channelEdgeImgs, Mat dstEdgeImg);
+    Mat extractEdge(QVector<Mat>& channelEdgeImgs, Rect& roi);
+    void extractEdge(QVector<Mat>& channelEdgeImgs, Mat& dstEdgeImg);
     void extractEdge(cv::Mat *channelEdgeImgs, cv::Mat dstEdgeImg);
     void drawEdge(Mat srcEdgeImg, Mat dstDrawnImg, int luminace);
 

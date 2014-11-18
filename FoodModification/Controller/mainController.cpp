@@ -34,7 +34,7 @@ void mouseCallback1(int event, int x, int y, int flags, void* param) {
 
 void MainController::doConvertion() {
 
-    srcController.bindSrc();
+    _sourcer.setUp();
     
     Mat srcBGRImg, srcHSVImg, srcYCrCbImg, srcGrayImg, dstBGRImg;
     Mat BGRChannels[3], HSVChannels[3], YCrCbChannels[3];
@@ -50,28 +50,13 @@ void MainController::doConvertion() {
     namedWindow("myWindow", CV_WINDOW_AUTOSIZE);
     setMouseCallback("myWindow", mouseCallback1);
     
-    Size srcSize = srcController.srcParam()->cameraSize();
-    srcBGRImg.create(srcSize, CV_8UC3);
-    srcYCrCbImg.create(srcSize, CV_8UC3);
-    srcHSVImg.create(srcSize, CV_8UC3);
-    srcGrayImg.create(srcSize, CV_8UC1);
-    maskImg.create(srcSize, CV_8UC3);
-    
-
-
     while (1) {
-        map<int, Mat> channels;
-        srcController.loadSrc(srcBGRImg, srcHSVImg, srcYCrCbImg, srcGrayImg, &channels);
-        //edgeController.calculateEdges(&channels, YCrCbEdges);
-        edgeController.calculateEdges(&channels, edgeImgs);
-        // maskImg = Mat::zeros(srcBGRImg.size(), CV_8UC1);
-        // vector<vector<Point> > dstContours;
-        // extractController.extract(srcBGRImg, srcHSVImg, srcYCrCbImg, srcGrayImg, maskImg, dstContours, YCrCbEdges);
-         imshow("myWindow", srcBGRImg);
-        // imshow("FinalExtractedImg", maskImg);
-
-         MatSet srcSet(srcBGRImg);
-        _extractor.extract(&srcSet, edgeImgs);
+        MatSet matSet;
+        _sourcer.loadSrc(matSet);
+        imshow("myWindow", matSet.bgr());
+        edgeController.calculateEdges(matSet.channelImgs(), edgeImgs);
+        MatSet srcSet(srcBGRImg);
+		_extractor.extract(srcSet, edgeImgs);
         
         // vector<Rect> rects;
         // if(textureParam->isNoTexture()) {

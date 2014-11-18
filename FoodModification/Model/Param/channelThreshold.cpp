@@ -39,7 +39,7 @@ QList<ChannelThreshold> ChannelThreshold::createAllChannelThreshold() {
     return channelThresholds;
 }
 
-bool ChannelThreshold::isWithinThreshold(MatSet* matSet, Point point) {
+bool ChannelThreshold::isWithinThreshold(MatSet& matSet, Point point) {
     int value = _channelFunc->value(matSet, point);
     if( value <= _upper && value >= _under ) {
         return true;

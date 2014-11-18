@@ -1,12 +1,12 @@
 #ifndef EXTRACTSERVICE_H
 #define EXTRACTSERVICE_H
 
+#include "../condition.h"
 #include "../Param/region.h"
 #include "../Param/matSet.h"
 #include "../featureReference.h"
 #include "../SDK/opencv/opencvApi.h"
-#include "../condition.h"
-#include "../../Service/contourService.h"
+#include "contourService.h"
 
 class ExtractService {
 
@@ -19,9 +19,9 @@ private:
 /*method*/
 public:
     ExtractService();
-    void extractRegionByColor( MatSet* matSet, Region* result);
+    void extractRegionByColor( MatSet& matSet, Region& result);
     // Region extractRegionByColor( MatSet* matSet);
-    Region acquireMaxAreaRegion(Region* region);
+    Region acquireMaxAreaRegion(Region& region);
 };
 
 #endif // EXTRACTSERVICE_H

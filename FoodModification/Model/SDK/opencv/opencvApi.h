@@ -56,6 +56,8 @@ using namespace std;
 class OpenCVAPI {
 public:
     OpenCVAPI();
+    static Rect calculateROI(Size imgSize, Rect srcRect, double scaleRatio);
+    static Rect scaleRect(Rect srcRect, double scaleRatio);
 
     template<class Functor> void raster(Size size, Functor f) {
     	for(int y =0; y<size.height; y++) {
