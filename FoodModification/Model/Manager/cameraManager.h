@@ -1,7 +1,7 @@
 #ifndef CAMERAMANAGER_H
 #define CAMERAMANAGER_H
 
-#include "./SDK/opencv/opencvApi.h"
+#include "../SDK/opencv/opencvApi.h"
 
 class CameraManager {
 
@@ -13,14 +13,13 @@ private:
 /*method*/
 public:
 	static CameraManager& getInstance();
-    void setUp();
+    bool setUp();
     void setCaptureSize(Size size);
-    VideoCapture capture();
+    Mat getFrame();
 private:
     CameraManager();
     CameraManager(const CameraManager&);
     void bindCamera(int port);
-    bool confirmCapture();
 };
 
 #endif // CAMERAMANAGER_H

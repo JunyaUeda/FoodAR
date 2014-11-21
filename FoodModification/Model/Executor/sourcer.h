@@ -1,10 +1,10 @@
 #ifndef SOURCER_H
 #define SOURCER_H
 
-#include "./Param/matSet.h"
-#include "./SDK/opencv/opencvApi.h"
-#include "./cameraManager.h"
-#include "./textureManager.h"
+#include "../Param/matSet.h"
+#include "../SDK/opencv/opencvApi.h"
+#include "../Manager/cameraManager.h"
+#include "../Manager/textureManager.h"
 
 class Sourcer {
 

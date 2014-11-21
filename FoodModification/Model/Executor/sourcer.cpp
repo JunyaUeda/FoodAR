@@ -19,13 +19,12 @@ bool Sourcer::setUp() {
 
 void Sourcer::loadSrc(MatSet& srcSet) {
 
-    Mat srcBGRImg;
-    _cameraManager.capture() >> srcBGRImg;
-
-    srcSet.setBgr(srcBGRImg);
+    Mat bgrImg = _cameraManager.getFrame();
+   
+    srcSet.setBgr(bgrImg);
     srcSet.addChannelImgs(SpaceType::bgr);
     srcSet.addChannelImgs(SpaceType::hsv);
     srcSet.addChannelImgs(SpaceType::ycrcb);
 
-    _textureManager.setTextureSource();
+    _textureManager.update();
 }

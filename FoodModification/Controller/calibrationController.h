@@ -8,7 +8,7 @@
 #include "../Service/calibrationService.h"
 #include "./propertyController.h"
 #include "../Model/Service/regionService.h"
-#include "../Model/calibrator.h"
+#include "../Model/Executor/calibrator.h"
 
 class CalibrationController {
 

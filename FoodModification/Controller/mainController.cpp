@@ -6,8 +6,6 @@
 #define APERTURE_SIZE 3
 #define L2_GRADIENT true
 
-Mat srcHSVImg;//クリックポイントの色度値を取得するためにグローバルにしている。
-
 MainController::MainController() {
 
 }
@@ -17,69 +15,9 @@ MainController& MainController::getInstance() {
     return instance;
 }
 
-void mouseCallback1(int event, int x, int y, int flags, void* param) {
- 
-    switch(event) {
-        case cv::EVENT_LBUTTONDOWN:
-            qDebug() << " H =" << B(srcHSVImg, x,y);
-            qDebug() << " S =" << G(srcHSVImg, x,y);
-            qDebug() << " V =" << R(srcHSVImg, x,y);
-        break;
-        case cv::EVENT_RBUTTONDOWN:
-        
-        break;
-    }
-
-}
 
 void MainController::doConvertion() {
-
-    _sourcer.setUp();
-    
-    Mat srcBGRImg, srcHSVImg, srcYCrCbImg, srcGrayImg, dstBGRImg;
-    Mat BGRChannels[3], HSVChannels[3], YCrCbChannels[3];
-    Mat BGREdges[3], HSVEdges[3], YCrCbEdges[3];
-    QVector<Mat> edgeImgs;
-    
-    map<int, Mat> edges;
-    Mat maskImg;
-    
-    //namedWindow("myWindow", 0);
-    //setWindowProperty("myWindow",CV_WND_PROP_FULLSCREEN,CV_WINDOW_FULLSCREEN);
-
-    namedWindow("myWindow", CV_WINDOW_AUTOSIZE);
-    setMouseCallback("myWindow", mouseCallback1);
-    
-    while (1) {
-        MatSet matSet;
-        _sourcer.loadSrc(matSet);
-        imshow("myWindow", matSet.bgr());
-        edgeController.calculateEdges(matSet.channelImgs(), edgeImgs);
-        MatSet srcSet(srcBGRImg);
-		_extractor.extract(srcSet, edgeImgs);
-        
-        // vector<Rect> rects;
-        // if(textureParam->isNoTexture()) {
-        //     textureController.setROI(dstContours, rects);
-        // } else {
-        //     Mat textureImg = textureController.createTexture(dstContours, maskImg, rects, srcController.srcParam()->textureImg() );
-        //     textureParam->setImg(textureImg);
-        //     imshow("textureImg", textureImg);
-        // }
-        
-
-        // dstBGRImg = srcBGRImg.clone();
-        // convertController.convert(srcBGRImg,srcHSVImg, dstBGRImg, maskImg, rects, textureParam);
-        // if(resizeFlag) {
-        //     resize(dstBGRImg, dstBGRImg, dstSize, 0, 0, INTER_LINEAR);
-        // }
-        // imshow("dstImg",dstBGRImg);
-
-
-        char ch = waitKey(33);
-        if ( ch == 27 ) break;
-    }
-
+    _mainProcedure.start();
 }
 
 

@@ -8,10 +8,14 @@ CameraManager& CameraManager::getInstance() {
     return instance;
 }
 
-void CameraManager::setUp() {
+bool CameraManager::setUp() {
     bindCamera(0);
     setCaptureSize(_defaultSize);
-    confirmCapture();
+
+	if(_capture.isOpened()) {
+        return true;
+    }
+	return false;
 }
 
 void CameraManager::bindCamera(int port) {
@@ -24,18 +28,8 @@ void CameraManager::setCaptureSize(Size size) {
 	_capture.set(CV_CAP_PROP_FRAME_HEIGHT, size.height);
 }
 
-bool CameraManager::confirmCapture() {
-    Mat srcImg;
-    _capture >> srcImg;
-
-    if(srcImg.empty()) {
-        cerr << "videoCapture is failed." << endl;
-        return false;
-    }
-    
-    return true;
-}
-
-VideoCapture CameraManager::capture() {
-    return _capture;
+Mat CameraManager::getFrame() {
+    Mat result;
+    _capture >> result;
+    return result;
 }

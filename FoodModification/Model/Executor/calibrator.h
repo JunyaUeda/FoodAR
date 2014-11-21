@@ -1,12 +1,12 @@
 #ifndef CALIBRATOR_H
 #define CALIBRATOR_H
 
-#include "./SDK/opencv/opencvApi.h"
-#include "./Param/color.h"
-#include "./Service/regionService.h"
-#include "./Param/matSet.h"
-#include "./featureReference.h"
-#include "./TypeDef.h"
+#include "../SDK/opencv/opencvApi.h"
+#include "../Param/color.h"
+#include "../Service/regionService.h"
+#include "../Param/matSet.h"
+#include "../featureReference.h"
+#include "../TypeDef.h"
 
 class Calibrator {
 /*property*/

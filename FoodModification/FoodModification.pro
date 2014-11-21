@@ -53,7 +53,6 @@ SOURCES += main.cpp\
     Model/featureReference.cpp \
     Model/Param/threshold.cpp \
     Model/Param/channelThreshold.cpp \
-    Model/calibrator.cpp \
     Model/Service/regionService.cpp \
     Model/SDK/opencv/opencvApi.cpp \
     Model/Param/channel.cpp \
@@ -61,7 +60,6 @@ SOURCES += main.cpp\
     Model/Param/channelHistogram.cpp \
     Model/Param/matSet.cpp \
     Model/Param/colorThreshold.cpp \
-    Model/extractor.cpp \
     Model/Param/region.cpp \
     Model/Param/edge.cpp \
     Model/Service/colorService.cpp \
@@ -83,9 +81,20 @@ SOURCES += main.cpp\
     Model/condition.cpp \
     Model/Service/edgeService.cpp \
     Model/Service/contourService.cpp \
-    Model/sourcer.cpp \
-    Model/cameraManager.cpp \
-    Model/textureManager.cpp
+    Model/Executor/sourcer.cpp \
+    Model/Manager/textureManager.cpp \
+    Model/Executor/calibrator.cpp \
+    Model/Executor/extractor.cpp \
+    Model/Manager/cameraManager.cpp \
+    Model/Manager/extractionManager.cpp \
+    Model/Executor/outputer.cpp \
+    Model/Manager/windowManager.cpp \
+    Model/Param/Texture/movieTexture.cpp \
+    Model/Param/Texture/stilltexture.cpp \
+    Model/Param/Texture/texture.cpp \
+    Model/Param/Texture/noTexture.cpp \
+    Model/Param/window.cpp \
+    Model/mainProcedure.cpp
 
 HEADERS  += \
     extractParamManager.h \
@@ -130,7 +139,6 @@ HEADERS  += \
     Model/Param/threshold.h \
     Model/Param/channelThreshold.h \
     Model/Param/channelType.h \
-    Model/calibrator.h \
     Model/Service/regionService.h \
     Model/SDK/opencv/opencvApi.h \
     Model/Param/colorSpaceType.h \
@@ -140,7 +148,6 @@ HEADERS  += \
     Model/Param/matSet.h \
     Model/TypeDef.h \
     Model/Param/colorThreshold.h \
-    Model/extractor.h \
     Model/Param/region.h \
     Model/Param/edge.h \
     Model/Service/colorService.h \
@@ -163,9 +170,20 @@ HEADERS  += \
     Model/Param/channelFunc.h \
     Model/Service/edgeService.h \
     Model/Service/contourService.h \
-    Model/sourcer.h \
-    Model/cameraManager.h \
-    Model/textureManager.h
+    Model/Executor/sourcer.h \
+    Model/Manager/textureManager.h \
+    Model/Executor/calibrator.h \
+    Model/Executor/extractor.h \
+    Model/Manager/cameraManager.h \
+    Model/Manager/extractionManager.h \
+    Model/Executor/outputer.h \
+    Model/Manager/windowManager.h \
+    Model/Param/Texture/movieTexture.h \
+    Model/Param/Texture/stillTexture.h \
+    Model/Param/Texture/texture.h \
+    Model/Param/Texture/noTexture.h \
+    Model/Param/window.h \
+    Model/mainProcedure.h
 
 FORMS    += \
     View/calibrateDialog.ui \

@@ -2,12 +2,12 @@
 #define EXTRACTOR_H
 
 
-#include "./Param/edge.h"
-#include "./Param/matSet.h"
-#include "./Param/region.h"
-#include "./Service/edgeService.h"
-#include "./Service/extractService.h"
-#include "./Service/contourService.h"
+#include "../Param/edge.h"
+#include "../Param/matSet.h"
+#include "../Param/region.h"
+#include "../Service/edgeService.h"
+#include "../Service/extractService.h"
+#include "../Service/contourService.h"
 
 
 class Extractor {

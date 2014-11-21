@@ -32,4 +32,11 @@ enum SpaceType {
 	hsv = 1,
 	ycrcb = 2,
 };
+
+enum MediaType {
+	no = 0,
+    still = 1,
+	movie = 2,
+};
+
 #endif // TYPEDEF_H

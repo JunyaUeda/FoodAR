@@ -4,13 +4,10 @@
 #include "opencv2/opencv.hpp"
 #include "./extractController.h"
 #include "../Utils/opencvUtils.h"
-#include "./textureController.h"
 #include "./convertController.h"
-#include "./calibrationController.h"
-#include "./edgeController.h"
 #include "./srcController.h"
 #include "../Param/textureParam.h"
-#include "../Model/sourcer.h"
+#include "../Model/mainProcedure.h"
 
 
 class MainController {
@@ -26,14 +23,8 @@ public:
     void setNoTexture(bool flag);
 
 private:
-    ExtractController& extractController         = ExtractController::getInstance();
-    CalibrationController& calibrationController = CalibrationController::getInstance();
-    TextureController& textureController         = TextureController::getInstance();
-    ConvertController& convertController         = ConvertController::getInstance();
-    EdgeController& edgeController               = EdgeController::getInstance();
-    SrcController& srcController                 = SrcController::getInstance();
-    Extractor& _extractor = Extractor::getInstance();
-    Sourcer& _sourcer = Sourcer::getInstance();
+    MainProcedure& _mainProcedure = MainProcedure::getInstance();
+
 
     TextureParam* textureParam = new TextureParam();
     bool resizeFlag = false;

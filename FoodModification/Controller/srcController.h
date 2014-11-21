@@ -1,7 +1,7 @@
 #ifndef SRCCONTROLLER_H
 #define SRCCONTROLLER_H
-#include "../Model/cameraManager.h"
-#include "../Model/textureManager.h"
+#include "../Model/Manager/cameraManager.h"
+#include "../Model/Manager/textureManager.h"
 #include "../Model/SDK/opencv/opencvApi.h"
 #include "../definition.h"
 
