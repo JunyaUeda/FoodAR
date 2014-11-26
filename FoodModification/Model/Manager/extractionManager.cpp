@@ -8,10 +8,10 @@ ExtractionManager& ExtractionManager::getInstance() {
     return instance;
 }
 
-int ExtractionManager::splitColorSpace() const {
-    return _splitColorSpace;
-}
+// int ExtractionManager::splitColorSpace() const {
+//     return _splitColorSpace;
+// }
 
-void ExtractionManager::setSplitColorSpace(int splitColorSpace) {
-    _splitColorSpace = splitColorSpace;
-}
+// void ExtractionManager::setSplitColorSpace(int splitColorSpace) {
+//     _splitColorSpace = splitColorSpace;
+// }

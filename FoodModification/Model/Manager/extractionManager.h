@@ -2,20 +2,28 @@
 #define EXTRACTIONMANAGER_H
 
 #include "../../definition.h"
+#include "manager.h"
 
-class ExtractionManager {
+class ExtractionManager : public Manager {
+
+/*method*/
+public:
+    static ExtractionManager& getInstance();
+    void save(string filePath){}
+    int splitColorSpace() const;
+    void setSplitColorSpace(int splitColorSpace);
+private:
+    ExtractionManager();
+    ExtractionManager(const ExtractionManager&);
+    XmlElement createXmlElement(){
+        return (*new XmlElement);
+    }
 
 /*property*/
 private:
     int _splitColorSpace = JU_YCrCb;
-/*method*/
-public:
-     static ExtractionManager& getInstance();
-     int splitColorSpace() const;
-    void setSplitColorSpace(int splitColorSpace);
-private:
-	ExtractionManager();
-    ExtractionManager(const ExtractionManager&);
+    
+
 };
 
 #endif // EXTRACTIONMANAGER_H

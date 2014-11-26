@@ -7,11 +7,11 @@ class CameraManager {
 
 /*property*/
 private:
-    VideoCapture _capture;
     Size _size;
 	Size _defaultSize = Size(640, 480);
 /*method*/
 public:
+    VideoCapture _capture;
 	static CameraManager& getInstance();
     bool setUp();
     void setCaptureSize(Size size);

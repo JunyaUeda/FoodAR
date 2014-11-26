@@ -11,7 +11,6 @@ Sourcer& Sourcer::getInstance() {
 bool Sourcer::setUp() {
 
     _cameraManager.setUp();
-
     _textureManager.setUp();
 
     return true;
@@ -20,11 +19,10 @@ bool Sourcer::setUp() {
 void Sourcer::loadSrc(MatSet& srcSet) {
 
     Mat bgrImg = _cameraManager.getFrame();
-   
     srcSet.setBgr(bgrImg);
-    srcSet.addChannelImgs(SpaceType::bgr);
-    srcSet.addChannelImgs(SpaceType::hsv);
-    srcSet.addChannelImgs(SpaceType::ycrcb);
+    //srcSet.addChannelImgs(SpaceType::bgr);
+    //srcSet.addChannelImgs(SpaceType::hsv);
+    //srcSet.addChannelImgs(SpaceType::ycrcb);
 
     _textureManager.update();
 }

@@ -33,3 +33,17 @@ void WindowManager::unFullScreen(QString name) {
     std::string windowName = name.toLocal8Bit();
     unFullScreen(windowName);
 }
+
+string WindowManager::windowName(int index) {
+    return _windowNames[index];
+}
+
+void WindowManager::save(string filePath) {
+
+}
+
+XmlElement WindowManager::createXmlElement() {
+    XmlElement* result = new XmlElement();
+
+    return (*new XmlElement);
+}

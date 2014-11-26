@@ -1,16 +1,14 @@
 #include "mainProcedure.h"
 
 void MainProcedure::start() {
-    
+
      _sourcer.setUp();
     
     while (1) {
-        map<int, Mat> edges;
-        QVector<Mat> edgeImgs;
-        MatSet matSet;
+        map<int, Mat> edges; QVector<Mat> edgeImgs; MatSet matSet;
         _sourcer.loadSrc(matSet);
-        imshow(_windowManager._windowNames[0], matSet.bgr());
-
+    
+		imshow(_windowManager.windowName(0), matSet.bgr());
 
   //       edgeController.calculateEdges(matSet.channelImgs(), edgeImgs);
   //       MatSet srcSet(srcBGRImg);
@@ -33,10 +31,10 @@ void MainProcedure::start() {
         // }
         // imshow("dstImg",dstBGRImg);
 
-        char ch = waitKey(0);
+        char ch = waitKey(33);
         if ( ch == 27 ) break;
     }
-
+    qDebug() << "why";
 }
 
 MainProcedure::MainProcedure() {

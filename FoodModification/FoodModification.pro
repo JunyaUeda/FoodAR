@@ -94,7 +94,11 @@ SOURCES += main.cpp\
     Model/Param/Texture/texture.cpp \
     Model/Param/Texture/noTexture.cpp \
     Model/Param/window.cpp \
-    Model/mainProcedure.cpp
+    Model/mainProcedure.cpp \
+    Model/Executor/saver.cpp \
+    Model/Manager/manager.cpp \
+    Model/Param/xmlElement.cpp \
+    Model/Manager/fileManager.cpp
 
 HEADERS  += \
     extractParamManager.h \
@@ -183,7 +187,11 @@ HEADERS  += \
     Model/Param/Texture/texture.h \
     Model/Param/Texture/noTexture.h \
     Model/Param/window.h \
-    Model/mainProcedure.h
+    Model/mainProcedure.h \
+    Model/Executor/saver.h \
+    Model/Manager/manager.h \
+    Model/Param/xmlElement.h \
+    Model/Manager/fileManager.h
 
 FORMS    += \
     View/calibrateDialog.ui \

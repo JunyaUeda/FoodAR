@@ -2,19 +2,19 @@
 <Params>
     <ExtractColorSpace value="HSV"/>
     <CriterionNum value="2"/>
-    <Criterion Cr="175" Cb="175" value="191" saturation="206" Y="175" green="175" id="0" hue="18" red="175" blue="175"/>
-    <Criterion Cr="176" Cb="176" value="199" saturation="196" Y="176" green="176" id="1" hue="18" red="176" blue="176"/>
+    <Criterion hue="18" red="175" Cr="175" value="208" Y="175" Cb="175" saturation="187" green="175" blue="175" id="0"/>
+    <Criterion hue="18" red="176" Cr="176" value="216" Y="176" Cb="176" saturation="189" green="176" blue="176" id="1"/>
     <ColorExtractTolerance ID="0">
         <hue high="1" low="1"/>
-        <saturation high="49" low="54"/>
-        <value high="9" low="9"/>
+        <saturation high="65" low="65"/>
+        <value high="7" low="7"/>
         <blue high="12" low="13"/>
         <green high="15" low="14"/>
         <red high="17" low="3"/>
     </ColorExtractTolerance>
     <ColorExtractTolerance ID="1">
         <hue high="1" low="1"/>
-        <saturation high="45" low="45"/>
+        <saturation high="38" low="38"/>
         <value high="4" low="4"/>
         <blue high="12" low="13"/>
         <green high="15" low="14"/>
