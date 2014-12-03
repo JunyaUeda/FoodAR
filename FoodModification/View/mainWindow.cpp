@@ -33,10 +33,21 @@ MainWindow::~MainWindow() {
     delete ui;
 
 }
+/*Home Tab*/
+void MainWindow::on_startPushButton_clicked()
+{
+    mainController.start();
+}
+
+void MainWindow::on_stopPushButton_clicked()
+{
+    mainController.stop();
+}
+
 
 void MainWindow::on_convertButton_clicked() {
 
-    mainController.doConvertion();
+    mainController.start();
 
 }
 
@@ -325,3 +336,4 @@ void MainWindow::on_edgeCbCheckBox_clicked()
 {
     _extractionController.updateEngagedEdgeChannels(collectEdgeChannelCheckBoxStatus());
 }
+

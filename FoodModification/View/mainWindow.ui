@@ -30,7 +30,7 @@
      <enum>QTabWidget::Triangular</enum>
     </property>
     <property name="currentIndex">
-     <number>1</number>
+     <number>0</number>
     </property>
     <property name="iconSize">
      <size>
@@ -270,6 +270,32 @@
       </property>
       <property name="text">
        <string>明度</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="stopPushButton">
+      <property name="geometry">
+       <rect>
+        <x>130</x>
+        <y>110</y>
+        <width>101</width>
+        <height>71</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Stop</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="startPushButton">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>100</y>
+        <width>111</width>
+        <height>81</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Start</string>
       </property>
      </widget>
     </widget>

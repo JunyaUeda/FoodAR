@@ -28,7 +28,6 @@ SOURCES += main.cpp\
     Service/textureService.cpp \
     Controller/textureController.cpp \
     Controller/convertController.cpp \
-    Service/calibrationService.cpp \
     View/colorDialog.cpp \
     Param/textureParam.cpp \
     Utils/xmlUtils.cpp \
@@ -114,7 +113,6 @@ HEADERS  += \
     Service/textureService.h \
     Controller/textureController.h \
     Controller/convertController.h \
-    Service/calibrationService.h \
     View/colorDialog.h \
     Param/textureParam.h \
     Utils/xmlUtils.h \

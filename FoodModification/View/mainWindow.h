@@ -27,6 +27,8 @@ public:
     ~MainWindow();
     
 private slots:
+    void on_startPushButton_clicked();
+    void on_stopPushButton_clicked();
     void on_convertButton_clicked();
     void on_CalibrateButton_clicked();
     void on_colorMapButton_clicked();
@@ -84,7 +86,6 @@ private slots:
 	void on_edgeYCheckBox_clicked();
     void on_edgeCrCheckBox_clicked();
 	void on_edgeCbCheckBox_clicked();
-
 private:
     vector<ChannelType> collectColorCheckBoxStatus();
     vector<ChannelType> collectEdgeChannelCheckBoxStatus();
