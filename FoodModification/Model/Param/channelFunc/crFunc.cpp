@@ -14,3 +14,7 @@ int CrFunc::value(MatSet& matSet, int x, int y) {
 int CrFunc::value(MatSet& matSet, Point point) {
 	return value(matSet, point.x, point.y);
 }
+
+QString CrFunc::getChannelName() {
+    return "cr";
+}

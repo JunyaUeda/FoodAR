@@ -1,6 +1,7 @@
 #include "extractionManager.h"
 
 ExtractionManager::ExtractionManager() {
+  
 }
 
 ExtractionManager& ExtractionManager::getInstance() {
@@ -8,10 +9,8 @@ ExtractionManager& ExtractionManager::getInstance() {
     return instance;
 }
 
-// int ExtractionManager::splitColorSpace() const {
-//     return _splitColorSpace;
-// }
+void ExtractionManager::save(QXmlStreamWriter& writer) {
 
-// void ExtractionManager::setSplitColorSpace(int splitColorSpace) {
-//     _splitColorSpace = splitColorSpace;
-// }
+}
+
+

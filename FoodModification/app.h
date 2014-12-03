@@ -17,10 +17,8 @@
 #include <QtCore>
 #include "View/mainWindow.h"
 #include "Controller/mainController.h"
-#include "Controller/propertyController.h"
 #include "Controller/calibrationController.h"
 #include "Utils/opencvBase.h"
-#include "extractParamManager.h"
 
 #define FILEPATH "ExtractParam.xml"
 
@@ -35,8 +33,6 @@ public:
 
 private:
     QString paramFilePath = FILEPATH;
-    PropertyController& propertyController = PropertyController::getInstance();
-    ExtractParamManager& extractParamManager = ExtractParamManager::getInstance();
 	CalibrationController& calibrationController = CalibrationController::getInstance();
     MainController& mainController = MainController::getInstance();
     

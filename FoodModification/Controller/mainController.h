@@ -2,7 +2,6 @@
 #define MAINCONTROLLER_H
 
 #include "opencv2/opencv.hpp"
-#include "./extractController.h"
 #include "../Utils/opencvUtils.h"
 #include "./convertController.h"
 #include "./srcController.h"

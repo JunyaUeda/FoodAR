@@ -10,6 +10,7 @@ public:
     int value(Mat img, int x, int y);
     int value(MatSet& matSet, int x, int y);
     int value(MatSet& matSet, Point point);
+    QString getChannelName();
 };
 
 #endif // CRFUNC_H

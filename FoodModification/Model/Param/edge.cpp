@@ -3,12 +3,16 @@
 Edge::Edge() {
 }
 
-Mat Edge::edgeImg() const {
-    return _edgeImg;
+Edge::Edge(const Mat &mat) {
+    _mat = mat;
 }
 
-void Edge::setEdgeImg(const Mat &edgeImg) {
-    _edgeImg = edgeImg;
+Mat Edge::mat() const {
+    return _mat;
+}
+
+void Edge::setMat(const Mat &mat) {
+    _mat = mat;
 }
 
 vPs Edge::contours() const {

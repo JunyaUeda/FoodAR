@@ -14,3 +14,7 @@ int CbFunc::value(MatSet& matSet, int x, int y) {
 int CbFunc::value(MatSet& matSet, Point point) {
 	return value(matSet, point.x, point.y);
 }
+
+QString CbFunc::getChannelName() {
+    return "cb";
+}

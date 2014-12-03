@@ -14,3 +14,7 @@ int RedFunc::value(MatSet& matSet, int x, int y) {
 int RedFunc::value(MatSet& matSet, Point point) {
 	return value(matSet, point.x, point.y);
 }
+
+QString RedFunc::getChannelName() {
+    return "red";
+}

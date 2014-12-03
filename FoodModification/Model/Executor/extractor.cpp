@@ -12,7 +12,8 @@ Extractor& Extractor::getInstance() {
     return instance;
 }
 
-void Extractor::extract(MatSet& srcSet, QVector<Mat>& edges) {
+void Extractor::extract(MatSet& srcSet) {
+    //_featureReference.displayThreshold();
     Region region(srcSet.size() );
     //コピーの速度をきにしないなら右のほうが読みやすい
     _extractService.extractRegionByColor(srcSet, region);// Region region = _extractService.extractRegionByColor(srcSet);
@@ -20,14 +21,19 @@ void Extractor::extract(MatSet& srcSet, QVector<Mat>& edges) {
 
     Region areamaxRegion = _extractService.acquireMaxAreaRegion(region);
 
+    //エッジ画像を取得する
+    vector<Mat> rawEdges;
+    _edgeFactory.createEdges(srcSet, rawEdges);
+    
+
     // //エッジ画像を取得する
-    Mat dstEdgeImg = _edgeService.extractEdge(edges, areamaxRegion.rois()[0]);
+    Mat dstEdgeImg = _edgeService.extractEdge(rawEdges, areamaxRegion.rois()[0]);
     imshow("edge", dstEdgeImg);
 
 
     //残ったエッジ画像と色による抽出画像を合成する
     bitwise_or(areamaxRegion.maskImg(), dstEdgeImg, dstEdgeImg);
-    //drawContours(dstEdgeImg, areamaxRegion.contours(), 0, Scalar(255, 255, 255), CV_FILLED, LINK_EIGHT);
+    drawContours(dstEdgeImg, areamaxRegion.contours(), 0, Scalar(255, 255, 255), CV_FILLED, LINK_EIGHT);
 
     int minSize = 200;
 	_contourService.fillContours(dstEdgeImg, minSize);

@@ -14,3 +14,7 @@ int HueFunc::value(MatSet& matSet, int x, int y) {
 int HueFunc::value(MatSet& matSet, Point point) {
 	return value(matSet, point.x, point.y);
 }
+
+QString HueFunc::getChannelName() {
+    return "hue";
+}

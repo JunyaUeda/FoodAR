@@ -7,23 +7,21 @@
 
 
 class ChannelFunc {
-
-/*property*/
-public:
-  	virtual int value(Mat img, int x, int y);
-  	virtual int value(MatSet& matSet, int x, int y);
-  	virtual int value(MatSet& matSet, Point point);
-private:
-    QString _name;
-
 /*method*/
 public:
-	QString toString() const {
-        return _name;
-    }
+    virtual int value(Mat img, int x, int y);
+    virtual int value(MatSet& matSet, int x, int y);
+    virtual int value(MatSet& matSet, Point point);
+    virtual QString getChannelName();
     ChannelFunc();
 
 private:
+
+/*property*/  	
+private:
+   
+
+
 
 };
 

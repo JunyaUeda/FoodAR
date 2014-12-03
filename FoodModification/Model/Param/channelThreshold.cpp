@@ -14,8 +14,8 @@ void ChannelThreshold::setThreshold(int average, int tolerance) {
     _under     = average - tolerance;
 }
 
-QList<ChannelThreshold> ChannelThreshold::createAllChannelThreshold() {
-    QList<ChannelThreshold> channelThresholds;
+vector<ChannelThreshold> ChannelThreshold::createAllChannelThreshold() {
+    vector<ChannelThreshold> channelThresholds;
 
     ChannelThreshold th0(new BlueFunc());
     ChannelThreshold th1(new GreenFunc());
@@ -41,9 +41,11 @@ QList<ChannelThreshold> ChannelThreshold::createAllChannelThreshold() {
 
 bool ChannelThreshold::isWithinThreshold(MatSet& matSet, Point point) {
     int value = _channelFunc->value(matSet, point);
-    if( value <= _upper && value >= _under ) {
+    if( (value <= _upper) && (value >= _under) ) {
+
         return true;
     }
+
     return false;
 }
 
@@ -84,3 +86,7 @@ void ChannelThreshold::setUnder(int under) {
     _under = under;
 }
 
+void ChannelThreshold::displayThreshold() {
+    qDebug() << _channelFunc->getChannelName();
+	qDebug() << "upper" << _upper << "under" << _under;
+}

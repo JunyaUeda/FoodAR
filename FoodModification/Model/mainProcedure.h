@@ -1,25 +1,27 @@
 #ifndef MAINPROCEDURE_H
 #define MAINPROCEDURE_H
 
+#include "./Executor/saver.h"
 #include "./Executor/sourcer.h"
 #include "./Executor/extractor.h"
 #include "./Manager/windowManager.h"
 
 class MainProcedure {
 
-/*property*/
-private:
-    Sourcer& _sourcer             = Sourcer::getInstance();
-    Extractor& _extractor         = Extractor::getInstance();
-    WindowManager& _windowManager = WindowManager::getInstance();
-
 /*method*/
 public:
-	static MainProcedure& getInstance();
+    static MainProcedure& getInstance();
     void start();
 private:
     MainProcedure();
     MainProcedure(const MainProcedure&);
+
+/*property*/
+private:
+    Sourcer& _sourcer             = Sourcer::getInstance();
+    Extractor& _extractor         = Extractor::getInstance();
+    Saver& _saver                 = Saver::getInstance();
+    WindowManager& _windowManager = WindowManager::getInstance();
 
 };
 

@@ -25,7 +25,7 @@ ExtractService::ExtractService() {
 // }
 
 void ExtractService::extractRegionByColor(MatSet& srcSet, Region& result) {
-
+    
     for(int y=0; y<srcSet.height(); y++) {
         for(int x=0; x<srcSet.width(); x++) {
 

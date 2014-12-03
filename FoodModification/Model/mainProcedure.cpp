@@ -2,14 +2,15 @@
 
 void MainProcedure::start() {
 
-     _sourcer.setUp();
+    _sourcer.setUp();
+    _saver.save();
     
     while (1) {
         map<int, Mat> edges; QVector<Mat> edgeImgs; MatSet matSet;
         _sourcer.loadSrc(matSet);
-    
 		imshow(_windowManager.windowName(0), matSet.bgr());
 
+        _extractor.extract(matSet);
   //       edgeController.calculateEdges(matSet.channelImgs(), edgeImgs);
   //       MatSet srcSet(srcBGRImg);
         // _extractor.extract(srcSet, edgeImgs);

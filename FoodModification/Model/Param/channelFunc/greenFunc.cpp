@@ -14,3 +14,7 @@ int GreenFunc::value(MatSet& matSet, int x, int y) {
 int GreenFunc::value(MatSet& matSet, Point point) {
 	return value(matSet, point.x, point.y);
 }
+
+QString GreenFunc::getChannelName() {
+    return "green";
+}

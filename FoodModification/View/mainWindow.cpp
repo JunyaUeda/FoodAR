@@ -55,147 +55,273 @@ void MainWindow::on_colorMapButton_clicked() {
 }
 
 void MainWindow::on_alphaSlider_actionTriggered(int action) {
-	int value = ui->alphaSlider->value();
-	double alpha = (double)value/100.0;
-	ui->alphaValueLabel->setText(QString::number(alpha));
-    mainController.setAlpha(alpha);
+// 	int value = ui->alphaSlider->value();
+// 	double alpha = (double)value/100.0;
+// 	ui->alphaValueLabel->setText(QString::number(alpha));
+//     mainController.setAlpha(alpha);
 }
 
 void MainWindow::on_radioButton_captureSizeLarge_clicked() {
-	srcController.setVCaptureSize(SIZE_LARGE);
+	//srcController.setVCaptureSize(SIZE_LARGE);
 }
 
 void MainWindow::on_radioButton_captureSizeSmall_clicked() {
-	srcController.setVCaptureSize(SIZE_SMALL);
+	//srcController.setVCaptureSize(SIZE_SMALL);
 }
 
 void MainWindow::on_radioButton_dstSizeSmall_clicked() {
-	if(ui->radioButton_captureSizeSmall->isChecked()) {
-		mainController.setResizeFlag(false);
-	} else {
-		mainController.setResizeFlag(true);
-		mainController.setDstSize(SIZE_SMALL);
-	}
+	// if(ui->radioButton_captureSizeSmall->isChecked()) {
+	// 	mainController.setResizeFlag(false);
+	// } else {
+	// 	mainController.setResizeFlag(true);
+	// 	mainController.setDstSize(SIZE_SMALL);
+	// }
 }
 
 void MainWindow::on_radioButton_dstSizeLarge_clicked() {
-	if(ui->radioButton_captureSizeSmall->isChecked()){
-		mainController.setResizeFlag(true);
-		mainController.setDstSize(SIZE_LARGE);
-	} else {
-		mainController.setResizeFlag(false);
-	}
+	// if(ui->radioButton_captureSizeSmall->isChecked()){
+	// 	mainController.setResizeFlag(true);
+	// 	mainController.setDstSize(SIZE_LARGE);
+	// } else {
+	// 	mainController.setResizeFlag(false);
+	// }
 }
 
 void MainWindow::on_textureComboBox_currentIndexChanged(const QString &arg1) {
-    if(arg1.contains(".")) {
-        QString path = DIRPATH;
-        path.append(arg1);
-        qDebug() << "changed" << path;
-        QByteArray cStr = path.toLocal8Bit();
-        srcController.changeTextureImg(cStr.data());
-		mainController.setNoTexture(false);
-	} else {
-		String cStr = "noTexture";
-		srcController.changeTextureImg(cStr);
-		mainController.setNoTexture(true);
-	}
+ //    if(arg1.contains(".")) {
+ //        QString path = DIRPATH;
+ //        path.append(arg1);
+ //        qDebug() << "changed" << path;
+ //        QByteArray cStr = path.toLocal8Bit();
+ //        srcController.changeTextureImg(cStr.data());
+	// 	mainController.setNoTexture(false);
+	// } else {
+	// 	String cStr = "noTexture";
+	// 	srcController.changeTextureImg(cStr);
+	// 	mainController.setNoTexture(true);
+	// }
 }
 
 void MainWindow::on_illuminationSlider_valueChanged(int value) {
-	convertController.changeIntensityParam(true, value);
+	//convertController.changeIntensityParam(true, value);
 }
 
 void MainWindow::on_horizontalSlider_valueChanged(int value) {
-	convertController.changeZParam(true, value);
+	//convertController.changeZParam(true, value);
 }
 
 void MainWindow::on_toleranceShiftSlider_0_valueChanged(int value) {
-	vector<int> shift = extractParamManager.toleranceShift();
-	shift[0] = value;
-	extractParamManager.setToleranceShift(shift);
+	// vector<int> shift = extractParamManager.toleranceShift();
+	// shift[0] = value;
+	// extractParamManager.setToleranceShift(shift);
 }
 
 void MainWindow::on_toleranceShiftSlider_1_valueChanged(int value) {
-	vector<int> shift = extractParamManager.toleranceShift();
-	shift[1] = value;
-	extractParamManager.setToleranceShift(shift);
+	// vector<int> shift = extractParamManager.toleranceShift();
+	// shift[1] = value;
+	// extractParamManager.setToleranceShift(shift);
 }
 
 void MainWindow::on_toleranceShiftSlider_2_valueChanged(int value) {
-	vector<int> shift = extractParamManager.toleranceShift();
-	shift[2] = value;
-	extractParamManager.setToleranceShift(shift);
+	// vector<int> shift = extractParamManager.toleranceShift();
+	// shift[2] = value;
+	// extractParamManager.setToleranceShift(shift);
 }
 
 void MainWindow::on_splitColorSpaceComboBox_currentIndexChanged(int index) {
-	srcController.changeSplitColorSpace(index);
+	//srcController.changeSplitColorSpace(index);
 }
 
 
 //Edge Event 
 void MainWindow::changeThreshold(int widgetIndex, int value1, int value2) {
-	CannyThreshold* novel = new CannyThreshold(value1, value2);
-	int channelKey = _edgeWidgetChannelMap.find(widgetIndex)->second;
-	edgeController.changeCannyThreshold(channelKey, novel);
+	// CannyThreshold* novel = new CannyThreshold(value1, value2);
+	// int channelKey = _edgeWidgetChannelMap.find(widgetIndex)->second;
+	// edgeController.changeCannyThreshold(channelKey, novel);
 }
 
 void MainWindow::on_ch0EdgeThreshold1_LineEdit_textChanged(const QString &arg1) {
-	changeThreshold(0, arg1.toInt(), ui->ch0EdgeThreshold2_Slider->value());
-	ui->ch0EdgeThreshold1_Slider->setSliderPosition(arg1.toInt());
+	// changeThreshold(0, arg1.toInt(), ui->ch0EdgeThreshold2_Slider->value());
+	// ui->ch0EdgeThreshold1_Slider->setSliderPosition(arg1.toInt());
 }
 
 void MainWindow::on_ch0EdgeThreshold2_LineEdit_textChanged(const QString &arg1) {
-	changeThreshold(0, ui->ch0EdgeThreshold1_Slider->value(), arg1.toInt());
-	ui->ch0EdgeThreshold2_Slider->setSliderPosition(arg1.toInt());
+	// changeThreshold(0, ui->ch0EdgeThreshold1_Slider->value(), arg1.toInt());
+	// ui->ch0EdgeThreshold2_Slider->setSliderPosition(arg1.toInt());
 }
 
 void MainWindow::on_ch1EdgeThreshold1_LineEdit_textChanged(const QString &arg1) {
-	changeThreshold(1, arg1.toInt(), ui->ch1EdgeThreshold2_Slider->value());
-	ui->ch1EdgeThreshold1_Slider->setSliderPosition(arg1.toInt());
+	// changeThreshold(1, arg1.toInt(), ui->ch1EdgeThreshold2_Slider->value());
+	// ui->ch1EdgeThreshold1_Slider->setSliderPosition(arg1.toInt());
 }
 
 void MainWindow::on_ch1EdgeThreshold2_LineEdit_textChanged(const QString &arg1) {
-	changeThreshold(1, ui->ch1EdgeThreshold1_Slider->value(), arg1.toInt());
-	ui->ch1EdgeThreshold2_Slider->setSliderPosition(arg1.toInt());
+	// changeThreshold(1, ui->ch1EdgeThreshold1_Slider->value(), arg1.toInt());
+	// ui->ch1EdgeThreshold2_Slider->setSliderPosition(arg1.toInt());
 }
 
 void MainWindow::on_ch2EdgeThreshold1_LineEdit_textChanged(const QString &arg1) {
-	changeThreshold(2, arg1.toInt(), ui->ch2EdgeThreshold2_Slider->value());
-	ui->ch2EdgeThreshold1_Slider->setSliderPosition(arg1.toInt());
+	// changeThreshold(2, arg1.toInt(), ui->ch2EdgeThreshold2_Slider->value());
+	// ui->ch2EdgeThreshold1_Slider->setSliderPosition(arg1.toInt());
 }
 
 void MainWindow::on_ch2EdgeThreshold2_LineEdit_textChanged(const QString &arg1) {
-	changeThreshold(2, ui->ch2EdgeThreshold1_Slider->value(), arg1.toInt());
-	ui->ch2EdgeThreshold2_Slider->setSliderPosition(arg1.toInt());
+	// changeThreshold(2, ui->ch2EdgeThreshold1_Slider->value(), arg1.toInt());
+	// ui->ch2EdgeThreshold2_Slider->setSliderPosition(arg1.toInt());
 }
 
 void MainWindow::on_ch0EdgeThreshold1_Slider_valueChanged(int value) {
-	changeThreshold(0, value, ui->ch0EdgeThreshold2_Slider->value());
-	ui->ch0EdgeThreshold1_LineEdit->setText(QString::number(value));
+	// changeThreshold(0, value, ui->ch0EdgeThreshold2_Slider->value());
+	// ui->ch0EdgeThreshold1_LineEdit->setText(QString::number(value));
 }
 
 void MainWindow::on_ch0EdgeThreshold2_Slider_valueChanged(int value) {
-	changeThreshold(0, ui->ch0EdgeThreshold1_Slider->value(),value);
-	ui->ch0EdgeThreshold2_LineEdit->setText(QString::number(value));
+	// changeThreshold(0, ui->ch0EdgeThreshold1_Slider->value(),value);
+	// ui->ch0EdgeThreshold2_LineEdit->setText(QString::number(value));
 }
 
 void MainWindow::on_ch1EdgeThreshold1_Slider_valueChanged(int value) {
-	changeThreshold(1, value, ui->ch1EdgeThreshold2_Slider->value());
-	ui->ch1EdgeThreshold1_LineEdit->setText(QString::number(value));
+	// changeThreshold(1, value, ui->ch1EdgeThreshold2_Slider->value());
+	// ui->ch1EdgeThreshold1_LineEdit->setText(QString::number(value));
 }
 
 void MainWindow::on_ch1EdgeThreshold2_Slider_valueChanged(int value) {
-	changeThreshold(1, ui->ch1EdgeThreshold1_Slider->value(),value);
-	ui->ch1EdgeThreshold2_LineEdit->setText(QString::number(value));
+	// changeThreshold(1, ui->ch1EdgeThreshold1_Slider->value(),value);
+	// ui->ch1EdgeThreshold2_LineEdit->setText(QString::number(value));
 }
 
 void MainWindow::on_ch2EdgeThreshold1_Slider_valueChanged(int value) {
-	changeThreshold(2, value, ui->ch2EdgeThreshold2_Slider->value());
-	ui->ch2EdgeThreshold1_LineEdit->setText(QString::number(value));
+	// changeThreshold(2, value, ui->ch2EdgeThreshold2_Slider->value());
+	// ui->ch2EdgeThreshold1_LineEdit->setText(QString::number(value));
 }
 
 void MainWindow::on_ch2EdgeThreshold2_Slider_valueChanged(int value) {
-	changeThreshold(2, ui->ch2EdgeThreshold1_Slider->value(),value);
-	ui->ch2EdgeThreshold2_LineEdit->setText(QString::number(value));
+	// changeThreshold(2, ui->ch2EdgeThreshold1_Slider->value(),value);
+	// ui->ch2EdgeThreshold2_LineEdit->setText(QString::number(value));
+}
+
+/**
+ *色領域抽出時使用チャンネルボックスのイベントハンドラ
+ *
+*/
+vector<ChannelType> MainWindow::collectColorCheckBoxStatus() {
+	vector<ChannelType> channelList;
+	if(ui->colorBlueCheckBox->isChecked()) channelList.push_back(ChannelType::blue);
+	if(ui->colorGreenCheckBox->isChecked()) channelList.push_back(ChannelType::green);
+	if(ui->colorRedCheckBox->isChecked()) channelList.push_back(ChannelType::red);
+	if(ui->colorHueCheckBox->isChecked()) channelList.push_back(ChannelType::hue);
+	if(ui->colorSaturationCheckBox->isChecked()) channelList.push_back(ChannelType::saturation);
+	if(ui->colorValueCheckBox->isChecked()) channelList.push_back(ChannelType::value);
+	if(ui->colorYCheckBox->isChecked()) channelList.push_back(ChannelType::y);
+	if(ui->colorCrCheckBox->isChecked()) channelList.push_back(ChannelType::cr);
+	if(ui->colorCbCheckBox->isChecked()) channelList.push_back(ChannelType::cb);
+    return channelList;
+}
+
+void MainWindow::on_colorBlueCheckBox_clicked()
+{
+   _extractionController.updateEngagedColorChannels(collectColorCheckBoxStatus());
+}
+
+void MainWindow::on_colorGreenCheckBox_clicked()
+{
+    _extractionController.updateEngagedColorChannels(collectColorCheckBoxStatus());
+}
+
+void MainWindow::on_colorRedCheckBox_clicked()
+{
+    _extractionController.updateEngagedColorChannels(collectColorCheckBoxStatus());
+}
+
+void MainWindow::on_colorHueCheckBox_clicked()
+{
+    _extractionController.updateEngagedColorChannels(collectColorCheckBoxStatus());
+}
+
+void MainWindow::on_colorSaturationCheckBox_clicked()
+{
+    _extractionController.updateEngagedColorChannels(collectColorCheckBoxStatus());
+}
+
+void MainWindow::on_colorValueCheckBox_clicked()
+{
+    _extractionController.updateEngagedColorChannels(collectColorCheckBoxStatus());
+}
+
+void MainWindow::on_colorYCheckBox_clicked()
+{
+    _extractionController.updateEngagedColorChannels(collectColorCheckBoxStatus());
+}
+
+void MainWindow::on_colorCrCheckBox_clicked()
+{
+    _extractionController.updateEngagedColorChannels(collectColorCheckBoxStatus());
+}
+
+void MainWindow::on_colorCbCheckBox_clicked()
+{
+    _extractionController.updateEngagedColorChannels(collectColorCheckBoxStatus());
+}
+
+
+/**
+ *エッジ抽出時使用チャンネルボックスのイベントハンドラ
+ *
+*/
+vector<ChannelType> MainWindow::collectEdgeChannelCheckBoxStatus() {
+    vector<ChannelType> channelList;
+    if(ui->edgeBlueCheckBox->isChecked()) channelList.push_back(ChannelType::blue);
+    if(ui->edgeGreenCheckBox->isChecked()) channelList.push_back(ChannelType::green);
+    if(ui->edgeRedCheckBox->isChecked()) channelList.push_back(ChannelType::red);
+    if(ui->edgeHueCheckBox->isChecked()) channelList.push_back(ChannelType::hue);
+    if(ui->edgeSaturationCheckBox->isChecked()) channelList.push_back(ChannelType::saturation);
+    if(ui->edgeValueCheckBox->isChecked()) channelList.push_back(ChannelType::value);
+    if(ui->edgeYCheckBox->isChecked()) channelList.push_back(ChannelType::y);
+    if(ui->edgeCrCheckBox->isChecked()) channelList.push_back(ChannelType::cr);
+    if(ui->edgeCbCheckBox->isChecked()) channelList.push_back(ChannelType::cb);
+    return channelList;
+}
+void MainWindow::on_edgeBlueCheckBox_clicked()
+{
+    _extractionController.updateEngagedEdgeChannels(collectEdgeChannelCheckBoxStatus());
+}
+
+void MainWindow::on_edgeGreenCheckBox_clicked()
+{
+    _extractionController.updateEngagedEdgeChannels(collectEdgeChannelCheckBoxStatus());
+}
+
+void MainWindow::on_edgeRedCheckBox_clicked()
+{
+    _extractionController.updateEngagedEdgeChannels(collectEdgeChannelCheckBoxStatus());
+}
+
+void MainWindow::on_edgeHueCheckBox_clicked()
+{
+    _extractionController.updateEngagedEdgeChannels(collectEdgeChannelCheckBoxStatus());
+}
+
+void MainWindow::on_edgeSaturationCheckBox_clicked()
+{
+    _extractionController.updateEngagedEdgeChannels(collectEdgeChannelCheckBoxStatus());
+}
+
+void MainWindow::on_edgeValueCheckBox_clicked()
+{
+    _extractionController.updateEngagedEdgeChannels(collectEdgeChannelCheckBoxStatus());
+}
+
+void MainWindow::on_edgeYCheckBox_clicked()
+{
+    _extractionController.updateEngagedEdgeChannels(collectEdgeChannelCheckBoxStatus());
+}
+
+void MainWindow::on_edgeCrCheckBox_clicked()
+{
+    _extractionController.updateEngagedEdgeChannels(collectEdgeChannelCheckBoxStatus());
+}
+
+void MainWindow::on_edgeCbCheckBox_clicked()
+{
+    _extractionController.updateEngagedEdgeChannels(collectEdgeChannelCheckBoxStatus());
 }

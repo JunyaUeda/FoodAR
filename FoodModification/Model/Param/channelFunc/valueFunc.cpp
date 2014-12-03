@@ -14,3 +14,7 @@ int ValueFunc::value(MatSet& matSet, int x, int y) {
 int ValueFunc::value(MatSet& matSet, Point point) {
 	return value(matSet, point.x, point.y);
 }
+
+QString ValueFunc::getChannelName() {
+    return "value";
+}

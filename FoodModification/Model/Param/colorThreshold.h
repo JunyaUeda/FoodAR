@@ -7,22 +7,23 @@
 
 class ColorThreshold {
 
-/*property*/
-private:
-    QList<ChannelThreshold> _channelThresholds;
-    QList<ChannelThreshold> _usedChannelThresholds;
-    int _luminance;
-
 /*method*/
 public:
-	ColorThreshold();
+    ColorThreshold();
     void updateThresholds(QVi averages, QVi tolerances);
-    QList<ChannelThreshold> channelThresholds() const;
-    void setChannelThresholds(const QList<ChannelThreshold> &channelThresholds);
-    void addUsedChannelThreshold(ChannelThreshold threshold);
+    vector<ChannelThreshold> channelThresholds() const;
+    void setChannelThresholds(const vector<ChannelThreshold> &channelThresholds);
+    void addEngagedChannelThreshold(ChannelThreshold& threshold);
     bool isWithinThreshold(MatSet& matSet, Point point);
-    void updateUsedChannels(QList<ChannelType> channelTypes);
+    void updateEngagedChannels(vector<ChannelType> channelTypes);
     int luminance();
+    void displayThreshold();
+
+/*property*/
+private:
+    vector<ChannelThreshold> _channelThresholds;
+    vector<ChannelThreshold*> _engagedChannelThresholds;
+    int _luminance;
 
 };
 

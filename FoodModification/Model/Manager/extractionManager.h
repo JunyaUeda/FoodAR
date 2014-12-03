@@ -1,28 +1,23 @@
 #ifndef EXTRACTIONMANAGER_H
 #define EXTRACTIONMANAGER_H
 
-#include "../../definition.h"
+#include <vector>
 #include "manager.h"
+#include "../TypeDef.h"
+#include "../Param/edgeThreshold.h"
 
 class ExtractionManager : public Manager {
 
 /*method*/
 public:
     static ExtractionManager& getInstance();
-    void save(string filePath){}
-    int splitColorSpace() const;
-    void setSplitColorSpace(int splitColorSpace);
+    void save(QXmlStreamWriter& writer);
 private:
     ExtractionManager();
     ExtractionManager(const ExtractionManager&);
-    XmlElement createXmlElement(){
-        return (*new XmlElement);
-    }
 
 /*property*/
 private:
-    int _splitColorSpace = JU_YCrCb;
-    
 
 };
 

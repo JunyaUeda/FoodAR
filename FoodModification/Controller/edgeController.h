@@ -4,10 +4,10 @@
 #include "../Model/TypeDef.h"
 #include "../Param/edgeParam.h"
 #include "../Utils/opencvUtils.h"
-#include "../extractParamManager.h"
 
 class EdgeController {
 
+/*method*/
 public:
 	static EdgeController& getInstance();
 

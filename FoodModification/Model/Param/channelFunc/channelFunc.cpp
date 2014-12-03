@@ -16,3 +16,7 @@ int ChannelFunc::value(MatSet& matSet, int x, int y) {
 int ChannelFunc::value(MatSet& matSet, Point point) {
 	 return value(matSet, point.x, point.y);
 }
+
+QString ChannelFunc::getChannelName() {
+    return "channel";
+}

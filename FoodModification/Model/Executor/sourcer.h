@@ -8,18 +8,20 @@
 
 class Sourcer {
 
-/*property*/
-private:
-    CameraManager& _cameraManager = CameraManager::getInstance();
-    TextureManager& _textureManager = TextureManager::getInstance();
 /*method*/
 public:
     static Sourcer& getInstance();
     bool setUp();
     void loadSrc(MatSet& srcSet);
 private:
-	Sourcer();
+    Sourcer();
     Sourcer(const Sourcer&);
+    
+/*property*/
+private:
+    CameraManager& _cameraManager = CameraManager::getInstance();
+    TextureManager& _textureManager = TextureManager::getInstance();
+
 };
 
 #endif // SOURCER_H

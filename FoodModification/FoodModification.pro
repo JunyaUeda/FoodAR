@@ -14,19 +14,15 @@ TEMPLATE = app
 
 
 SOURCES += main.cpp\
-    extractParamManager.cpp \
     Param/colorCriterion.cpp \
     Param/colorExtractTolerance.cpp \
     View/calibrateDialog.cpp \
     Param/calibrateClickParam.cpp \
     app.cpp \
-    Controller/extractController.cpp \
     Param/targetParam.cpp \
-    Service/colorExtractService.cpp \
     Utils/opencvBase.cpp \
     Utils/opencvUtils.cpp \
     Controller/calibrationController.cpp \
-    Controller/propertyController.cpp \
     View/mainWindow.cpp \
     Controller/mainController.cpp \
     Service/textureService.cpp \
@@ -49,14 +45,11 @@ SOURCES += main.cpp\
     Model/features.cpp \
     Model/Param/color.cpp \
     Model/extractParam.cpp \
-    Model/xmlReader.cpp \
     Model/featureReference.cpp \
-    Model/Param/threshold.cpp \
     Model/Param/channelThreshold.cpp \
     Model/Service/regionService.cpp \
     Model/SDK/opencv/opencvApi.cpp \
     Model/Param/channel.cpp \
-    Model/Param/source.cpp \
     Model/Param/channelHistogram.cpp \
     Model/Param/matSet.cpp \
     Model/Param/colorThreshold.cpp \
@@ -98,22 +91,24 @@ SOURCES += main.cpp\
     Model/Executor/saver.cpp \
     Model/Manager/manager.cpp \
     Model/Param/xmlElement.cpp \
-    Model/Manager/fileManager.cpp
+    Model/Manager/fileManager.cpp \
+    Controller/fileController.cpp \
+    Param/Features/features.cpp \
+    Model/Util/qtUtil.cpp \
+    Model/Param/edgeThreshold.cpp \
+    Model/edgeFactory.cpp \
+    Controller/extractionController.cpp
 
 HEADERS  += \
-    extractParamManager.h \
     Param/colorCriterion.h \
     Param/colorExtractTolerance.h \
     View/calibrateDialog.h \
     Param/calibrateClickParam.h \
     app.h \
-    Controller/extractController.h \
     Param/targetParam.h \
-    Service/colorExtractService.h \
     Utils/opencvBase.h \
     Utils/opencvUtils.h \
     Controller/calibrationController.h \
-    Controller/propertyController.h \
     View/mainWindow.h \
     Controller/mainController.h \
     Service/textureService.h \
@@ -138,16 +133,13 @@ HEADERS  += \
     Model/Param/color.h \
     Model/Param/channel.h \
     Model/extractParam.h \
-    Model/xmlReader.h \
     Model/featureReference.h \
-    Model/Param/threshold.h \
     Model/Param/channelThreshold.h \
     Model/Param/channelType.h \
     Model/Service/regionService.h \
     Model/SDK/opencv/opencvApi.h \
     Model/Param/colorSpaceType.h \
     Model/Param/channel.h \
-    Model/Param/source.h \
     Model/Param/channelHistogram.h \
     Model/Param/matSet.h \
     Model/TypeDef.h \
@@ -191,7 +183,13 @@ HEADERS  += \
     Model/Executor/saver.h \
     Model/Manager/manager.h \
     Model/Param/xmlElement.h \
-    Model/Manager/fileManager.h
+    Model/Manager/fileManager.h \
+    Controller/fileController.h \
+    Param/Features/features.h \
+    Model/Util/qtUtil.h \
+    Model/Param/edgeThreshold.h \
+    Model/edgeFactory.h \
+    Controller/extractionController.h
 
 FORMS    += \
     View/calibrateDialog.ui \

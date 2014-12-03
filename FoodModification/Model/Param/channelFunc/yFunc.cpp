@@ -14,3 +14,7 @@ int YFunc::value(MatSet& matSet, int x, int y) {
 int YFunc::value(MatSet& matSet, Point point) {
 	return value(matSet, point.x, point.y);
 }
+
+QString YFunc::getChannelName() {
+    return "y";
+}

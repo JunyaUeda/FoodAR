@@ -14,3 +14,7 @@ int BlueFunc::value(MatSet& matSet, int x, int y) {
 int BlueFunc::value(MatSet& matSet, Point point) {
 	return value(matSet, point.x, point.y);
 }
+
+QString BlueFunc::getChannelName() {
+    return "blue";
+}

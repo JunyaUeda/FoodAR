@@ -15,3 +15,8 @@ int SaturationFunc::value(MatSet& matSet, int x, int y) {
 int SaturationFunc::value(MatSet& matSet, Point point) {
 	return value(matSet, point.x, point.y);
 }
+
+
+QString SaturationFunc::getChannelName() {
+    return "saturation";
+}

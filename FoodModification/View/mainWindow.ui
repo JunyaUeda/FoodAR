@@ -6,21 +6,21 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>800</width>
-    <height>600</height>
+    <width>806</width>
+    <height>597</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Main</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QTabWidget" name="tabWidget">
+   <widget class="QTabWidget" name="extractionTabWidget">
     <property name="geometry">
      <rect>
-      <x>0</x>
-      <y>0</y>
+      <x>10</x>
+      <y>10</y>
       <width>801</width>
-      <height>561</height>
+      <height>581</height>
      </rect>
     </property>
     <property name="tabPosition">
@@ -30,7 +30,7 @@
      <enum>QTabWidget::Triangular</enum>
     </property>
     <property name="currentIndex">
-     <number>3</number>
+     <number>1</number>
     </property>
     <property name="iconSize">
      <size>
@@ -273,6 +273,645 @@
       </property>
      </widget>
     </widget>
+    <widget class="QWidget" name="tab_3">
+     <attribute name="title">
+      <string>抽出</string>
+     </attribute>
+     <widget class="QComboBox" name="splitColorSpaceComboBox">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>130</y>
+        <width>131</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="editable">
+       <bool>false</bool>
+      </property>
+      <property name="currentText">
+       <string>YCrCb</string>
+      </property>
+      <property name="currentIndex">
+       <number>2</number>
+      </property>
+      <item>
+       <property name="text">
+        <string>BGR</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>HSV</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>YCrCb</string>
+       </property>
+      </item>
+     </widget>
+     <widget class="QGroupBox" name="ch1EdgeThreshold_groupBox">
+      <property name="geometry">
+       <rect>
+        <x>270</x>
+        <y>300</y>
+        <width>231</width>
+        <height>171</height>
+       </rect>
+      </property>
+      <property name="title">
+       <string>Ch1</string>
+      </property>
+      <widget class="QLineEdit" name="ch1EdgeThreshold1_LineEdit">
+       <property name="geometry">
+        <rect>
+         <x>70</x>
+         <y>40</y>
+         <width>113</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>30</string>
+       </property>
+      </widget>
+      <widget class="QSlider" name="ch1EdgeThreshold1_Slider">
+       <property name="geometry">
+        <rect>
+         <x>60</x>
+         <y>70</y>
+         <width>160</width>
+         <height>19</height>
+        </rect>
+       </property>
+       <property name="maximum">
+        <number>255</number>
+       </property>
+       <property name="value">
+        <number>30</number>
+       </property>
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+      </widget>
+      <widget class="QLabel" name="edgeThresholdLabel_1">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>50</y>
+         <width>62</width>
+         <height>15</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>閾値1</string>
+       </property>
+      </widget>
+      <widget class="QLineEdit" name="ch1EdgeThreshold2_LineEdit">
+       <property name="geometry">
+        <rect>
+         <x>80</x>
+         <y>100</y>
+         <width>113</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>60</string>
+       </property>
+      </widget>
+      <widget class="QSlider" name="ch1EdgeThreshold2_Slider">
+       <property name="geometry">
+        <rect>
+         <x>60</x>
+         <y>140</y>
+         <width>160</width>
+         <height>19</height>
+        </rect>
+       </property>
+       <property name="maximum">
+        <number>255</number>
+       </property>
+       <property name="value">
+        <number>60</number>
+       </property>
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+      </widget>
+      <widget class="QLabel" name="edgeThresholdLabel_2">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>110</y>
+         <width>62</width>
+         <height>15</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>閾値2</string>
+       </property>
+      </widget>
+     </widget>
+     <widget class="QGroupBox" name="ch2EdgeThreshold_groupBox">
+      <property name="geometry">
+       <rect>
+        <x>520</x>
+        <y>300</y>
+        <width>231</width>
+        <height>171</height>
+       </rect>
+      </property>
+      <property name="title">
+       <string>Ch2</string>
+      </property>
+      <widget class="QLineEdit" name="ch2EdgeThreshold1_LineEdit">
+       <property name="geometry">
+        <rect>
+         <x>70</x>
+         <y>40</y>
+         <width>113</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>30</string>
+       </property>
+      </widget>
+      <widget class="QSlider" name="ch2EdgeThreshold1_Slider">
+       <property name="geometry">
+        <rect>
+         <x>60</x>
+         <y>70</y>
+         <width>160</width>
+         <height>19</height>
+        </rect>
+       </property>
+       <property name="maximum">
+        <number>255</number>
+       </property>
+       <property name="value">
+        <number>30</number>
+       </property>
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+      </widget>
+      <widget class="QLabel" name="edgeThresholdLabel_3">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>50</y>
+         <width>62</width>
+         <height>15</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>閾値1</string>
+       </property>
+      </widget>
+      <widget class="QLineEdit" name="ch2EdgeThreshold2_LineEdit">
+       <property name="geometry">
+        <rect>
+         <x>80</x>
+         <y>100</y>
+         <width>113</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>60</string>
+       </property>
+      </widget>
+      <widget class="QSlider" name="ch2EdgeThreshold2_Slider">
+       <property name="geometry">
+        <rect>
+         <x>60</x>
+         <y>140</y>
+         <width>160</width>
+         <height>19</height>
+        </rect>
+       </property>
+       <property name="maximum">
+        <number>255</number>
+       </property>
+       <property name="value">
+        <number>60</number>
+       </property>
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+      </widget>
+      <widget class="QLabel" name="edgeThresholdLabel_4">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>110</y>
+         <width>62</width>
+         <height>15</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>閾値2</string>
+       </property>
+      </widget>
+     </widget>
+     <widget class="QGroupBox" name="ch0EdgeThreshold_groupBox">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>290</y>
+        <width>231</width>
+        <height>171</height>
+       </rect>
+      </property>
+      <property name="title">
+       <string>Ch0</string>
+      </property>
+      <widget class="QLineEdit" name="ch0EdgeThreshold1_LineEdit">
+       <property name="geometry">
+        <rect>
+         <x>70</x>
+         <y>40</y>
+         <width>113</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>30</string>
+       </property>
+      </widget>
+      <widget class="QSlider" name="ch0EdgeThreshold1_Slider">
+       <property name="geometry">
+        <rect>
+         <x>60</x>
+         <y>70</y>
+         <width>160</width>
+         <height>19</height>
+        </rect>
+       </property>
+       <property name="maximum">
+        <number>255</number>
+       </property>
+       <property name="value">
+        <number>30</number>
+       </property>
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+      </widget>
+      <widget class="QLabel" name="edgeThresholdLabel_11">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>50</y>
+         <width>62</width>
+         <height>15</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>閾値1</string>
+       </property>
+      </widget>
+      <widget class="QLineEdit" name="ch0EdgeThreshold2_LineEdit">
+       <property name="geometry">
+        <rect>
+         <x>80</x>
+         <y>100</y>
+         <width>113</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>60</string>
+       </property>
+      </widget>
+      <widget class="QSlider" name="ch0EdgeThreshold2_Slider">
+       <property name="geometry">
+        <rect>
+         <x>60</x>
+         <y>140</y>
+         <width>160</width>
+         <height>19</height>
+        </rect>
+       </property>
+       <property name="maximum">
+        <number>255</number>
+       </property>
+       <property name="value">
+        <number>60</number>
+       </property>
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+      </widget>
+      <widget class="QLabel" name="edgeThresholdLabel_12">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>110</y>
+         <width>62</width>
+         <height>15</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>閾値2</string>
+       </property>
+      </widget>
+     </widget>
+     <widget class="QPushButton" name="pushButton">
+      <property name="geometry">
+       <rect>
+        <x>30</x>
+        <y>30</y>
+        <width>101</width>
+        <height>81</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>チャンネル画像</string>
+      </property>
+     </widget>
+     <widget class="QGroupBox" name="colorChannelGroupBox">
+      <property name="geometry">
+       <rect>
+        <x>180</x>
+        <y>20</y>
+        <width>271</width>
+        <height>141</height>
+       </rect>
+      </property>
+      <property name="title">
+       <string>色抽出使用チャンネル</string>
+      </property>
+      <widget class="QCheckBox" name="colorBlueCheckBox">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>30</y>
+         <width>93</width>
+         <height>19</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>青</string>
+       </property>
+      </widget>
+      <widget class="QCheckBox" name="colorGreenCheckBox">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>60</y>
+         <width>93</width>
+         <height>19</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>緑</string>
+       </property>
+      </widget>
+      <widget class="QCheckBox" name="colorRedCheckBox">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>90</y>
+         <width>93</width>
+         <height>19</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>赤</string>
+       </property>
+      </widget>
+      <widget class="QCheckBox" name="colorHueCheckBox">
+       <property name="geometry">
+        <rect>
+         <x>110</x>
+         <y>30</y>
+         <width>93</width>
+         <height>19</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>色相</string>
+       </property>
+       <property name="checked">
+        <bool>true</bool>
+       </property>
+      </widget>
+      <widget class="QCheckBox" name="colorSaturationCheckBox">
+       <property name="geometry">
+        <rect>
+         <x>110</x>
+         <y>60</y>
+         <width>93</width>
+         <height>19</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>彩度</string>
+       </property>
+       <property name="checked">
+        <bool>true</bool>
+       </property>
+      </widget>
+      <widget class="QCheckBox" name="colorValueCheckBox">
+       <property name="geometry">
+        <rect>
+         <x>110</x>
+         <y>90</y>
+         <width>93</width>
+         <height>19</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>明度</string>
+       </property>
+       <property name="checked">
+        <bool>true</bool>
+       </property>
+      </widget>
+      <widget class="QCheckBox" name="colorYCheckBox">
+       <property name="geometry">
+        <rect>
+         <x>210</x>
+         <y>30</y>
+         <width>93</width>
+         <height>19</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Y</string>
+       </property>
+      </widget>
+      <widget class="QCheckBox" name="colorCrCheckBox">
+       <property name="geometry">
+        <rect>
+         <x>210</x>
+         <y>60</y>
+         <width>93</width>
+         <height>19</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Cr</string>
+       </property>
+      </widget>
+      <widget class="QCheckBox" name="colorCbCheckBox">
+       <property name="geometry">
+        <rect>
+         <x>210</x>
+         <y>90</y>
+         <width>93</width>
+         <height>19</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Cb</string>
+       </property>
+      </widget>
+     </widget>
+     <widget class="QGroupBox" name="edgeChannelGroupBox">
+      <property name="geometry">
+       <rect>
+        <x>480</x>
+        <y>30</y>
+        <width>281</width>
+        <height>131</height>
+       </rect>
+      </property>
+      <property name="title">
+       <string>エッジ抽出使用チャンネル</string>
+      </property>
+      <widget class="QCheckBox" name="edgeBlueCheckBox">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>20</y>
+         <width>93</width>
+         <height>19</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>青</string>
+       </property>
+      </widget>
+      <widget class="QCheckBox" name="edgeGreenCheckBox">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>50</y>
+         <width>93</width>
+         <height>19</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>緑</string>
+       </property>
+      </widget>
+      <widget class="QCheckBox" name="edgeRedCheckBox">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>90</y>
+         <width>93</width>
+         <height>19</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>赤</string>
+       </property>
+      </widget>
+      <widget class="QCheckBox" name="edgeHueCheckBox">
+       <property name="geometry">
+        <rect>
+         <x>110</x>
+         <y>20</y>
+         <width>93</width>
+         <height>19</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>色相</string>
+       </property>
+      </widget>
+      <widget class="QCheckBox" name="edgeSaturationCheckBox">
+       <property name="geometry">
+        <rect>
+         <x>110</x>
+         <y>50</y>
+         <width>93</width>
+         <height>19</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>彩度</string>
+       </property>
+       <property name="checked">
+        <bool>true</bool>
+       </property>
+      </widget>
+      <widget class="QCheckBox" name="edgeValueCheckBox">
+       <property name="geometry">
+        <rect>
+         <x>110</x>
+         <y>90</y>
+         <width>93</width>
+         <height>19</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>明度</string>
+       </property>
+       <property name="checked">
+        <bool>true</bool>
+       </property>
+      </widget>
+      <widget class="QCheckBox" name="edgeYCheckBox">
+       <property name="geometry">
+        <rect>
+         <x>200</x>
+         <y>20</y>
+         <width>93</width>
+         <height>19</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Y</string>
+       </property>
+      </widget>
+      <widget class="QCheckBox" name="edgeCrCheckBox">
+       <property name="geometry">
+        <rect>
+         <x>200</x>
+         <y>50</y>
+         <width>93</width>
+         <height>19</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Cr</string>
+       </property>
+       <property name="checked">
+        <bool>true</bool>
+       </property>
+      </widget>
+      <widget class="QCheckBox" name="edgeCbCheckBox">
+       <property name="geometry">
+        <rect>
+         <x>200</x>
+         <y>90</y>
+         <width>93</width>
+         <height>19</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Cb</string>
+       </property>
+      </widget>
+     </widget>
+    </widget>
     <widget class="QWidget" name="tab_5">
      <attribute name="title">
       <string>照明</string>
@@ -470,367 +1109,6 @@
       </attribute>
      </widget>
     </widget>
-    <widget class="QWidget" name="tab_3">
-     <attribute name="title">
-      <string>食品抽出</string>
-     </attribute>
-     <widget class="QComboBox" name="splitColorSpaceComboBox">
-      <property name="geometry">
-       <rect>
-        <x>40</x>
-        <y>40</y>
-        <width>131</width>
-        <height>41</height>
-       </rect>
-      </property>
-      <property name="editable">
-       <bool>false</bool>
-      </property>
-      <property name="currentText">
-       <string>YCrCb</string>
-      </property>
-      <property name="currentIndex">
-       <number>2</number>
-      </property>
-      <item>
-       <property name="text">
-        <string>BGR</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>HSV</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>YCrCb</string>
-       </property>
-      </item>
-     </widget>
-     <widget class="QLabel" name="label_2">
-      <property name="geometry">
-       <rect>
-        <x>30</x>
-        <y>130</y>
-        <width>62</width>
-        <height>15</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>エッジ</string>
-      </property>
-     </widget>
-     <widget class="QGroupBox" name="ch1EdgeThreshold_groupBox">
-      <property name="geometry">
-       <rect>
-        <x>290</x>
-        <y>180</y>
-        <width>231</width>
-        <height>171</height>
-       </rect>
-      </property>
-      <property name="title">
-       <string>Ch1</string>
-      </property>
-      <widget class="QLineEdit" name="ch1EdgeThreshold1_LineEdit">
-       <property name="geometry">
-        <rect>
-         <x>70</x>
-         <y>40</y>
-         <width>113</width>
-         <height>21</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>30</string>
-       </property>
-      </widget>
-      <widget class="QSlider" name="ch1EdgeThreshold1_Slider">
-       <property name="geometry">
-        <rect>
-         <x>60</x>
-         <y>70</y>
-         <width>160</width>
-         <height>19</height>
-        </rect>
-       </property>
-       <property name="maximum">
-        <number>255</number>
-       </property>
-       <property name="value">
-        <number>30</number>
-       </property>
-       <property name="orientation">
-        <enum>Qt::Horizontal</enum>
-       </property>
-      </widget>
-      <widget class="QLabel" name="edgeThresholdLabel_1">
-       <property name="geometry">
-        <rect>
-         <x>20</x>
-         <y>50</y>
-         <width>62</width>
-         <height>15</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>閾値1</string>
-       </property>
-      </widget>
-      <widget class="QLineEdit" name="ch1EdgeThreshold2_LineEdit">
-       <property name="geometry">
-        <rect>
-         <x>80</x>
-         <y>100</y>
-         <width>113</width>
-         <height>21</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>60</string>
-       </property>
-      </widget>
-      <widget class="QSlider" name="ch1EdgeThreshold2_Slider">
-       <property name="geometry">
-        <rect>
-         <x>60</x>
-         <y>140</y>
-         <width>160</width>
-         <height>19</height>
-        </rect>
-       </property>
-       <property name="maximum">
-        <number>255</number>
-       </property>
-       <property name="value">
-        <number>60</number>
-       </property>
-       <property name="orientation">
-        <enum>Qt::Horizontal</enum>
-       </property>
-      </widget>
-      <widget class="QLabel" name="edgeThresholdLabel_2">
-       <property name="geometry">
-        <rect>
-         <x>20</x>
-         <y>110</y>
-         <width>62</width>
-         <height>15</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>閾値2</string>
-       </property>
-      </widget>
-     </widget>
-     <widget class="QGroupBox" name="ch2EdgeThreshold_groupBox">
-      <property name="geometry">
-       <rect>
-        <x>540</x>
-        <y>170</y>
-        <width>231</width>
-        <height>171</height>
-       </rect>
-      </property>
-      <property name="title">
-       <string>Ch2</string>
-      </property>
-      <widget class="QLineEdit" name="ch2EdgeThreshold1_LineEdit">
-       <property name="geometry">
-        <rect>
-         <x>70</x>
-         <y>40</y>
-         <width>113</width>
-         <height>21</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>30</string>
-       </property>
-      </widget>
-      <widget class="QSlider" name="ch2EdgeThreshold1_Slider">
-       <property name="geometry">
-        <rect>
-         <x>60</x>
-         <y>70</y>
-         <width>160</width>
-         <height>19</height>
-        </rect>
-       </property>
-       <property name="maximum">
-        <number>255</number>
-       </property>
-       <property name="value">
-        <number>30</number>
-       </property>
-       <property name="orientation">
-        <enum>Qt::Horizontal</enum>
-       </property>
-      </widget>
-      <widget class="QLabel" name="edgeThresholdLabel_3">
-       <property name="geometry">
-        <rect>
-         <x>20</x>
-         <y>50</y>
-         <width>62</width>
-         <height>15</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>閾値1</string>
-       </property>
-      </widget>
-      <widget class="QLineEdit" name="ch2EdgeThreshold2_LineEdit">
-       <property name="geometry">
-        <rect>
-         <x>80</x>
-         <y>100</y>
-         <width>113</width>
-         <height>21</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>60</string>
-       </property>
-      </widget>
-      <widget class="QSlider" name="ch2EdgeThreshold2_Slider">
-       <property name="geometry">
-        <rect>
-         <x>60</x>
-         <y>140</y>
-         <width>160</width>
-         <height>19</height>
-        </rect>
-       </property>
-       <property name="maximum">
-        <number>255</number>
-       </property>
-       <property name="value">
-        <number>60</number>
-       </property>
-       <property name="orientation">
-        <enum>Qt::Horizontal</enum>
-       </property>
-      </widget>
-      <widget class="QLabel" name="edgeThresholdLabel_4">
-       <property name="geometry">
-        <rect>
-         <x>20</x>
-         <y>110</y>
-         <width>62</width>
-         <height>15</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>閾値2</string>
-       </property>
-      </widget>
-     </widget>
-     <widget class="QGroupBox" name="ch0EdgeThreshold_groupBox">
-      <property name="geometry">
-       <rect>
-        <x>30</x>
-        <y>180</y>
-        <width>231</width>
-        <height>171</height>
-       </rect>
-      </property>
-      <property name="title">
-       <string>Ch0</string>
-      </property>
-      <widget class="QLineEdit" name="ch0EdgeThreshold1_LineEdit">
-       <property name="geometry">
-        <rect>
-         <x>70</x>
-         <y>40</y>
-         <width>113</width>
-         <height>21</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>30</string>
-       </property>
-      </widget>
-      <widget class="QSlider" name="ch0EdgeThreshold1_Slider">
-       <property name="geometry">
-        <rect>
-         <x>60</x>
-         <y>70</y>
-         <width>160</width>
-         <height>19</height>
-        </rect>
-       </property>
-       <property name="maximum">
-        <number>255</number>
-       </property>
-       <property name="value">
-        <number>30</number>
-       </property>
-       <property name="orientation">
-        <enum>Qt::Horizontal</enum>
-       </property>
-      </widget>
-      <widget class="QLabel" name="edgeThresholdLabel_11">
-       <property name="geometry">
-        <rect>
-         <x>20</x>
-         <y>50</y>
-         <width>62</width>
-         <height>15</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>閾値1</string>
-       </property>
-      </widget>
-      <widget class="QLineEdit" name="ch0EdgeThreshold2_LineEdit">
-       <property name="geometry">
-        <rect>
-         <x>80</x>
-         <y>100</y>
-         <width>113</width>
-         <height>21</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>60</string>
-       </property>
-      </widget>
-      <widget class="QSlider" name="ch0EdgeThreshold2_Slider">
-       <property name="geometry">
-        <rect>
-         <x>60</x>
-         <y>140</y>
-         <width>160</width>
-         <height>19</height>
-        </rect>
-       </property>
-       <property name="maximum">
-        <number>255</number>
-       </property>
-       <property name="value">
-        <number>60</number>
-       </property>
-       <property name="orientation">
-        <enum>Qt::Horizontal</enum>
-       </property>
-      </widget>
-      <widget class="QLabel" name="edgeThresholdLabel_12">
-       <property name="geometry">
-        <rect>
-         <x>20</x>
-         <y>110</y>
-         <width>62</width>
-         <height>15</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>閾値2</string>
-       </property>
-      </widget>
-     </widget>
-    </widget>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
@@ -838,13 +1116,19 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>800</width>
+     <width>806</width>
      <height>29</height>
     </rect>
    </property>
    <property name="nativeMenuBar">
     <bool>false</bool>
    </property>
+   <widget class="QMenu" name="menuFood_AR_System">
+    <property name="title">
+     <string>Food AR System</string>
+    </property>
+   </widget>
+   <addaction name="menuFood_AR_System"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
  </widget>

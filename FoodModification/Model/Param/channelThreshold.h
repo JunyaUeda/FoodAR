@@ -16,20 +16,12 @@
 
 class ChannelThreshold {
 
-/*property*/
-private:
-    ChannelFunc* _channelFunc;
-	int _average;
-	int _tolerance;
-	int _upper;
-	int _under;
-
 /*method*/
 public:
     ChannelThreshold(ChannelFunc* type);
     bool loadAverage(QDomElement element);
     void setThreshold(int average, int tolerance);
-    static QList<ChannelThreshold> createAllChannelThreshold();
+    static vector<ChannelThreshold> createAllChannelThreshold();
     bool isWithinThreshold(MatSet& matSet, Point point);
     //getter setter
     ChannelFunc* channelFunc() const;
@@ -41,9 +33,20 @@ public:
     void setUpper(int upper);
     int under() const;
     void setUnder(int under);
+    void displayThreshold();
 
 private:
     ChannelThreshold();
+
+/*property*/
+private:
+    ChannelFunc* _channelFunc;
+	int _average;
+	int _tolerance;
+	int _upper;
+	int _under;
+
+
 
 };
 

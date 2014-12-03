@@ -5,6 +5,7 @@
 #include "../Param/edge.h"
 #include "../Param/matSet.h"
 #include "../Param/region.h"
+#include "../edgeFactory.h"
 #include "../Service/edgeService.h"
 #include "../Service/extractService.h"
 #include "../Service/contourService.h"
@@ -12,20 +13,22 @@
 
 class Extractor {
 
+/*method*/
+public:
+    static Extractor& getInstance();
+    void extract(MatSet& srcSet);
+
+private:
+    Extractor();
+    Extractor(const Extractor&);
+
 /*property*/
 private:
 	ExtractService  _extractService;
     EdgeService _edgeService;
     ContourService _contourService;
 	FeatureReference& _featureReference = FeatureReference::getInstance();
-/*method*/
-public:
-	static Extractor& getInstance();
-    void extract(MatSet& srcSet, QVector<Mat>& edges);
-
-private:
-    Extractor();
-    Extractor(const Extractor&);
+    EdgeFactory& _edgeFactory = EdgeFactory::getInstance();
 
 };
 

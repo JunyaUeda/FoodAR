@@ -2,7 +2,13 @@
 
 FeatureReference::FeatureReference() {
     _colorThresholds.push_back((*new ColorThreshold()));
+    vector<ChannelType> types;
+    types.push_back(ChannelType::hue);
+    types.push_back(ChannelType::saturation);
+    types.push_back(ChannelType::value);
+    _colorThresholds[0].updateEngagedChannels(types);
     _colorThresholds.push_back((*new ColorThreshold()));
+    _colorThresholds[1].updateEngagedChannels(types);
 }
 
 FeatureReference& FeatureReference::getInstance() {
@@ -11,55 +17,30 @@ FeatureReference& FeatureReference::getInstance() {
 }
 
 void FeatureReference::loadFeaturesFromFile(QDomDocument doc) {
-	loadExtractColorSpace(doc);
-	loadAverage(doc);
+
+	//loadAverage(doc);
 }
 
-void FeatureReference::loadExtractColorSpace(QDomDocument doc) {
-    QString colorSpace_txt = XmlUtils::getAttr(doc, "ExtractColorSpace", "value");
 
-    if(colorSpace_txt == "BGR") {
-    	qDebug() << "colorSpace = BGR";
-        _extractParamManager.setExtractColorSpace(0);
-    } else if (colorSpace_txt == "HSV") {
-    	qDebug() << "colorSpace = HSV";
-        _extractParamManager.setExtractColorSpace(1);
-    }
-}
-
-void FeatureReference::loadAverage(QDomDocument doc) {
-	QDomElement root = doc.firstChildElement();
-    QDomNodeList nodes = root.elementsByTagName("Average");
-    qDebug() << "loadAverage";
-    for(int i =0;  i<nodes.count(); i++ ) {
-
-        QDomElement element = nodes.at(i).toElement();
-
-        _threshold->loadThreshold(element);
-        qDebug() << "loadThreshold";
-    }
-}
 
 void FeatureReference::updateThresholds(QVis averages, QVis tolerances) {
 
-    QList<ChannelType> types;
-    types.push_back(ChannelType::hue);
-    types.push_back(ChannelType::saturation);
-    types.push_back(ChannelType::value);
-
     for(int i=0; i<tolerances.size(); i++) {
         _colorThresholds[i].updateThresholds(averages[i], tolerances[i]);
-        _colorThresholds[i].updateUsedChannels(types);
     }
 
-    
+}
 
+void FeatureReference::displayThreshold() {
+    for(ColorThreshold threshold : _colorThresholds) {
+        threshold.displayThreshold();
+    }
 }
 
 inline ColorThreshold* FeatureReference::getColorThreshold(int value) {
 
-    ColorThreshold* colorThreshold;
-    int minDiff = 256;
+    // ColorThreshold* colorThreshold;
+    // int minDiff = 256;
 
     // for(ColorThreshold c : _colorThresholds) {
     //     int diff = abs(value - c.channelThresholds()[5].average());
@@ -76,16 +57,27 @@ inline ColorThreshold* FeatureReference::getColorThreshold(int value) {
     //return colorThreshold;
     return &_colorThresholds[0];
 }
+
 bool FeatureReference::isWithinThreshold(MatSet& matSet, Point point) {
 
-    ColorThreshold* colorThreshold = getColorThreshold( V(matSet.hsv(), point.x, point.y) );
-    if(colorThreshold->isWithinThreshold(matSet, point)) {
-        return true;
+    //ColorThreshold* colorThreshold = getColorThreshold( V(matSet.hsv(), point.x, point.y) );
+    if(abs(value - _colorThresholds[0].luminance()) > abs(value - _colorThresholds[1].luminance() ) ){
+        if( _colorThresholds[1].isWithinThreshold(matSet, point)) {
+            return true;
+        }
+        return false;
+    } else {
+        if( _colorThresholds[0].isWithinThreshold(matSet, point)) {
+            return true;
+        }
+        return false;
     }
-    return false;
+   
 }
 
-
+void FeatureReference::updateEngagedChannels(const vector<ChannelType> list, const int thresholdIndex) {
+    _colorThresholds[thresholdIndex].updateEngagedChannels(list);
+}
 
 
 

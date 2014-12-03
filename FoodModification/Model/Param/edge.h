@@ -2,20 +2,24 @@
 #define EDGE_H
 
 #include "../TypeDef.h"
+#include "../SDK/opencv/opencvApi.h"
 
 class Edge {
 
-/*property*/
-private:
-	Mat _edgeImg;
-	vPs _contours;
 /*method*/
 public:
     Edge();
-    Mat edgeImg() const;
-    void setEdgeImg(const Mat &edgeImg);
+    Edge(const Mat &mat);
+    Mat mat() const;
+    void setMat(const Mat &mat);;
     vPs contours() const;
     void setContours(const vPs &contours);
+
+/*property*/
+private:
+	Mat _mat;
+	vPs _contours;
+
 };
 
 #endif // EDGE_H

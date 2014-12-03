@@ -33,3 +33,18 @@ Mat CameraManager::getFrame() {
     _capture >> result;
     return result;
 }
+
+void CameraManager::save(QXmlStreamWriter& writer) {
+   
+    writer.writeStartElement("Camera"); // root element start
+
+    writer.writeStartElement("input size"); // element1 start
+    QXmlStreamAttributes inputSizes;
+    inputSizes.append("width", QtUtil::toQString(_size.width));
+    inputSizes.append("height", QtUtil::toQString(_size.width));
+    writer.writeAttributes(inputSizes);
+    writer.writeEndElement(); // element1 end
+
+    writer.writeEndElement(); // root end
+  
+}

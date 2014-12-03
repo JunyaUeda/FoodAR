@@ -1,80 +1,35 @@
 #include "edgeService.h"
 
-EdgeService::EdgeService()
-{
+EdgeService::EdgeService() {
+
 }
 
 void EdgeService::aqcuireEdgeImgs() {
 
 }
 
-Mat EdgeService::extractEdge(QVector<Mat>& channelEdgeImgs, Rect& roi) {
+Mat EdgeService::extractEdge(vector<Mat>& channelEdgeImgs, Rect& roi) {
+
+    if(!channelEdgeImgs.size()) {
+        Mat mat;
+        return  mat;  
+    }
 
      Mat resultImg = Mat::zeros(channelEdgeImgs[0].size(), CV_8UC1);
-    imshow("edge img ", channelEdgeImgs[0]);
-    imshow("edge img1 ", channelEdgeImgs[1]);
-    imshow("edge img2 ", channelEdgeImgs[2]);
+
     for(int y=roi.y; y<(roi.y+roi.height); y++) {
         for(int x=roi.x; x<(roi.x+roi.width); x++) {
             int score = 0;
-            if(L(channelEdgeImgs[0],x,y) == 255) score++;
-            if(L(channelEdgeImgs[1],x,y) == 255) score++;
-            if(L(channelEdgeImgs[2],x,y) == 255) score++;
-
+            for(Mat mat : channelEdgeImgs) {
+                if(L(mat,x,y) == 255) score++;
+            }
+            
             if(score >= 2) {
                 L(resultImg, x,y) = 255;
             }
         }
     }
      return resultImg;
-}
-
-void EdgeService::extractEdge(QVector<Mat>& channelEdgeImgs, Mat& dstEdgeImg) {
-
-    // imshow("edge img ", channelEdgeImgs[0]);
-    // imshow("edge img ", channelEdgeImgs[1]);
-    // imshow("edge img ", channelEdgeImgs[2]);
-    // for(int y=0; y<channelEdgeImgs[0].rows; y++) {
-    //     for(int x=0; x<channelEdgeImgs[0].cols; x++) {
-    //         int score = 0;
-    //         if(L(channelEdgeImgs[0],x,y) == 255) score++;
-    //         if(L(channelEdgeImgs[1],x,y) == 255) score++;
-    //         if(L(channelEdgeImgs[2],x,y) == 255) score++;
-
-    //         // if(score >= 2) {
-    //         //     L(dstEdgeImg, x,y) = 255;
-    //         // } else {
-    //         //     L(dstEdgeImg, x,y) = 0;
-    //         // }
-    //     }
-    // }
-
-     imshow("edge img after", dstEdgeImg);
-
-}
-
-void EdgeService::extractEdge(cv::Mat *channelEdgeImgs, cv::Mat dstEdgeImg) {
-
-    // cv::imshow("edge img0 before", channelEdgeImgs[0]);
-    // cv::imshow("edge img1 before", channelEdgeImgs[1]);
-    // cv::imshow("edge img2 before", channelEdgeImgs[2]);
-    for(int y=0; y<channelEdgeImgs[0].rows; y++) {
-        for(int x=0; x<channelEdgeImgs[0].cols; x++) {
-            int score = 0;
-            if(L(channelEdgeImgs[0],x,y) == 255) score++;
-            if(L(channelEdgeImgs[1],x,y) == 255) score++;
-            if(L(channelEdgeImgs[2],x,y) == 255) score++;
-
-            if(score >= 2) {
-                L(dstEdgeImg, x,y) = 255;
-            } else {
-                L(dstEdgeImg, x,y) = 0;
-            }
-        }
-    }
-
-    cv::imshow("edge img after", dstEdgeImg);
-
 }
 
 /**

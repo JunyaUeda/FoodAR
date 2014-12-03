@@ -9,6 +9,7 @@
 #include "../TypeDef.h"
 
 class Calibrator {
+    
 /*property*/
 private:
 	RegionService* _regionService;

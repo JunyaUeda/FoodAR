@@ -5,15 +5,7 @@
 #include "../TypeDef.h"
 
 class MatSet {
-/*property*/
-private:
-	Mat _bgr;
-	Mat _hsv;
-	Mat _ycrcb;
-	Mat _gray;
-	map<ChannelType, Mat> _channelImgs;
-	int _width;
-	int _height;
+
 /*method*/
 public:
 	MatSet();
@@ -28,6 +20,17 @@ public:
 	Size size() const;
 	map<ChannelType, Mat> channelImgs();
 	void addChannelImgs(SpaceType type);
+
+/*property*/
+private:
+	Mat _bgr;
+	Mat _hsv;
+	Mat _ycrcb;
+	Mat _gray;
+	map<ChannelType, Mat> _channelImgs;
+	int _width;
+	int _height;
+
 };
 
 #endif // MATSET_H

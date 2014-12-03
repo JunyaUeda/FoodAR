@@ -18,6 +18,7 @@ private:
     string _value;
     map<string, string> _attributes;
     list<XmlElement> _childs;
+    
 };
 
 #endif // XMLELEMENT_H
