@@ -1,11 +1,11 @@
 #include "mainProcedure.h"
 
 void MainProcedure::start() {
-
+    _isProcessed = true;
     _sourcer.setUp();
     _saver.save();
     
-    while (1) {
+    while (_isProcessed) {
         map<int, Mat> edges; QVector<Mat> edgeImgs; MatSet matSet;
         _sourcer.loadSrc(matSet);
 		imshow(_windowManager.windowName(0), matSet.bgr());
@@ -35,7 +35,10 @@ void MainProcedure::start() {
         char ch = waitKey(33);
         if ( ch == 27 ) break;
     }
-    qDebug() << "why";
+}
+
+void MainProcedure::stop() {
+    _isProcessed = false;
 }
 
 MainProcedure::MainProcedure() {

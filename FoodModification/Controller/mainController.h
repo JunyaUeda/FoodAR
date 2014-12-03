@@ -13,6 +13,8 @@ class MainController {
 
 public:
 	static MainController& getInstance();
+    void start();
+    void stop();
     void doConvertion();
 	void setResizeFlag(bool flag);
 	void setDstSize(Size size);

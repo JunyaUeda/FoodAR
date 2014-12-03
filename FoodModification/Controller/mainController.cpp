@@ -15,6 +15,13 @@ MainController& MainController::getInstance() {
     return instance;
 }
 
+void MainController::start() {
+    _mainProcedure.start();
+}
+
+void MainController::stop() {
+    _mainProcedure.stop();
+}
 
 void MainController::doConvertion() {
     _mainProcedure.start();

@@ -12,6 +12,7 @@ class MainProcedure {
 public:
     static MainProcedure& getInstance();
     void start();
+    void stop();
 private:
     MainProcedure();
     MainProcedure(const MainProcedure&);
@@ -22,6 +23,7 @@ private:
     Extractor& _extractor         = Extractor::getInstance();
     Saver& _saver                 = Saver::getInstance();
     WindowManager& _windowManager = WindowManager::getInstance();
+    bool _isProcessed = true;
 
 };
 
