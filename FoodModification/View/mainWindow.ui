@@ -45,24 +45,11 @@
      <attribute name="title">
       <string>ホーム</string>
      </attribute>
-     <widget class="QPushButton" name="convertButton">
-      <property name="geometry">
-       <rect>
-        <x>10</x>
-        <y>10</y>
-        <width>101</width>
-        <height>81</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>convert</string>
-      </property>
-     </widget>
      <widget class="QPushButton" name="CalibrateButton">
       <property name="geometry">
        <rect>
-        <x>120</x>
-        <y>10</y>
+        <x>0</x>
+        <y>110</y>
         <width>101</width>
         <height>81</height>
        </rect>
@@ -276,9 +263,9 @@
       <property name="geometry">
        <rect>
         <x>130</x>
-        <y>110</y>
+        <y>10</y>
         <width>101</width>
-        <height>71</height>
+        <height>81</height>
        </rect>
       </property>
       <property name="text">
@@ -288,8 +275,8 @@
      <widget class="QPushButton" name="startPushButton">
       <property name="geometry">
        <rect>
-        <x>10</x>
-        <y>100</y>
+        <x>0</x>
+        <y>10</y>
         <width>111</width>
         <height>81</height>
        </rect>

@@ -29,7 +29,6 @@ public:
 private slots:
     void on_startPushButton_clicked();
     void on_stopPushButton_clicked();
-    void on_convertButton_clicked();
     void on_CalibrateButton_clicked();
     void on_colorMapButton_clicked();
     void on_alphaSlider_actionTriggered(int action);

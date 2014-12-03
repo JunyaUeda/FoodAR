@@ -44,14 +44,6 @@ void MainWindow::on_stopPushButton_clicked()
     mainController.stop();
 }
 
-
-void MainWindow::on_convertButton_clicked() {
-
-    mainController.start();
-
-}
-
-
 void MainWindow::on_CalibrateButton_clicked() {
 
     CalibrateDialog* calibrateDialog = new CalibrateDialog();
