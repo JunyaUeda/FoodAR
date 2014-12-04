@@ -6,24 +6,6 @@
 ExtractService::ExtractService() {
 }
 
-// Region ExtractService::extractRegionByColor(MatSet* srcSet) {
-
-//     Region region(Size(srcSet->width(), srcSet->height()) );
-//     for(int y=0; y<srcSet->height(); y++) {
-//         for(int x=0; x<srcSet->width(); x++) {
-
-//             if(_featureReference.isWithinThreshold(srcSet, Point(x,y))) {
-//                 L(region.maskImg(),x,y) = 255;
-//             }
-
-//         }
-//     }
-
-//     region.calcContours();
-  
-//     return region;
-// }
-
 void ExtractService::extractRegionByColor(MatSet& srcSet, Region& result) {
     
     for(int y=0; y<srcSet.height(); y++) {

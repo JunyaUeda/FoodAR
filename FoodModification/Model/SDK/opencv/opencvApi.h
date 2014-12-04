@@ -53,7 +53,7 @@
 using namespace cv;
 using namespace std;
 
-class OpenCVAPI {
+class OpenCVAPI {    
 public:
     OpenCVAPI();
     static Rect calculateROI(Size imgSize, Rect srcRect, double scaleRatio);
