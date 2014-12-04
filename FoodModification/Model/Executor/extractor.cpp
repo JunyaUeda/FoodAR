@@ -30,7 +30,8 @@ void Extractor::extract(MatSet& srcSet, Region& result) {
     
 
     // //エッジ画像を取得する
-    Mat dstEdgeImg = _edgeService.extractEdge(rawEdges, areamaxRegion.rois()[0]);
+    Mat dstEdgeImg = Mat::zeros(region.size(), CV_8UC1);
+    _edgeService.extractEdge(rawEdges, areamaxRegion.rois()[0], dstEdgeImg);
     imshow("edge", dstEdgeImg);
 
 

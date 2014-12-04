@@ -11,7 +11,7 @@ class EdgeService {
 public:
 	EdgeService();
     void aqcuireEdgeImgs();
-    Mat extractEdge(vector<Mat>& channelEdgeImgs, Rect& roi);
+    void extractEdge(vector<Mat>& channelEdgeImgs, Rect& roi, Mat& dstEdgeImg);
     void drawEdge(Mat srcEdgeImg, Mat dstDrawnImg, int luminace);
 
 private:

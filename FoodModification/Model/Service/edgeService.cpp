@@ -8,14 +8,11 @@ void EdgeService::aqcuireEdgeImgs() {
 
 }
 
-Mat EdgeService::extractEdge(vector<Mat>& channelEdgeImgs, Rect& roi) {
+void EdgeService::extractEdge(vector<Mat>& channelEdgeImgs, Rect& roi, Mat& dstEdgeImg) {
 
     if(!channelEdgeImgs.size()) {
-        Mat mat;
-        return  mat;  
+        return;  
     }
-
-     Mat resultImg = Mat::zeros(channelEdgeImgs[0].size(), CV_8UC1);
 
     for(int y=roi.y; y<(roi.y+roi.height); y++) {
         for(int x=roi.x; x<(roi.x+roi.width); x++) {
@@ -25,11 +22,10 @@ Mat EdgeService::extractEdge(vector<Mat>& channelEdgeImgs, Rect& roi) {
             }
             
             if(score >= 2) {
-                L(resultImg, x,y) = 255;
+                L(dstEdgeImg, x,y) = 255;
             }
         }
     }
-     return resultImg;
 }
 
 /**
