@@ -9,15 +9,40 @@ class MatSet {
 /*method*/
 public:
 	MatSet();
-	MatSet(const Mat &bgr);
-	Mat bgr() const;
-	void setBgr(const Mat &bgr);
-	Mat hsv() const;
-	Mat ycrcb() const;
-	Mat gray() const;
-	int width() const;
-	int height() const;
-	Size size() const;
+	MatSet(Mat bgr);
+
+
+	void setBgr(Mat bgr) {
+		_bgr = bgr;
+		cvtColor(_bgr, _hsv, CV_BGR2HSV);
+    	cvtColor(_bgr, _ycrcb, CV_BGR2YCrCb);
+    	cvtColor(_bgr, _gray, CV_BGR2GRAY);
+    	_width = bgr.cols;
+    	_height = bgr.rows;
+	}
+
+	Mat bgr() const {
+		return _bgr;
+	}
+	Mat hsv() const {
+		return _hsv;
+	}
+	Mat ycrcb() const {
+		return _ycrcb;
+	}
+	Mat gray() const {
+		return _gray;
+	}
+	int width() const {
+		return _width;
+	}
+	int height() const {
+		return _height;
+	}
+	Size size() const {
+		return Size(_width, _height);
+	}
+
 	map<ChannelType, Mat> channelImgs();
 	void addChannelImgs(SpaceType type);
 

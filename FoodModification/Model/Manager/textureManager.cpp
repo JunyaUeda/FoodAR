@@ -40,6 +40,7 @@ void TextureManager::addTexture(MediaType type, string path, string name) {
 void TextureManager::updateCurrentTexture(const Texture texture) {
     _currentTexture = texture;
 	_textureFactory.updateSrc(_currentTexture.img());
+    _converter.updateMediaType(_currentTexture.mediaType());
 }
 
 void TextureManager::updateCurrentTexture(const string path) {
@@ -49,6 +50,7 @@ void TextureManager::updateCurrentTexture(const string path) {
     if(aTexture != _allTextures.end()) {
         _currentTexture = aTexture->second;;
         _textureFactory.updateSrc(_currentTexture.img());
+        _converter.updateMediaType(_currentTexture.mediaType());
     }
 }
 

@@ -9,6 +9,7 @@
 #include "../Param/Texture/noTexture.h"
 
 #include "../textureFactory.h"
+#include "../Executor/converter.h"
 
 class TextureManager {
 
@@ -35,6 +36,7 @@ private:
     string _path;
     MediaType _currentMediaType;
     TextureFactory& _textureFactory = TextureFactory::getInstance();
+    Converter& _converter = Converter::getInstance();
     
 
 };

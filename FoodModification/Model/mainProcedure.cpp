@@ -9,6 +9,7 @@ void MainProcedure::start() {
 
         MatSet matSet;
         _sourcer.loadSrc(matSet);
+
 		imshow(_windowManager.windowName(0), matSet.bgr());
 
         Region extractedRegion;
@@ -22,13 +23,11 @@ void MainProcedure::start() {
         }
          
         Mat dstBGRImg = matSet.bgr().clone();
-        // convertController.convert(srcBGRImg,srcHSVImg, dstBGRImg, maskImg, rects, textureParam);
-        // if(resizeFlag) {
-        //     resize(dstBGRImg, dstBGRImg, dstSize, 0, 0, INTER_LINEAR);
-        // }
-        // imshow("dstImg",dstBGRImg);
+        _converter.convert(matSet, extractedRegion, resultTexture, dstBGRImg);
+        
+        _outputer.show(dstBGRImg);
 
-        char ch = waitKey(33);
+        char ch = waitKey(1);
         if ( ch == 27 ) break;
     }
 }

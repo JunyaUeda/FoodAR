@@ -34,7 +34,7 @@ QLP RegionService::toPointList(Mat refImg, Scalar refColor) {
 *
 */
 
-QVis RegionService::calcAverages(const MatSet* matSet, QLPs regions) {
+QVis RegionService::calcAverages(const MatSet& matSet, QLPs regions) {
     QVis averages;
     for(QLP region : regions) {
         averages.push_back(calcAverage(matSet, region));
@@ -44,10 +44,10 @@ QVis RegionService::calcAverages(const MatSet* matSet, QLPs regions) {
 
 QVi RegionService::calcAverage(Mat srcBGRImg, QLP region) {
     MatSet matSet(srcBGRImg);
-    return calcAverage(&matSet, region);
+	return calcAverage(matSet, region);
 }
 
-QVi RegionService::calcAverage(const MatSet* matSet, QLP region) {
+QVi RegionService::calcAverage(const MatSet& matSet, QLP region) {
     QVi averages(9,0);
    
     if(!region.size()) {
@@ -76,25 +76,25 @@ QVi RegionService::countSum(Mat srcBGRImg, Mat refImg, Scalar refColor) {
 
 QVi RegionService::countSum(Mat srcBGRImg, QLP region) {
     MatSet matSet(srcBGRImg);
-    return countSum(&matSet, region);
+	return countSum(matSet, region);
 }
 
 
-QVi RegionService::countSum(const MatSet* matSet, QLP region) {
+QVi RegionService::countSum(const MatSet& matSet, QLP region) {
   
      QVi sumOfValue(9,0);
 
     for(Point point : region) {
 
-      sumOfValue[0] = sumOfValue[0] + B(matSet->bgr(), point.x, point.y);
-      sumOfValue[1] = sumOfValue[1] + G(matSet->bgr(), point.x, point.y);
-      sumOfValue[2] = sumOfValue[2] + R(matSet->bgr(), point.x, point.y);
-      sumOfValue[3] = sumOfValue[3] + B(matSet->hsv(), point.x, point.y);
-      sumOfValue[4] = sumOfValue[4] + G(matSet->hsv(), point.x, point.y);
-      sumOfValue[5] = sumOfValue[5] + R(matSet->hsv(), point.x, point.y);
-      sumOfValue[6] = sumOfValue[6] + B(matSet->ycrcb(), point.x, point.y);
-      sumOfValue[7] = sumOfValue[7] + G(matSet->ycrcb(), point.x, point.y);
-      sumOfValue[8] = sumOfValue[8] + R(matSet->ycrcb(), point.x, point.y);
+      sumOfValue[0] = sumOfValue[0] + B(matSet.bgr(), point.x, point.y);
+      sumOfValue[1] = sumOfValue[1] + G(matSet.bgr(), point.x, point.y);
+      sumOfValue[2] = sumOfValue[2] + R(matSet.bgr(), point.x, point.y);
+      sumOfValue[3] = sumOfValue[3] + B(matSet.hsv(), point.x, point.y);
+      sumOfValue[4] = sumOfValue[4] + G(matSet.hsv(), point.x, point.y);
+      sumOfValue[5] = sumOfValue[5] + R(matSet.hsv(), point.x, point.y);
+      sumOfValue[6] = sumOfValue[6] + B(matSet.ycrcb(), point.x, point.y);
+      sumOfValue[7] = sumOfValue[7] + G(matSet.ycrcb(), point.x, point.y);
+      sumOfValue[8] = sumOfValue[8] + R(matSet.ycrcb(), point.x, point.y);
 
     }
 
@@ -107,7 +107,7 @@ QVi RegionService::countSum(const MatSet* matSet, QLP region) {
 *
 */
 
-QVis RegionService::calcTolerances(const MatSet* matSet, QLPs regions, QVis averages) {
+QVis RegionService::calcTolerances(const MatSet& matSet, QLPs regions, QVis averages) {
     QVis tolerances;
     for(int i=0; i<regions.size(); i++) {
         tolerances.push_back(calcTolerance(matSet, regions[i], averages[i]));
@@ -115,7 +115,7 @@ QVis RegionService::calcTolerances(const MatSet* matSet, QLPs regions, QVis aver
     return tolerances;
 }
 
-QVi RegionService::calcTolerance(const MatSet* matSet, QLP region, QVi averages) {
+QVi RegionService::calcTolerance(const MatSet& matSet, QLP region, QVi averages) {
 
     QVis histograms = createHistogram(matSet, region);
     QVi tolerance(9,0);
@@ -151,29 +151,29 @@ int RegionService::findTolerance(int average, QVi histogram, int pixcelNum) {
 QVis RegionService::createHistogram(Mat srcBGRImg, QLP region) {
   
     MatSet matSet(srcBGRImg);
-    return createHistogram(&matSet, region);
+    return createHistogram(matSet, region);
 }
 
-QVis RegionService::createHistogram(const MatSet* matSet, QLP region) {
+QVis RegionService::createHistogram(const MatSet& matSet, QLP region) {
   
   QVis histograms(9);
 
   for(int i=0; i<9; i++) {
     int BITE = 256;
-    QVi channelHistogram(matSet->bgr().elemSize1()*BITE, 0);
+	QVi channelHistogram(matSet.bgr().elemSize1()*BITE, 0);
     histograms[i] = channelHistogram;
   }
 
     for(Point point : region) {
-        histograms.value(0)[B(matSet->bgr(), point.x, point.y)]++;
-        histograms.value(1)[G(matSet->bgr(), point.x, point.y)]++;
-        histograms.value(2)[R(matSet->bgr(), point.x, point.y)]++;
-        histograms.value(3)[B(matSet->hsv(), point.x, point.y)]++;
-        histograms.value(4)[G(matSet->hsv(), point.x, point.y)]++;
-        histograms.value(5)[R(matSet->hsv(), point.x, point.y)]++;
-        histograms.value(6)[B(matSet->ycrcb(), point.x, point.y)]++;
-        histograms.value(7)[G(matSet->ycrcb(), point.x, point.y)]++;
-        histograms.value(8)[R(matSet->ycrcb(), point.x, point.y)]++;
+        histograms.value(0)[B(matSet.bgr(), point.x, point.y)]++;
+        histograms.value(1)[G(matSet.bgr(), point.x, point.y)]++;
+        histograms.value(2)[R(matSet.bgr(), point.x, point.y)]++;
+        histograms.value(3)[B(matSet.hsv(), point.x, point.y)]++;
+        histograms.value(4)[G(matSet.hsv(), point.x, point.y)]++;
+        histograms.value(5)[R(matSet.hsv(), point.x, point.y)]++;
+        histograms.value(6)[B(matSet.ycrcb(), point.x, point.y)]++;
+        histograms.value(7)[G(matSet.ycrcb(), point.x, point.y)]++;
+        histograms.value(8)[R(matSet.ycrcb(), point.x, point.y)]++;
     }
   
 

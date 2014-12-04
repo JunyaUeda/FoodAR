@@ -28,12 +28,6 @@ void CameraManager::setCaptureSize(Size size) {
 	_capture.set(CV_CAP_PROP_FRAME_HEIGHT, size.height);
 }
 
-Mat CameraManager::getFrame() {
-    Mat result;
-    _capture >> result;
-    return result;
-}
-
 void CameraManager::save(QXmlStreamWriter& writer) {
    
     writer.writeStartElement("Camera"); // root element start

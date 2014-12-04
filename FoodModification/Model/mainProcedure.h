@@ -4,9 +4,12 @@
 #include "./Executor/saver.h"
 #include "./Executor/sourcer.h"
 #include "./Executor/extractor.h"
+#include "./Executor/converter.h"
+#include "./Executor/outputer.h"
 #include "./Manager/windowManager.h"
-#include "./textureFactory.h"
+#include "./Manager/cameraManager.h"
 #include "./Manager/textureManager.h"
+
 
 class MainProcedure {
 
@@ -27,6 +30,8 @@ private:
     WindowManager& _windowManager = WindowManager::getInstance();
     TextureFactory& _textureFactory = TextureFactory::getInstance();
     TextureManager& _textureManager = TextureManager::getInstance();
+    Converter& _converter         = Converter::getInstance();
+    Outputer& _outputer           = Outputer::getInstance();
     bool _isProcessed = true;
 
 };

@@ -13,7 +13,10 @@ public:
     static CameraManager& getInstance();
     bool setUp();
     void setCaptureSize(Size size);
-    Mat getFrame();
+    Mat& getFrame() {
+        _capture >> _inputMat;
+        return _inputMat;
+    }
     void save(QXmlStreamWriter& writer);
 private:
     CameraManager();
@@ -24,6 +27,7 @@ private:
 private:
     Size _size;
 	Size _defaultSize = Size(640, 480);
+    Mat _inputMat;
 
 };
 

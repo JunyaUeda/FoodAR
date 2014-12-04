@@ -12,7 +12,11 @@ class Sourcer {
 public:
     static Sourcer& getInstance();
     bool setUp();
-    void loadSrc(MatSet& srcSet);
+    void loadSrc(MatSet& srcSet) {
+        Mat& bgrImg = _cameraManager.getFrame();
+        srcSet.setBgr(bgrImg);
+    }
+    
 private:
     Sourcer();
     Sourcer(const Sourcer&);

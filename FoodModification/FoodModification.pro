@@ -98,7 +98,8 @@ SOURCES += main.cpp\
     Model/edgeFactory.cpp \
     Controller/extractionController.cpp \
     Model/channelViewer.cpp \
-    Model/textureFactory.cpp
+    Model/textureFactory.cpp \
+    Model/Executor/converter.cpp
 
 HEADERS  += \
     Param/colorCriterion.h \
@@ -191,7 +192,8 @@ HEADERS  += \
     Model/edgeFactory.h \
     Controller/extractionController.h \
     Model/channelViewer.h \
-    Model/textureFactory.h
+    Model/textureFactory.h \
+    Model/Executor/converter.h
 
 FORMS    += \
     View/calibrateDialog.ui \
