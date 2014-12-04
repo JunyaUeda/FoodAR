@@ -54,6 +54,3 @@ void TextureManager::updateCurrentTexture(const string path) {
     }
 }
 
-MediaType TextureManager::currentMediaType() {
-    return _currentTexture.mediaType();
-}

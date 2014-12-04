@@ -22,7 +22,10 @@ public:
     void addTexture(MediaType type, string path, string name);
     void updateCurrentTexture(const Texture texture);
     void updateCurrentTexture(const string path);
-    MediaType currentMediaType();
+
+    MediaType currentMediaType() {
+        return _currentTexture.mediaType();
+    }
     
     
 private:

@@ -11,7 +11,7 @@ private:
 /*method*/
 public:
 	NoTexture();
-    void update();
+    
 };
 
 #endif // NOTEXTURE_H
