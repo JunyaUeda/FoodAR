@@ -31,6 +31,15 @@ public:
         return false;
     }
 
+    /**
+    * ユーザーによるリアルタイムの閾値調整
+    *　@param degree 0～100の整数
+    *　0→variableTolerance=-tolerance
+    * 50→variableTolerance=0;
+    * 100→variableTolerance=2*tolerance;
+    */
+    void updateVariableTolerance(int degree);
+
     //getter setter
     ChannelFunc* channelFunc() const;
     int average() const;
@@ -42,7 +51,9 @@ public:
     int under() const;
     void setUnder(int under);
     void displayThreshold();
-
+    int degree() const {
+        return _degree;
+    }
 private:
     ChannelThreshold();
 
@@ -50,7 +61,9 @@ private:
 private:
     ChannelFunc* _channelFunc;
 	int _average;
-	int _tolerance;
+	int _tolerance;//０以上
+    int _degree = 50; // 閾値調整のView操作において扱う0～100の整数値
+    int _variableTolerance = 0;//ユーザーによってコントロールできる。条件の強弱を変える
 	int _upper;
 	int _under;
 

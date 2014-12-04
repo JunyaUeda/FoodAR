@@ -80,15 +80,21 @@ private slots:
 	
 	void on_channelMatPushButton_toggled(bool checked);
 
+    /** チャンネル閾値強度調整*/
+	void on_channelThresholdHorizontalSlider_valueChanged(int value);
+	void on_channelThresholdLineEdit_textChanged(const QString &arg1);
+	void on_channelThresholdComboBox_currentIndexChanged(int index);
+
 private:
     vector<ChannelType> collectColorCheckBoxStatus();
     vector<ChannelType> collectEdgeChannelCheckBoxStatus();
+    ChannelType aqcuireChannelType(int channelNumber);
 
 /*property*/
 private:
     Ui::MainWindow *ui;
 
-    MainController& mainController               = MainController::getInstance();
+	MainController& mainController               = MainController::getInstance();
     CalibrationController& calibrationController = CalibrationController::getInstance();
     ConvertController& convertController         = ConvertController::getInstance();
     EdgeController& edgeController               = EdgeController::getInstance();

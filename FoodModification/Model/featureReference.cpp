@@ -64,6 +64,11 @@ void FeatureReference::updateEngagedChannels(const vector<ChannelType> list, con
 }
 
 
-
+void FeatureReference::updateChannelThresholdValue(int degree, ChannelType type, int index) {
+    //ほんとはindexによって分けたい。そのためにはUIでいじれるようにすることと
+    //Modelの中でcolorThresholdの区別をつけなければいけない
+    _colorThresholds[0].updateChannelThresholdValue(degree, type);
+    _colorThresholds[1].updateChannelThresholdValue(degree, type);
+}
 
 

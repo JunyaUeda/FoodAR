@@ -19,7 +19,7 @@ void MainProcedure::start() {
         
         if(_textureManager.currentMediaType() != MediaType::no) {
             _textureFactory.create(extractedRegion, resultTexture);
-            imshow("textureImg", resultTexture);
+            //imshow("textureImg", resultTexture);
         }
          
         Mat dstBGRImg = matSet.bgr().clone();

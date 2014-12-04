@@ -26,16 +26,6 @@ void ColorThreshold::addEngagedChannelThreshold(ChannelThreshold& threshold) {
 	_engagedChannelThresholds.push_back(&threshold);
 }
 
-// bool ColorThreshold::isWithinThreshold(MatSet& matSet, Point point) {
-
-// 	for(ChannelThreshold* thr : _engagedChannelThresholds) {
-// 		if(!thr->isWithinThreshold(matSet, point)) {
-// 			return  false;
-// 		}
-// 	}
-// 	return true;
-	
-// }
 
 void ColorThreshold::updateEngagedChannels(vector<ChannelType> channelTypes) {
     _engagedChannelThresholds.clear();
@@ -70,6 +60,11 @@ void ColorThreshold::updateEngagedChannels(vector<ChannelType> channelTypes) {
             break;
         }
     }
+}
+
+void ColorThreshold::updateChannelThresholdValue(int degree, ChannelType type) {
+    int channelNumber = static_cast<int>(type);
+    _channelThresholds[channelNumber].updateVariableTolerance(degree);
 }
 
 void ColorThreshold::displayThreshold() {

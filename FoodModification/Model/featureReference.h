@@ -30,7 +30,20 @@ public:
     }
 
     void updateEngagedChannels(const vector<ChannelType> list, const int thresholdIndex);
+
+     /**
+    * リアルタイムの閾値調整
+    *　@param degree 閾値の変更度合い
+    * @param type どのチャンネルの閾値を変更するか
+    * @param index 何個目のcolorThreshold か
+    * @see ColorThresholdクラスのupdateChannelThresholdValue()
+    */
+    void updateChannelThresholdValue(int degree, ChannelType type, int index);
     void displayThreshold();
+
+    int channelThresholdDegree(ChannelType type, int index){
+        return _colorThresholds[0].channelThresholdDegree(type); //ほんとはindexで区別すべし
+    }
 private:
     FeatureReference();
     FeatureReference(const FeatureReference&);
@@ -39,7 +52,7 @@ private:
 
 /*property*/
 private:
-    QList<ColorThreshold> _colorThresholds;
+    vector<ColorThreshold> _colorThresholds;
     
 };
 

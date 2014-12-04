@@ -13,6 +13,10 @@ public:
     static ExtractionController& getInstance();
     void updateEngagedColorChannels(vector<ChannelType> list);
     void updateEngagedEdgeChannels(vector<ChannelType> list);
+    void updateChannelThresholdValue(int degree, ChannelType type, int index);
+    int channelThresholdComboBox_currentIndexChanged(ChannelType type){
+		return _featureReference.channelThresholdDegree(type, 0);
+    }
 private:
 	ExtractionController();
     ExtractionController(const ExtractionController&);

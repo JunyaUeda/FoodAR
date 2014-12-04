@@ -10,8 +10,8 @@ ChannelThreshold::ChannelThreshold(ChannelFunc* type) : _channelFunc(type) {
 void ChannelThreshold::setThreshold(int average, int tolerance) {
     _average   = average;
     _tolerance = tolerance;
-    _upper     = average + tolerance;
-    _under     = average - tolerance;
+    _upper     = _average + (_tolerance + _variableTolerance);
+    _under     = _average - (_tolerance + _variableTolerance);
 }
 
 vector<ChannelThreshold> ChannelThreshold::createAllChannelThreshold() {
@@ -39,6 +39,20 @@ vector<ChannelThreshold> ChannelThreshold::createAllChannelThreshold() {
     return channelThresholds;
 }
 
+void ChannelThreshold::updateVariableTolerance(int degree) {
+    if(degree < 0 || degree > 100) {
+        return;
+    } else if (degree >= 0 && degree<50) {
+        _variableTolerance = -(int)(_tolerance*((double)(50-degree)/(double)50) );
+    } else if (degree == 50) {
+        _variableTolerance = 0;
+    } else {
+        _variableTolerance = (int)(2*_tolerance*((double)(degree-50)/(double)50) );
+    }
+    _upper     = _average + (_tolerance + _variableTolerance);
+    _under     = _average - (_tolerance + _variableTolerance);
+    _degree = degree;
+}
 
 //getter setter
 ChannelFunc* ChannelThreshold::channelFunc() const {

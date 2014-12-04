@@ -33,8 +33,13 @@ public:
     void overlapTexture(const Mat& textureImg, const Region& extractedRegion, Mat& dstBGRImg) {
         for(int i=0; i<extractedRegion.rois().size(); i++) {
 
-            for(int y=extractedRegion.rois()[i].y; y<(extractedRegion.rois()[i].y+extractedRegion.rois()[i].height); y++) {
-                for(int x=extractedRegion.rois()[i].x; x<(extractedRegion.rois()[i].x+extractedRegion.rois()[i].width); x++){
+            int yBegin = extractedRegion.rois()[i].y;
+            int yEnd = extractedRegion.rois()[i].y+extractedRegion.rois()[i].height;
+            int xBegin = extractedRegion.rois()[i].x;
+            int xEnd = extractedRegion.rois()[i].x+extractedRegion.rois()[i].width;
+            
+            for(int y=yBegin; y<yEnd; y++) {
+                for(int x=xBegin; x<xEnd; x++){
                     if(L(extractedRegion.maskImg(),x,y) == 255) {
                         B(dstBGRImg,x,y) = _alpha*B(dstBGRImg,x,y) + (1-_alpha)*B(textureImg,x,y);
                         G(dstBGRImg,x,y) = _alpha*G(dstBGRImg,x,y) + (1-_alpha)*G(textureImg,x,y);
@@ -45,7 +50,7 @@ public:
 
         }
     }
-    
+
     void updateAlpha(double value);
 	void updateMediaType(MediaType type);
 

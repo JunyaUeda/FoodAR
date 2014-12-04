@@ -17,3 +17,8 @@ void ExtractionController::updateEngagedColorChannels(vector<ChannelType> list) 
 void ExtractionController::updateEngagedEdgeChannels(vector<ChannelType> list) {
     _edgeFactory.updateEngagedChannels(list);
 }
+
+void ExtractionController::updateChannelThresholdValue(int degree, ChannelType type, int index) {
+    _featureReference.updateChannelThresholdValue(degree, type, index);
+}
+

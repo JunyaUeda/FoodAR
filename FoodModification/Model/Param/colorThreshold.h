@@ -26,11 +26,24 @@ public:
 
     void updateEngagedChannels(vector<ChannelType> channelTypes);
 
+    /**
+    * リアルタイムの閾値調整
+    *　@param degree 閾値の変更度合い
+    * @param type どのチャンネルの閾値を変更するか
+    * @see ChannelThresholdクラスのupdateVariableTolerance()
+    */
+    void updateChannelThresholdValue(int degree, ChannelType type);
+
     int luminance() {
          return _luminance;
     }
 
     void displayThreshold();
+
+    int channelThresholdDegree(ChannelType type) {
+        int channelNumber = static_cast<int>(type);
+        return _channelThresholds[channelNumber].degree();
+    }
 
 /*property*/
 private:

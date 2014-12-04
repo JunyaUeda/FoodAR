@@ -306,3 +306,57 @@ void MainWindow::on_channelMatPushButton_toggled(bool checked)
         mainController.closeChannelMat();
     }
 }
+
+ /**
+ * チャンネル閾値強度調整
+ * TODO : indexを識別する機能を追加すべし
+ */
+void MainWindow::on_channelThresholdHorizontalSlider_valueChanged(int value)
+{
+    int degree = value;
+    ChannelType type = aqcuireChannelType(ui->channelThresholdComboBox->currentIndex() );
+    int index = 0;
+    _extractionController.updateChannelThresholdValue(degree,type,index);
+    ui->channelThresholdLineEdit->setText(QString::number(value));
+}
+
+void MainWindow::on_channelThresholdLineEdit_textChanged(const QString &arg1)
+{
+    int degree = arg1.toInt(); // TODO ：ユーザーが整数以外を入力した場合の処理を書くべし
+    ChannelType type = aqcuireChannelType(ui->channelThresholdComboBox->currentIndex() );
+    int index = 0;
+    _extractionController.updateChannelThresholdValue(degree, type, index);
+    ui->channelThresholdHorizontalSlider->setSliderPosition(arg1.toInt());
+}
+
+void MainWindow::on_channelThresholdComboBox_currentIndexChanged(int index)
+{
+    int degree = _extractionController.channelThresholdComboBox_currentIndexChanged(aqcuireChannelType(index));
+    ui->channelThresholdLineEdit->setText(QString::number(degree));
+    ui->channelThresholdHorizontalSlider->setSliderPosition(degree);
+}
+
+//TODO comboBoxのリストの順番が変わったら成り立たなくなるので別の方法を考えるべし
+ChannelType MainWindow::aqcuireChannelType(int channelNumber) {
+    switch(channelNumber) {
+        case 0:
+            return ChannelType::blue;
+        case 1:
+            return ChannelType::green;
+        case 2:
+            return ChannelType::red;
+        case 3:
+            return ChannelType::hue;
+        case 4:
+            return ChannelType::saturation;
+        case 5:
+            return ChannelType::value;
+        case 6:
+            return ChannelType::y;
+        case 7:
+            return ChannelType::cr;
+        case 8:
+            return ChannelType::cb;
+
+    }
+}
