@@ -22,7 +22,15 @@ public:
     bool loadAverage(QDomElement element);
     void setThreshold(int average, int tolerance);
     static vector<ChannelThreshold> createAllChannelThreshold();
-    bool isWithinThreshold(MatSet& matSet, Point point);
+
+    bool isWithinThreshold(MatSet& matSet, Point& point) {
+        int value = _channelFunc->value(matSet, point);
+        if( (value <= _upper) && (value >= _under) ) {
+            return true;
+        }
+        return false;
+    }
+
     //getter setter
     ChannelFunc* channelFunc() const;
     int average() const;

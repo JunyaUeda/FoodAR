@@ -39,15 +39,6 @@ vector<ChannelThreshold> ChannelThreshold::createAllChannelThreshold() {
     return channelThresholds;
 }
 
-bool ChannelThreshold::isWithinThreshold(MatSet& matSet, Point point) {
-    int value = _channelFunc->value(matSet, point);
-    if( (value <= _upper) && (value >= _under) ) {
-
-        return true;
-    }
-
-    return false;
-}
 
 //getter setter
 ChannelFunc* ChannelThreshold::channelFunc() const {

@@ -15,12 +15,14 @@ Extractor& Extractor::getInstance() {
 void Extractor::extract(MatSet& srcSet, Region& result) {
 
     Region region(srcSet.size() );
-    
+
     //コピーの速度をきにしないなら右のほうが読みやすい
     _extractService.extractRegionByColor(srcSet, region);// Region region = _extractService.extractRegionByColor(srcSet);
     imshow("new extract", region.maskImg());
 
-    Region areamaxRegion = _extractService.acquireMaxAreaRegion(region);
+    //最大面積の領域を取得する
+    Region areamaxRegion(region.size() );
+     _extractService.acquireMaxAreaRegion(region, areamaxRegion);
 
     //エッジ画像を取得する
     vector<Mat> rawEdges;

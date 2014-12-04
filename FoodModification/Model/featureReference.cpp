@@ -58,22 +58,6 @@ inline ColorThreshold* FeatureReference::getColorThreshold(int value) {
     return &_colorThresholds[0];
 }
 
-bool FeatureReference::isWithinThreshold(MatSet& matSet, Point point) {
-
-    //ColorThreshold* colorThreshold = getColorThreshold( V(matSet.hsv(), point.x, point.y) );
-    if(abs(value - _colorThresholds[0].luminance()) > abs(value - _colorThresholds[1].luminance() ) ){
-        if( _colorThresholds[1].isWithinThreshold(matSet, point)) {
-            return true;
-        }
-        return false;
-    } else {
-        if( _colorThresholds[0].isWithinThreshold(matSet, point)) {
-            return true;
-        }
-        return false;
-    }
-   
-}
 
 void FeatureReference::updateEngagedChannels(const vector<ChannelType> list, const int thresholdIndex) {
     _colorThresholds[thresholdIndex].updateEngagedChannels(list);

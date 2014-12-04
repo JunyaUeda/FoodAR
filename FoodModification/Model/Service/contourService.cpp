@@ -7,22 +7,22 @@
 ContourService::ContourService() {
 }
 
-int ContourService::getMaxAreaContourIndex(vPs contours) {
+// int ContourService::getMaxAreaContourIndex(vPs& contours) {
     
-    size_t max=0;
-    int indexForMaxArea=0;
-    for(int i=0; i<contours.size(); ++i) {
-        size_t count = contours[i].size();
-        if(count < 150 || count > 1000) continue;
+//     size_t max=0;
+//     int indexForMaxArea=0;
+//     for(int i=0; i<contours.size(); ++i) {
+//         size_t count = contours[i].size();
+//         if(count < 150 || count > 1000) continue;
 
-        if(count > max) {
-            indexForMaxArea = i;
-            max = count;
-        }
-    }
+//         if(count > max) {
+//             indexForMaxArea = i;
+//             max = count;
+//         }
+//     }
 
-    return indexForMaxArea;
-}
+//     return indexForMaxArea;
+// }
 
 vPs ContourService::getTargetContours(Mat srcBinaryImg) {
     vPs contours;

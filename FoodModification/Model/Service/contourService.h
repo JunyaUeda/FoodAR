@@ -9,7 +9,23 @@ class ContourService {
 /*method*/
 public:
 	ContourService();
-    int getMaxAreaContourIndex(vPs contours);
+    
+    int getMaxAreaContourIndex(vPs& contours) {
+        size_t max=0;
+        int indexForMaxArea=0;
+        for(int i=0; i<contours.size(); ++i) {
+            size_t count = contours[i].size();
+            if(count < 150 || count > 1000) continue;
+
+            if(count > max) {
+                indexForMaxArea = i;
+                max = count;
+            }
+        }
+
+        return indexForMaxArea;
+    }
+
     vPs getTargetContours(Mat srcBinaryImg);
     void fillContours(Mat& filledImg, vPs& contours, int lineType, int minSize);
     void fillContours(Mat& filledImg, int minSize);

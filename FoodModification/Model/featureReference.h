@@ -13,14 +13,29 @@ public:
     static FeatureReference& getInstance();
     void loadFeaturesFromFile(QDomDocument doc);
     void updateThresholds(QVis averages, QVis tolerances);
-    bool isWithinThreshold(MatSet& matSet, Point point);
+
+    bool isWithinThreshold(MatSet& matSet, Point& point) {
+        int value = L(matSet.hsv(), point.x, point.y);
+        if(abs(value - _colorThresholds[0].luminance()) > abs(value - _colorThresholds[1].luminance() ) ){
+            if( _colorThresholds[1].isWithinThreshold(matSet, point)) {
+                return true;
+            }
+            return false;
+        } else {
+            if( _colorThresholds[0].isWithinThreshold(matSet, point)) {
+                return true;
+            }
+            return false;
+        }
+    }
+
     void updateEngagedChannels(const vector<ChannelType> list, const int thresholdIndex);
     void displayThreshold();
 private:
     FeatureReference();
     FeatureReference(const FeatureReference&);
     
-    inline ColorThreshold* getColorThreshold(int value);
+    ColorThreshold* getColorThreshold(int value);
 
 /*property*/
 private:

@@ -7,7 +7,7 @@
 
 
 class ChannelFunc {
-    
+
 /*method*/
 public:
     virtual int value(Mat img, int x, int y) {
@@ -19,7 +19,7 @@ public:
     }
         
 
-    virtual int value(MatSet& matSet, Point point) {
+    virtual int value(MatSet& matSet, Point& point) {
          return value(matSet, point.x, point.y);
     }
 
