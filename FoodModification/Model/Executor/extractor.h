@@ -16,7 +16,7 @@ class Extractor {
 /*method*/
 public:
     static Extractor& getInstance();
-    void extract(MatSet& srcSet);
+    void extract(MatSet& srcSet, Region& result);
 
 private:
     Extractor();

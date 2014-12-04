@@ -6,26 +6,22 @@ void MainProcedure::start() {
     _saver.save();
     
     while (_isProcessed) {
-        map<int, Mat> edges; QVector<Mat> edgeImgs; MatSet matSet;
+
+        MatSet matSet;
         _sourcer.loadSrc(matSet);
 		imshow(_windowManager.windowName(0), matSet.bgr());
 
-        _extractor.extract(matSet);
-  //       edgeController.calculateEdges(matSet.channelImgs(), edgeImgs);
-  //       MatSet srcSet(srcBGRImg);
-        // _extractor.extract(srcSet, edgeImgs);
+        Region extractedRegion;
+        _extractor.extract(matSet,extractedRegion);
         
-        // vector<Rect> rects;
-        // if(textureParam->isNoTexture()) {
-        //     textureController.setROI(dstContours, rects);
-        // } else {
-        //     Mat textureImg = textureController.createTexture(dstContours, maskImg, rects, srcController.srcParam()->textureImg() );
-        //     textureParam->setImg(textureImg);
-        //     imshow("textureImg", textureImg);
-        // }
+        Mat resultTexture = Mat::zeros(matSet.size(), CV_8UC3);
         
-
-        // dstBGRImg = srcBGRImg.clone();
+        if(_textureManager.currentMediaType() != MediaType::no) {
+            _textureFactory.create(extractedRegion, resultTexture);
+            imshow("textureImg", resultTexture);
+        }
+         
+        Mat dstBGRImg = matSet.bgr().clone();
         // convertController.convert(srcBGRImg,srcHSVImg, dstBGRImg, maskImg, rects, textureParam);
         // if(resizeFlag) {
         //     resize(dstBGRImg, dstBGRImg, dstSize, 0, 0, INTER_LINEAR);

@@ -7,6 +7,7 @@
 #include "./srcController.h"
 #include "../Param/textureParam.h"
 #include "../Model/mainProcedure.h"
+#include "../Model/channelViewer.h"
 
 
 class MainController {
@@ -15,7 +16,8 @@ public:
 	static MainController& getInstance();
     void start();
     void stop();
-    void doConvertion();
+    void showChannelMat();
+    void closeChannelMat();
 	void setResizeFlag(bool flag);
 	void setDstSize(Size size);
 	void changeShiftValue(int hShift, int sShift, int vShift);
@@ -25,7 +27,7 @@ public:
 
 private:
     MainProcedure& _mainProcedure = MainProcedure::getInstance();
-
+    ChannelViewer _viewer;
 
     TextureParam* textureParam = new TextureParam();
     bool resizeFlag = false;

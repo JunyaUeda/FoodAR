@@ -136,7 +136,10 @@ void MainWindow::on_splitColorSpaceComboBox_currentIndexChanged(int index) {
 }
 
 
-//Edge Event 
+/**
+ *エッジ閾値ウィジェットのハンドラ
+ *
+*/
 void MainWindow::changeThreshold(int widgetIndex, int value1, int value2) {
 	// CannyThreshold* novel = new CannyThreshold(value1, value2);
 	// int channelKey = _edgeWidgetChannelMap.find(widgetIndex)->second;
@@ -153,26 +156,6 @@ void MainWindow::on_ch0EdgeThreshold2_LineEdit_textChanged(const QString &arg1) 
 	// ui->ch0EdgeThreshold2_Slider->setSliderPosition(arg1.toInt());
 }
 
-void MainWindow::on_ch1EdgeThreshold1_LineEdit_textChanged(const QString &arg1) {
-	// changeThreshold(1, arg1.toInt(), ui->ch1EdgeThreshold2_Slider->value());
-	// ui->ch1EdgeThreshold1_Slider->setSliderPosition(arg1.toInt());
-}
-
-void MainWindow::on_ch1EdgeThreshold2_LineEdit_textChanged(const QString &arg1) {
-	// changeThreshold(1, ui->ch1EdgeThreshold1_Slider->value(), arg1.toInt());
-	// ui->ch1EdgeThreshold2_Slider->setSliderPosition(arg1.toInt());
-}
-
-void MainWindow::on_ch2EdgeThreshold1_LineEdit_textChanged(const QString &arg1) {
-	// changeThreshold(2, arg1.toInt(), ui->ch2EdgeThreshold2_Slider->value());
-	// ui->ch2EdgeThreshold1_Slider->setSliderPosition(arg1.toInt());
-}
-
-void MainWindow::on_ch2EdgeThreshold2_LineEdit_textChanged(const QString &arg1) {
-	// changeThreshold(2, ui->ch2EdgeThreshold1_Slider->value(), arg1.toInt());
-	// ui->ch2EdgeThreshold2_Slider->setSliderPosition(arg1.toInt());
-}
-
 void MainWindow::on_ch0EdgeThreshold1_Slider_valueChanged(int value) {
 	// changeThreshold(0, value, ui->ch0EdgeThreshold2_Slider->value());
 	// ui->ch0EdgeThreshold1_LineEdit->setText(QString::number(value));
@@ -183,25 +166,7 @@ void MainWindow::on_ch0EdgeThreshold2_Slider_valueChanged(int value) {
 	// ui->ch0EdgeThreshold2_LineEdit->setText(QString::number(value));
 }
 
-void MainWindow::on_ch1EdgeThreshold1_Slider_valueChanged(int value) {
-	// changeThreshold(1, value, ui->ch1EdgeThreshold2_Slider->value());
-	// ui->ch1EdgeThreshold1_LineEdit->setText(QString::number(value));
-}
 
-void MainWindow::on_ch1EdgeThreshold2_Slider_valueChanged(int value) {
-	// changeThreshold(1, ui->ch1EdgeThreshold1_Slider->value(),value);
-	// ui->ch1EdgeThreshold2_LineEdit->setText(QString::number(value));
-}
-
-void MainWindow::on_ch2EdgeThreshold1_Slider_valueChanged(int value) {
-	// changeThreshold(2, value, ui->ch2EdgeThreshold2_Slider->value());
-	// ui->ch2EdgeThreshold1_LineEdit->setText(QString::number(value));
-}
-
-void MainWindow::on_ch2EdgeThreshold2_Slider_valueChanged(int value) {
-	// changeThreshold(2, ui->ch2EdgeThreshold1_Slider->value(),value);
-	// ui->ch2EdgeThreshold2_LineEdit->setText(QString::number(value));
-}
 
 /**
  *色領域抽出時使用チャンネルボックスのイベントハンドラ
@@ -329,3 +294,15 @@ void MainWindow::on_edgeCbCheckBox_clicked()
     _extractionController.updateEngagedEdgeChannels(collectEdgeChannelCheckBoxStatus());
 }
 
+/**
+ *チャンネル画像出力ボタンのハンドラ
+ *
+*/
+void MainWindow::on_channelMatPushButton_toggled(bool checked)
+{
+    if(checked) {
+        mainController.showChannelMat();
+    } else {
+        mainController.closeChannelMat();
+    }
+}

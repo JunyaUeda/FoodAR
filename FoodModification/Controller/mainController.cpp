@@ -23,10 +23,14 @@ void MainController::stop() {
     _mainProcedure.stop();
 }
 
-void MainController::doConvertion() {
-    _mainProcedure.start();
+void MainController::showChannelMat() {
+    _mainProcedure.stop();
+    _viewer.showAllChannels();
 }
 
+void MainController::closeChannelMat() {
+    _viewer.closeAllWindows();
+}
 
 /**
 * mainWindowのサイズ設定によって呼び出される.

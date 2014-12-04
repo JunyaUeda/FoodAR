@@ -96,7 +96,9 @@ SOURCES += main.cpp\
     Model/Util/qtUtil.cpp \
     Model/Param/edgeThreshold.cpp \
     Model/edgeFactory.cpp \
-    Controller/extractionController.cpp
+    Controller/extractionController.cpp \
+    Model/channelViewer.cpp \
+    Model/textureFactory.cpp
 
 HEADERS  += \
     Param/colorCriterion.h \
@@ -187,7 +189,9 @@ HEADERS  += \
     Model/Util/qtUtil.h \
     Model/Param/edgeThreshold.h \
     Model/edgeFactory.h \
-    Controller/extractionController.h
+    Controller/extractionController.h \
+    Model/channelViewer.h \
+    Model/textureFactory.h
 
 FORMS    += \
     View/calibrateDialog.ui \

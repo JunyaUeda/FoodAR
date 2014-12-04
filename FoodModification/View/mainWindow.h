@@ -53,16 +53,8 @@ private slots:
     void changeThreshold(int channelIndex, int value1, int value2);
     void on_ch0EdgeThreshold1_LineEdit_textChanged(const QString &arg1);
     void on_ch0EdgeThreshold2_LineEdit_textChanged(const QString &arg1);
-	void on_ch1EdgeThreshold1_LineEdit_textChanged(const QString &arg1);
-	void on_ch1EdgeThreshold2_LineEdit_textChanged(const QString &arg1);
-    void on_ch2EdgeThreshold1_LineEdit_textChanged(const QString &arg1);
-    void on_ch2EdgeThreshold2_LineEdit_textChanged(const QString &arg1);
     void on_ch0EdgeThreshold1_Slider_valueChanged(int value);
     void on_ch0EdgeThreshold2_Slider_valueChanged(int value);
-	void on_ch1EdgeThreshold1_Slider_valueChanged(int value);
-	void on_ch1EdgeThreshold2_Slider_valueChanged(int value);
-	void on_ch2EdgeThreshold1_Slider_valueChanged(int value);
-    void on_ch2EdgeThreshold2_Slider_valueChanged(int value);
 
 	/*抽出チャンネルチェックボックス*/
 	void on_colorBlueCheckBox_clicked();
@@ -85,6 +77,9 @@ private slots:
 	void on_edgeYCheckBox_clicked();
     void on_edgeCrCheckBox_clicked();
 	void on_edgeCbCheckBox_clicked();
+	
+	void on_channelMatPushButton_toggled(bool checked);
+
 private:
     vector<ChannelType> collectColorCheckBoxStatus();
     vector<ChannelType> collectEdgeChannelCheckBoxStatus();

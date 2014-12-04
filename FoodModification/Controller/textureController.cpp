@@ -57,6 +57,7 @@ Mat TextureController::createTexture(vector<vector<Point> >& contours, Mat maskI
 
 }
 
+
 void TextureController::setROI(vector<vector<Point> >& contours, vector<Rect>& rects) {
 
 	for(int i=0; i<contours.size(); i++) {

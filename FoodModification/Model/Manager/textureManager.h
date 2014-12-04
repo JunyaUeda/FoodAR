@@ -8,25 +8,35 @@
 #include "../Param/Texture/movieTexture.h"
 #include "../Param/Texture/noTexture.h"
 
+#include "../textureFactory.h"
+
 class TextureManager {
 
-/*property*/
-private:
-    Texture* _current;
-    QList<Texture> _allTextures;
-    QString _path;
-    MediaType _currentMediaType;
-    
 /*method*/    
 public:
     static TextureManager& getInstance();
 
     void setUp();
-    void setTexture(MediaType type, QString path="null",  QString name = "noTexture");
-    void update();
+    void addTexture(const string path, const Texture texture);
+    void addTexture(MediaType type, string path, string name);
+    void updateCurrentTexture(const Texture texture);
+    void updateCurrentTexture(const string path);
+    MediaType currentMediaType();
+    
+    
 private:
     TextureManager();
     TextureManager(const TextureManager&);
+
+/*property*/
+private:
+    Texture _currentTexture;
+    map<string, Texture> _allTextures;
+    string _path;
+    MediaType _currentMediaType;
+    TextureFactory& _textureFactory = TextureFactory::getInstance();
+    
+
 };
 
 #endif // TEXTUREMANAGER_H

@@ -12,8 +12,8 @@ Extractor& Extractor::getInstance() {
     return instance;
 }
 
-void Extractor::extract(MatSet& srcSet) {
-    //_featureReference.displayThreshold();
+void Extractor::extract(MatSet& srcSet, Region& result) {
+
     Region region(srcSet.size() );
     //コピーの速度をきにしないなら右のほうが読みやすい
     _extractService.extractRegionByColor(srcSet, region);// Region region = _extractService.extractRegionByColor(srcSet);
@@ -39,6 +39,8 @@ void Extractor::extract(MatSet& srcSet) {
 	_contourService.fillContours(dstEdgeImg, minSize);
     imshow("merge", dstEdgeImg);
 
-    Region result(dstEdgeImg);
+    result.setMaskImg(dstEdgeImg);
     result.calcContours();
+    result.calcRois();
+    result.calcRotatedRects();
 }

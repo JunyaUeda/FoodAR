@@ -22,7 +22,5 @@ void Sourcer::loadSrc(MatSet& srcSet) {
     srcSet.setBgr(bgrImg);
     //srcSet.addChannelImgs(SpaceType::bgr);
     //srcSet.addChannelImgs(SpaceType::hsv);
-    //srcSet.addChannelImgs(SpaceType::ycrcb);
-
-    _textureManager.update();
+	//srcSet.addChannelImgs(SpaceType::ycrcb);
 }

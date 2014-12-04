@@ -1,10 +1,9 @@
 #include "stillTexture.h"
 
-StillTexture::StillTexture(QString path, QString name) {
+StillTexture::StillTexture(string path, string name) {
     _path = path;
-	_img = imread((string)path.toLocal8Bit(), 1);
+	_img = imread(path, 1);
     _mediaType = MediaType::still;
     _name = name;
 }
 
-void StillTexture::update() {}

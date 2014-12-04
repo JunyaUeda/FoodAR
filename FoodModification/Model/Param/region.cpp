@@ -37,6 +37,18 @@ void Region::calcContours() {
 	findContours(copyImg, _contours, CV_RETR_LIST, CV_CHAIN_APPROX_NONE);
 }
 
+
+vector<RotatedRect> Region::rotatedRects() const {
+    return _rotatedRects;
+}
+
+void Region::calcRotatedRects() {
+    _rotatedRects.clear();
+    for(int i=0; i<_contours.size(); i++) {
+        _rotatedRects.push_back( minAreaRect(_contours[i]) );
+    }
+}
+
 void Region::calcRois() {
     _rois.clear();
     for(int i=0; i<_contours.size(); i++) {

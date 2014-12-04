@@ -4,14 +4,17 @@
 #include "texture.h"
 
 class MovieTexture : public Texture {
+
+/*method*/    
+public:
+    MovieTexture(string path, string name);
+    VideoCapture capture() const;
+    Mat img();
+
 /*property*/
 private:
-    VideoCapture  _capture;
-/*property*/    
-public:
-	MovieTexture(QString path, QString name);
-    VideoCapture capture() const;
-    void update();
+    VideoCapture _capture;
+
 };
 
 #endif // MOVIETEXTURE_H

@@ -1,8 +1,8 @@
 #include "movieTexture.h"
 
-MovieTexture::MovieTexture(QString path, QString name) {
+MovieTexture::MovieTexture(string path, string name) {
     _path = path;
-	_capture = VideoCapture((string)path.toLocal8Bit());
+	_capture = VideoCapture(path);
     _capture >> _img;    
     _mediaType = MediaType::movie;
     _name = name;
@@ -12,6 +12,7 @@ VideoCapture MovieTexture::capture() const {
     return _capture;
 }
 
-void MovieTexture::update() {
+Mat MovieTexture::img() {
     _capture >> _img;
+    return _img;
 }

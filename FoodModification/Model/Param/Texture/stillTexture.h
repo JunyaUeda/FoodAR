@@ -4,12 +4,14 @@
 #include "texture.h"
 
 class StillTexture : public Texture {
-/*property*/
 
 /*method*/
 public:
-	StillTexture(QString path, QString name);
-    void update();
+    StillTexture(string path, string name);
+    
+/*property*/
+
+
 };
 
 #endif // STILLTEXTURE_H

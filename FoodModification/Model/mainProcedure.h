@@ -5,6 +5,8 @@
 #include "./Executor/sourcer.h"
 #include "./Executor/extractor.h"
 #include "./Manager/windowManager.h"
+#include "./textureFactory.h"
+#include "./Manager/textureManager.h"
 
 class MainProcedure {
 
@@ -23,6 +25,8 @@ private:
     Extractor& _extractor         = Extractor::getInstance();
     Saver& _saver                 = Saver::getInstance();
     WindowManager& _windowManager = WindowManager::getInstance();
+    TextureFactory& _textureFactory = TextureFactory::getInstance();
+    TextureManager& _textureManager = TextureManager::getInstance();
     bool _isProcessed = true;
 
 };

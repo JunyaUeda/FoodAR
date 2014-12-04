@@ -7,14 +7,14 @@ Mat Texture::img() const {
     return _img;
 }
 
-QString Texture::name() const {
+string Texture::name() const {
     return _name;
 }
 
-QString Texture::path() const {
+string Texture::path() const {
     return _path;
 }
 
-void Texture::setName(const QString &name) {
+void Texture::setName(const string &name) {
     _name = name;
 }
