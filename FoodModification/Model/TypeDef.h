@@ -39,4 +39,8 @@ enum MediaType {
 	movie = 2,
 };
 
+enum ObjectType {
+    food = 0,
+    hand = 1,
+};
 #endif // TYPEDEF_H

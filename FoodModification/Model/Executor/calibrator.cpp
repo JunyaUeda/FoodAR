@@ -27,5 +27,10 @@ bool Calibrator::calibrate(Mat srcImg, Mat refImg, QVS refColor) {
     region.calcRois();
     region.calcRotatedRects();
     _extractor.setPreviousRegion(region);
+
 	return true;
+}
+
+void Calibrator::calibrate(Region& region) {
+    
 }

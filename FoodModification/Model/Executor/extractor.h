@@ -10,6 +10,7 @@
 #include "../Service/extractService.h"
 #include "../Service/contourService.h"
 #include "../Manager/extractionManager.h"
+#include "../../Utils/opencvUtils.h"
 
 
 class Extractor {

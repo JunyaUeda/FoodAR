@@ -24,28 +24,64 @@ void Extractor::extract(MatSet& srcSet, Region& result) {
     //_extractService.extractRegionByColor(srcSet, region);//色情報だけではなくなる可能性が高いのでいったんコメントアウト
     //いったん手続き型でアルゴリズムを作成する
     //TODO : メソッド分割すべし
-    for(int y=0; y<srcSet.height(); y++) {
-        for(int x=0; x<srcSet.width(); x++) {
+    if(_previousRegion.rois().size()) {
+        for(int i=0; i<_previousRegion.rois().size(); i++) {
+            Rect rect = OpenCVUtils::calculateROI(_previousRegion.size(), _previousRegion.rois()[i], 1.25);
+            int yBegin = rect.y;
+            int yEnd = rect.y+rect.height;
+            int xBegin = rect.x;
+            int xEnd = rect.x+rect.width;
+        
+            for(int y=yBegin; y<yEnd; y++) {
+                for(int x=xBegin; x<xEnd; x++) {
 
-            //全ピクセルに対する操作
-            if(_featureReference.isWithinThreshold(srcSet, Point(x,y)) ){ 
-                // switch(L(_scoreMat,x,y)) {
-                //     case 0:
-                //         L(_scoreMat,x,y) = 1;
-                //         break;
-                //     case 1:
-                //         L(region.maskImg(),x,y) = 255;
-                //         L(_scoreMat,x,y) = 2;
-                //         break;
-                //     case 2:
-                //         L(region.maskImg(),x,y) = 255;
-                //         break;
-                // }   
-                L(region.maskImg(),x,y) = 255;     
+                    //全ピクセルに対する操作
+                    if(_featureReference.isWithinThreshold(srcSet, Point(x,y)) ){ 
+                        ////score使う方法
+                        // switch(L(_scoreMat,x,y)) {
+                        //     case 0:
+                        //         L(_scoreMat,x,y) = 1;
+                        //         break;
+                        //     case 1:
+                        //         L(region.maskImg(),x,y) = 255;
+                        //         L(_scoreMat,x,y) = 2;
+                        //         break;
+                        //     case 2:
+                        //         L(region.maskImg(),x,y) = 255;
+                        //         break;
+                        // }   
+                        L(region.maskImg(),x,y) = 255;     
+                    }
+                    
+                }
             }
-            
+        }
+    } else {
+        for(int y=0; y<srcSet.size().height; y++) {
+            for(int x=0; x<srcSet.size().width; x++) {
+
+                //全ピクセルに対する操作
+                if(_featureReference.isWithinThreshold(srcSet, Point(x,y)) ){ 
+                    ////score使う方法
+                    // switch(L(_scoreMat,x,y)) {
+                    //     case 0:
+                    //         L(_scoreMat,x,y) = 1;
+                    //         break;
+                    //     case 1:
+                    //         L(region.maskImg(),x,y) = 255;
+                    //         L(_scoreMat,x,y) = 2;
+                    //         break;
+                    //     case 2:
+                    //         L(region.maskImg(),x,y) = 255;
+                    //         break;
+                    // }   
+                    L(region.maskImg(),x,y) = 255;     
+                }
+                
+            }
         }
     }
+    
     region.calcContours();
     
 
@@ -72,6 +108,8 @@ void Extractor::extract(MatSet& srcSet, Region& result) {
 
         //残ったエッジ画像と色による抽出画像を合成する
         bitwise_or(areamaxRegion.maskImg(), dstEdgeImg, dstEdgeImg);
+
+
         drawContours(dstEdgeImg, areamaxRegion.contours(), 0, Scalar(255, 255, 255), CV_FILLED, LINK_EIGHT);
 
         int minSize = 200;

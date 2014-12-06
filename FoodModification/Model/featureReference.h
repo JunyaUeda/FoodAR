@@ -15,18 +15,21 @@ public:
     void updateThresholds(QVis averages, QVis tolerances);
 
     bool isWithinThreshold(MatSet& matSet, Point& point) {
-        int value = L(matSet.hsv(), point.x, point.y);
-        if(abs(value - _colorThresholds[0].luminance()) > abs(value - _colorThresholds[1].luminance() ) ){
-            if( _colorThresholds[1].isWithinThreshold(matSet, point)) {
-                return true;
-            }
-            return false;
+        
+        // if( _colorThresholds[1].isWithinThreshold(matSet, point)) {
+        //     return true;
+        // } else if ( _colorThresholds[0].isWithinThreshold(matSet, point)) {
+        //     return true;
+        // } else {
+        //     return false;
+        // }
+
+        if( _colorThresholds[1].isWithinThreshold(matSet, point)) {
+            return true;
         } else {
-            if( _colorThresholds[0].isWithinThreshold(matSet, point)) {
-                return true;
-            }
             return false;
         }
+
     }
 
     void updateEngagedChannels(const vector<ChannelType> list, const int thresholdIndex);

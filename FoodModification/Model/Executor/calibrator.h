@@ -16,6 +16,7 @@ class Calibrator {
 public:
     static Calibrator& getInstance();
     bool calibrate(Mat srcImg, Mat refImg, QVS refColor);
+    
 private:
     Calibrator();
     Calibrator(const Calibrator&);
