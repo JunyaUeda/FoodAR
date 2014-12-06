@@ -9,6 +9,7 @@
 #include "../Service/edgeService.h"
 #include "../Service/extractService.h"
 #include "../Service/contourService.h"
+#include "../Manager/extractionManager.h"
 
 
 class Extractor {
@@ -29,6 +30,7 @@ private:
     ContourService _contourService;
 	FeatureReference& _featureReference = FeatureReference::getInstance();
     EdgeFactory& _edgeFactory = EdgeFactory::getInstance();
+    ExtractionManager& _extractionManager = ExtractionManager::getInstance();
 
 };
 

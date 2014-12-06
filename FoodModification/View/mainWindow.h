@@ -85,6 +85,10 @@ private slots:
 	void on_channelThresholdLineEdit_textChanged(const QString &arg1);
 	void on_channelThresholdComboBox_currentIndexChanged(int index);
 
+    /*モルフォロジー変換*/
+	void on_dilateSpinBox_valueChanged(int arg1);
+	void on_erodeSpinBox_valueChanged(int arg1);
+
 private:
     vector<ChannelType> collectColorCheckBoxStatus();
     vector<ChannelType> collectEdgeChannelCheckBoxStatus();

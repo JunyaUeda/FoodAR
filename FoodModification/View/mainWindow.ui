@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>806</width>
-    <height>597</height>
+    <width>1088</width>
+    <height>779</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -19,8 +19,8 @@
      <rect>
       <x>0</x>
       <y>10</y>
-      <width>801</width>
-      <height>581</height>
+      <width>1091</width>
+      <height>721</height>
      </rect>
     </property>
     <property name="tabPosition">
@@ -724,8 +724,8 @@
      <widget class="QGroupBox" name="channelThresholdAdjustmentGroupBox">
       <property name="geometry">
        <rect>
-        <x>40</x>
-        <y>240</y>
+        <x>20</x>
+        <y>280</y>
         <width>281</width>
         <height>211</height>
        </rect>
@@ -856,6 +856,74 @@
        </property>
        <property name="text">
         <string>Tight</string>
+       </property>
+      </widget>
+     </widget>
+     <widget class="QGroupBox" name="groupBox">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>180</y>
+        <width>151</width>
+        <height>91</height>
+       </rect>
+      </property>
+      <property name="title">
+       <string>モルフォロジー変換</string>
+      </property>
+      <widget class="QSpinBox" name="dilateSpinBox">
+       <property name="geometry">
+        <rect>
+         <x>70</x>
+         <y>20</y>
+         <width>43</width>
+         <height>22</height>
+        </rect>
+       </property>
+       <property name="maximum">
+        <number>5</number>
+       </property>
+       <property name="value">
+        <number>2</number>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_11">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>20</y>
+         <width>62</width>
+         <height>15</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>膨張</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_12">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>60</y>
+         <width>62</width>
+         <height>15</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>縮小</string>
+       </property>
+      </widget>
+      <widget class="QSpinBox" name="erodeSpinBox">
+       <property name="geometry">
+        <rect>
+         <x>70</x>
+         <y>60</y>
+         <width>43</width>
+         <height>22</height>
+        </rect>
+       </property>
+       <property name="maximum">
+        <number>5</number>
        </property>
       </widget>
      </widget>
@@ -1064,7 +1132,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>806</width>
+     <width>1088</width>
      <height>29</height>
     </rect>
    </property>
@@ -1083,7 +1151,7 @@
  <resources/>
  <connections/>
  <buttongroups>
-  <buttongroup name="buttonGroup_captureSize"/>
   <buttongroup name="buttonGroup_dstSize"/>
+  <buttongroup name="buttonGroup_captureSize"/>
  </buttongroups>
 </ui>

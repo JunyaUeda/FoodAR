@@ -22,3 +22,11 @@ void ExtractionController::updateChannelThresholdValue(int degree, ChannelType t
     _featureReference.updateChannelThresholdValue(degree, type, index);
 }
 
+/*モルフォロジー変換*/
+void ExtractionController::updateDilateCount(int count) {
+    _extractionManager.setDilateCount(count);
+}
+
+void ExtractionController::updateErodeCount(int count) {
+    _extractionManager.setErodeCount(count);
+}

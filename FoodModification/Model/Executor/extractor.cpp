@@ -17,9 +17,13 @@ void Extractor::extract(MatSet& srcSet, Region& result) {
     Region region(srcSet.size() );
 
     //コピーの速度をきにしないなら右のほうが読みやすい
-    _extractService.extractRegionByColor(srcSet, region);// Region region = _extractService.extractRegionByColor(srcSet);
+    _extractService.extractRegionByColor(srcSet, region);
+
+    dilate(region.maskImg(), region.maskImg(), cv::Mat(), Point(-1,-1), _extractionManager.dilateCount());
+	erode(region.maskImg(), region.maskImg(), cv::Mat(), Point(-1,-1), _extractionManager.erodeCount());
     imshow("new extract", region.maskImg());
 
+    
     //最大面積の領域を取得する
     Region areamaxRegion(region.size() );
      _extractService.acquireMaxAreaRegion(region, areamaxRegion);

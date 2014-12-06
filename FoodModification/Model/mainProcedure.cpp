@@ -9,7 +9,6 @@ void MainProcedure::start() {
 
         MatSet matSet;
         _sourcer.loadSrc(matSet);
-
 		imshow(_windowManager.windowName(0), matSet.bgr());
 
         Region extractedRegion;
@@ -19,7 +18,6 @@ void MainProcedure::start() {
         
         if(_textureManager.currentMediaType() != MediaType::no) {
             _textureFactory.create(extractedRegion, resultTexture);
-            //imshow("textureImg", resultTexture);
         }
          
         Mat dstBGRImg = matSet.bgr().clone();

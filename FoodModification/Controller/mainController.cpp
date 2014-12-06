@@ -58,7 +58,6 @@ void MainController::setResizeFlag(bool flag) {
 void MainController::changeShiftValue(int hShift, int sShift, int vShift) {
 
     textureParam->setShift(hShift, sShift, vShift);
-    
 }
 
 /**

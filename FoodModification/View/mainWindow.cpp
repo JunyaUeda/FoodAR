@@ -360,3 +360,14 @@ ChannelType MainWindow::aqcuireChannelType(int channelNumber) {
 
     }
 }
+
+/*モルフォロジー変換*/
+void MainWindow::on_dilateSpinBox_valueChanged(int arg1)
+{
+    _extractionController.updateDilateCount(arg1);
+}
+
+void MainWindow::on_erodeSpinBox_valueChanged(int arg1)
+{
+    _extractionController.updateErodeCount(arg1);
+}

@@ -5,6 +5,7 @@
 #include "../Model/typeDef.h"
 #include "../Model/featureReference.h"
 #include "../Model/edgeFactory.h"
+#include "../Model/Manager/extractionManager.h"
 
 class ExtractionController {
 
@@ -17,6 +18,8 @@ public:
     int channelThresholdComboBox_currentIndexChanged(ChannelType type){
 		return _featureReference.channelThresholdDegree(type, 0);
     }
+    void updateDilateCount(int count);
+    void updateErodeCount(int count);
 private:
 	ExtractionController();
     ExtractionController(const ExtractionController&);
@@ -25,6 +28,7 @@ private:
 private:
     FeatureReference& _featureReference = FeatureReference::getInstance();
     EdgeFactory& _edgeFactory = EdgeFactory::getInstance();
+    ExtractionManager& _extractionManager = ExtractionManager::getInstance();
 
 };
 

@@ -33,6 +33,9 @@ public:
 	Mat gray() const {
 		return _gray;
 	}
+	Mat blur() const {
+		return _blur;
+	}
 	int width() const {
 		return _width;
 	}
@@ -43,8 +46,6 @@ public:
 		return Size(_width, _height);
 	}
 
-	map<ChannelType, Mat> channelImgs();
-	void addChannelImgs(SpaceType type);
 
 /*property*/
 private:
@@ -52,7 +53,7 @@ private:
 	Mat _hsv;
 	Mat _ycrcb;
 	Mat _gray;
-	map<ChannelType, Mat> _channelImgs;
+	Mat _blur;
 	int _width;
 	int _height;
 

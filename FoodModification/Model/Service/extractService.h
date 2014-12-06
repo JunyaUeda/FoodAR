@@ -30,7 +30,6 @@ public:
         }
         result.calcContours();
     }
-
     void acquireMaxAreaRegion(Region& region, Region& result) {
         int maxAreaIndex = _contourService->getMaxAreaContourIndex(region.contours());
         int lineType = LINK_EIGHT;
