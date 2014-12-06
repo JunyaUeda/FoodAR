@@ -6,6 +6,7 @@
 #include "../Param/region.h"
 #include "../Param/matSet.h"
 #include "../typeDef.h"
+#include "../featureReference.h"
 
 class Converter {
 
@@ -13,8 +14,11 @@ class Converter {
 public:
     static Converter& getInstance();
     void convert(const MatSet& srcSet, const Region& extractedRegion, const Mat& textureImg, Mat& dstBGRImg) {
+        if(!extractedRegion.rois().size()) {
+            return;
+        }
         if(_textureMediaType != MediaType::no) {
-            overlapTexture(textureImg, extractedRegion, dstBGRImg);
+            overlapTexture(srcSet, textureImg, extractedRegion, dstBGRImg);
         } 
         
 
@@ -30,7 +34,11 @@ public:
 
     }
 
-    void overlapTexture(const Mat& textureImg, const Region& extractedRegion, Mat& dstBGRImg) {
+    void overlapTexture(const MatSet& srcSet, const Mat& textureImg, const Region& extractedRegion, Mat& dstBGRImg) {
+
+        vint sum(9,0);
+        int pixelSum=0;
+
         for(int i=0; i<extractedRegion.rois().size(); i++) {
 
             int yBegin = extractedRegion.rois()[i].y;
@@ -41,14 +49,36 @@ public:
             for(int y=yBegin; y<yEnd; y++) {
                 for(int x=xBegin; x<xEnd; x++){
                     if(L(extractedRegion.maskImg(),x,y) == 255) {
+
+                        //overlapTexture
                         B(dstBGRImg,x,y) = _alpha*B(dstBGRImg,x,y) + (1-_alpha)*B(textureImg,x,y);
                         G(dstBGRImg,x,y) = _alpha*G(dstBGRImg,x,y) + (1-_alpha)*G(textureImg,x,y);
                         R(dstBGRImg,x,y) = _alpha*R(dstBGRImg,x,y) + (1-_alpha)*R(textureImg,x,y);
+
+                        //count Sum
+                        sum[0] = sum[0] + B(srcSet.bgr(), x, y);
+                        sum[1] = sum[1] + G(srcSet.bgr(), x, y);
+                        sum[2] = sum[2] + R(srcSet.bgr(), x, y);
+                        sum[3] = sum[3] + B(srcSet.hsv(), x, y);
+                        sum[4] = sum[4] + G(srcSet.hsv(), x, y);
+                        sum[5] = sum[5] + R(srcSet.hsv(), x, y);
+                        sum[6] = sum[6] + B(srcSet.ycrcb(), x, y);
+                        sum[7] = sum[7] + G(srcSet.ycrcb(), x, y);
+                        sum[8] = sum[8] + R(srcSet.ycrcb(), x, y);
+                        pixelSum++;
                     }
                 }
             }
 
         }
+
+        //calculate average;
+        vint averages(9,0);
+        for(int i=0; i<9; i++) {
+            averages[i] = static_cast<int>((float)sum[i] / (float)pixelSum);
+        }
+        
+       // _featureReference.updateAverages(averages);
     }
 
     void updateAlpha(double value);
@@ -62,6 +92,7 @@ private:
 private:
     double _alpha = 0.5;
     MediaType _textureMediaType;
+    FeatureReference& _featureReference = FeatureReference::getInstance();
 };
 
 #endif // CONVERTER_H

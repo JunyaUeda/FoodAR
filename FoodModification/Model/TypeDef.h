@@ -14,6 +14,7 @@ typedef QList<QList<Point> >    QLPs;
 typedef QVector<Scalar>         QVS;
 typedef vector<vector<Point> >  vPs;
 typedef vector<Point>            vP;
+typedef vector<int>          vint;
 
 enum ChannelType {
     blue = 0,

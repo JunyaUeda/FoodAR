@@ -24,13 +24,14 @@ void Extractor::extract(MatSet& srcSet, Region& result) {
     //_extractService.extractRegionByColor(srcSet, region);//色情報だけではなくなる可能性が高いのでいったんコメントアウト
     //いったん手続き型でアルゴリズムを作成する
     //TODO : メソッド分割すべし
+
+
     if(_previousRegion.rois().size()) {
         for(int i=0; i<_previousRegion.rois().size(); i++) {
-            Rect rect = OpenCVUtils::calculateROI(_previousRegion.size(), _previousRegion.rois()[i], 1.25);
-            int yBegin = rect.y;
-            int yEnd = rect.y+rect.height;
-            int xBegin = rect.x;
-            int xEnd = rect.x+rect.width;
+            int yBegin = _previousRegion.rois()[i].y;
+            int yEnd = _previousRegion.rois()[i].y+_previousRegion.rois()[i].height;
+            int xBegin = _previousRegion.rois()[i].x;
+            int xEnd = _previousRegion.rois()[i].x+_previousRegion.rois()[i].width;
         
             for(int y=yBegin; y<yEnd; y++) {
                 for(int x=xBegin; x<xEnd; x++) {
@@ -97,13 +98,13 @@ void Extractor::extract(MatSet& srcSet, Region& result) {
      Mat dstEdgeImg = Mat::zeros(region.size(), CV_8UC1);
     if(areamaxRegion.rois().size()) {
         //エッジ画像を取得する
-        vector<Mat> rawEdges;
-        _edgeFactory.createEdges(srcSet, rawEdges);
+        // vector<Mat> rawEdges;
+        // _edgeFactory.createEdges(srcSet, rawEdges);
         
 
-        //エッジ画像を取得する
-        _edgeService.extractEdge(rawEdges, areamaxRegion.rois()[0], dstEdgeImg);
-        imshow("edge", dstEdgeImg);
+        // //エッジ画像を取得する
+        // _edgeService.extractEdge(rawEdges, areamaxRegion.rois()[0], dstEdgeImg);
+        // imshow("edge", dstEdgeImg);
 
 
         //残ったエッジ画像と色による抽出画像を合成する
@@ -122,7 +123,6 @@ void Extractor::extract(MatSet& srcSet, Region& result) {
     result.calcContours();
     result.calcRois();
     result.calcRotatedRects();
-
     _previousRegion = result;
 }
 

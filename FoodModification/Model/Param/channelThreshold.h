@@ -20,6 +20,11 @@ class ChannelThreshold {
 public:
     ChannelThreshold(ChannelFunc* type);
     bool loadAverage(QDomElement element);
+    void updateAverage(int value) {
+        _upper = _upper + (value - _average);
+        _under = _under + (value - _average);
+		_average = value;
+    }
     void setThreshold(int average, int tolerance);
     static vector<ChannelThreshold> createAllChannelThreshold();
 

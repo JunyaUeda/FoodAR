@@ -24,6 +24,12 @@ public:
         return true;
     }
 
+    void updateAverages(vint averages) {
+        for(int i=0; i<averages.size(); i++) {
+            _channelThresholds[i].updateAverage(averages[i]);
+        }
+    }
+
     void updateEngagedChannels(vector<ChannelType> channelTypes);
 
     /**

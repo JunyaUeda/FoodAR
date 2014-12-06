@@ -12,6 +12,10 @@ class FeatureReference {
 public:
     static FeatureReference& getInstance();
     void loadFeaturesFromFile(QDomDocument doc);
+    void updateAverages(vint averages) {
+        _colorThresholds[1].updateAverages(averages);
+    }
+
     void updateThresholds(QVis averages, QVis tolerances);
 
     bool isWithinThreshold(MatSet& matSet, Point& point) {

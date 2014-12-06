@@ -31,6 +31,3 @@ bool Calibrator::calibrate(Mat srcImg, Mat refImg, QVS refColor) {
 	return true;
 }
 
-void Calibrator::calibrate(Region& region) {
-    
-}
