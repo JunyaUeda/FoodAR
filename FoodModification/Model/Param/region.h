@@ -23,82 +23,51 @@ public:
         _maskImg = maskImg;
     }
 
-    vPs contours() const {
-        return _contours;
+    vector<Point> contour() const {
+        return _contour;
     }
 
-    QVector<Rect> rois() const {
-        return _rois;
+    Rect roi() const {
+        return _roi;
     }
 
-    vector<RotatedRect> rotatedRects() const {
-        return _rotatedRects;
+    RotatedRect rotatedRect() const {
+        return _rotatedRect;
     }
 
-    void calcContours() {
-        Mat copyImg = _maskImg.clone();
-        findContours(copyImg, _contours, CV_RETR_LIST, CV_CHAIN_APPROX_NONE);
+    // void calcContours() {
+    //     Mat copyImg = _maskImg.clone();
+    //     findContours(copyImg, _contours, CV_RETR_LIST, CV_CHAIN_APPROX_NONE);
+    // }
+
+    void setContour(vector<Point> contour) {
+        _contour = contour;
     }
 
-    void setContours(const vPs &contours) {
-        _contours = contours;
+    void calcRoi() {       
+        Rect rect = boundingRect(_contour);
+        double SCALE_RATIO = 1.2;
+        _roi = OpenCVAPI::calculateROI(_maskImg.size(), rect, SCALE_RATIO);
     }
 
-    void calcRois() {
-        _rois.clear();
-        for(int i=0; i<_contours.size(); i++) {
-            Rect rect = boundingRect(_contours[i]);
-            double SCALE_RATIO = 1.2;
-            _rois.push_back( OpenCVAPI::calculateROI(_maskImg.size(), rect, SCALE_RATIO) );
-        }
+    void calcRotatedRect() {
+        _rotatedRect= minAreaRect(_contour);
     }
-
-    void calcRotatedRects() {
-         _rotatedRects.clear();
-         //_rotatedRectVertices.clear();
-        for(int i=0; i<_contours.size(); i++) {
-            //RotatedRect rect = minAreaRect(_contours[i]);
-            //_rotatedRects.push_back(rect);
-            //calcRotatedRectVetcies(rect);
-            //_rotatedRectVertices.push_back(calcRotatedRectVetcies(rect));
-            _rotatedRects.push_back(minAreaRect(_contours[i]));
-        }
-    }
-
-
 
     Size size() const {
         return _maskImg.size();
     }
     
-     // void addPoint(Point point) {
-    //     _points.push_back(point);
-    // }
-
-    // vector<Point> points() {
-    //     return _points;
-    // }
-
 private:
-    // vector<Point2f> calcRotatedRectVetcies(RotatedRect& rect) {
-    //     Point2f vertices[4];
-    //     rect.points(vertices);
-    //     vector<Point2f> result;
-    //     for(int i=0; i<4; i++) {
-    //         result.push_back(vertices[i]);
-    //     }
-    //     return result;
-    // }
+    
 /*property*/
 private:
 	Mat _maskImg;
-    vPs _contours;
-    QVector<Rect> _rois;
-    vPs _regionPixels;
-    vector<RotatedRect> _rotatedRects;
+    vector<Point> _contour;
+    Rect _roi;
     vector<Point> _points;
-   // vector<vector<Point2f> > _rotatedRectVertices;
-
+    RotatedRect _rotatedRect;
+  
 };
 
 #endif // REGION_H

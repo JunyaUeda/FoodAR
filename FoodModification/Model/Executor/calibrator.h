@@ -9,6 +9,7 @@
 #include "../TypeDef.h"
 #include "../Param/region.h"
 #include "../Executor/extractor.h"
+#include "../Service/contourService.h"
 
 class Calibrator {
 
@@ -24,6 +25,7 @@ private:
 /*property*/
 private:
 	RegionService* _regionService;
+    ContourService* _contourService;
     FeatureReference&  _featureReference = FeatureReference::getInstance();
     Extractor& _extractor = Extractor::getInstance();//ここに依存関係は作るべきではない
 };

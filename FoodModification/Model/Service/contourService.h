@@ -13,6 +13,30 @@ class ContourService {
 /*method*/
 public:
 	ContourService();
+    vector<Point> acquireMaxAreaContour(Mat& maskImg) {
+        vPs contours;
+        Mat mat = maskImg.clone();
+        findContours(mat, contours, CV_RETR_LIST, CV_CHAIN_APPROX_NONE);
+        int indexOfMaxArea = calcIndexOfMaxArea(contours);
+
+        return contours[indexOfMaxArea];
+    }
+
+    int calcIndexOfMaxArea(vPs& contours) {
+        size_t max=0;
+        int indexForMaxArea=0;
+        for(int i=0; i<contours.size(); ++i) {
+            size_t count = contours[i].size();
+            if(count < 300 || count > 1000) continue;
+
+            if(count > max) {
+                indexForMaxArea = i;
+                max = count;
+            }
+        }
+
+        return indexForMaxArea;
+    }
 
     int getMaxAreaContourIndex(vPs& contours) {
         size_t max=0;

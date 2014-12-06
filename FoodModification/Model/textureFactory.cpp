@@ -9,24 +9,16 @@ TextureFactory& TextureFactory::getInstance() {
     return instance;
 }
 
-void TextureFactory::create(const Region& region, Mat& result) {
+void TextureFactory::create(const Region& region, Mat& aTexture) {
             
-    if(region.contours().empty()) {
+    if(region.contour().empty()) {
         qDebug() << "contours is empty in textureController";
         return;
     }
-    
-    for(int i=0; i<region.contours().size(); i++) {
 
-        size_t count = region.contours()[i].size();
-        if(count < 300) {
-			continue;
-        }
-
-        Mat aTexture = Mat::zeros(region.maskImg().size(), CV_8UC3);
-	    resize(_src, _resizedSrc, region.rotatedRects()[i].size, 0, 0, INTER_NEAREST);
+	    resize(_src, _resizedSrc, region.rotatedRect().size, 0, 0, INTER_NEAREST);
         Point2f vertices[4];
-        region.rotatedRects()[i].points(vertices);
+        region.rotatedRect().points(vertices);
         
         // double scale = 1.0;
         // Mat affine_matrix = getRotationMatrix2D(region.rotatedRects()[i].center, region.rotatedRects()[i].angle, scale);
@@ -43,8 +35,6 @@ void TextureFactory::create(const Region& region, Mat& result) {
         // rectangle(aTexture, rect.tl(), rect.br(), Scalar(255,0,255), 2);
         // for (int i = 0; i < 4; i++) line(aTexture, vertices[i], vertices[(i+1)%4], Scalar(0,255,0), 4, 8, 0);
         
-        add(result, aTexture, result);
-    }
 }
 
 void TextureFactory::updateSrc(Mat src) {

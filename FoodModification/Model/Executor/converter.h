@@ -14,7 +14,7 @@ class Converter {
 public:
     static Converter& getInstance();
     void convert(const MatSet& srcSet, const Region& extractedRegion, const Mat& textureImg, Mat& dstBGRImg) {
-        if(!extractedRegion.rois().size()) {
+        if(!extractedRegion.contour().size()) {
             return;
         }
         if(_textureMediaType != MediaType::no) {
@@ -39,12 +39,12 @@ public:
         vint sum(9,0);
         int pixelSum=0;
 
-        for(int i=0; i<extractedRegion.rois().size(); i++) {
+       
 
-            int yBegin = extractedRegion.rois()[i].y;
-            int yEnd = extractedRegion.rois()[i].y+extractedRegion.rois()[i].height;
-            int xBegin = extractedRegion.rois()[i].x;
-            int xEnd = extractedRegion.rois()[i].x+extractedRegion.rois()[i].width;
+            int yBegin = extractedRegion.roi().y;
+            int yEnd = extractedRegion.roi().y+extractedRegion.roi().height;
+            int xBegin = extractedRegion.roi().x;
+            int xEnd = extractedRegion.roi().x+extractedRegion.roi().width;
             
             for(int y=yBegin; y<yEnd; y++) {
                 for(int x=xBegin; x<xEnd; x++){
@@ -70,7 +70,6 @@ public:
                 }
             }
 
-        }
 
         //calculate average;
         vint averages(9,0);

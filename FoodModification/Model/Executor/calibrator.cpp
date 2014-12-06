@@ -19,13 +19,14 @@ bool Calibrator::calibrate(Mat srcImg, Mat refImg, QVS refColor) {
 
     _featureReference.updateThresholds(averages, tolerances);
     
-
     Mat resultMaskImg = Mat::zeros(srcImg.size(), CV_8UC1);
     _regionService->acquireMaskImg(refImg, refColor, resultMaskImg);
+    
+	vector<Point> contour = _contourService->acquireMaxAreaContour(resultMaskImg);
     Region region(resultMaskImg);
-    region.calcContours();
-    region.calcRois();
-    region.calcRotatedRects();
+    region.setContour(contour);
+    region.calcRoi();
+    region.calcRotatedRect();
     _extractor.setPreviousRegion(region);
 
 	return true;
