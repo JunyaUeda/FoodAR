@@ -22,7 +22,7 @@ public:
 
 private:
     Ui::CalibrateDialog *ui;
-    CalibrationController& calibrationController = CalibrationController::getInstance();
+    CalibrationController& _calibrationController = CalibrationController::getInstance();
     VideoCapture videoCapture;
     Mat srcBGRImg, srcRGBImg, srcHSVImg;
     int timerId;

@@ -30,3 +30,4 @@ void ExtractionController::updateDilateCount(int count) {
 void ExtractionController::updateErodeCount(int count) {
     _extractionManager.setErodeCount(count);
 }
+

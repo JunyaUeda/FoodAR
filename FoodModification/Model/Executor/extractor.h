@@ -18,6 +18,8 @@ class Extractor {
 public:
     static Extractor& getInstance();
     void extract(MatSet& srcSet, Region& result);
+    void setPreviousRegion(Region& region);
+    void setScoreMatZeroAndSize(Size size);
 
 private:
     Extractor();
@@ -31,6 +33,8 @@ private:
 	FeatureReference& _featureReference = FeatureReference::getInstance();
     EdgeFactory& _edgeFactory = EdgeFactory::getInstance();
     ExtractionManager& _extractionManager = ExtractionManager::getInstance();
+    Region _previousRegion;
+    Mat _scoreMat;
 
 };
 

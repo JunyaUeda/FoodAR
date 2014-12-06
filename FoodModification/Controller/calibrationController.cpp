@@ -32,6 +32,9 @@ void CalibrationController::calibrate(CalibrateClickParam* param) {
 
     QVector<Scalar> color = QVector<Scalar>() << Scalar(0,0,255) << Scalar(0,255,0);
     _calibrator.calibrate(param->srcBGRImg, param->refImg, color);
-    //Features features = calibrationService.calcurateFeatures(param);
 
+}
+
+Size CalibrationController::captureSize() {
+    return _cameraManager.size();
 }

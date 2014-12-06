@@ -30,6 +30,23 @@ QLP RegionService::toPointList(Mat refImg, Scalar refColor) {
 }
 
 /**
+* 指定領域のmaskImgを返す
+* NOTE:初回の処理ループのときに使うextractorのpreviousRegionの初期化にしよう
+*/
+void RegionService::acquireMaskImg(const Mat refImg, QVS refColor, Mat& result) {
+    for(Scalar color : refColor) {
+        for(int y=0; y<refImg.rows; y++) {
+            for(int x=0; x<refImg.cols; x++) {
+                Scalar hereColor(B(refImg,x,y), G(refImg,x,y), R(refImg,x,y));
+                if(hereColor == color) {
+                    L(result,x,y) = 255;
+                }
+            }
+        }
+    }
+}
+
+/**
 * 指定領域の9チャンネルの平均値を返す
 *
 */

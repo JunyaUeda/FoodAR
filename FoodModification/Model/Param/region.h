@@ -27,6 +27,14 @@ public:
         return _contours;
     }
 
+    QVector<Rect> rois() const {
+        return _rois;
+    }
+
+    vector<RotatedRect> rotatedRects() const {
+        return _rotatedRects;
+    }
+
     void calcContours() {
         Mat copyImg = _maskImg.clone();
         findContours(copyImg, _contours, CV_RETR_LIST, CV_CHAIN_APPROX_NONE);
@@ -36,10 +44,6 @@ public:
         _contours = contours;
     }
 
-    QVector<Rect> rois() const {
-        return _rois;
-    }
-
     void calcRois() {
         _rois.clear();
         for(int i=0; i<_contours.size(); i++) {
@@ -47,10 +51,6 @@ public:
             double SCALE_RATIO = 1.3;
             _rois.push_back( OpenCVAPI::calculateROI(_maskImg.size(), rect, SCALE_RATIO) );
         }
-    }
-
-    vector<RotatedRect> rotatedRects() const {
-        return _rotatedRects;
     }
 
     void calcRotatedRects() {
@@ -63,24 +63,7 @@ public:
     Size size() const {
         return _maskImg.size();
     }
-    // Region(Size& size);
-    // Region(Mat& img);
-    // Mat maskImg() const;
-    // void setMaskImg(Mat &maskImg);
-    // vPs contours() const;
-    // void calcContours();
-    // void setContours(const vPs &contours);
-
-    // QVector<Rect> rois() const;
-
-    // void calcRois();
-
-    // vector<RotatedRect> rotatedRects() const;
-
-    // void calcRotatedRects();
     
-    // Size size() const;
-
 /*property*/
 private:
 	Mat _maskImg;

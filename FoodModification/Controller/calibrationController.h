@@ -4,9 +4,11 @@
 #include "../Param/calibrateClickParam.h"
 #include "../Model/Service/regionService.h"
 #include "../Model/Executor/calibrator.h"
+#include "../Model/Manager/cameraManager.h"
 
 class CalibrationController {
 
+/*method*/
 public:
     static CalibrationController& getInstance();
     void calibrate_old();
@@ -14,17 +16,20 @@ public:
     void videoInput();
     void capture();
     void stopDrawing();
-    
+    Size captureSize();
+
+private:
+    CalibrationController();
+    CalibrationController(const CalibrationController&);
+
+/*property*/
 private:
     bool inputFlag = true;
     bool drawingFlag = true;
     CalibrateClickParam* clickParam;
     Calibrator& _calibrator = Calibrator::getInstance();
+    CameraManager& _cameraManager = CameraManager::getInstance();
 
-
-    CalibrationController();
-    CalibrationController(const CalibrationController&);
-    
 };
 
 #endif // CALIBRATIONCONTROLLER_H

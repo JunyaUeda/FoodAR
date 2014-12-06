@@ -4,6 +4,7 @@ void MainProcedure::start() {
     _isProcessed = true;
     _sourcer.setUp();
     _saver.save();
+
     
     while (_isProcessed) {
 

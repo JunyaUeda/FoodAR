@@ -4,6 +4,7 @@
 #include <QString>
 #include "../SDK/opencv/opencvApi.h"
 #include "manager.h"
+#include "../Executor/extractor.h"
 
 class CameraManager : public Manager {
 
@@ -13,6 +14,9 @@ public:
     static CameraManager& getInstance();
     bool setUp();
     void setCaptureSize(Size size);
+    Size size() {
+        return _size;
+    }
     Mat& getFrame() {
         _capture >> _inputMat;
         return _inputMat;
@@ -25,9 +29,10 @@ private:
     
 /*property*/
 private:
-    Size _size;
+    Size _size = Size(640, 480);
 	Size _defaultSize = Size(640, 480);
     Mat _inputMat;
+    Extractor& _extractor = Extractor::getInstance();
 
 };
 

@@ -8,6 +8,7 @@ Calibrator& Calibrator::getInstance() {
 	return instance;
 }
 
+//TODO : 処理が多いので分割すべし
 bool Calibrator::calibrate(Mat srcImg, Mat refImg, QVS refColor) {
 
     MatSet matSet(srcImg);
@@ -17,7 +18,14 @@ bool Calibrator::calibrate(Mat srcImg, Mat refImg, QVS refColor) {
 	QVis tolerances = _regionService->calcTolerances(matSet, regions, averages);
 
     _featureReference.updateThresholds(averages, tolerances);
+    
 
-
+    Mat resultMaskImg = Mat::zeros(srcImg.size(), CV_8UC1);
+    _regionService->acquireMaskImg(refImg, refColor, resultMaskImg);
+    Region region(resultMaskImg);
+    region.calcContours();
+    region.calcRois();
+    region.calcRotatedRects();
+    _extractor.setPreviousRegion(region);
 	return true;
 }

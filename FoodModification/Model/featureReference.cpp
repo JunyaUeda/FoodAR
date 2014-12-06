@@ -37,28 +37,6 @@ void FeatureReference::displayThreshold() {
     }
 }
 
-inline ColorThreshold* FeatureReference::getColorThreshold(int value) {
-
-    // ColorThreshold* colorThreshold;
-    // int minDiff = 256;
-
-    // for(ColorThreshold c : _colorThresholds) {
-    //     int diff = abs(value - c.channelThresholds()[5].average());
-    //     if(minDiff > diff) {
-    //         minDiff = diff;
-    //         colorThreshold = &c;
-    //     }
-    // }
-    //じぶんでluminance持っておいた方がよりはやい
-     if(abs(value - _colorThresholds[0].luminance()) > abs(value - _colorThresholds[1].luminance() ) ){
-        return  &_colorThresholds[1];
-    }
-
-    //return colorThreshold;
-    return &_colorThresholds[0];
-}
-
-
 void FeatureReference::updateEngagedChannels(const vector<ChannelType> list, const int thresholdIndex) {
     _colorThresholds[thresholdIndex].updateEngagedChannels(list);
 }

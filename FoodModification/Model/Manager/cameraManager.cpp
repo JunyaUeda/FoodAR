@@ -11,7 +11,7 @@ CameraManager& CameraManager::getInstance() {
 bool CameraManager::setUp() {
     bindCamera(0);
     setCaptureSize(_defaultSize);
-
+	_extractor.setScoreMatZeroAndSize(_defaultSize);
 	if(_capture.isOpened()) {
         return true;
     }

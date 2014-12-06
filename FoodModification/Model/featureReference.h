@@ -48,8 +48,6 @@ private:
     FeatureReference();
     FeatureReference(const FeatureReference&);
     
-    ColorThreshold* getColorThreshold(int value);
-
 /*property*/
 private:
     vector<ColorThreshold> _colorThresholds;

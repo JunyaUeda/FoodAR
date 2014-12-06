@@ -16,6 +16,7 @@ public:
     QVis calcAverages(const MatSet& matSet, QLPs regions);
     QVis calcTolerances(const MatSet& matSet, QLPs regions, QVis averages);
     QLPs toPointList(Mat refImg, QVS refColor);
+    void acquireMaskImg(const Mat refImg, QVS refColor, Mat& result);
 private:
     QLP toPointList(Mat refImg, Scalar refColor);
     QVi calcAverage(const MatSet& matSet, QLP region);
