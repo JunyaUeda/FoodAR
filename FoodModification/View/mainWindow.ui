@@ -507,7 +507,7 @@
         <string>色相</string>
        </property>
        <property name="checked">
-        <bool>true</bool>
+        <bool>false</bool>
        </property>
       </widget>
       <widget class="QCheckBox" name="colorSaturationCheckBox">
@@ -523,7 +523,7 @@
         <string>彩度</string>
        </property>
        <property name="checked">
-        <bool>true</bool>
+        <bool>false</bool>
        </property>
       </widget>
       <widget class="QCheckBox" name="colorValueCheckBox">
@@ -539,7 +539,7 @@
         <string>明度</string>
        </property>
        <property name="checked">
-        <bool>true</bool>
+        <bool>false</bool>
        </property>
       </widget>
       <widget class="QCheckBox" name="colorYCheckBox">
@@ -554,6 +554,9 @@
        <property name="text">
         <string>Y</string>
        </property>
+       <property name="checked">
+        <bool>true</bool>
+       </property>
       </widget>
       <widget class="QCheckBox" name="colorCrCheckBox">
        <property name="geometry">
@@ -567,6 +570,9 @@
        <property name="text">
         <string>Cr</string>
        </property>
+       <property name="checked">
+        <bool>true</bool>
+       </property>
       </widget>
       <widget class="QCheckBox" name="colorCbCheckBox">
        <property name="geometry">
@@ -579,6 +585,9 @@
        </property>
        <property name="text">
         <string>Cb</string>
+       </property>
+       <property name="checked">
+        <bool>true</bool>
        </property>
       </widget>
      </widget>

@@ -18,13 +18,20 @@ void Extractor::setScoreMatZeroAndSize(Size size) {
 
 void Extractor::extract(MatSet& srcSet, Region& result) {
 
-    //コピーの速度をきにしないなら右のほうが読みやすい
     //_extractService.extractRegionByColor(srcSet, region);//色情報だけではなくなる可能性が高いのでいったんコメントアウト
     //いったん手続き型でアルゴリズムを作成する
     //TODO : メソッド分割すべし
 
+    //エッジ画像を取得する
+    vector<Mat> rawEdges;
+    _edgeFactory.createEdges(srcSet, rawEdges);
+    Mat dstEdgeImg(srcSet.size().height,srcSet.size().width, CV_8UC1, 255);
+    revMergeEdges(rawEdges, _previousRegion.roi(), dstEdgeImg);
+    erode(dstEdgeImg, dstEdgeImg, cv::Mat(), Point(-1,-1), 1);
+    imshow("revEdge", dstEdgeImg);
+
      Mat mat = Mat::zeros(srcSet.size(), CV_8UC1);
-    if(_previousRegion.contour().size()){
+    if(_indexOfMaxArea >=0){
 
         int yBegin = _previousRegion.roi().y;
         int yEnd = _previousRegion.roi().y+_previousRegion.roi().height;
@@ -48,14 +55,18 @@ void Extractor::extract(MatSet& srcSet, Region& result) {
                     //     case 2:
                     //         L(region.maskImg(),x,y) = 255;
                     //         break;
-                    // }   
-                    L(mat,x,y) = 255;     
+                    // }
+                    //if(L(dstEdgeImg,x,y)==255) {
+                        L(mat,x,y) = 255; 
+                    //}   
+                        
                 }
                 
             }
         }
     
     } else {
+        qDebug() << "indexOfMaxAreaout";
         for(int y=0; y<srcSet.size().height; y++) {
             for(int x=0; x<srcSet.size().width; x++) {
 
@@ -74,7 +85,9 @@ void Extractor::extract(MatSet& srcSet, Region& result) {
                     //         L(region.maskImg(),x,y) = 255;
                     //         break;
                     // }   
-                    L(mat,x,y) = 255;     
+                  // if(L(dstEdgeImg,x,y)==255) {
+                        L(mat,x,y) = 255; 
+                    //}      
                 }
                 
             }
@@ -86,25 +99,17 @@ void Extractor::extract(MatSet& srcSet, Region& result) {
     imshow("colorExtract", mat);
 
     
-    //最大面積の領域を取得する
-    //Region areamaxRegion(region.size() );
-     //_extractService.acquireMaxAreaRegion(region, areamaxRegion);
-
+    //最大面積
     vPs contours;
     findContours(mat, contours, CV_RETR_LIST, CV_CHAIN_APPROX_NONE);
-    int indexOfMaxArea = calcIndexOfMaxArea(contours);
-
+    _indexOfMaxArea = calcIndexOfMaxArea(contours);
+    qDebug() << "_indexOfMaxArea" << _indexOfMaxArea;
     Mat mat2 = Mat::zeros(srcSet.size(), CV_8UC1);
-    drawContours(mat2, contours, indexOfMaxArea, Scalar(255, 255, 255), CV_FILLED, LINK_EIGHT);
-
-    //  Mat dstEdgeImg = Mat::zeros(region.size(), CV_8UC1);
-    // if(areamaxRegion.rois().size()) {
-    //     //エッジ画像を取得する
-    //     // vector<Mat> rawEdges;
-    //     // _edgeFactory.createEdges(srcSet, rawEdges);
-        
-
-    //     // //エッジ画像を取得する
+   
+    drawContours(mat2, contours, _indexOfMaxArea, Scalar(255, 255, 255), CV_FILLED, LINK_EIGHT);
+    
+    
+    //エッジ画像を取得する
     //     // _edgeService.extractEdge(rawEdges, areamaxRegion.rois()[0], dstEdgeImg);
     //     // imshow("edge", dstEdgeImg);
 
@@ -118,14 +123,18 @@ void Extractor::extract(MatSet& srcSet, Region& result) {
     //     int minSize = 200;
     //     _contourService.fillContours(dstEdgeImg, minSize);
         
-    // }
+
     imshow("merge", mat2);
 
     result.setMaskImg(mat2);
-    result.setContour(contours[indexOfMaxArea]);
-    result.calcRoi();
-    result.calcRotatedRect();
+    if(_indexOfMaxArea>=0) {
+        result.setContour(contours[_indexOfMaxArea]);
+        result.calcRoi();
+        result.calcRotatedRect();
+    }
+    
     _previousRegion = result;
+
 }
 
 /**

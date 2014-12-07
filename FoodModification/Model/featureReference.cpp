@@ -3,9 +3,9 @@
 FeatureReference::FeatureReference() {
     _colorThresholds.push_back((*new ColorThreshold()));
     vector<ChannelType> types;
-    types.push_back(ChannelType::hue);
-    types.push_back(ChannelType::saturation);
-    types.push_back(ChannelType::value);
+    types.push_back(ChannelType::y);
+    types.push_back(ChannelType::cr);
+    types.push_back(ChannelType::cb);
     _colorThresholds[0].updateEngagedChannels(types);
     _colorThresholds.push_back((*new ColorThreshold()));
     _colorThresholds[1].updateEngagedChannels(types);

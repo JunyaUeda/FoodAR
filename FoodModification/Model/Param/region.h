@@ -44,13 +44,19 @@ public:
         _contour = contour;
     }
 
-    void calcRoi() {       
+    void calcRoi() { 
+        if(!_contour.size()) {
+            return;
+        }      
         Rect rect = boundingRect(_contour);
-        double SCALE_RATIO = 1.2;
+        double SCALE_RATIO = 2.0;
         _roi = OpenCVAPI::calculateROI(_maskImg.size(), rect, SCALE_RATIO);
     }
 
     void calcRotatedRect() {
+        if(!_contour.size()) {
+            return;
+        }  
         _rotatedRect= minAreaRect(_contour);
     }
 

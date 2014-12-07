@@ -21,12 +21,16 @@ public:
     void extract(MatSet& srcSet, Region& result);
     void setPreviousRegion(Region& region);
     void setScoreMatZeroAndSize(Size size);
+
     int calcIndexOfMaxArea(vPs& contours) {
+        if(!contours.size()) {
+            return -1;
+        }
         size_t max=0;
         int indexForMaxArea=0;
         for(int i=0; i<contours.size(); ++i) {
             size_t count = contours[i].size();
-            if(count < 300 || count > 1000) continue;
+            //if(count < 300 || count > 1000) continue;
 
             if(count > max) {
                 indexForMaxArea = i;
@@ -35,6 +39,25 @@ public:
         }
 
         return indexForMaxArea;
+    }
+
+    void revMergeEdges(vector<Mat>& channelEdgeImgs, Rect& roi, Mat& dstEdgeImg) {
+
+        if(!channelEdgeImgs.size()) {
+            return;  
+        }
+
+        for(int y=roi.y; y<(roi.y+roi.height); y++) {
+            for(int x=roi.x; x<(roi.x+roi.width); x++) {
+                for(Mat mat : channelEdgeImgs) {
+                    if(L(mat,x,y) == 255) {
+                        L(dstEdgeImg, x, y) = 0;
+                        break;
+                    } 
+                    L(dstEdgeImg, x, y) = 255;
+                }
+            }
+        }
     }
 
 private:
@@ -51,6 +74,7 @@ private:
     ExtractionManager& _extractionManager = ExtractionManager::getInstance();
     Region _previousRegion;
     Mat _scoreMat;
+    int _indexOfMaxArea=1;
 
 };
 
