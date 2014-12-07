@@ -9,6 +9,7 @@
 #include "../Controller/mainController.h"
 #include "../Controller/edgeController.h"
 #include "../Controller/extractionController.h"
+#include "../Controller/textureController.h"
 #include "../Param/cannyThreshold.h"
 #include "../definition.h"
 
@@ -25,7 +26,7 @@ class MainWindow : public QMainWindow {
 public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
-    
+
 private slots:
     /**
     * ホームタブ
@@ -118,6 +119,7 @@ private:
     EdgeController& edgeController               = EdgeController::getInstance();
     SrcController& srcController                 = SrcController::getInstance();
     ExtractionController& _extractionController  = ExtractionController::getInstance();
+    TextureController& _textureController        = TextureController::getInstance();
     
 
     map<int, int> _edgeWidgetChannelMap;

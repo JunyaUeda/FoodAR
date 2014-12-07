@@ -6,6 +6,7 @@
 #include <functional>
 #include "../Model/SDK/opencv/opencvApi.h"
 #include "../Model/Manager/textureManager.h"
+#include "../View/mainWindow.h"
 
 class TextureController {
 
@@ -13,13 +14,15 @@ class TextureController {
 public:
 	static TextureController& getInstance();
     void changeTextureImg(String path);
+
 private:
 	TextureController();
 	TextureController(const TextureController&);
 
 /*property*/
 private: 
-    TextureManager& _textureManager = TextureManager::getInstance(); 
+    TextureManager& _textureManager = TextureManager::getInstance();
+
 };
 
 #endif // TEXTURECONTROLLER_H

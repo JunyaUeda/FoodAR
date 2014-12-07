@@ -6,7 +6,7 @@ TextureManager::TextureManager() {
     
      
     Texture* texture = new NoTexture();
-    addTexture(string("NoTexture"), (*texture));
+    addTexture(string("../FoodModification/Images/NoTexture"), (*texture));
     loadTextureSrcFromDir();
     updateCurrentTexture(A_IMAGE_PATH);
 }
@@ -82,9 +82,10 @@ void TextureManager::loadTextureSrcFromDir() {
         pathStringList.push_back(path);
     }
 
-    const string IMAGE_DIRPATH = "../FoodModification/Images/";
+    const string TEXTURE_DIRPATH = "../FoodModification/Images/";
 
     for(string path : pathStringList) {
+        if(path == "." || path== "..") continue;
         //文字数分の領域確保
         string uppercase_path;
         uppercase_path.resize(path.size());
@@ -95,7 +96,7 @@ void TextureManager::loadTextureSrcFromDir() {
 			//静止画の拡張子を持っている検索
 			unsigned int result = uppercase_path.find(e);
 			if(result != String::npos) {
-                 addTexture(MediaType::still, IMAGE_DIRPATH+path, path);
+                 addTexture(MediaType::still, TEXTURE_DIRPATH+path, path);
                  break;
              }
         }
@@ -104,7 +105,7 @@ void TextureManager::loadTextureSrcFromDir() {
             //動画の拡張子を持っているか検索
 			unsigned int result = uppercase_path.find(e);
 			if(result != String::npos) {
-				addTexture(MediaType::movie, IMAGE_DIRPATH+path, path);
+				addTexture(MediaType::movie, TEXTURE_DIRPATH+path, path);
                 break;
             }
         }
