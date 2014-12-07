@@ -67,12 +67,41 @@ void MainWindow::on_alphaLineEdit_textChanged(const QString &arg1)
     ui->alphaLineEdit->setText(QString::number(alpha));
     _convertController.updateAlpha(alpha);
 }
-
 void MainWindow::on_alphaSlider_valueChanged(int value)
 {
     double alpha = (double)value/100.0;
     ui->alphaLineEdit->setText(QString::number(alpha));
     _convertController.updateAlpha(alpha);
+}
+
+void MainWindow::on_hueLineEdit_textChanged(const QString &arg1)
+{
+
+}
+
+void MainWindow::on_hueSlider_valueChanged(int value)
+{
+
+}
+
+void MainWindow::on_saturationLineEdit_textChanged(const QString &arg1)
+{
+
+}
+
+void MainWindow::on_saturationSlider_valueChanged(int value)
+{
+
+}
+
+void MainWindow::on_valueLineEdit_textChanged(const QString &arg1)
+{
+
+}
+
+void MainWindow::on_valueSlider_valueChanged(int value)
+{
+
 }
 
 /**
@@ -367,5 +396,6 @@ void MainWindow::on_erodeSpinBox_valueChanged(int arg1)
 {
     _extractionController.updateErodeCount(arg1);
 }
+
 
 

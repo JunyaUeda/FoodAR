@@ -39,3 +39,7 @@ void ConvertController::changeZParam(bool change, int ZFactor) {
 void ConvertController::updateAlpha(double alpha) {
 	_converter.updateAlpha(alpha);
 }
+
+void ConvertController::updateVariableHSVShift (int hue, int saturation, int value) {
+	_converter.updateVariableHSVShift(hue, saturation, value);
+}

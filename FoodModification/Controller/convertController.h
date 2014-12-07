@@ -14,6 +14,7 @@ public:
     void changeIntensityParam(bool change, int intensityFactor);
     void changeZParam(bool change, int ZFactor);
     void updateAlpha(double alpha);
+    void updateVariableHSVShift (int hue, int saturation, int value);
 private:
 	ConvertController();
 	ConvertController(const ConvertController&);

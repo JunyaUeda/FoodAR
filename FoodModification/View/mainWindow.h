@@ -34,9 +34,17 @@ private slots:
     void on_stopPushButton_clicked();
     void on_CalibrateButton_clicked();
     void on_colorMapButton_clicked();
+    //色調整コントロール
     //alpha
     void on_alphaLineEdit_textChanged(const QString &arg1);
     void on_alphaSlider_valueChanged(int value);
+    void on_hueLineEdit_textChanged(const QString &arg1);
+    void on_hueSlider_valueChanged(int value);
+    void on_saturationLineEdit_textChanged(const QString &arg1);
+    void on_saturationSlider_valueChanged(int value);
+    void on_valueLineEdit_textChanged(const QString &arg1);
+    void on_valueSlider_valueChanged(int value);
+
 
     /**
     * 画面サイズタブ
@@ -92,6 +100,7 @@ private slots:
     /*モルフォロジー変換*/
 	void on_dilateSpinBox_valueChanged(int arg1);
 	void on_erodeSpinBox_valueChanged(int arg1);
+
 
 
 private:
