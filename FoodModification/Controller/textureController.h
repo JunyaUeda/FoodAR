@@ -1,20 +1,25 @@
 #ifndef TEXTURECONTROLLER_H
 #define TEXTURECONTROLLER_H
-#include "../Utils/opencvBase.h"
+
+#include <cctype>
+#include <string>
+#include <functional>
+#include "../Model/SDK/opencv/opencvApi.h"
+#include "../Model/Manager/textureManager.h"
 
 class TextureController {
 
+/*method*/
 public:
 	static TextureController& getInstance();
-    Mat createTexture(vector<vector<Point> >& contours, Mat maskImg, vector<Rect>& rects, Mat textureSrcImg);
-    void setROI(vector<vector<Point> >& contours, vector<Rect>& rects);
+    void changeTextureImg(String path);
 private:
 	TextureController();
 	TextureController(const TextureController&);
-    vector<vector<Point> > contours;
-	vector<Size> rectSizes;
-	
 
+/*property*/
+private: 
+    TextureManager& _textureManager = TextureManager::getInstance(); 
 };
 
 #endif // TEXTURECONTROLLER_H

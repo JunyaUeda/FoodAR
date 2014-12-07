@@ -103,6 +103,21 @@ void MainWindow::on_valueSlider_valueChanged(int value)
 {
 
 }
+//テクスチャ切り替え
+void MainWindow::on_textureComboBox_currentIndexChanged(const QString &arg1) {
+ //    if(arg1.contains(".")) {
+ //        QString path = DIRPATH;
+ //        path.append(arg1);
+ //        qDebug() << "changed" << path;
+ //        QByteArray cStr = path.toLocal8Bit();
+ //        srcController.changeTextureImg(cStr.data());
+    //  mainController.setNoTexture(false);
+    // } else {
+    //  String cStr = "NoTexture";
+    //  srcController.changeTextureImg(cStr);
+    //  mainController.setNoTexture(true);
+    // }
+}
 
 /**
 * 画面サイズタブ
@@ -133,20 +148,7 @@ void MainWindow::on_radioButton_dstSizeLarge_clicked() {
 	// }
 }
 
-void MainWindow::on_textureComboBox_currentIndexChanged(const QString &arg1) {
- //    if(arg1.contains(".")) {
- //        QString path = DIRPATH;
- //        path.append(arg1);
- //        qDebug() << "changed" << path;
- //        QByteArray cStr = path.toLocal8Bit();
- //        srcController.changeTextureImg(cStr.data());
-	// 	mainController.setNoTexture(false);
-	// } else {
-	// 	String cStr = "noTexture";
-	// 	srcController.changeTextureImg(cStr);
-	// 	mainController.setNoTexture(true);
-	// }
-}
+
 
 void MainWindow::on_illuminationSlider_valueChanged(int value) {
 	//convertController.changeIntensityParam(true, value);

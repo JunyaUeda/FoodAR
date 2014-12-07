@@ -44,7 +44,8 @@ private slots:
     void on_saturationSlider_valueChanged(int value);
     void on_valueLineEdit_textChanged(const QString &arg1);
     void on_valueSlider_valueChanged(int value);
-
+    //テクスチャ切り替え
+    void on_textureComboBox_currentIndexChanged(const QString &arg1);
 
     /**
     * 画面サイズタブ
@@ -54,7 +55,6 @@ private slots:
     void on_radioButton_dstSizeSmall_clicked();
     void on_radioButton_dstSizeLarge_clicked();
     
-    void on_textureComboBox_currentIndexChanged(const QString &arg1);
     void on_illuminationSlider_valueChanged(int value);
     void on_horizontalSlider_valueChanged(int value);
 

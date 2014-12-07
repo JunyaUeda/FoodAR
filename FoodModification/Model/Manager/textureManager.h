@@ -40,8 +40,7 @@ private:
     MediaType _currentMediaType;
     TextureFactory& _textureFactory = TextureFactory::getInstance();
     Converter& _converter = Converter::getInstance();
-    
-
+	const string TEXTURE_DIRECTORY_PATH = "../FoodModification/Images/";
 };
 
 #endif // TEXTUREMANAGER_H

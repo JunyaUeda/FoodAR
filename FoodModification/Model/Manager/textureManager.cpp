@@ -4,7 +4,7 @@
 
 TextureManager::TextureManager() {
     Texture* texture = new NoTexture();
-    addTexture(string("No Texture"), (*texture));
+    addTexture(string("NoTexture"), (*texture));
     addTexture(MediaType::still, A_IMAGE_PATH, "Sarmon");
     //updateCurrentTexture((*texture));
     updateCurrentTexture(A_IMAGE_PATH);
@@ -23,6 +23,7 @@ void TextureManager::addTexture(const string path, const Texture texture) {
     _allTextures.insert(pair<string, Texture>(path, texture));
 }
 
+//TODO : factoryメソッドかabstract factoryパターンを使うべし
 void TextureManager::addTexture(MediaType type, string path, string name) {
     switch(type) {
         case no :
