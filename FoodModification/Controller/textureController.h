@@ -6,7 +6,6 @@
 #include <functional>
 #include "../Model/SDK/opencv/opencvApi.h"
 #include "../Model/Manager/textureManager.h"
-#include "../View/mainWindow.h"
 
 class TextureController {
 

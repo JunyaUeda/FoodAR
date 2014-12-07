@@ -1,6 +1,7 @@
 #include "cameraManager.h"
 
 CameraManager::CameraManager() {
+    setUp();
 }
 
 CameraManager& CameraManager::getInstance() {
@@ -11,7 +12,7 @@ CameraManager& CameraManager::getInstance() {
 bool CameraManager::setUp() {
     bindCamera(0);
     setCaptureSize(_defaultSize);
-	_extractor.setScoreMatZeroAndSize(_defaultSize);
+	//_extractor.setScoreMatZeroAndSize(_defaultSize);
 	if(_capture.isOpened()) {
         return true;
     }
@@ -26,6 +27,32 @@ void CameraManager::setCaptureSize(Size size) {
     _size = size;
 	_capture.set(CV_CAP_PROP_FRAME_WIDTH, size.width);
 	_capture.set(CV_CAP_PROP_FRAME_HEIGHT, size.height);
+}
+
+void CameraManager::setCaptureSaturation(double value) {
+    _captureSaturation = value;
+    _capture.set(CV_CAP_PROP_SATURATION, value);
+        
+}
+
+void CameraManager::setCaptureExposure(double value) {
+    _captureExposure = value;
+    _capture.set(CV_CAP_PROP_EXPOSURE, value);
+}
+
+void CameraManager::setCaptureGain(double value) {
+    _captureGain = value;
+    _capture.set(CV_CAP_PROP_GAIN, value);
+}
+
+void CameraManager::setCaptureBrightness(double value) {
+    _captureBrightness = value;
+    _capture.set(CV_CAP_PROP_BRIGHTNESS, value);
+}
+
+void CameraManager::setCaptureContrast(double value) {
+    _captureContrast = value;
+    _capture.set(CV_CAP_PROP_CONTRAST, value);
 }
 
 void CameraManager::save(QXmlStreamWriter& writer) {

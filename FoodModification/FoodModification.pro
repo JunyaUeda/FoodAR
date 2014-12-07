@@ -99,7 +99,8 @@ SOURCES += main.cpp\
     Controller/extractionController.cpp \
     Model/channelViewer.cpp \
     Model/textureFactory.cpp \
-    Model/Executor/converter.cpp
+    Model/Executor/converter.cpp \
+    Controller/cameraController.cpp
 
 HEADERS  += \
     Param/colorCriterion.h \
@@ -193,7 +194,8 @@ HEADERS  += \
     Controller/extractionController.h \
     Model/channelViewer.h \
     Model/textureFactory.h \
-    Model/Executor/converter.h
+    Model/Executor/converter.h \
+    Controller/cameraController.h
 
 FORMS    += \
     View/calibrateDialog.ui \

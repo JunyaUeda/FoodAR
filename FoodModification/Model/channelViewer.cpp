@@ -4,7 +4,7 @@ ChannelViewer::ChannelViewer() {
 }
 
 void ChannelViewer::showAllChannels() {
-    VideoCapture capture = VideoCapture(0);
+    // VideoCapture capture = VideoCapture(0);
     Mat srcBGRImg;
     Mat srcHSVImg;
     Mat srcYCrCbImg;
@@ -12,22 +12,10 @@ void ChannelViewer::showAllChannels() {
     Mat hsvChannelImgs[3];
     Mat ycrcbChannelImgs[3];
 
-    capture.set(CV_CAP_PROP_SATURATION, 128.0);
     _isShowing = true;
     while(_isShowing) {
 
-        //qDebug() << "BRIGHTNESS" << capture.get(CV_CAP_PROP_BRIGHTNESS);
-        //qDebug() << "contrast" << capture.get(CV_CAP_PROP_CONTRAST);
-        qDebug() << "SATURATION" << capture.get(CV_CAP_PROP_SATURATION);
-        //qDebug() << "hue" << capture.get(CV_CAP_PROP_HUE);
-        qDebug() << "GAIN" << capture.get(CV_CAP_PROP_GAIN);
-        qDebug() << "Exposure" << capture.get(CV_CAP_PROP_EXPOSURE);
-
-
-        capture.set(CV_CAP_PROP_EXPOSURE, -3.0);
-        capture.set(CV_CAP_PROP_GAIN, 0.0);
-
-        capture >> srcBGRImg;
+        srcBGRImg = _cameraManager.getFrame();
         cvtColor(srcBGRImg, srcHSVImg, CV_BGR2HSV);
         cvtColor(srcBGRImg, srcYCrCbImg, CV_BGR2YCrCb);
 

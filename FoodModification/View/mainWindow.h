@@ -9,9 +9,10 @@
 #include "../Controller/mainController.h"
 #include "../Controller/edgeController.h"
 #include "../Controller/extractionController.h"
-#include "../Controller/textureController.h"
 #include "../Param/cannyThreshold.h"
 #include "../definition.h"
+#include "../Controller/textureController.h"
+#include "../Controller/cameraController.h"
 
 #define DIRPATH "../FoodModification/Images/"
 
@@ -102,7 +103,19 @@ private slots:
 	void on_dilateSpinBox_valueChanged(int arg1);
 	void on_erodeSpinBox_valueChanged(int arg1);
 
-
+    /**
+    * カメラタブ
+    */
+	void on_captureContrastLineEdit_textChanged(const QString &arg1);
+	void on_captureContrastSlider_valueChanged(int value);
+	void on_captureBrightnessLineEdit_textChanged(const QString &arg1);
+	void on_captureBrightnessSlider_valueChanged(int value);
+	void on_captureGaineLineEdit_textChanged(const QString &arg1);
+	void on_captureGainSlider_valueChanged(int value);
+	void on_captureExposureLineEdit_textChanged(const QString &arg1);
+	void on_captureExposureSlider_valueChanged(int value);
+	void on_captureSaturationLineEdit_textChanged(const QString &arg1);
+	void on_captureSaturationSlider_valueChanged(int value);
 
 private:
     vector<ChannelType> collectColorCheckBoxStatus();
@@ -111,19 +124,16 @@ private:
 
 /*property*/
 private:
-    Ui::MainWindow *ui;
-
+	Ui::MainWindow *ui;
 	MainController& mainController               = MainController::getInstance();
     CalibrationController& calibrationController = CalibrationController::getInstance();
     ConvertController& _convertController         = ConvertController::getInstance();
     EdgeController& edgeController               = EdgeController::getInstance();
-    SrcController& srcController                 = SrcController::getInstance();
     ExtractionController& _extractionController  = ExtractionController::getInstance();
-    TextureController& _textureController        = TextureController::getInstance();
-    
-
+	TextureController& _textureController = TextureController::getInstance();
+    CameraController& _cameraController = CameraController::getInstance();
     map<int, int> _edgeWidgetChannelMap;
-    //map<int, string> _channelIndexNameMap;
+    
 };
 
 #endif // MAINWINDOW_H

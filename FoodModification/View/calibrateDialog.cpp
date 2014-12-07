@@ -9,10 +9,9 @@ CalibrateDialog::CalibrateDialog(QWidget *parent) :
 {
 
 	clickParam = new CalibrateClickParam;
-    videoCapture = VideoCapture(0);
-    Size captureSize = _calibrationController.captureSize();
-    videoCapture.set(CV_CAP_PROP_FRAME_WIDTH, captureSize.width);
-    videoCapture.set(CV_CAP_PROP_FRAME_HEIGHT, captureSize.height);
+    // Size captureSize = _calibrationController.captureSize();
+    // videoCapture.set(CV_CAP_PROP_FRAME_WIDTH, captureSize.width);
+    // videoCapture.set(CV_CAP_PROP_FRAME_HEIGHT, captureSize.height);
     ui->setupUi(this);
     
     timerId = startTimer(33);
@@ -55,7 +54,7 @@ void CalibrateDialog::on_captureButton_clicked() {
 */
 void CalibrateDialog::timerEvent(QTimerEvent *event) {
 
-	videoCapture >> srcBGRImg;
+    srcBGRImg = _cameraManager.getFrame();
     show(srcBGRImg);
 
 }

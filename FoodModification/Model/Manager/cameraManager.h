@@ -14,17 +14,21 @@ public:
     static CameraManager& getInstance();
     bool setUp();
     void setCaptureSize(Size size);
-    Size size() {
-        return _size;
-    }
+    void setCaptureSaturation(double value);
+    void setCaptureExposure(double value);
+    void setCaptureGain(double value);
+    void setCaptureBrightness(double value);
+    void setCaptureContrast(double value);
+    Size size() { return _size; }
     Mat& getFrame() {
-        _capture.set(CV_CAP_PROP_SATURATION, 128.0);
-        _capture.set(CV_CAP_PROP_EXPOSURE, -3.0);
-        _capture.set(CV_CAP_PROP_GAIN, 0.0);
+        _capture.set(CV_CAP_PROP_SATURATION, _captureSaturation);
+        _capture.set(CV_CAP_PROP_EXPOSURE, _captureExposure);
+        _capture.set(CV_CAP_PROP_GAIN, _captureGain);
         _capture >> _inputMat;
         return _inputMat;
     }
     void save(QXmlStreamWriter& writer);
+    
 private:
     CameraManager();
     CameraManager(const CameraManager&);
@@ -34,6 +38,12 @@ private:
 private:
     Size _size = Size(640, 480);
 	Size _defaultSize = Size(640, 480);
+    double _captureSaturation = 128.0;
+    double _captureExposure = -3.0;
+    double _captureGain = 0.0;
+    double _captureBrightness = 128.0;
+    double _captureContrast = 128.0;
+
     Mat _inputMat;
     Extractor& _extractor = Extractor::getInstance();
 

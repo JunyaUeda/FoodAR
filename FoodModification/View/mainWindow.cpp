@@ -64,7 +64,7 @@ void MainWindow::on_colorMapButton_clicked() {
 void MainWindow::on_alphaLineEdit_textChanged(const QString &arg1)
 {
     double alpha = arg1.toDouble(); // TODO ：ユーザーが整数以外を入力した場合の処理を書くべし
-    ui->alphaLineEdit->setText(QString::number(alpha));
+    ui->alphaSlider->setSliderPosition(arg1.toInt());
     _convertController.updateAlpha(alpha);
 }
 void MainWindow::on_alphaSlider_valueChanged(int value)
@@ -397,5 +397,66 @@ void MainWindow::on_erodeSpinBox_valueChanged(int arg1)
     _extractionController.updateErodeCount(arg1);
 }
 
+/**
+* カメラタブ
+*/
+void MainWindow::on_captureSaturationSlider_valueChanged(int value)
+{
+     ui->captureSaturationLineEdit->setText(QString::number(value));
+     _cameraController.setCaptureSaturation((double)value);
+}
 
+void MainWindow::on_captureSaturationLineEdit_textChanged(const QString &arg1)
+{
+    ui->captureSaturationSlider->setSliderPosition(arg1.toInt());
+    _cameraController.setCaptureSaturation(arg1.toDouble());
+}
 
+void MainWindow::on_captureExposureSlider_valueChanged(int value)
+{
+    ui->captureExposureLineEdit->setText(QString::number(value));
+     _cameraController.setCaptureExposure((double)value);
+}
+
+void MainWindow::on_captureExposureLineEdit_textChanged(const QString &arg1)
+{
+    ui->captureExposureSlider->setSliderPosition(arg1.toInt());
+    _cameraController.setCaptureExposure(arg1.toDouble());
+}
+
+void MainWindow::on_captureGainSlider_valueChanged(int value)
+{
+	ui->captureGaineLineEdit->setText(QString::number(value));
+     _cameraController.setCaptureGain((double)value);
+}
+
+void MainWindow::on_captureGaineLineEdit_textChanged(const QString &arg1)
+{
+     ui->captureGainSlider->setSliderPosition(arg1.toInt());
+    _cameraController.setCaptureGain(arg1.toDouble());
+}
+
+void MainWindow::on_captureBrightnessSlider_valueChanged(int value)
+{
+    ui->captureBrightnessLineEdit->setText(QString::number(value));
+     _cameraController.setCaptureBrightness((double)value);
+}
+
+void MainWindow::on_captureBrightnessLineEdit_textChanged(const QString &arg1)
+{
+     ui->captureBrightnessSlider->setSliderPosition(arg1.toInt());
+    _cameraController.setCaptureBrightness(arg1.toDouble());
+}
+
+void MainWindow::on_captureContrastSlider_valueChanged(int value)
+{
+     ui->captureContrastLineEdit->setText(QString::number(value));
+     _cameraController.setCaptureContrast((double)value);
+}
+
+void MainWindow::on_captureContrastLineEdit_textChanged(const QString &arg1)
+{
+    ui->captureContrastSlider->setSliderPosition(arg1.toInt());
+    _cameraController.setCaptureContrast(arg1.toDouble());
+}
+ 
