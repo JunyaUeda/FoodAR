@@ -4,7 +4,7 @@ ChannelViewer::ChannelViewer() {
 }
 
 void ChannelViewer::showAllChannels() {
-    // VideoCapture capture = VideoCapture(0);
+    
     Mat srcBGRImg;
     Mat srcHSVImg;
     Mat srcYCrCbImg;
