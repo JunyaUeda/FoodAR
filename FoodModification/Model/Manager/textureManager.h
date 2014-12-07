@@ -1,6 +1,10 @@
 #ifndef TEXTUREMANAGER_H
 #define TEXTUREMANAGER_H
 
+#include <QDir>
+#include <cctype>
+#include <string>
+#include <functional>
 #include "../TypeDef.h"
 #include "../SDK/opencv/opencvApi.h"
 #include "../Param/Texture/texture.h"
@@ -31,6 +35,7 @@ public:
 private:
     TextureManager();
     TextureManager(const TextureManager&);
+    void loadTextureSrcFromDir();
 
 /*property*/
 private:
@@ -40,7 +45,8 @@ private:
     MediaType _currentMediaType;
     TextureFactory& _textureFactory = TextureFactory::getInstance();
     Converter& _converter = Converter::getInstance();
-	const string TEXTURE_DIRECTORY_PATH = "../FoodModification/Images/";
+	const string TEXTURE_DIRECTORY_PATH = "../FoodModification/Images";
+    
 };
 
 #endif // TEXTUREMANAGER_H

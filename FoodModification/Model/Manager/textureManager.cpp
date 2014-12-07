@@ -3,10 +3,11 @@
 #define A_IMAGE_PATH "../FoodModification/Images/sarmon.jpg"
 
 TextureManager::TextureManager() {
+    
+     
     Texture* texture = new NoTexture();
     addTexture(string("NoTexture"), (*texture));
-    addTexture(MediaType::still, A_IMAGE_PATH, "Sarmon");
-    //updateCurrentTexture((*texture));
+    loadTextureSrcFromDir();
     updateCurrentTexture(A_IMAGE_PATH);
 }
 
@@ -55,3 +56,62 @@ void TextureManager::updateCurrentTexture(const string path) {
     }
 }
 
+/**private*/
+//TODO:機能分割するべき
+void TextureManager::loadTextureSrcFromDir() {
+
+    QDir q_dir("../FoodModification/Images");
+    QStringList filelist;
+    if(q_dir.exists())  {
+        filelist = q_dir.entryList();//全てのファイル・ディレクトリ名取得
+    }
+
+    vector<string> imgExtensions;
+    imgExtensions.push_back(".JPG");
+    imgExtensions.push_back(".JPEG");
+    imgExtensions.push_back(".PNG");
+    vector<string> movieExtensions;
+    movieExtensions.push_back(".AVI");
+    movieExtensions.push_back(".MP4");
+    movieExtensions.push_back(".WMV");
+
+    vector<string> pathStringList;
+    for(QString filePath : filelist) {
+        //QString→std::string
+		string path = filePath.toLocal8Bit();
+        pathStringList.push_back(path);
+    }
+
+    const string IMAGE_DIRPATH = "../FoodModification/Images/";
+
+    for(string path : pathStringList) {
+        //文字数分の領域確保
+        string uppercase_path;
+        uppercase_path.resize(path.size());
+        //すべて大文字に変換
+        std::transform(path.cbegin(), path.cend(), uppercase_path.begin(), (int (*)(int))std::toupper);
+        
+        for(string e : imgExtensions) {
+			//静止画の拡張子を持っている検索
+			unsigned int result = uppercase_path.find(e);
+			if(result != String::npos) {
+                 addTexture(MediaType::still, IMAGE_DIRPATH+path, path);
+                 break;
+             }
+        }
+
+        for(string e : movieExtensions) {
+            //動画の拡張子を持っているか検索
+			unsigned int result = uppercase_path.find(e);
+			if(result != String::npos) {
+				addTexture(MediaType::movie, IMAGE_DIRPATH+path, path);
+                break;
+            }
+        }
+    }
+   map<string, Texture>::iterator p;
+   for(p=_allTextures.begin(); p != _allTextures.end(); p++) {
+        QString qstr = QString::fromStdString(p->first);
+        qDebug() << qstr;
+   }
+}
