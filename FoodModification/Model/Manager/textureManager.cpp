@@ -13,7 +13,7 @@ TextureManager::TextureManager() {
 
 TextureManager& TextureManager::getInstance() {
     static TextureManager instance;
-    return instance;
+	return instance;
 }
 
 void TextureManager::setUp() {

@@ -66,7 +66,6 @@ void Extractor::extract(MatSet& srcSet, Region& result) {
         }
     
     } else {
-        qDebug() << "indexOfMaxAreaout";
         for(int y=0; y<srcSet.size().height; y++) {
             for(int x=0; x<srcSet.size().width; x++) {
 
@@ -103,7 +102,6 @@ void Extractor::extract(MatSet& srcSet, Region& result) {
     vPs contours;
     findContours(mat, contours, CV_RETR_LIST, CV_CHAIN_APPROX_NONE);
     _indexOfMaxArea = calcIndexOfMaxArea(contours);
-    qDebug() << "_indexOfMaxArea" << _indexOfMaxArea;
     Mat mat2 = Mat::zeros(srcSet.size(), CV_8UC1);
    
     drawContours(mat2, contours, _indexOfMaxArea, Scalar(255, 255, 255), CV_FILLED, LINK_EIGHT);
