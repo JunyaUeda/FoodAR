@@ -27,12 +27,20 @@ public:
     ~MainWindow();
     
 private slots:
+    /**
+    * ホームタブ
+    */
     void on_startPushButton_clicked();
     void on_stopPushButton_clicked();
     void on_CalibrateButton_clicked();
     void on_colorMapButton_clicked();
-    void on_alphaSlider_actionTriggered(int action);
+    //alpha
+    void on_alphaLineEdit_textChanged(const QString &arg1);
+    void on_alphaSlider_valueChanged(int value);
 
+    /**
+    * 画面サイズタブ
+    */
     void on_radioButton_captureSizeLarge_clicked();
     void on_radioButton_captureSizeSmall_clicked();
     void on_radioButton_dstSizeSmall_clicked();
@@ -43,10 +51,6 @@ private slots:
     void on_horizontalSlider_valueChanged(int value);
 
     
-	void on_toleranceShiftSlider_0_valueChanged(int value);
-	void on_toleranceShiftSlider_1_valueChanged(int value);
-	void on_toleranceShiftSlider_2_valueChanged(int value);
-
 	void on_splitColorSpaceComboBox_currentIndexChanged(int index);
 
     //edgeの閾値UIのイベント処理
@@ -89,6 +93,7 @@ private slots:
 	void on_dilateSpinBox_valueChanged(int arg1);
 	void on_erodeSpinBox_valueChanged(int arg1);
 
+
 private:
     vector<ChannelType> collectColorCheckBoxStatus();
     vector<ChannelType> collectEdgeChannelCheckBoxStatus();
@@ -100,7 +105,7 @@ private:
 
 	MainController& mainController               = MainController::getInstance();
     CalibrationController& calibrationController = CalibrationController::getInstance();
-    ConvertController& convertController         = ConvertController::getInstance();
+    ConvertController& _convertController         = ConvertController::getInstance();
     EdgeController& edgeController               = EdgeController::getInstance();
     SrcController& srcController                 = SrcController::getInstance();
     ExtractionController& _extractionController  = ExtractionController::getInstance();

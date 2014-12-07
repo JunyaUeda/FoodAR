@@ -33,7 +33,10 @@ MainWindow::~MainWindow() {
     delete ui;
 
 }
-/*Home Tab*/
+
+/**
+    * ホームタブ
+    */
 void MainWindow::on_startPushButton_clicked()
 {
     mainController.start();
@@ -57,13 +60,24 @@ void MainWindow::on_colorMapButton_clicked() {
 	colorDialog->QWidget::show();
 }
 
-void MainWindow::on_alphaSlider_actionTriggered(int action) {
-// 	int value = ui->alphaSlider->value();
-// 	double alpha = (double)value/100.0;
-// 	ui->alphaValueLabel->setText(QString::number(alpha));
-//     mainController.setAlpha(alpha);
+//alpha
+void MainWindow::on_alphaLineEdit_textChanged(const QString &arg1)
+{
+    double alpha = arg1.toDouble(); // TODO ：ユーザーが整数以外を入力した場合の処理を書くべし
+    ui->alphaLineEdit->setText(QString::number(alpha));
+    _convertController.updateAlpha(alpha);
 }
 
+void MainWindow::on_alphaSlider_valueChanged(int value)
+{
+    double alpha = (double)value/100.0;
+    ui->alphaLineEdit->setText(QString::number(alpha));
+    _convertController.updateAlpha(alpha);
+}
+
+/**
+* 画面サイズタブ
+*/
 void MainWindow::on_radioButton_captureSizeLarge_clicked() {
 	//srcController.setVCaptureSize(SIZE_LARGE);
 }
@@ -111,24 +125,6 @@ void MainWindow::on_illuminationSlider_valueChanged(int value) {
 
 void MainWindow::on_horizontalSlider_valueChanged(int value) {
 	//convertController.changeZParam(true, value);
-}
-
-void MainWindow::on_toleranceShiftSlider_0_valueChanged(int value) {
-	// vector<int> shift = extractParamManager.toleranceShift();
-	// shift[0] = value;
-	// extractParamManager.setToleranceShift(shift);
-}
-
-void MainWindow::on_toleranceShiftSlider_1_valueChanged(int value) {
-	// vector<int> shift = extractParamManager.toleranceShift();
-	// shift[1] = value;
-	// extractParamManager.setToleranceShift(shift);
-}
-
-void MainWindow::on_toleranceShiftSlider_2_valueChanged(int value) {
-	// vector<int> shift = extractParamManager.toleranceShift();
-	// shift[2] = value;
-	// extractParamManager.setToleranceShift(shift);
 }
 
 void MainWindow::on_splitColorSpaceComboBox_currentIndexChanged(int index) {
@@ -371,3 +367,5 @@ void MainWindow::on_erodeSpinBox_valueChanged(int arg1)
 {
     _extractionController.updateErodeCount(arg1);
 }
+
+

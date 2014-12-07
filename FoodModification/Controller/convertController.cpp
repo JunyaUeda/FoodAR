@@ -35,3 +35,7 @@ void ConvertController::changeZParam(bool change, int ZFactor) {
 	_illuminationParam->setZFactor(d_ZFactor);
 
 }
+
+void ConvertController::updateAlpha(double alpha) {
+	_converter.updateAlpha(alpha);
+}
