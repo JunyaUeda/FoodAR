@@ -18,6 +18,9 @@ public:
         return _size;
     }
     Mat& getFrame() {
+        _capture.set(CV_CAP_PROP_SATURATION, 128.0);
+        _capture.set(CV_CAP_PROP_EXPOSURE, -3.0);
+        _capture.set(CV_CAP_PROP_GAIN, 0.0);
         _capture >> _inputMat;
         return _inputMat;
     }
