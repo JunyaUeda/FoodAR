@@ -13,6 +13,7 @@
 #include "../definition.h"
 #include "../Controller/textureController.h"
 #include "../Controller/cameraController.h"
+#include "../Controller/windowController.h"
 
 #define DIRPATH "../FoodModification/Images/"
 
@@ -48,7 +49,8 @@ private slots:
     void on_valueSlider_valueChanged(int value);
     //テクスチャ切り替え
     void on_textureComboBox_currentIndexChanged(const QString &arg1);
-
+    //フルスクリーン
+    void on_fullScreenPushButton_toggled(bool checked);
     /**
     * 画面サイズタブ
     */
@@ -60,8 +62,11 @@ private slots:
     void on_illuminationSlider_valueChanged(int value);
     void on_horizontalSlider_valueChanged(int value);
 
+
     
-	void on_splitColorSpaceComboBox_currentIndexChanged(int index);
+	/**
+    * 抽出タブ
+    */
 
     //edgeの閾値UIのイベント処理
     void changeThreshold(int channelIndex, int value1, int value2);
@@ -92,6 +97,7 @@ private slots:
     void on_edgeCrCheckBox_clicked();
 	void on_edgeCbCheckBox_clicked();
 	
+    //チャンネル画像
 	void on_channelMatPushButton_toggled(bool checked);
 
     /** チャンネル閾値強度調整*/
@@ -103,9 +109,16 @@ private slots:
 	void on_dilateSpinBox_valueChanged(int arg1);
 	void on_erodeSpinBox_valueChanged(int arg1);
 
+   
+    void on_upperRatioSlider_valueChanged(int value);
+    void on_upperRatioLineEdit_textChanged(const QString &arg1);
+    void on_underRatioSlider_valueChanged(int value);
+    void on_underRatioLineEdit_textChanged(const QString &arg1);
+
     /**
     * カメラタブ
     */
+
 	void on_captureContrastLineEdit_textChanged(const QString &arg1);
 	void on_captureContrastSlider_valueChanged(int value);
 	void on_captureBrightnessLineEdit_textChanged(const QString &arg1);
@@ -132,6 +145,7 @@ private:
     ExtractionController& _extractionController  = ExtractionController::getInstance();
 	TextureController& _textureController = TextureController::getInstance();
     CameraController& _cameraController = CameraController::getInstance();
+    WindowController& _windowController = WindowController::getInstance();
     map<int, int> _edgeWidgetChannelMap;
     
 };

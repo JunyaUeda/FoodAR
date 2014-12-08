@@ -40,7 +40,10 @@ public:
     void updateAlpha(double value);
 	void updateMediaType(MediaType type);
     void updateVariableHSVShift(int hue, int saturation, int value);
-
+    void updateRatioPixelNum(double upperRatio, double underRatio) {
+        _ratioOfUpperPixelNum = upperRatio;
+        _ratioOfUnderPixelNum = underRatio;
+    }
 private:
 	Converter();
     Converter(const Converter&);
@@ -225,6 +228,9 @@ private:
     int _variableHueShift = 0;
     int _variableSaturationShift=0;
     int _variableValueShift=0;
+    double _ratioOfUnderPixelNum = 0.05;
+    double _ratioOfUpperPixelNum = 0.95;
+
     MediaType _textureMediaType;
     FeatureReference& _featureReference = FeatureReference::getInstance();
 

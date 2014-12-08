@@ -20,8 +20,10 @@ void WindowManager::createWindow(QString name) {
     resizeWindow(windowName, DEFAULT_WIDTH, DEFAULT_HEIGHT);
 }
 
-void WindowManager::fullScreen(string name) {
-    setWindowProperty(name, CV_WND_PROP_FULLSCREEN,CV_WINDOW_FULLSCREEN);
+void WindowManager::fullScreen() {
+    destroyWindow(String("dst"));
+    namedWindow(String("full"), 0);
+    setWindowProperty(String("full"), CV_WND_PROP_FULLSCREEN,CV_WINDOW_FULLSCREEN);
 }
 
 void WindowManager::fullScreen(QString name) {
@@ -30,6 +32,8 @@ void WindowManager::fullScreen(QString name) {
 }
 
 void WindowManager::unFullScreen(string name) {
+    destroyWindow(String("full"));
+    namedWindow(String("dst"), CV_WINDOW_NORMAL);
     setWindowProperty(name, CV_WND_PROP_FULLSCREEN,CV_WINDOW_NORMAL);
 }
 

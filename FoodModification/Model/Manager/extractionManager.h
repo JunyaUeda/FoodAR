@@ -5,6 +5,7 @@
 #include "manager.h"
 #include "../TypeDef.h"
 #include "../Param/edgeThreshold.h"
+#include "../Executor/converter.h"
 
 class ExtractionManager : public Manager {
 
@@ -24,6 +25,9 @@ public:
     int erodeCount() {
         return _erodeCount;
     }
+    void updateRatioOfPixelNum(double upperRatio, double underRatio) {
+        _converter.updateRatioPixelNum(upperRatio, underRatio);
+    }
 private:
     ExtractionManager();
     ExtractionManager(const ExtractionManager&);
@@ -32,6 +36,7 @@ private:
 private:
     int _dilateCount = 2;
     int _erodeCount = 0;
+    Converter& _converter = Converter::getInstance();
 };
 
 #endif // EXTRACTIONMANAGER_H

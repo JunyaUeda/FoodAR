@@ -300,50 +300,35 @@
        </widget>
       </widget>
      </widget>
+     <widget class="QPushButton" name="fullScreenPushButton">
+      <property name="geometry">
+       <rect>
+        <x>200</x>
+        <y>200</y>
+        <width>121</width>
+        <height>81</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>フルスクリーン</string>
+      </property>
+      <property name="checkable">
+       <bool>true</bool>
+      </property>
+      <property name="checked">
+       <bool>false</bool>
+      </property>
+     </widget>
     </widget>
     <widget class="QWidget" name="tab_3">
      <attribute name="title">
       <string>抽出</string>
      </attribute>
-     <widget class="QComboBox" name="splitColorSpaceComboBox">
-      <property name="geometry">
-       <rect>
-        <x>20</x>
-        <y>130</y>
-        <width>131</width>
-        <height>41</height>
-       </rect>
-      </property>
-      <property name="editable">
-       <bool>false</bool>
-      </property>
-      <property name="currentText">
-       <string>YCrCb</string>
-      </property>
-      <property name="currentIndex">
-       <number>2</number>
-      </property>
-      <item>
-       <property name="text">
-        <string>BGR</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>HSV</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>YCrCb</string>
-       </property>
-      </item>
-     </widget>
      <widget class="QGroupBox" name="ch0EdgeThreshold_groupBox">
       <property name="geometry">
        <rect>
-        <x>500</x>
-        <y>280</y>
+        <x>800</x>
+        <y>200</y>
         <width>231</width>
         <height>171</height>
        </rect>
@@ -762,7 +747,7 @@
         <rect>
          <x>40</x>
          <y>30</y>
-         <width>171</width>
+         <width>131</width>
          <height>31</height>
         </rect>
        </property>
@@ -949,6 +934,124 @@
        <property name="maximum">
         <number>5</number>
        </property>
+      </widget>
+     </widget>
+     <widget class="QGroupBox" name="histogramToleranceRatioGroupBox">
+      <property name="geometry">
+       <rect>
+        <x>310</x>
+        <y>280</y>
+        <width>431</width>
+        <height>211</height>
+       </rect>
+      </property>
+      <property name="title">
+       <string>Histogram Tolerance Ratio</string>
+      </property>
+      <widget class="QGroupBox" name="ratioUnderGroupBox">
+       <property name="geometry">
+        <rect>
+         <x>30</x>
+         <y>40</y>
+         <width>161</width>
+         <height>121</height>
+        </rect>
+       </property>
+       <property name="title">
+        <string>Under</string>
+       </property>
+       <widget class="QSlider" name="underRatioSlider">
+        <property name="geometry">
+         <rect>
+          <x>0</x>
+          <y>70</y>
+          <width>160</width>
+          <height>19</height>
+         </rect>
+        </property>
+        <property name="maximum">
+         <number>50</number>
+        </property>
+        <property name="pageStep">
+         <number>5</number>
+        </property>
+        <property name="value">
+         <number>5</number>
+        </property>
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+       </widget>
+       <widget class="QLineEdit" name="underRatioLineEdit">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>30</y>
+          <width>113</width>
+          <height>21</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>0.05</string>
+        </property>
+        <property name="maxLength">
+         <number>4</number>
+        </property>
+       </widget>
+      </widget>
+      <widget class="QGroupBox" name="ratioUpperGroupBox">
+       <property name="geometry">
+        <rect>
+         <x>230</x>
+         <y>40</y>
+         <width>161</width>
+         <height>121</height>
+        </rect>
+       </property>
+       <property name="title">
+        <string>Upper</string>
+       </property>
+       <widget class="QSlider" name="upperRatioSlider">
+        <property name="geometry">
+         <rect>
+          <x>0</x>
+          <y>70</y>
+          <width>160</width>
+          <height>19</height>
+         </rect>
+        </property>
+        <property name="minimum">
+         <number>50</number>
+        </property>
+        <property name="maximum">
+         <number>100</number>
+        </property>
+        <property name="pageStep">
+         <number>5</number>
+        </property>
+        <property name="value">
+         <number>95</number>
+        </property>
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+       </widget>
+       <widget class="QLineEdit" name="upperRatioLineEdit">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>30</y>
+          <width>113</width>
+          <height>21</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>0.95</string>
+        </property>
+        <property name="maxLength">
+         <number>4</number>
+        </property>
+       </widget>
       </widget>
      </widget>
     </widget>

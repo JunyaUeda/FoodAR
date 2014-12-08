@@ -116,6 +116,16 @@ void MainWindow::on_textureComboBox_currentIndexChanged(const QString &arg1) {
        _textureController.changeTextureImg(cStr);
     }
 }
+//フルクリーン
+void MainWindow::on_fullScreenPushButton_toggled(bool checked)
+{
+    if(checked) {
+        _windowController.fullScreen();
+    } else {
+        _windowController.unFullScreen();
+    }
+}
+
 
 /**
 * 画面サイズタブ
@@ -156,10 +166,9 @@ void MainWindow::on_horizontalSlider_valueChanged(int value) {
 	//convertController.changeZParam(true, value);
 }
 
-void MainWindow::on_splitColorSpaceComboBox_currentIndexChanged(int index) {
-	//srcController.changeSplitColorSpace(index);
-}
-
+/**
+* 抽出タブ
+*/
 
 /**
  *エッジ閾値ウィジェットのハンドラ
@@ -319,10 +328,7 @@ void MainWindow::on_edgeCbCheckBox_clicked()
     _extractionController.updateEngagedEdgeChannels(collectEdgeChannelCheckBoxStatus());
 }
 
-/**
- *チャンネル画像出力ボタンのハンドラ
- *
-*/
+//チャンネル画像
 void MainWindow::on_channelMatPushButton_toggled(bool checked)
 {
     if(checked) {
@@ -386,7 +392,7 @@ ChannelType MainWindow::aqcuireChannelType(int channelNumber) {
     }
 }
 
-/*モルフォロジー変換*/
+/**モルフォロジー変換*/
 void MainWindow::on_dilateSpinBox_valueChanged(int arg1)
 {
     _extractionController.updateDilateCount(arg1);
@@ -396,6 +402,40 @@ void MainWindow::on_erodeSpinBox_valueChanged(int arg1)
 {
     _extractionController.updateErodeCount(arg1);
 }
+
+void MainWindow::on_underRatioLineEdit_textChanged(const QString &arg1)
+{
+    double underRatio = arg1.toDouble(); // TODO ：ユーザーが整数以外を入力した場合の処理を書くべし
+    double upperRatio = ui->upperRatioLineEdit->text().toDouble();
+    _extractionController.updateRatioOfPixelNum(upperRatio, underRatio);
+    ui->underRatioSlider->setSliderPosition((int)(underRatio*100));
+}
+
+void MainWindow::on_underRatioSlider_valueChanged(int value)
+{
+    double underRatio = (double)((double)value/100.0);
+    double upperRatio = ui->upperRatioLineEdit->text().toDouble();
+    _extractionController.updateRatioOfPixelNum(upperRatio, underRatio);
+    ui->underRatioLineEdit->setText(QString::number(underRatio));
+}
+
+void MainWindow::on_upperRatioLineEdit_textChanged(const QString &arg1)
+{
+    double upperRatio = arg1.toDouble(); // TODO ：ユーザーが整数以外を入力した場合の処理を書くべし
+    double underRatio = ui->upperRatioLineEdit->text().toDouble();
+    _extractionController.updateRatioOfPixelNum(upperRatio, underRatio);
+    ui->upperRatioSlider->setSliderPosition((int)(upperRatio*100));
+}
+
+void MainWindow::on_upperRatioSlider_valueChanged(int value)
+{
+    double upperRatio = (double)((double)value/100.0);
+    double underRatio = ui->underRatioLineEdit->text().toDouble();
+    _extractionController.updateRatioOfPixelNum(upperRatio, underRatio);
+    ui->upperRatioLineEdit->setText(QString::number(upperRatio));
+}
+
+
 
 /**
 * カメラタブ
@@ -460,3 +500,4 @@ void MainWindow::on_captureContrastLineEdit_textChanged(const QString &arg1)
     _cameraController.setCaptureContrast(arg1.toDouble());
 }
  
+
