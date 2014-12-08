@@ -11,18 +11,17 @@ void MainProcedure::start() {
         MatSet matSet;
         _sourcer.loadSrc(matSet);
 		imshow(_windowManager.windowName(0), matSet.bgr());
-
-        Region extractedRegion;
-        _extractor.extract(matSet,extractedRegion);
+        Region _extractedRegion;
+        _extractor.extract(matSet,_extractedRegion);
         
         Mat resultTexture = Mat::zeros(matSet.size(), CV_8UC3);
         
         if(_textureManager.currentMediaType() != MediaType::no) {
-            _textureFactory.create(extractedRegion, resultTexture);
+            _textureFactory.create(_extractedRegion, resultTexture);
         }
          
         Mat dstBGRImg = matSet.bgr().clone();
-        _converter.convert(matSet, extractedRegion, resultTexture, dstBGRImg);
+        _converter.convert(matSet, _extractedRegion, resultTexture, dstBGRImg);
         
         _outputer.show(dstBGRImg);
 

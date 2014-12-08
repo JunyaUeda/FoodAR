@@ -15,6 +15,7 @@ public:
     static Converter& getInstance();
     void convert(const MatSet& srcSet, const Region& extractedRegion, const Mat& textureImg, Mat& dstBGRImg) {
         if(!extractedRegion.contour().size()) {
+            qDebug() << "contour is empty in convert()";
             return;
         }
         if(_textureMediaType != MediaType::no) {

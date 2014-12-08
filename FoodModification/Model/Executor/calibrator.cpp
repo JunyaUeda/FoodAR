@@ -25,8 +25,9 @@ bool Calibrator::calibrate(Mat srcImg, Mat refImg, QVS refColor) {
 	vector<Point> contour = _contourService->acquireMaxAreaContour(resultMaskImg);
     Region region(resultMaskImg);
     region.setContour(contour);
-    region.calcRoi();
     region.calcRotatedRect();
+    region.calcRoi();
+	region.calcExpectedRoiConsideringMove(region.rotatedRect());
     _extractor.setPreviousRegion(region);
 
 	return true;

@@ -27,13 +27,18 @@ public:
         return _contour;
     }
 
+    RotatedRect rotatedRect() const {
+        return _rotatedRect;
+    }
+
     Rect roi() const {
         return _roi;
     }
 
-    RotatedRect rotatedRect() const {
-        return _rotatedRect;
+    Rect expectedRoi() const {
+        return _expectedRoi;
     }
+    
 
     // void calcContours() {
     //     Mat copyImg = _maskImg.clone();
@@ -42,6 +47,13 @@ public:
 
     void setContour(vector<Point> contour) {
         _contour = contour;
+    }
+
+    void calcRotatedRect() {
+        if(!_contour.size()) {
+            return;
+        }  
+        _rotatedRect= minAreaRect(_contour);
     }
 
     void calcRoi() { 
@@ -53,11 +65,20 @@ public:
         _roi = OpenCVAPI::calculateROI(_maskImg.size(), rect, SCALE_RATIO);
     }
 
-    void calcRotatedRect() {
+    /**
+    * 前フレームにおける回転Rectの中心と今回の中心の移動量を加味して今回のROIを作成する
+    * @note このメソッドを実行する前にcalcRotatedRect()を実行する必要がある
+    */
+    void calcExpectedRoiConsideringMove(RotatedRect& _previousRotatedRect) {
         if(!_contour.size()) {
             return;
-        }  
-        _rotatedRect= minAreaRect(_contour);
+        }      
+       
+        int shiftX = _rotatedRect.center.x - _previousRotatedRect.center.x;
+        int shiftY = _rotatedRect.center.y - _previousRotatedRect.center.y;
+        double SCALE_RATIO = 2.0;
+        Rect rect = boundingRect(_contour);
+        _expectedRoi = OpenCVAPI::calculateROI(_maskImg.size(), rect, SCALE_RATIO, shiftX, shiftY);
     }
 
     Size size() const {
@@ -70,9 +91,11 @@ private:
 private:
 	Mat _maskImg;
     vector<Point> _contour;
-    Rect _roi;
-    vector<Point> _points;
     RotatedRect _rotatedRect;
+    Rect _roi;
+    Rect _expectedRoi;
+    vector<Point> _points;
+    
   
 };
 

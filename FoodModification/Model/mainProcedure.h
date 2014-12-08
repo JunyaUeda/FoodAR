@@ -30,9 +30,11 @@ private:
     WindowManager& _windowManager = WindowManager::getInstance();
     TextureFactory& _textureFactory = TextureFactory::getInstance();
     TextureManager& _textureManager = TextureManager::getInstance();
+    CameraManager& _cameraManager = CameraManager::getInstance();
     Converter& _converter         = Converter::getInstance();
     Outputer& _outputer           = Outputer::getInstance();
     bool _isProcessed = true;
+    Region _extractedRegion;
 
 };
 

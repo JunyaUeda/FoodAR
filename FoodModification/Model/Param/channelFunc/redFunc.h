@@ -7,10 +7,20 @@
 class RedFunc : public ChannelFunc {
 public:
     RedFunc();
-    int value(Mat img, int x, int y);
-    int value(MatSet& matSet, int x, int y);
-    int value(MatSet& matSet, Point point);
-    QString getChannelName();
+    int value(Mat& img, int x, int y) {
+        return R(img, x, y);
+    }
+
+    int value(MatSet& matSet, int x, int y) {
+        return value(matSet.bgr(),x,y);
+    }
+
+    int value(MatSet& matSet, Point point) {
+        return value(matSet, point.x, point.y);
+    }
+    QString getChannelName() {
+        return "red";
+    }
 };
 
 #endif // REDFUNC_H

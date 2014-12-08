@@ -7,10 +7,20 @@
 class ValueFunc : public ChannelFunc {
 public:
     ValueFunc();
-    int value(Mat img, int x, int y);
-    int value(MatSet& matSet, int x, int y);
-    int value(MatSet& matSet, Point point);
-    QString getChannelName();
+    int value(Mat& img, int x, int y) {
+        return R(img, x, y);
+    }
+
+    int value(MatSet& matSet, int x, int y) {
+        return value(matSet.hsv(),x,y);
+    }
+
+    int value(MatSet& matSet, Point point) {
+        return value(matSet, point.x, point.y);
+    }
+    QString getChannelName() {
+        return "value";
+    }
 };
 
 #endif // VALUEFUNC_H

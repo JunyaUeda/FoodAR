@@ -10,10 +10,20 @@ class BlueFunc : public ChannelFunc {
 /*method*/
 public:
     BlueFunc();
-    int value(Mat img, int x, int y);
-    int value(MatSet& matSet, int x, int y);
-    int value(MatSet& matSet, Point point);
-    QString getChannelName();
+    int value(Mat& img, int x, int y) {
+        return B(img, x, y);
+    }
+
+    int value(MatSet& matSet, int x, int y) {
+        return value(matSet.bgr(),x,y);
+    }
+
+    int value(MatSet& matSet, Point point) {
+        return value(matSet, point.x, point.y);
+    }
+    QString getChannelName() {
+        return "blue";
+    }
 };
 
 #endif // BLUEFUNC_H

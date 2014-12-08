@@ -18,7 +18,6 @@ void Extractor::setScoreMatZeroAndSize(Size size) {
 
 void Extractor::extract(MatSet& srcSet, Region& result) {
 
-    //_extractService.extractRegionByColor(srcSet, region);//色情報だけではなくなる可能性が高いのでいったんコメントアウト
     //いったん手続き型でアルゴリズムを作成する
     //TODO : メソッド分割すべし
 
@@ -127,8 +126,9 @@ void Extractor::extract(MatSet& srcSet, Region& result) {
     result.setMaskImg(mat2);
     if(_indexOfMaxArea>=0) {
         result.setContour(contours[_indexOfMaxArea]);
-        result.calcRoi();
         result.calcRotatedRect();
+        result.calcRoi();
+        result.calcExpectedRoiConsideringMove(_previousRegion.rotatedRect());
     }
     
     _previousRegion = result;
@@ -139,6 +139,6 @@ void Extractor::extract(MatSet& srcSet, Region& result) {
 * calibratorで呼び出される
 */
 void Extractor::setPreviousRegion(Region& region) {
-    _previousRegion = region;
+
 }
 
