@@ -3,6 +3,7 @@
 
 #include "../TypeDef.h"
 #include "../SDK/opencv/opencvApi.h"
+#include <QDebug>
 
 class Region {
 
@@ -39,10 +40,19 @@ public:
         return _expectedRoi;
     }
     
+    int velocityX() {
+        return _velocityX;
+    }
 
-    // void calcContours() {
-    //     Mat copyImg = _maskImg.clone();
-    //     findContours(copyImg, _contours, CV_RETR_LIST, CV_CHAIN_APPROX_NONE);
+    int velocityY() {
+        return _velocityY;
+    }
+
+    // bool isAccelerationXSlowerThan(int accelerationX) {
+    //     if(_accelerationX < accelerationX) {
+    //         return true;
+    //     }
+    //     return false;
     // }
 
     void setContour(vector<Point> contour) {
@@ -69,17 +79,25 @@ public:
     * 前フレームにおける回転Rectの中心と今回の中心の移動量を加味して今回のROIを作成する
     * @note このメソッドを実行する前にcalcRotatedRect()を実行する必要がある
     */
-    void calcExpectedRoiConsideringMove(RotatedRect& _previousRotatedRect) {
+    void calcExpectedRoiConsideringMove(Region& previousRegion) {
         if(!_contour.size()) {
             return;
-        }      
+        }
+
         int shiftX = 0;
         int shiftY = 0;
-        if(_previousRotatedRect.center.x > 0 && _previousRotatedRect.center.x < _maskImg.size().width) {
-            shiftX = _rotatedRect.center.x - _previousRotatedRect.center.x;
-            shiftY = _rotatedRect.center.y - _previousRotatedRect.center.y;
+        _accelerationX = 0;
+        _accelerationY = 0;
+        if(previousRegion.rotatedRect().center.x > 0 && previousRegion.rotatedRect().center.x < _maskImg.size().width) {
+            _velocityX = _rotatedRect.center.x - previousRegion.rotatedRect().center.x;
+            _velocityY = _rotatedRect.center.y - previousRegion.rotatedRect().center.y;
+            _accelerationX = _velocityX - previousRegion.velocityX();
+            _accelerationY = _velocityY - previousRegion.velocityY();
+
+            shiftX = _velocityX + _accelerationX*2;
+            shiftY = _velocityY + _accelerationY*2;
         }
-        
+
         double SCALE_RATIO = 2.0;
         Rect rect = boundingRect(_contour);
         _expectedRoi = OpenCVAPI::calculateROI(_maskImg.size(), rect, SCALE_RATIO, shiftX, shiftY);
@@ -99,6 +117,10 @@ private:
     Rect _roi;
     Rect _expectedRoi;
     vector<Point> _points;
+    int _velocityX = 0;
+    int _velocityY = 0;
+    int _accelerationX = 0;
+    int _accelerationY = 0;
     
   
 };

@@ -27,7 +27,7 @@ bool Calibrator::calibrate(Mat srcImg, Mat refImg, QVS refColor) {
     region.setContour(contour);
     region.calcRotatedRect();
     region.calcRoi();
-	region.calcExpectedRoiConsideringMove(region.rotatedRect());
+	region.calcExpectedRoiConsideringMove(region);
     _extractor.setPreviousRegion(region);
 
 	return true;

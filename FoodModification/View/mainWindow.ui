@@ -30,7 +30,7 @@
      <enum>QTabWidget::Triangular</enum>
     </property>
     <property name="currentIndex">
-     <number>4</number>
+     <number>1</number>
     </property>
     <property name="iconSize">
      <size>
@@ -1175,7 +1175,7 @@
         </rect>
        </property>
        <property name="text">
-        <string>128</string>
+        <string>200</string>
        </property>
        <property name="maxLength">
         <number>3</number>
@@ -1194,7 +1194,7 @@
         <number>255</number>
        </property>
        <property name="value">
-        <number>128</number>
+        <number>200</number>
        </property>
        <property name="orientation">
         <enum>Qt::Vertical</enum>
@@ -1223,7 +1223,7 @@
         </rect>
        </property>
        <property name="text">
-        <string>-3</string>
+        <string>-4</string>
        </property>
        <property name="maxLength">
         <number>3</number>
@@ -1248,7 +1248,7 @@
         <number>1</number>
        </property>
        <property name="value">
-        <number>-3</number>
+        <number>-4</number>
        </property>
        <property name="orientation">
         <enum>Qt::Vertical</enum>

@@ -128,7 +128,7 @@ void Extractor::extract(MatSet& srcSet, Region& result) {
         result.setContour(contours[_indexOfMaxArea]);
         result.calcRotatedRect();
         result.calcRoi();
-        result.calcExpectedRoiConsideringMove(_previousRegion.rotatedRect());
+        result.calcExpectedRoiConsideringMove(_previousRegion);
     }
     
     _previousRegion = result;
