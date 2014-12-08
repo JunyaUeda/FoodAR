@@ -89,42 +89,87 @@ private:
         }
 
         int harfOfPixelSum = (int)((double)pixelSum/2.0);
+        int underOfPixelSum = (int)((double)pixelSum*0.05);
+        int upperOfPixelSum = (int)((double)pixelSum*0.95);
 
         int greenPixelCount = 0;
         int greenMedian = 0;
+        int greenUpperTolerance = 0;
+        int greenUnderTolerance = 0;
+
         for(int bin =0; bin<256; bin++ ) {
             greenPixelCount = greenPixelCount + greenFrequency[bin];
-            if(greenPixelCount >harfOfPixelSum) {
+            if(greenPixelCount <= underOfPixelSum) {
+                greenUnderTolerance = bin;
+                continue;
+            }
+            if(greenPixelCount <= harfOfPixelSum) {
                 greenMedian = bin;
+                continue;
+            }
+            if(greenPixelCount >= upperOfPixelSum) {
+                greenUpperTolerance = bin;
                 break;
-            }      
+            }
+
         }
         int yPixelCount = 0;
         int yMedian = 0;
+        int yUpperTolerance = 0;
+        int yUnderTolerance = 0;
         for(int bin =0; bin<256; bin++ ) {
             yPixelCount = yPixelCount + yFrequency[bin];
-            if(yPixelCount >harfOfPixelSum) {
+            if(yPixelCount <= underOfPixelSum) {
+                yUnderTolerance = bin;
+                continue;
+            }
+            if(yPixelCount <= harfOfPixelSum) {
                 yMedian = bin;
+                continue;
+            }
+            if(yPixelCount >= upperOfPixelSum) {
+                yUpperTolerance = bin;
                 break;
-            }      
+            }
         }
         int crPixelCount = 0;
         int crMedian = 0;
+        int crUpperTolerance = 0;
+        int crUnderTolerance = 0;
         for(int bin =0; bin<256; bin++ ) {
             crPixelCount = crPixelCount + crFrequency[bin];
-            if(crPixelCount >harfOfPixelSum) {
+            if(crPixelCount <= underOfPixelSum) {
+                crUnderTolerance = bin;
+                continue;
+            }
+            if(crPixelCount <= harfOfPixelSum) {
                 crMedian = bin;
+                continue;
+            }
+            if(crPixelCount >= upperOfPixelSum) {
+                crUpperTolerance = bin;
                 break;
-            } 
+            }
         }
         int cbPixelCount = 0;
         int cbMedian = 0;
+        int cbUpperTolerance = 0;
+        int cbUnderTolerance = 0;
         for(int bin =0; bin<256; bin++ ) {
             cbPixelCount = cbPixelCount + cbFrequency[bin];
-            if(cbPixelCount >harfOfPixelSum) {
+            if(cbPixelCount <= underOfPixelSum) {
+                cbUnderTolerance = bin;
+                continue;
+            }
+            if(cbPixelCount <= harfOfPixelSum) {
                 cbMedian = bin;
+                continue;
+            }
+            if(cbPixelCount >= upperOfPixelSum) {
+                cbUpperTolerance = bin;
                 break;
-            } 
+            }
+
         }
 
 
