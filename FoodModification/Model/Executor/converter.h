@@ -50,6 +50,9 @@ private:
         vint sum(9,0);
         int pixelSum=0;
         vint averages(9,0);
+        vint medians(9,0);
+        vint upperTolerances(9,0);
+        vint underTolerances(9,0);
         int greenFrequency[256] = {0};
         int yFrequency[256] = {0};
         int crFrequency[256] = {0};
@@ -89,8 +92,8 @@ private:
         }
 
         int harfOfPixelSum = (int)((double)pixelSum/2.0);
-        int underOfPixelSum = (int)((double)pixelSum*0.05);
-        int upperOfPixelSum = (int)((double)pixelSum*0.95);
+        int underOfPixelSum = (int)((double)pixelSum*0.1);
+        int upperOfPixelSum = (int)((double)pixelSum*0.9);
 
         int greenPixelCount = 0;
         int greenMedian = 0;
@@ -177,12 +180,21 @@ private:
         // for(int i=0; i<9; i++) {
         //     averages[i] = static_cast<int>((float)sum[i] / (float)pixelSum);
         // }
+        //_featureReference.updateAverages(averages);
         
-        averages[1] = greenMedian;
-        averages[6] = yMedian;
-        averages[7] = crMedian;
-        averages[8] = cbMedian;
-        _featureReference.updateAverages(averages);
+        medians[1] = greenMedian;
+        medians[6] = yMedian;
+        medians[7] = crMedian;
+        medians[8] = cbMedian;
+        upperTolerances[1] = greenUpperTolerance;
+        upperTolerances[6] = yUpperTolerance;
+        upperTolerances[7] = crUpperTolerance;
+        upperTolerances[8] = cbUpperTolerance;
+        underTolerances[1] = greenUnderTolerance;
+        underTolerances[6] = yUnderTolerance;
+        underTolerances[7] = crUnderTolerance;
+        underTolerances[8] = cbUnderTolerance;
+        _featureReference.updateMedianAndTolerance(medians, upperTolerances, underTolerances);
     }
 
     void convertHSV(const MatSet& srcSet, const Region& extractedRegion, Mat& dstBGRImg) {

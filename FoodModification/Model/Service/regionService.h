@@ -8,6 +8,7 @@
 #include "../Param/matSet.h"
 #include "../TypeDef.h"
 
+
 class RegionService {
 
 /*method*/
@@ -17,6 +18,7 @@ public:
     QVis calcTolerances(const MatSet& matSet, QLPs regions, QVis averages);
     QLPs toPointList(Mat refImg, QVS refColor);
     void acquireMaskImg(const Mat refImg, QVS refColor, Mat& result);
+    void calcMedianAndTolerance(const MatSet& matSet, QLPs regions, vint& medians, vint& upperTolerances, vint& underTolerances);
 private:
     QLP toPointList(Mat refImg, Scalar refColor);
     QVi calcAverage(const MatSet& matSet, QLP region);
@@ -27,6 +29,10 @@ private:
     QVi calcTolerance(const MatSet& matSet, QLP region, QVi averages);
     QVis createHistogram(const MatSet& matSet, QLP region);
 	QVis createHistogram(Mat srcBGRImg, QLP region);
-    int findTolerance(int average, QVi histogram, int pixcelNum);
+	int findTolerance(int average, QVi histogram, int pixcelNum);
+
+/*property*/
+private:
+    
 };
 #endif // REGIONSERVICE_H

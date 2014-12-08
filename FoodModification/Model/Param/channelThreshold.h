@@ -25,6 +25,15 @@ public:
         _under = _under + (value - _average);
 		_average = value;
     }
+
+    void updateMedianAndTolerance(int median, int upperTolerance, int underTolerance) {
+        _upper = (upperTolerance + _variableTolerance);
+        _under = (underTolerance - _variableTolerance);
+        _average = median;
+        _upperTolerance = upperTolerance;
+        _underTolerance = underTolerance;
+    }
+
     void setThreshold(int average, int tolerance);
     static vector<ChannelThreshold> createAllChannelThreshold();
 
@@ -69,6 +78,8 @@ private:
 	int _tolerance;//０以上
     int _degree = 50; // 閾値調整のView操作において扱う0～100の整数値
     int _variableTolerance = 0;//ユーザーによってコントロールできる。条件の強弱を変える
+    int _upperTolerance = 0;
+    int _underTolerance = 0;
 	int _upper;
 	int _under;
 

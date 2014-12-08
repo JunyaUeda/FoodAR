@@ -30,6 +30,12 @@ public:
         }
     }
 
+    void updateMedianAndTolerance(vint medians, vint upperTolerances, vint underTolerances) {
+        for(int i=0; i<medians.size(); i++) {
+            _channelThresholds[i].updateMedianAndTolerance(medians[i], upperTolerances[i], underTolerances[i]);
+        }
+    }
+
     void updateEngagedChannels(vector<ChannelType> channelTypes);
 
     /**

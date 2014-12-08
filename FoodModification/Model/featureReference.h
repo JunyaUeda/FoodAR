@@ -15,6 +15,9 @@ public:
     void updateAverages(vint averages) {
         _colorThresholds[1].updateAverages(averages);
     }
+    void updateMedianAndTolerance(vint medians, vint upperTolerances, vint underTolerances) {
+        _colorThresholds[1].updateMedianAndTolerance(medians, upperTolerances, underTolerances);
+    }
 
     void updateThresholds(QVis averages, QVis tolerances);
 
