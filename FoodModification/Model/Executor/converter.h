@@ -49,6 +49,11 @@ private:
 
         vint sum(9,0);
         int pixelSum=0;
+        vint averages(9,0);
+        int greenFrequency[256] = {0};
+        int yFrequency[256] = {0};
+        int crFrequency[256] = {0};
+        int cbFrequency[256] = {0};
 
         int yBegin = extractedRegion.roi().y;
         int yEnd = extractedRegion.roi().y+extractedRegion.roi().height;
@@ -65,28 +70,74 @@ private:
                     R(dstBGRImg,x,y) = _alpha*R(dstBGRImg,x,y) + (1-_alpha)*R(textureImg,x,y);
 
                     //count Sum
-                    sum[0] = sum[0] + B(srcSet.bgr(), x, y);
-                    sum[1] = sum[1] + G(srcSet.bgr(), x, y);
-                    sum[2] = sum[2] + R(srcSet.bgr(), x, y);
-                    sum[3] = sum[3] + B(srcSet.hsv(), x, y);
-                    sum[4] = sum[4] + G(srcSet.hsv(), x, y);
-                    sum[5] = sum[5] + R(srcSet.hsv(), x, y);
-                    sum[6] = sum[6] + B(srcSet.ycrcb(), x, y);
-                    sum[7] = sum[7] + G(srcSet.ycrcb(), x, y);
-                    sum[8] = sum[8] + R(srcSet.ycrcb(), x, y);
+                    //sum[0] = sum[0] + B(srcSet.bgr(), x, y);
+                    //sum[1] = sum[1] + G(srcSet.bgr(), x, y);
+                    //sum[2] = sum[2] + R(srcSet.bgr(), x, y);
+                    //sum[3] = sum[3] + B(srcSet.hsv(), x, y);
+                    //sum[4] = sum[4] + G(srcSet.hsv(), x, y);
+                    //sum[5] = sum[5] + R(srcSet.hsv(), x, y);
+                    //sum[6] = sum[6] + B(srcSet.ycrcb(), x, y);
+                    //sum[7] = sum[7] + G(srcSet.ycrcb(), x, y);
+                    //sum[8] = sum[8] + R(srcSet.ycrcb(), x, y);
+                    greenFrequency[G(srcSet.bgr(), x, y)]++;
+                    yFrequency[B(srcSet.ycrcb(), x, y)]++;
+                    crFrequency[G(srcSet.ycrcb(), x, y)]++;
+                    cbFrequency[R(srcSet.ycrcb(), x, y)]++;
                     pixelSum++;
                 }
             }
         }
 
+        int harfOfPixelSum = (int)((double)pixelSum/2.0);
+
+        int greenPixelCount = 0;
+        int greenMedian = 0;
+        for(int bin =0; bin<256; bin++ ) {
+            greenPixelCount = greenPixelCount + greenFrequency[bin];
+            if(greenPixelCount >harfOfPixelSum) {
+                greenMedian = bin;
+                break;
+            }      
+        }
+        int yPixelCount = 0;
+        int yMedian = 0;
+        for(int bin =0; bin<256; bin++ ) {
+            yPixelCount = yPixelCount + yFrequency[bin];
+            if(yPixelCount >harfOfPixelSum) {
+                yMedian = bin;
+                break;
+            }      
+        }
+        int crPixelCount = 0;
+        int crMedian = 0;
+        for(int bin =0; bin<256; bin++ ) {
+            crPixelCount = crPixelCount + crFrequency[bin];
+            if(crPixelCount >harfOfPixelSum) {
+                crMedian = bin;
+                break;
+            } 
+        }
+        int cbPixelCount = 0;
+        int cbMedian = 0;
+        for(int bin =0; bin<256; bin++ ) {
+            cbPixelCount = cbPixelCount + cbFrequency[bin];
+            if(cbPixelCount >harfOfPixelSum) {
+                cbMedian = bin;
+                break;
+            } 
+        }
+
 
         //calculate average;
-        vint averages(9,0);
-        for(int i=0; i<9; i++) {
-            averages[i] = static_cast<int>((float)sum[i] / (float)pixelSum);
-        }
+        // for(int i=0; i<9; i++) {
+        //     averages[i] = static_cast<int>((float)sum[i] / (float)pixelSum);
+        // }
         
-       // _featureReference.updateAverages(averages);
+        averages[1] = greenMedian;
+        averages[6] = yMedian;
+        averages[7] = crMedian;
+        averages[8] = cbMedian;
+        _featureReference.updateAverages(averages);
     }
 
     void convertHSV(const MatSet& srcSet, const Region& extractedRegion, Mat& dstBGRImg) {
@@ -120,6 +171,7 @@ private:
     int _variableValueShift=0;
     MediaType _textureMediaType;
     FeatureReference& _featureReference = FeatureReference::getInstance();
+
 };
 
 #endif // CONVERTER_H

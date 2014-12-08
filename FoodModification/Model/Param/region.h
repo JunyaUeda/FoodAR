@@ -48,6 +48,14 @@ public:
         return _velocityY;
     }
 
+    void updatePixelSum(int sum) {
+        _pixelSum = sum;
+    }
+
+    int pixelSum() {
+        return _pixelSum;
+    }
+
     // bool isAccelerationXSlowerThan(int accelerationX) {
     //     if(_accelerationX < accelerationX) {
     //         return true;
@@ -121,7 +129,7 @@ private:
     int _velocityY = 0;
     int _accelerationX = 0;
     int _accelerationY = 0;
-    
+    int _pixelSum = 0;
   
 };
 
