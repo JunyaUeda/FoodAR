@@ -73,9 +73,13 @@ public:
         if(!_contour.size()) {
             return;
         }      
-       
-        int shiftX = _rotatedRect.center.x - _previousRotatedRect.center.x;
-        int shiftY = _rotatedRect.center.y - _previousRotatedRect.center.y;
+        int shiftX = 0;
+        int shiftY = 0;
+        if(_previousRotatedRect.center.x > 0 && _previousRotatedRect.center.x < _maskImg.size().width) {
+            shiftX = _rotatedRect.center.x - _previousRotatedRect.center.x;
+            shiftY = _rotatedRect.center.y - _previousRotatedRect.center.y;
+        }
+        
         double SCALE_RATIO = 2.0;
         Rect rect = boundingRect(_contour);
         _expectedRoi = OpenCVAPI::calculateROI(_maskImg.size(), rect, SCALE_RATIO, shiftX, shiftY);

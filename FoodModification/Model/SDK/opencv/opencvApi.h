@@ -76,26 +76,32 @@ public:
         return Rect(roi_x, roi_y, roi_w, roi_h);
     }
 
-    static Rect calculateROI(Size imgSize, Rect srcRect, double scaleRatio, int variableXShift, int variableYShift) {
-         Rect scaledRect = scaleRect(srcRect, scaleRatio);
+    static Rect calculateROI(Size imgSize, Rect srcRect, double scaleRatio, int variableShiftX, int variableShiftY) {
+        Rect scaledRect = scaleRect(srcRect, scaleRatio);
 
         int roi_x=0, roi_y=0, roi_w=0, roi_h=0;
 
         //x
-        if(scaledRect.x  + variableXShift < 0) roi_x=0;
-        else roi_x = scaledRect.x + variableXShift;
+        int candidateX = scaledRect.x + variableShiftX;
+        if(candidateX < 0) roi_x=0;
+        else if(candidateX > imgSize.width) roi_x = imgSize.width;
+        else roi_x = candidateX;
 
         //width
-        if( (scaledRect.x+ scaledRect.width + variableXShift) > imgSize.width ) roi_w = imgSize.width - scaledRect.x;
-        else roi_w = scaledRect.width + variableXShift;
+        if( (roi_x + scaledRect.width) < 0) roi_w = 0;
+        else if( (roi_x + scaledRect.width) > imgSize.width ) roi_w = imgSize.width - roi_x;
+        else roi_w = scaledRect.width;
                     
         //y
-        if(scaledRect.y + variableYShift < 0) roi_y=0;
-        else roi_y = scaledRect.y + variableYShift;
+        int candidateY = scaledRect.y + variableShiftY;
+        if(candidateY < 0) roi_y = 0;
+        else if(candidateY > imgSize.height) roi_y=imgSize.height;
+        else roi_y = candidateY;
 
         //height
-        if( (scaledRect.y+scaledRect.height + variableYShift) > imgSize.height ) roi_h = imgSize.height - scaledRect.y;
-        else roi_h = scaledRect.height + variableYShift;
+        if( (roi_y + scaledRect.height) < 0) roi_h = 0;
+        else if( (roi_y + scaledRect.height) > imgSize.height ) roi_h = imgSize.height - roi_y;
+        else roi_h = scaledRect.height;
 
         return Rect(roi_x, roi_y, roi_w, roi_h);
     }

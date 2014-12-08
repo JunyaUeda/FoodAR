@@ -25,17 +25,17 @@ void Extractor::extract(MatSet& srcSet, Region& result) {
     vector<Mat> rawEdges;
     _edgeFactory.createEdges(srcSet, rawEdges);
     Mat dstEdgeImg(srcSet.size().height,srcSet.size().width, CV_8UC1, 255);
-    revMergeEdges(rawEdges, _previousRegion.roi(), dstEdgeImg);
+    revMergeEdges(rawEdges, _previousRegion.expectedRoi(), dstEdgeImg);
     erode(dstEdgeImg, dstEdgeImg, cv::Mat(), Point(-1,-1), 1);
     imshow("revEdge", dstEdgeImg);
 
      Mat mat = Mat::zeros(srcSet.size(), CV_8UC1);
     if(_indexOfMaxArea >=0){
 
-        int yBegin = _previousRegion.roi().y;
-        int yEnd = _previousRegion.roi().y+_previousRegion.roi().height;
-        int xBegin = _previousRegion.roi().x;
-        int xEnd = _previousRegion.roi().x+_previousRegion.roi().width;
+        int yBegin = _previousRegion.expectedRoi().y;
+        int yEnd = _previousRegion.expectedRoi().y+_previousRegion.expectedRoi().height;
+        int xBegin = _previousRegion.expectedRoi().x;
+        int xEnd = _previousRegion.expectedRoi().x+_previousRegion.expectedRoi().width;
     
         for(int y=yBegin; y<yEnd; y++) {
             for(int x=xBegin; x<xEnd; x++) {
