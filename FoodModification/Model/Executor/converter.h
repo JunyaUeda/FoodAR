@@ -175,7 +175,6 @@ private:
 
         }
 
-
         //calculate average;
         // for(int i=0; i<9; i++) {
         //     averages[i] = static_cast<int>((float)sum[i] / (float)pixelSum);

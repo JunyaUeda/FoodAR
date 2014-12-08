@@ -21,6 +21,9 @@ public:
                 return  false;
             }
         }
+        if(R(matSet.bgr(),point.x,point.y) < G(matSet.bgr(), point.x, point.y)) {
+            return false;
+        }
         return true;
     }
 
