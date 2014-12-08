@@ -8,10 +8,10 @@ WindowController& WindowController::getInstance() {
     return instance;
 }
 void WindowController::fullScreen() {
-    _windowManager.fullScreen(QString("dst"));
+    _windowManager.fullScreen();
     _outputer.fullScreen();
 }
 void WindowController::unFullScreen() {
-    _windowManager.unFullScreen(QString("dst"));
+    _windowManager.unFullScreen();
     _outputer.unFullScreen();
 }

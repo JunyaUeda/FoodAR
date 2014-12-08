@@ -26,20 +26,11 @@ void WindowManager::fullScreen() {
     setWindowProperty(String("full"), CV_WND_PROP_FULLSCREEN,CV_WINDOW_FULLSCREEN);
 }
 
-void WindowManager::fullScreen(QString name) {
-    std::string windowName = name.toLocal8Bit();
-    fullScreen(windowName);
-}
 
-void WindowManager::unFullScreen(string name) {
+void WindowManager::unFullScreen() {
     destroyWindow(String("full"));
     namedWindow(String("dst"), CV_WINDOW_NORMAL);
-    setWindowProperty(name, CV_WND_PROP_FULLSCREEN,CV_WINDOW_NORMAL);
-}
-
-void WindowManager::unFullScreen(QString name) {
-    std::string windowName = name.toLocal8Bit();
-    unFullScreen(windowName);
+    setWindowProperty(String("dst"), CV_WND_PROP_FULLSCREEN,CV_WINDOW_NORMAL);
 }
 
 string WindowManager::windowName(int index) {

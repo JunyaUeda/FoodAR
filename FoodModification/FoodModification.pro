@@ -100,7 +100,9 @@ SOURCES += main.cpp\
     Model/channelViewer.cpp \
     Model/textureFactory.cpp \
     Model/Executor/converter.cpp \
-    Controller/cameraController.cpp
+    Controller/cameraController.cpp \
+    Model/Service/histogramsService.cpp \
+    Controller/windowController.cpp
 
 HEADERS  += \
     Param/colorCriterion.h \
@@ -195,7 +197,9 @@ HEADERS  += \
     Model/channelViewer.h \
     Model/textureFactory.h \
     Model/Executor/converter.h \
-    Controller/cameraController.h
+    Controller/cameraController.h \
+    Model/Service/histogramService.h \
+    Controller/windowController.h
 
 FORMS    += \
     View/calibrateDialog.ui \

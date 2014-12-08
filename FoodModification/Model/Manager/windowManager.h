@@ -15,12 +15,11 @@ class WindowManager : public Manager {
 public:
     static WindowManager& getInstance();
     void createWindow(QString name);
-    void fullScreen(QString name);
-    void fullScreen(string name);
-    void unFullScreen(string name);
-    void unFullScreen(QString name);
+    void fullScreen();
+    void unFullScreen();
     string windowName(int index);
     void save(QXmlStreamWriter& writer);
+
 private:
 	WindowManager();
     WindowManager(const WindowManager&);
