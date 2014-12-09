@@ -180,42 +180,7 @@ void MainWindow::on_horizontalSlider_valueChanged(int value) {
 * 抽出タブ
 */
 
-/**
- *エッジ閾値ウィジェットのハンドラ
- *
-*/
-void MainWindow::changeThreshold(int widgetIndex, int value1, int value2) {
-	// CannyThreshold* novel = new CannyThreshold(value1, value2);
-	// int channelKey = _edgeWidgetChannelMap.find(widgetIndex)->second;
-	// edgeController.changeCannyThreshold(channelKey, novel);
-}
-
-void MainWindow::on_ch0EdgeThreshold1_LineEdit_textChanged(const QString &arg1) {
-	// changeThreshold(0, arg1.toInt(), ui->ch0EdgeThreshold2_Slider->value());
-	// ui->ch0EdgeThreshold1_Slider->setSliderPosition(arg1.toInt());
-}
-
-void MainWindow::on_ch0EdgeThreshold2_LineEdit_textChanged(const QString &arg1) {
-	// changeThreshold(0, ui->ch0EdgeThreshold1_Slider->value(), arg1.toInt());
-	// ui->ch0EdgeThreshold2_Slider->setSliderPosition(arg1.toInt());
-}
-
-void MainWindow::on_ch0EdgeThreshold1_Slider_valueChanged(int value) {
-	// changeThreshold(0, value, ui->ch0EdgeThreshold2_Slider->value());
-	// ui->ch0EdgeThreshold1_LineEdit->setText(QString::number(value));
-}
-
-void MainWindow::on_ch0EdgeThreshold2_Slider_valueChanged(int value) {
-	// changeThreshold(0, ui->ch0EdgeThreshold1_Slider->value(),value);
-	// ui->ch0EdgeThreshold2_LineEdit->setText(QString::number(value));
-}
-
-
-
-/**
- *色領域抽出時使用チャンネルボックスのイベントハンドラ
- *
-*/
+/**色領域抽出時使用チャンネルボックスのイベントハンドラ*/
 vector<ChannelType> MainWindow::collectColorCheckBoxStatus() {
 	vector<ChannelType> channelList;
 	if(ui->colorBlueCheckBox->isChecked()) channelList.push_back(ChannelType::blue);
@@ -276,10 +241,7 @@ void MainWindow::on_colorCbCheckBox_clicked()
 }
 
 
-/**
- *エッジ抽出時使用チャンネルボックスのイベントハンドラ
- *
-*/
+/**エッジ抽出時使用チャンネルボックスのイベントハンドラ*/
 vector<ChannelType> MainWindow::collectEdgeChannelCheckBoxStatus() {
     vector<ChannelType> channelList;
     if(ui->edgeBlueCheckBox->isChecked()) channelList.push_back(ChannelType::blue);
@@ -338,7 +300,6 @@ void MainWindow::on_edgeCbCheckBox_clicked()
     _extractionController.updateEngagedEdgeChannels(collectEdgeChannelCheckBoxStatus());
 }
 
-//チャンネル画像
 void MainWindow::on_channelMatPushButton_toggled(bool checked)
 {
     if(checked) {
@@ -347,7 +308,6 @@ void MainWindow::on_channelMatPushButton_toggled(bool checked)
         mainController.closeChannelMat();
     }
 }
-//２値化画像
 void MainWindow::on_binarizedMatPushButton_toggled(bool checked)
 {
     if(checked) {
@@ -356,6 +316,15 @@ void MainWindow::on_binarizedMatPushButton_toggled(bool checked)
         mainController.closeBinarizationImgs();
     }
 }
+void MainWindow::on_cannyEdgeMatPushButton_toggled(bool checked)
+{
+    if(checked) {
+        mainController.showCannyImgs();
+    } else {
+        mainController.closeCannyImgs();
+    }
+}
+
 
  /**
  * チャンネル閾値強度調整
@@ -561,5 +530,4 @@ void MainWindow::on_captureContrastLineEdit_textChanged(const QString &arg1)
     _cameraController.setCaptureContrast(arg1.toDouble());
 }
  
-
 

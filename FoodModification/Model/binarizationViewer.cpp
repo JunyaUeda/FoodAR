@@ -1,7 +1,6 @@
 #include "binarizationViewer.h"
 
-BinarizationViewer::BinarizationViewer()
-{
+BinarizationViewer::BinarizationViewer() {
 }
 
 int binarizationViewerBlueThreshold = 128;
@@ -83,6 +82,7 @@ void BinarizationViewer::showBinarizedImgs() {
     _isShowing = true;
 	while(_isShowing) {
         srcBGRImg = _cameraManager.getFrame();
+
         cvtColor(srcBGRImg, srcHSVImg, CV_BGR2HSV);
         cvtColor(srcBGRImg, srcYCrCbImg, CV_BGR2YCrCb);
 
@@ -100,6 +100,7 @@ void BinarizationViewer::showBinarizedImgs() {
         threshold(ycrcbChannelImgs[1], ycrcbChannelImgs[1], binarizationViewerCrThreshold, 255, CV_THRESH_BINARY);
         threshold(ycrcbChannelImgs[2], ycrcbChannelImgs[2], binarizationViewerCbThreshold, 255, CV_THRESH_BINARY);
         
+        imshow("src", srcBGRImg);
         imshow("Blue", bgrChannelImgs[0]);
         imshow("Green", bgrChannelImgs[1]);
         imshow("Red", bgrChannelImgs[2]);

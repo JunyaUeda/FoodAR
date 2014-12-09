@@ -65,20 +65,10 @@ private slots:
     void on_illuminationSlider_valueChanged(int value);
     void on_horizontalSlider_valueChanged(int value);
 
-
-    
 	/**
     * 抽出タブ
     */
-
-    //edgeの閾値UIのイベント処理
-    void changeThreshold(int channelIndex, int value1, int value2);
-    void on_ch0EdgeThreshold1_LineEdit_textChanged(const QString &arg1);
-    void on_ch0EdgeThreshold2_LineEdit_textChanged(const QString &arg1);
-    void on_ch0EdgeThreshold1_Slider_valueChanged(int value);
-    void on_ch0EdgeThreshold2_Slider_valueChanged(int value);
-
-	/*抽出チャンネルチェックボックス*/
+    /**抽出チャンネルチェックボックス*/
 	void on_colorBlueCheckBox_clicked();
 	void on_colorGreenCheckBox_clicked();
 	void on_colorRedCheckBox_clicked();
@@ -88,8 +78,7 @@ private slots:
 	void on_colorYCheckBox_clicked();
 	void on_colorCrCheckBox_clicked();
 	void on_colorCbCheckBox_clicked();
-
-    /*抽出エッジチャンネルチェックボックス*/
+    /**抽出エッジチャンネルチェックボックス*/
 	void on_edgeBlueCheckBox_clicked();
 	void on_edgeGreenCheckBox_clicked();
 	void on_edgeRedCheckBox_clicked();
@@ -99,21 +88,17 @@ private slots:
 	void on_edgeYCheckBox_clicked();
     void on_edgeCrCheckBox_clicked();
 	void on_edgeCbCheckBox_clicked();
-	
-    //チャンネル画像
 	void on_channelMatPushButton_toggled(bool checked);
-    //２値化画像
     void on_binarizedMatPushButton_toggled(bool checked);
-    /** チャンネル閾値強度調整*/
+    void on_cannyEdgeMatPushButton_toggled(bool checked);
+    /**チャンネル閾値強度調整*/
 	void on_channelThresholdHorizontalSlider_valueChanged(int value);
 	void on_channelThresholdLineEdit_textChanged(const QString &arg1);
 	void on_channelThresholdComboBox_currentIndexChanged(int index);
-
-    /*モルフォロジー変換*/
+    /**モルフォロジー変換*/
 	void on_dilateSpinBox_valueChanged(int arg1);
 	void on_erodeSpinBox_valueChanged(int arg1);
-
-    /** 二値化閾値調整*/
+    /**二値化閾値調整*/
     void on_greenBinarizationThresholdLineEdit_textChanged(const QString &arg1);
     void on_greenBinarizationThresholdSlider_valueChanged(int value);
     void on_yBinarizationThresholdLineEdit_textChanged(const QString &arg1);
@@ -141,11 +126,6 @@ private slots:
 	void on_captureSaturationLineEdit_textChanged(const QString &arg1);
 	void on_captureSaturationSlider_valueChanged(int value);
 
-	
-
-	
-
-	
 
 private:
     vector<ChannelType> collectColorCheckBoxStatus();

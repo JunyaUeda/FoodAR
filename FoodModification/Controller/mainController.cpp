@@ -47,6 +47,17 @@ void MainController::closeBinarizationImgs() {
 }
 
 /**
+*Cannyエッジ画像を見る
+*/
+void MainController::showCannyImgs() {
+    _mainProcedure.stop();
+    _cannyViewer.showCannyImgs();
+}
+void MainController::closeCannyImgs() {
+    _cannyViewer.closeCannyImgs();
+}
+
+/**
 * mainWindowのサイズ設定によって呼び出される.
 *　@param cv::Size
 */

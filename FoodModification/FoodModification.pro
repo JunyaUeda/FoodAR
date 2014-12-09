@@ -103,7 +103,8 @@ SOURCES += main.cpp\
     Controller/cameraController.cpp \
     Model/Service/histogramsService.cpp \
     Controller/windowController.cpp \
-    Model/binarizationViewer.cpp
+    Model/binarizationViewer.cpp \
+    Model/cannyViewer.cpp
 
 HEADERS  += \
     Param/colorCriterion.h \
@@ -201,7 +202,8 @@ HEADERS  += \
     Controller/cameraController.h \
     Model/Service/histogramService.h \
     Controller/windowController.h \
-    Model/binarizationViewer.h
+    Model/binarizationViewer.h \
+    Model/cannyViewer.h
 
 FORMS    += \
     View/calibrateDialog.ui \

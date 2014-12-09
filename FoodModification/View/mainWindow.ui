@@ -369,116 +369,13 @@
      <attribute name="title">
       <string>抽出</string>
      </attribute>
-     <widget class="QGroupBox" name="ch0EdgeThreshold_groupBox">
-      <property name="geometry">
-       <rect>
-        <x>800</x>
-        <y>140</y>
-        <width>231</width>
-        <height>171</height>
-       </rect>
-      </property>
-      <property name="title">
-       <string>Ch0</string>
-      </property>
-      <widget class="QLineEdit" name="ch0EdgeThreshold1_LineEdit">
-       <property name="geometry">
-        <rect>
-         <x>70</x>
-         <y>40</y>
-         <width>113</width>
-         <height>21</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>30</string>
-       </property>
-      </widget>
-      <widget class="QSlider" name="ch0EdgeThreshold1_Slider">
-       <property name="geometry">
-        <rect>
-         <x>60</x>
-         <y>70</y>
-         <width>160</width>
-         <height>19</height>
-        </rect>
-       </property>
-       <property name="maximum">
-        <number>255</number>
-       </property>
-       <property name="value">
-        <number>30</number>
-       </property>
-       <property name="orientation">
-        <enum>Qt::Horizontal</enum>
-       </property>
-      </widget>
-      <widget class="QLabel" name="edgeThresholdLabel_11">
-       <property name="geometry">
-        <rect>
-         <x>20</x>
-         <y>50</y>
-         <width>62</width>
-         <height>15</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>閾値1</string>
-       </property>
-      </widget>
-      <widget class="QLineEdit" name="ch0EdgeThreshold2_LineEdit">
-       <property name="geometry">
-        <rect>
-         <x>80</x>
-         <y>100</y>
-         <width>113</width>
-         <height>21</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>60</string>
-       </property>
-      </widget>
-      <widget class="QSlider" name="ch0EdgeThreshold2_Slider">
-       <property name="geometry">
-        <rect>
-         <x>60</x>
-         <y>140</y>
-         <width>160</width>
-         <height>19</height>
-        </rect>
-       </property>
-       <property name="maximum">
-        <number>255</number>
-       </property>
-       <property name="value">
-        <number>60</number>
-       </property>
-       <property name="orientation">
-        <enum>Qt::Horizontal</enum>
-       </property>
-      </widget>
-      <widget class="QLabel" name="edgeThresholdLabel_12">
-       <property name="geometry">
-        <rect>
-         <x>20</x>
-         <y>110</y>
-         <width>62</width>
-         <height>15</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>閾値2</string>
-       </property>
-      </widget>
-     </widget>
      <widget class="QPushButton" name="channelMatPushButton">
       <property name="geometry">
        <rect>
-        <x>30</x>
+        <x>20</x>
         <y>30</y>
-        <width>101</width>
-        <height>81</height>
+        <width>121</width>
+        <height>91</height>
        </rect>
       </property>
       <property name="text">
@@ -781,8 +678,8 @@
      <widget class="QGroupBox" name="channelThresholdAdjustmentGroupBox">
       <property name="geometry">
        <rect>
-        <x>10</x>
-        <y>170</y>
+        <x>320</x>
+        <y>400</y>
         <width>281</width>
         <height>211</height>
        </rect>
@@ -919,7 +816,7 @@
      <widget class="QGroupBox" name="groupBox">
       <property name="geometry">
        <rect>
-        <x>930</x>
+        <x>840</x>
         <y>40</y>
         <width>151</width>
         <height>91</height>
@@ -1105,8 +1002,8 @@
      <widget class="QPushButton" name="binarizedMatPushButton">
       <property name="geometry">
        <rect>
-        <x>780</x>
-        <y>40</y>
+        <x>20</x>
+        <y>130</y>
         <width>121</width>
         <height>91</height>
        </rect>
@@ -1283,6 +1180,22 @@
         </property>
        </widget>
       </widget>
+     </widget>
+     <widget class="QPushButton" name="cannyEdgeMatPushButton">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>240</y>
+        <width>121</width>
+        <height>71</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Cannyエッジ画像</string>
+      </property>
+      <property name="checkable">
+       <bool>true</bool>
+      </property>
      </widget>
     </widget>
     <widget class="QWidget" name="tab_5">

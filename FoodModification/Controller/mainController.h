@@ -9,6 +9,7 @@
 #include "../Model/mainProcedure.h"
 #include "../Model/channelViewer.h"
 #include "../Model/binarizationViewer.h"
+#include "../Model/cannyViewer.h"
 
 
 class MainController {
@@ -23,6 +24,9 @@ public:
     /**2値化画像を見る*/
     void showBinarizationImgs();
     void closeBinarizationImgs();
+    /**Cannyエッジ画像を見る*/
+    void showCannyImgs();
+    void closeCannyImgs();
 	void setResizeFlag(bool flag);
 	void setDstSize(Size size);
 	void changeShiftValue(int hShift, int sShift, int vShift);
@@ -33,7 +37,8 @@ public:
 private:
     MainProcedure& _mainProcedure = MainProcedure::getInstance();
 	ChannelViewer _viewer;
-    BinarizationViewer _binarizationViewer; 
+    BinarizationViewer _binarizationViewer;
+    CannyViewer _cannyViewer; 
     TextureParam* textureParam = new TextureParam();
     bool resizeFlag = false;
     Size dstSize;
