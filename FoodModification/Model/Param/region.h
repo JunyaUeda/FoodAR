@@ -79,8 +79,7 @@ public:
             return;
         }      
         Rect rect = boundingRect(_contour);
-        double SCALE_RATIO = 2.0;
-        _roi = OpenCVAPI::calculateROI(_maskImg.size(), rect, SCALE_RATIO);
+        _roi = OpenCVAPI::calculateROI(_maskImg.size(), rect, _roiScaleRatio);
     }
 
     /**
@@ -102,13 +101,12 @@ public:
             _accelerationX = _velocityX - previousRegion.velocityX();
             _accelerationY = _velocityY - previousRegion.velocityY();
 
-            shiftX = _velocityX + _accelerationX*2;
-            shiftY = _velocityY + _accelerationY*2;
+            shiftX = _velocityX + _accelerationX;
+            shiftY = _velocityY + _accelerationY;
         }
 
-        double SCALE_RATIO = 2.0;
         Rect rect = boundingRect(_contour);
-        _expectedRoi = OpenCVAPI::calculateROI(_maskImg.size(), rect, SCALE_RATIO, shiftX, shiftY);
+        _expectedRoi = OpenCVAPI::calculateROI(_maskImg.size(), rect, _roiScaleRatio, shiftX, shiftY);
     }
 
     Size size() const {
@@ -130,6 +128,7 @@ private:
     int _accelerationX = 0;
     int _accelerationY = 0;
     int _pixelSum = 0;
+    double _roiScaleRatio = 2.0;
   
 };
 

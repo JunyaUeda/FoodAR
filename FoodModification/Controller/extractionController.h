@@ -6,6 +6,8 @@
 #include "../Model/featureReference.h"
 #include "../Model/edgeFactory.h"
 #include "../Model/Manager/extractionManager.h"
+#include "../Model/Executor/extractor.h"
+
 
 class ExtractionController {
 
@@ -23,7 +25,15 @@ public:
     void updateRatioOfPixelNum(double upperRatio, double underRatio) {
         _extractionManager.updateRatioOfPixelNum(upperRatio, underRatio);
     }
-    
+    void updateGreenBinarizationThreshold(int value) {
+        _extractor.updateGreenBinarizationThreshold(value);
+    }   
+    void updateYBinarizationThreshold(int value) {
+        _extractor.updateYBinarizationThreshold(value);
+    }
+    void updateCrBinarizationThreshold(int value) {
+        _extractor.updateCrBinarizationThreshold(value);
+    }
 private:
 	ExtractionController();
     ExtractionController(const ExtractionController&);
@@ -33,7 +43,7 @@ private:
     FeatureReference& _featureReference = FeatureReference::getInstance();
     EdgeFactory& _edgeFactory = EdgeFactory::getInstance();
     ExtractionManager& _extractionManager = ExtractionManager::getInstance();
-
+    Extractor& _extractor = Extractor::getInstance();
 };
 
 #endif // EXTRACTIONCONTROLLER_H

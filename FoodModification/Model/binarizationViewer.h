@@ -2,6 +2,7 @@
 #define BINARIZATIONVIEWER_H
 
 #include "./SDK/opencv/opencvApi.h"
+#include "./Manager/cameraManager.h"
 
 class BinarizationViewer {
 
@@ -14,7 +15,8 @@ private:
 
 /*property*/
 private:
-	bool BinarizationViewer::_isShowing = true;
+	bool _isShowing = true;
+    CameraManager& _cameraManager = CameraManager::getInstance();
 };
 
 #endif // BINARIZATIONVIEWER_H

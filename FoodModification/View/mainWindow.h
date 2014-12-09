@@ -113,6 +113,13 @@ private slots:
 	void on_dilateSpinBox_valueChanged(int arg1);
 	void on_erodeSpinBox_valueChanged(int arg1);
 
+    /** 二値化閾値調整*/
+    void on_greenBinarizationThresholdLineEdit_textChanged(const QString &arg1);
+    void on_greenBinarizationThresholdSlider_valueChanged(int value);
+    void on_yBinarizationThresholdLineEdit_textChanged(const QString &arg1);
+    void on_yBinarizationThresholdSlider_valueChanged(int value);
+    void on_crBinarizationThresholdLineEdit_textChanged(const QString &arg1);
+    void on_crBinarizationThresholdSlider_valueChanged(int value);
    
     void on_upperRatioSlider_valueChanged(int value);
     void on_upperRatioLineEdit_textChanged(const QString &arg1);
@@ -133,6 +140,8 @@ private slots:
 	void on_captureExposureSlider_valueChanged(int value);
 	void on_captureSaturationLineEdit_textChanged(const QString &arg1);
 	void on_captureSaturationSlider_valueChanged(int value);
+
+	
 
 	
 

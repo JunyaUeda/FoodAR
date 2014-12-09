@@ -59,53 +59,77 @@ public:
     static Rect calculateROI(Size imgSize, Rect srcRect, double scaleRatio) {
         Rect scaledRect = scaleRect(srcRect, scaleRatio);
 
-        int roi_x=0, roi_y=0, roi_w=0, roi_h=0;
+        int xBegin = scaledRect.x;
+        int xEnd = scaledRect.x + scaledRect.width;
+        int yBegin = scaledRect.y;
+        int yEnd = scaledRect.y + scaledRect.height;
 
-        if(scaledRect.x < 0) roi_x=0;
-        else roi_x = scaledRect.x;
 
-        if( (scaledRect.x+scaledRect.width) > imgSize.width ) roi_w = imgSize.width - scaledRect.x;
-        else roi_w = scaledRect.width;
+        if(xBegin <= 0) xBegin=0;
+        // else if(xBegin >= imgSize.width) xBegin = imgSize.width-1;
+
+        if( xEnd >= imgSize.width ) xEnd = imgSize.width;
+        
                     
-        if(scaledRect.y<0) roi_y=0;
-        else roi_y = scaledRect.y;
+        if(yBegin <=  0) yBegin=0;
+        
 
-        if( (scaledRect.y+scaledRect.height) > imgSize.height ) roi_h = imgSize.height - scaledRect.y;
-        else roi_h = scaledRect.height;
+        if( yEnd >= imgSize.height ) yEnd = imgSize.height;
+        
 
-        return Rect(roi_x, roi_y, roi_w, roi_h);
+        return Rect(xBegin, yBegin, xEnd-xBegin, yEnd-yBegin);
     }
 
     static Rect calculateROI(Size imgSize, Rect srcRect, double scaleRatio, int variableShiftX, int variableShiftY) {
         Rect scaledRect = scaleRect(srcRect, scaleRatio);
+        int xBegin = scaledRect.x;
+        int xEnd = scaledRect.x + scaledRect.width;
+        int yBegin = scaledRect.y;
+        int yEnd = scaledRect.y + scaledRect.height;
 
-        int roi_x=0, roi_y=0, roi_w=0, roi_h=0;
+        if(variableShiftX >= 0) {
+            //x
+            if(xBegin < 0) xBegin=0;
+            else if(xBegin >= imgSize.width) xBegin = imgSize.width-1;
 
-        //x
-        int candidateX = scaledRect.x + variableShiftX;
-        if(candidateX < 0) roi_x=0;
-        else if(candidateX > imgSize.width) roi_x = imgSize.width;
-        else roi_x = candidateX;
+            int candidateXEnd = xEnd + (int)variableShiftX*1.5;
+            if( candidateXEnd <= 0) xEnd = 0;
+            else if( candidateXEnd >= imgSize.width ) xEnd = imgSize.width;
+            else xEnd = candidateXEnd;
 
-        //width
-        int candidateW = scaledRect.width + abs(variableShiftX);
-        if( (roi_x + candidateW) < 0) roi_w = 0;
-        else if( (roi_x + candidateW) > imgSize.width ) roi_w = imgSize.width - roi_x;
-        else roi_w = candidateW;
-                    
-        //y
-        int candidateY = scaledRect.y + variableShiftY;
-        if(candidateY < 0) roi_y = 0;
-        else if(candidateY > imgSize.height) roi_y=imgSize.height;
-        else roi_y = candidateY;
+        } else {
+            //x
+            int candidateXBegin = xBegin + (int)variableShiftX*1.5;
+            if(candidateXBegin < 0) xBegin=0;
+            else if(candidateXBegin >= imgSize.width) xBegin = imgSize.width-1;
+            else xBegin = candidateXBegin;
 
-        //height
-        int candidateH = scaledRect.height + abs(variableShiftX); 
-        if( (roi_y + candidateH) < 0) roi_h = 0;
-        else if( (roi_y + candidateH) > imgSize.height ) roi_h = imgSize.height - roi_y;
-        else roi_h = candidateH;
+            if( xEnd <= 0) xEnd = 0;
+            else if( xEnd >= imgSize.width ) xEnd = imgSize.width;
 
-        return Rect(roi_x, roi_y, roi_w, roi_h);
+        }
+       
+        if(variableShiftY >= 0) {
+            //y
+            if(yBegin <= 0) yBegin=0;
+            else if(yBegin >= imgSize.height) yBegin = imgSize.height-1;
+
+            int candidateYEnd = yEnd + (int)variableShiftY*1.5;
+            if( candidateYEnd <= 0) yEnd = 0;
+            else if( candidateYEnd >= imgSize.height ) yEnd = imgSize.height;
+            else yEnd = candidateYEnd;
+        } else {
+            //y
+            int candidateYBegin = yBegin + (int)variableShiftY*1.5;
+            if(candidateYBegin <= 0) yBegin=0;
+            else if(candidateYBegin >= imgSize.height) yBegin = imgSize.height-1;
+            else yBegin = candidateYBegin;
+
+            if( yEnd <= 0) yEnd = 0;
+            else if( yEnd >= imgSize.height ) yEnd = imgSize.height;
+        }  
+          
+        return Rect(xBegin, yBegin, xEnd-xBegin, yEnd-yBegin);
     }
 
     static Rect scaleRect(Rect srcRect, double scaleRatio) {
@@ -124,7 +148,9 @@ public:
     		}
     	}
 	}
-    
+
+private:
+
 
 };
 

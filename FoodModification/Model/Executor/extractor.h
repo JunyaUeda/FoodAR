@@ -10,8 +10,8 @@
 #include "../Service/extractService.h"
 #include "../Service/contourService.h"
 #include "../Manager/extractionManager.h"
-#include "../../Utils/opencvUtils.h"
-
+// #include "../../Utils/opencvUtils.h"
+#include "../SDK/opencv/opencvApi.h"
 
 class Extractor {
 
@@ -19,6 +19,7 @@ class Extractor {
 public:
     static Extractor& getInstance();
     void extract(MatSet& srcSet, Region& result);
+    void extractCoffee(MatSet& srcSet, Region& result);
     void setPreviousRegion(Region& region);
     void setScoreMatZeroAndSize(Size size);
 
@@ -57,9 +58,39 @@ public:
                     L(dstEdgeImg, x, y) = 255;
                 }
             }
+		}
+    }
+
+    void revMergeEdges(vector<Mat>& channelEdgeImgs, Rect& roi, vector<Mat*> edgeImgs) {
+
+        if(!channelEdgeImgs.size()) {
+            return;  
+        }
+
+        for(int y=roi.y; y<(roi.y+roi.height); y++) {
+            for(int x=roi.x; x<(roi.x+roi.width); x++) {
+                for(Mat mat : channelEdgeImgs) {
+                    if(L(mat,x,y) == 255) {
+                        L((*edgeImgs[0]), x, y) = 0;
+                        L((*edgeImgs[1]), x, y) = 255;
+                        break;
+                    } 
+                    L((*edgeImgs[0]), x, y) = 255;
+                    L((*edgeImgs[1]), x, y) = 0;
+                }
+            }
         }
     }
 
+    void updateGreenBinarizationThreshold(int value) {
+        _greenBinarizationThreshold = value;
+    }   
+    void updateYBinarizationThreshold(int value) {
+        _yBinarizationThreshold = value;
+    }
+    void updateCrBinarizationThreshold(int value) {
+        _crBinarizationThreshold = value;
+    }
 private:
     Extractor();
     Extractor(const Extractor&);
@@ -74,7 +105,12 @@ private:
     ExtractionManager& _extractionManager = ExtractionManager::getInstance();
     Region _previousRegion;
     Mat _scoreMat;
-    int _indexOfMaxArea=1;
+    int _indexOfMaxArea=-1;
+    int _greenBinarizationThreshold = 19;
+    int _yBinarizationThreshold = 60;
+    int _crBinarizationThreshold = 30;
+
+    
 
 };
 

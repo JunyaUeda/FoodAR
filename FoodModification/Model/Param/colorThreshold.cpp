@@ -2,9 +2,9 @@
 
 ColorThreshold::ColorThreshold() {
     _channelThresholds = ChannelThreshold::createAllChannelThreshold();
-    addEngagedChannelThreshold(_channelThresholds[6]);
     addEngagedChannelThreshold(_channelThresholds[7]);
-    addEngagedChannelThreshold(_channelThresholds[8]);
+    addEngagedChannelThreshold(_channelThresholds[5]);
+    addEngagedChannelThreshold(_channelThresholds[1]);
 }
 
 vector<ChannelThreshold> ColorThreshold::channelThresholds() const {

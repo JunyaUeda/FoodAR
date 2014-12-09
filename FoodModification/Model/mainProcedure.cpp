@@ -11,8 +11,9 @@ void MainProcedure::start() {
         MatSet matSet;
         _sourcer.loadSrc(matSet);
 		imshow(_windowManager.windowName(0), matSet.bgr());
-        Region _extractedRegion;
+
         _extractor.extract(matSet,_extractedRegion);
+        //_extractor.extractCoffee(matSet,_extractedRegion);
         
         Mat resultTexture = Mat::zeros(matSet.size(), CV_8UC3);
         

@@ -44,7 +44,7 @@ void onCbTrackbar(int position) {
 
 
 void BinarizationViewer::showBinarizedImgs() {
-    VideoCapture _capture = VideoCapture(0);
+    
     Mat srcBGRImg, srcHSVImg, srcYCrCbImg;
     Mat bgrChannelImgs[3], hsvChannelImgs[3], ycrcbChannelImgs[3];
 
@@ -82,7 +82,7 @@ void BinarizationViewer::showBinarizedImgs() {
 
     _isShowing = true;
 	while(_isShowing) {
-        _capture >> srcBGRImg;
+        srcBGRImg = _cameraManager.getFrame();
         cvtColor(srcBGRImg, srcHSVImg, CV_BGR2HSV);
         cvtColor(srcBGRImg, srcYCrCbImg, CV_BGR2YCrCb);
 

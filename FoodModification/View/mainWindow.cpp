@@ -64,7 +64,7 @@ void MainWindow::on_colorMapButton_clicked() {
 void MainWindow::on_alphaLineEdit_textChanged(const QString &arg1)
 {
     double alpha = arg1.toDouble(); // TODO ：ユーザーが整数以外を入力した場合の処理を書くべし
-    ui->alphaSlider->setSliderPosition(arg1.toInt());
+    ui->alphaSlider->setSliderPosition(alpha*100);
     _convertController.updateAlpha(alpha);
 }
 void MainWindow::on_alphaSlider_valueChanged(int value)
@@ -422,6 +422,48 @@ void MainWindow::on_erodeSpinBox_valueChanged(int arg1)
     _extractionController.updateErodeCount(arg1);
 }
 
+/** 二値化閾値調整*/
+void MainWindow::on_greenBinarizationThresholdLineEdit_textChanged(const QString &arg1)
+{
+    int value = arg1.toInt(); // TODO ：ユーザーが数以外を入力した場合の処理を書くべし
+    _extractionController.updateGreenBinarizationThreshold(value);
+    ui->greenBinarizationThresholdSlider->setSliderPosition(value);
+}
+
+void MainWindow::on_greenBinarizationThresholdSlider_valueChanged(int value)
+{
+    _extractionController.updateGreenBinarizationThreshold(value);
+    ui->greenBinarizationThresholdLineEdit->setText(QString::number(value));
+}
+
+void MainWindow::on_yBinarizationThresholdLineEdit_textChanged(const QString &arg1)
+{
+    int value = arg1.toInt(); // TODO ：ユーザーが数以外を入力した場合の処理を書くべし
+    _extractionController.updateYBinarizationThreshold(value);
+    ui->yBinarizationThresholdSlider->setSliderPosition(value);
+}
+
+void MainWindow::on_yBinarizationThresholdSlider_valueChanged(int value)
+{
+    _extractionController.updateGreenBinarizationThreshold(value);
+    ui->yBinarizationThresholdLineEdit->setText(QString::number(value));
+}
+
+void MainWindow::on_crBinarizationThresholdLineEdit_textChanged(const QString &arg1)
+{
+    int value = arg1.toInt(); // TODO ：ユーザーが数以外を入力した場合の処理を書くべし
+    _extractionController.updateCrBinarizationThreshold(value);
+    ui->crBinarizationThresholdSlider->setSliderPosition(value);
+}
+
+void MainWindow::on_crBinarizationThresholdSlider_valueChanged(int value)
+{
+    _extractionController.updateGreenBinarizationThreshold(value);
+    ui->crBinarizationThresholdLineEdit->setText(QString::number(value));
+}
+
+
+
 void MainWindow::on_underRatioLineEdit_textChanged(const QString &arg1)
 {
     double underRatio = arg1.toDouble(); // TODO ：ユーザーが整数以外を入力した場合の処理を書くべし
@@ -519,4 +561,5 @@ void MainWindow::on_captureContrastLineEdit_textChanged(const QString &arg1)
     _cameraController.setCaptureContrast(arg1.toDouble());
 }
  
+
 
