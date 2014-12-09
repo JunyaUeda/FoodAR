@@ -22,7 +22,9 @@ void MainController::start() {
 void MainController::stop() {
     _mainProcedure.stop();
 }
-
+/**
+* チャンネル画像を見る
+*/
 void MainController::showChannelMat() {
     _mainProcedure.stop();
     _viewer.showAllChannels();
@@ -30,6 +32,18 @@ void MainController::showChannelMat() {
 
 void MainController::closeChannelMat() {
     _viewer.closeAllWindows();
+}
+
+/**
+* 各チャンネルの二値化画像を見る
+*/
+void MainController::showBinarizationImgs() {
+    _mainProcedure.stop();
+	_binarizationViewer.showBinarizedImgs();
+}
+
+void MainController::closeBinarizationImgs() {
+	_binarizationViewer.closeBinarizedImgs();
 }
 
 /**

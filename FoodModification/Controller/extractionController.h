@@ -23,6 +23,7 @@ public:
     void updateRatioOfPixelNum(double upperRatio, double underRatio) {
         _extractionManager.updateRatioOfPixelNum(upperRatio, underRatio);
     }
+    
 private:
 	ExtractionController();
     ExtractionController(const ExtractionController&);

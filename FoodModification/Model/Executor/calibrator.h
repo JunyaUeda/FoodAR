@@ -17,13 +17,16 @@ class Calibrator {
 public:
     static Calibrator& getInstance();
     bool calibrate(Mat srcImg, Mat refImg, QVS refColor);
-    
+    void setAverageUsedFlag(bool flag) {
+        _isAverageUsed = flag;
+    }
 private:
     Calibrator();
     Calibrator(const Calibrator&);
 
 /*property*/
 private:
+    bool _isAverageUsed = false;
 	RegionService* _regionService;
     ContourService* _contourService;
     FeatureReference&  _featureReference = FeatureReference::getInstance();

@@ -43,3 +43,13 @@ void ConvertController::updateAlpha(double alpha) {
 void ConvertController::updateVariableHSVShift (int hue, int saturation, int value) {
 	_converter.updateVariableHSVShift(hue, saturation, value);
 }
+
+void ConvertController::setUpForCoffee() {
+	_calibrator.setAverageUsedFlag(true);
+	_converter.setOriginalValueUsedFlag(false);
+}
+
+void ConvertController::setUpForMaguro() {
+	_calibrator.setAverageUsedFlag(false);
+	_converter.setOriginalValueUsedFlag(true);
+}

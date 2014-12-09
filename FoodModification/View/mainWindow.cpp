@@ -116,6 +116,7 @@ void MainWindow::on_textureComboBox_currentIndexChanged(const QString &arg1) {
        _textureController.changeTextureImg(cStr);
     }
 }
+
 //フルクリーン
 void MainWindow::on_fullScreenPushButton_toggled(bool checked)
 {
@@ -125,7 +126,16 @@ void MainWindow::on_fullScreenPushButton_toggled(bool checked)
         _windowController.unFullScreen();
     }
 }
+//ショートカットセッティング
+void MainWindow::on_maguroRadioButton_clicked()
+{
+    _convertController.setUpForMaguro();
+}
 
+void MainWindow::on_coffeeRadioButton_clicked(bool checked)
+{
+    _convertController.setUpForCoffee();
+}
 
 /**
 * 画面サイズタブ
@@ -335,6 +345,15 @@ void MainWindow::on_channelMatPushButton_toggled(bool checked)
         mainController.showChannelMat();
     } else {
         mainController.closeChannelMat();
+    }
+}
+//２値化画像
+void MainWindow::on_binarizedMatPushButton_toggled(bool checked)
+{
+    if(checked) {
+        mainController.showBinarizationImgs();
+    } else {
+        mainController.closeBinarizationImgs();
     }
 }
 

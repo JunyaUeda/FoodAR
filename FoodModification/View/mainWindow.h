@@ -51,6 +51,9 @@ private slots:
     void on_textureComboBox_currentIndexChanged(const QString &arg1);
     //フルスクリーン
     void on_fullScreenPushButton_toggled(bool checked);
+    //ショートカットセッティング
+    void on_maguroRadioButton_clicked();    
+    void on_coffeeRadioButton_clicked(bool checked);
     /**
     * 画面サイズタブ
     */
@@ -99,7 +102,8 @@ private slots:
 	
     //チャンネル画像
 	void on_channelMatPushButton_toggled(bool checked);
-
+    //２値化画像
+    void on_binarizedMatPushButton_toggled(bool checked);
     /** チャンネル閾値強度調整*/
 	void on_channelThresholdHorizontalSlider_valueChanged(int value);
 	void on_channelThresholdLineEdit_textChanged(const QString &arg1);
@@ -129,6 +133,10 @@ private slots:
 	void on_captureExposureSlider_valueChanged(int value);
 	void on_captureSaturationLineEdit_textChanged(const QString &arg1);
 	void on_captureSaturationSlider_valueChanged(int value);
+
+	
+
+	
 
 private:
     vector<ChannelType> collectColorCheckBoxStatus();
