@@ -7,7 +7,7 @@
 Extractor::Extractor() {
 
     _binarizationThreshold[0] = 50;  //Blue
-    _binarizationThreshold[1] = 75;  //Green
+    _binarizationThreshold[1] = 40;  //Green
     _binarizationThreshold[2] = 180;  //Red
     _binarizationThreshold[3] = 45;  //Hue
     _binarizationThreshold[4] = 140; //Saturation
@@ -69,12 +69,16 @@ void Extractor::extract(MatSet& srcSet, Region& result) {
     // imshow("r", bgrChannels[2]);
 
     Mat mat = Mat::zeros(srcSet.size(), CV_8UC1);
-    if(_indexOfMaxArea >=0){
 
+    
+
+    if(_indexOfMaxArea >=0){
         int yBegin = _previousRegion.expectedRoi().y;
         int yEnd = _previousRegion.expectedRoi().y+_previousRegion.expectedRoi().height;
         int xBegin = _previousRegion.expectedRoi().x;
         int xEnd = _previousRegion.expectedRoi().x+_previousRegion.expectedRoi().width;
+
+        
     
         for(int y=yBegin; y<yEnd; y++) {
             for(int x=xBegin; x<xEnd; x++) {
@@ -130,28 +134,37 @@ void Extractor::extract(MatSet& srcSet, Region& result) {
    
     
     if(indexiesOfTop3Area[1] >= 0) {
-        vector<Point> allPoints;
+        Point2f vertices[4];
+        _previousRegion.rotatedRect().points(vertices);
+        vector<Point> allPoints = contours[indexiesOfTop3Area[0]];
         if(indexiesOfTop3Area[2] >= 0) {
             drawContours(mat2, contours, indexiesOfTop3Area[1], Scalar(255, 255, 255), CV_FILLED, LINK_EIGHT);
             drawContours(mat2, contours, indexiesOfTop3Area[2], Scalar(255, 255, 255), CV_FILLED, LINK_EIGHT);
             drawContours(mat2, contours, _indexOfMaxArea, Scalar(255, 255, 255), CV_FILLED, LINK_EIGHT);
-            for(int i=0; i<3; i++) {
+
+            for(int i=1; i<3; i++) {
                 for(Point point :contours[indexiesOfTop3Area[i]]) {
-                    allPoints.push_back(point);
+                    if(isInROI(point, vertices)) {
+                        allPoints.push_back(point);
+                    }
+                    
                 }
             }
 
         } else {
             drawContours(mat2, contours, indexiesOfTop3Area[1], Scalar(255, 255, 255), CV_FILLED, LINK_EIGHT);
             drawContours(mat2, contours, _indexOfMaxArea, Scalar(255, 255, 255), CV_FILLED, LINK_EIGHT);
-            for(int i=0; i<2; i++) {
+           
+            for(int i=1; i<2; i++) {
                 for(Point point :contours[indexiesOfTop3Area[i]]) {
-                    allPoints.push_back(point);
+                    if(isInROI(point, vertices)) {
+                        allPoints.push_back(point);
+                    }
                 }
             }
     
         }
-        
+    
         RotatedRect rect = minAreaRect(Mat(allPoints));
         // Point2f vertices[4];
         // rect.points(vertices);

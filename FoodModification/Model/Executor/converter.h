@@ -63,11 +63,19 @@ private:
     Converter(const Converter&);
 
     void overlapTexture(const MatSet& srcSet, const Mat& textureImg, const Region& extractedRegion, Mat& dstBGRImg) {
-
-           
-        vint sum(9,0);
-        int pixelSum=0;
-        vint averages(9,0);
+        Mat dstHSVImg;
+        // cvtColor(dstBGRImg, dstHSVImg, CV_BGR2HSV);
+        // for(int y=0; y<srcSet.size().height; y++) {
+        //     for(int x=0; x<srcSet.size().width; x++ ) {
+        //         S(dstHSVImg,x,y) = (int)S(dstHSVImg,x,y)*0.6;
+        //         V(dstHSVImg,x,y) = (int)V(srcSet.hsv(),x,y);
+        //     }
+        // }
+        // cvtColor(dstHSVImg, dstBGRImg, CV_HSV2BGR);
+        
+        // vint sum(9,0);
+        // int pixelSum=0;
+        // vint averages(9,0);
         // vint medians(9,0);
         // vint upperTolerances(9,0);
         // vint underTolerances(9,0);
@@ -91,29 +99,29 @@ private:
                     R(dstBGRImg,x,y) = _alpha*R(dstBGRImg,x,y) + (1-_alpha)*R(textureImg,x,y);
 
                     //count Sum
-                    sum[0] = sum[0] + B(srcSet.bgr(), x, y);
-                    sum[1] = sum[1] + G(srcSet.bgr(), x, y);
-                    sum[2] = sum[2] + R(srcSet.bgr(), x, y);
-                    sum[3] = sum[3] + B(srcSet.hsv(), x, y);
-                    sum[4] = sum[4] + G(srcSet.hsv(), x, y);
-                    sum[5] = sum[5] + R(srcSet.hsv(), x, y);
-                    sum[6] = sum[6] + B(srcSet.ycrcb(), x, y);
-                    sum[7] = sum[7] + G(srcSet.ycrcb(), x, y);
-                    sum[8] = sum[8] + R(srcSet.ycrcb(), x, y);
+                    // sum[0] = sum[0] + B(srcSet.bgr(), x, y);
+                    // sum[1] = sum[1] + G(srcSet.bgr(), x, y);
+                    // sum[2] = sum[2] + R(srcSet.bgr(), x, y);
+                    // sum[3] = sum[3] + B(srcSet.hsv(), x, y);
+                    // sum[4] = sum[4] + G(srcSet.hsv(), x, y);
+                    // sum[5] = sum[5] + R(srcSet.hsv(), x, y);
+                    // sum[6] = sum[6] + B(srcSet.ycrcb(), x, y);
+                    // sum[7] = sum[7] + G(srcSet.ycrcb(), x, y);
+                    // sum[8] = sum[8] + R(srcSet.ycrcb(), x, y);
                     // greenFrequency[G(srcSet.bgr(), x, y)]++;
                     // yFrequency[B(srcSet.ycrcb(), x, y)]++;
                     // crFrequency[G(srcSet.ycrcb(), x, y)]++;
                     // cbFrequency[R(srcSet.ycrcb(), x, y)]++;
-                    pixelSum++;
+                    //pixelSum++;
                 }
             }
         }
 
         //calculate average;
-        for(int i=0; i<9; i++) {
-            averages[i] = static_cast<int>((float)sum[i] / (float)pixelSum);
-        }
-        _featureReference.updateAverages(averages);
+        // for(int i=0; i<9; i++) {
+        //     averages[i] = static_cast<int>((float)sum[i] / (float)pixelSum);
+        // }
+        // _featureReference.updateAverages(averages);
 
 
         // int harfOfPixelSum = (int)((double)pixelSum/2.0);
@@ -217,9 +225,9 @@ private:
         // _featureReference.updateMedianAndTolerance(medians, upperTolerances, underTolerances);
     }
     void overlapTextureWithAverageCalc(const MatSet& srcSet, const Mat& textureImg, const Region& extractedRegion, Mat& dstBGRImg) {
-        vint sum(9,0);
-        int pixelSum=0;
-        vint averages(9,0);
+        // vint sum(9,0);
+        // int pixelSum=0;
+        // vint averages(9,0);
         
         int yBegin = extractedRegion.roi().y;
         int yEnd = extractedRegion.roi().y+extractedRegion.roi().height;
@@ -236,26 +244,26 @@ private:
                     R(dstBGRImg,x,y) = _alpha*R(dstBGRImg,x,y) + (1-_alpha)*R(textureImg,x,y);
 
                     //count Sum
-                    sum[0] = sum[0] + B(srcSet.bgr(), x, y);
-                    sum[1] = sum[1] + G(srcSet.bgr(), x, y);
-                    sum[2] = sum[2] + R(srcSet.bgr(), x, y);
-                    sum[3] = sum[3] + B(srcSet.hsv(), x, y);
-                    sum[4] = sum[4] + G(srcSet.hsv(), x, y);
-                    sum[5] = sum[5] + R(srcSet.hsv(), x, y);
-                    sum[6] = sum[6] + B(srcSet.ycrcb(), x, y);
-                    sum[7] = sum[7] + G(srcSet.ycrcb(), x, y);
-                    sum[8] = sum[8] + R(srcSet.ycrcb(), x, y);
+                    // sum[0] = sum[0] + B(srcSet.bgr(), x, y);
+                    // sum[1] = sum[1] + G(srcSet.bgr(), x, y);
+                    // sum[2] = sum[2] + R(srcSet.bgr(), x, y);
+                    // sum[3] = sum[3] + B(srcSet.hsv(), x, y);
+                    // sum[4] = sum[4] + G(srcSet.hsv(), x, y);
+                    // sum[5] = sum[5] + R(srcSet.hsv(), x, y);
+                    // sum[6] = sum[6] + B(srcSet.ycrcb(), x, y);
+                    // sum[7] = sum[7] + G(srcSet.ycrcb(), x, y);
+                    // sum[8] = sum[8] + R(srcSet.ycrcb(), x, y);
                    
-                    pixelSum++;
+                    // pixelSum++;
                 }
             }
         }
       
         //calculate average;
-        for(int i=0; i<9; i++) {
-            averages[i] = static_cast<int>((float)sum[i] / (float)pixelSum);
-        }
-        _featureReference.updateAverages(averages);
+        // for(int i=0; i<9; i++) {
+        //     averages[i] = static_cast<int>((float)sum[i] / (float)pixelSum);
+        // }
+        // _featureReference.updateAverages(averages);
     
     }
 
