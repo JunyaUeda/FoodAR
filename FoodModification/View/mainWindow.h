@@ -99,13 +99,27 @@ private slots:
 	void on_dilateSpinBox_valueChanged(int arg1);
 	void on_erodeSpinBox_valueChanged(int arg1);
     /**二値化閾値調整*/
+    void on_blueBinarizationThresholdLineEdit_textChanged(const QString &arg1);
+    void on_blueBinarizationThresholdSlider_valueChanged(int value);
     void on_greenBinarizationThresholdLineEdit_textChanged(const QString &arg1);
     void on_greenBinarizationThresholdSlider_valueChanged(int value);
+    void on_redBinarizationThresholdLineEdit_textChanged(const QString &arg1);
+    void on_redBinarizationThresholdSlider_valueChanged(int value);
+    void on_hueBinarizationThresholdLineEdit_textChanged(const QString &arg1);
+    void on_hueBinarizationThresholdSlider_valueChanged(int value);
+    void on_saturationBinarizationThresholdLineEdit_textChanged(const QString &arg1);
+    void on_saturationBinarizationThresholdSlider_valueChanged(int value);
+    void on_valueBinarizationThresholdLineEdit_textChanged(const QString &arg1);
+    void on_valueBinarizationThresholdSlider_valueChanged(int value);
     void on_yBinarizationThresholdLineEdit_textChanged(const QString &arg1);
     void on_yBinarizationThresholdSlider_valueChanged(int value);
     void on_crBinarizationThresholdLineEdit_textChanged(const QString &arg1);
     void on_crBinarizationThresholdSlider_valueChanged(int value);
-   
+    void on_cbBinarizationThresholdLineEdit_textChanged(const QString &arg1);
+    void on_cbBinarizationThresholdSlider_valueChanged(int value);
+    
+
+
     void on_upperRatioSlider_valueChanged(int value);
     void on_upperRatioLineEdit_textChanged(const QString &arg1);
     void on_underRatioSlider_valueChanged(int value);
@@ -126,6 +140,9 @@ private slots:
 	void on_captureSaturationLineEdit_textChanged(const QString &arg1);
 	void on_captureSaturationSlider_valueChanged(int value);
 
+
+
+	
 
 private:
     vector<ChannelType> collectColorCheckBoxStatus();

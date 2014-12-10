@@ -81,14 +81,8 @@ public:
         }
     }
 
-    void updateGreenBinarizationThreshold(int value) {
-        _greenBinarizationThreshold = value;
-    }   
-    void updateYBinarizationThreshold(int value) {
-        _yBinarizationThreshold = value;
-    }
-    void updateCrBinarizationThreshold(int value) {
-        _crBinarizationThreshold = value;
+    void updateBinarizationThreshold(int value ,int index) {
+        _binarizationThreshold[index] = value;
     }
 private:
     Extractor();
@@ -105,11 +99,8 @@ private:
     Region _previousRegion;
     Mat _scoreMat;
     int _indexOfMaxArea=-1;
-    int _greenBinarizationThreshold = 19;
-    int _yBinarizationThreshold = 60;
-    int _crBinarizationThreshold = 30;
-
-    
+	int _binarizationThreshold[9];
+   
 
 };
 

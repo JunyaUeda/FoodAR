@@ -25,15 +25,10 @@ public:
     void updateRatioOfPixelNum(double upperRatio, double underRatio) {
         _extractionManager.updateRatioOfPixelNum(upperRatio, underRatio);
     }
-    void updateGreenBinarizationThreshold(int value) {
-        _extractor.updateGreenBinarizationThreshold(value);
-    }   
-    void updateYBinarizationThreshold(int value) {
-        _extractor.updateYBinarizationThreshold(value);
+    void updateBinarizationThreshold(int value, int index) {
+        _extractor.updateBinarizationThreshold(value, index);
     }
-    void updateCrBinarizationThreshold(int value) {
-        _extractor.updateCrBinarizationThreshold(value);
-    }
+   
 private:
 	ExtractionController();
     ExtractionController(const ExtractionController&);

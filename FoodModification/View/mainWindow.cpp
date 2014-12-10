@@ -392,44 +392,127 @@ void MainWindow::on_erodeSpinBox_valueChanged(int arg1)
 }
 
 /** 二値化閾値調整*/
+void MainWindow::on_blueBinarizationThresholdLineEdit_textChanged(const QString &arg1)
+{
+    int value = arg1.toInt(); // TODO ：ユーザーが数以外を入力した場合の処理を書くべし
+    _extractionController.updateBinarizationThreshold(value, 0);
+    ui->blueBinarizationThresholdSlider->setSliderPosition(value);
+}
+
+void MainWindow::on_blueBinarizationThresholdSlider_valueChanged(int value)
+{
+    _extractionController.updateBinarizationThreshold(value, 0);
+    ui->blueBinarizationThresholdLineEdit->setText(QString::number(value));
+}
+
 void MainWindow::on_greenBinarizationThresholdLineEdit_textChanged(const QString &arg1)
 {
     int value = arg1.toInt(); // TODO ：ユーザーが数以外を入力した場合の処理を書くべし
-    _extractionController.updateGreenBinarizationThreshold(value);
+    _extractionController.updateBinarizationThreshold(value, 1);
     ui->greenBinarizationThresholdSlider->setSliderPosition(value);
 }
 
 void MainWindow::on_greenBinarizationThresholdSlider_valueChanged(int value)
 {
-    _extractionController.updateGreenBinarizationThreshold(value);
+    _extractionController.updateBinarizationThreshold(value, 1);
     ui->greenBinarizationThresholdLineEdit->setText(QString::number(value));
+}
+
+void MainWindow::on_redBinarizationThresholdLineEdit_textChanged(const QString &arg1)
+{
+    int value = arg1.toInt(); // TODO ：ユーザーが数以外を入力した場合の処理を書くべし
+    _extractionController.updateBinarizationThreshold(value, 2);
+    ui->redBinarizationThresholdSlider->setSliderPosition(value);
+}
+
+void MainWindow::on_redBinarizationThresholdSlider_valueChanged(int value)
+{
+    _extractionController.updateBinarizationThreshold(value, 2);
+    ui->redBinarizationThresholdLineEdit->setText(QString::number(value));
+}
+void MainWindow::on_hueBinarizationThresholdLineEdit_textChanged(const QString &arg1)
+{
+     _extractionController.updateBinarizationThreshold(value, 3);
+    ui->hueBinarizationThresholdLineEdit->setText(QString::number(value));
+}
+
+void MainWindow::on_hueBinarizationThresholdSlider_valueChanged(int value)
+{
+     _extractionController.updateBinarizationThreshold(value, 3);
+    ui->hueBinarizationThresholdLineEdit->setText(QString::number(value));
+}
+
+void MainWindow::on_saturationBinarizationThresholdLineEdit_textChanged(const QString &arg1)
+{
+     _extractionController.updateBinarizationThreshold(value, 4);
+    ui->saturationBinarizationThresholdLineEdit->setText(QString::number(value));
+}
+
+void MainWindow::on_saturationBinarizationThresholdSlider_valueChanged(int value)
+{
+     _extractionController.updateBinarizationThreshold(value, 4);
+    ui->saturationBinarizationThresholdLineEdit->setText(QString::number(value));
+}
+
+void MainWindow::on_valueBinarizationThresholdLineEdit_textChanged(const QString &arg1)
+{
+     _extractionController.updateBinarizationThreshold(value, 5);
+    ui->valueBinarizationThresholdLineEdit->setText(QString::number(value));
+}   
+
+void MainWindow::on_valueBinarizationThresholdSlider_valueChanged(int value)
+{
+     _extractionController.updateBinarizationThreshold(value, 5);
+    ui->valueBinarizationThresholdLineEdit->setText(QString::number(value));
 }
 
 void MainWindow::on_yBinarizationThresholdLineEdit_textChanged(const QString &arg1)
 {
     int value = arg1.toInt(); // TODO ：ユーザーが数以外を入力した場合の処理を書くべし
-    _extractionController.updateYBinarizationThreshold(value);
+    _extractionController.updateBinarizationThreshold(value, 6);
     ui->yBinarizationThresholdSlider->setSliderPosition(value);
 }
 
 void MainWindow::on_yBinarizationThresholdSlider_valueChanged(int value)
 {
-    _extractionController.updateGreenBinarizationThreshold(value);
+    _extractionController.updateBinarizationThreshold(value, 6);
     ui->yBinarizationThresholdLineEdit->setText(QString::number(value));
 }
 
 void MainWindow::on_crBinarizationThresholdLineEdit_textChanged(const QString &arg1)
 {
     int value = arg1.toInt(); // TODO ：ユーザーが数以外を入力した場合の処理を書くべし
-    _extractionController.updateCrBinarizationThreshold(value);
+    _extractionController.updateBinarizationThreshold(value, 7);
     ui->crBinarizationThresholdSlider->setSliderPosition(value);
 }
 
 void MainWindow::on_crBinarizationThresholdSlider_valueChanged(int value)
 {
-    _extractionController.updateGreenBinarizationThreshold(value);
+    _extractionController.updateBinarizationThreshold(value, 7);
     ui->crBinarizationThresholdLineEdit->setText(QString::number(value));
 }
+
+void MainWindow::on_cbBinarizationThresholdLineEdit_textChanged(const QString &arg1)
+{
+     _extractionController.updateBinarizationThreshold(value, 8);
+    ui->cbBinarizationThresholdLineEdit->setText(QString::number(value));
+}
+
+void MainWindow::on_cbBinarizationThresholdSlider_valueChanged(int value)
+{
+     _extractionController.updateBinarizationThreshold(value, 8);
+    ui->cbBinarizationThresholdLineEdit->setText(QString::number(value));
+}
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -530,4 +613,5 @@ void MainWindow::on_captureContrastLineEdit_textChanged(const QString &arg1)
     _cameraController.setCaptureContrast(arg1.toDouble());
 }
  
+
 

@@ -111,7 +111,7 @@ void BinarizationViewer::showBinarizedImgs() {
         imshow("Cr", ycrcbChannelImgs[1]);
         imshow("Cb", ycrcbChannelImgs[2]);
 
-        int key = waitKey(33);
+		int key = waitKey(1);
         if(key == 27) break;
     }
 

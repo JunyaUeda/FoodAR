@@ -39,7 +39,7 @@ private:
     Size _size = Size(640, 480);
 	Size _defaultSize = Size(640, 480);
     double _captureSaturation = 255.0;
-    double _captureExposure = -5.0;
+    double _captureExposure = -4.0;
     double _captureGain = 30.0;
     double _captureBrightness = 128.0;
     double _captureContrast = 100.0;

@@ -5,7 +5,18 @@
 #define LINK_CVAA CV_AA
 
 Extractor::Extractor() {
-    
+
+    _binarizationThreshold[0] = 50;  //Blue
+    _binarizationThreshold[1] = 75;  //Green
+    _binarizationThreshold[2] = 180;  //Red
+    _binarizationThreshold[3] = 45;  //Hue
+    _binarizationThreshold[4] = 140; //Saturation
+    _binarizationThreshold[5] = 173; //Value
+    _binarizationThreshold[6] = 125;  //Y
+    _binarizationThreshold[7] = 155; //Cr
+    _binarizationThreshold[8] = 30;  //Cb
+
+
 }
 
 Extractor& Extractor::getInstance() {
@@ -71,11 +82,11 @@ void Extractor::extract(MatSet& srcSet, Region& result) {
                 //         L(mat,x,y) = 255;     
                 //     } 
 
-                if(L(ycrcbChannels[1],x,y) >= 174 && L(hsvChannels[2],x,y) >=170  && L(bgrChannels[2],x,y) >=170) {
-                    
+                if(L(ycrcbChannels[1],x,y) >= _binarizationThreshold[7] && L(bgrChannels[1],x,y) <=_binarizationThreshold[1] && L(bgrChannels[2],x,y) >=_binarizationThreshold[2]) {
+    
                     L(mat,x,y) = 255;
                     
-                } else if(L(hsvChannels[1],x,y) >=224 && L(ycrcbChannels[1],x,y) >= 174  && L(bgrChannels[1],x,y) <= 21)  {
+                } else if(L(hsvChannels[1],x,y) >=_binarizationThreshold[4] && L(ycrcbChannels[1],x,y) >= 154 && L(bgrChannels[1],x,y) <= 40 && L(bgrChannels[0],x,y) <= 41 ) {
                     L(mat,x,y) = 255;
                 }
 
@@ -89,13 +100,15 @@ void Extractor::extract(MatSet& srcSet, Region& result) {
                 // if(_featureReference.isWithinThreshold(srcSet, Point(x,y)) ) { 
                 //         L(mat,x,y) = 255;     
                 //     } 
-                if(L(ycrcbChannels[1],x,y) >= 174 && L(hsvChannels[2],x,y) >=170  && L(bgrChannels[2],x,y) >=170) {
-                    
+                if(L(ycrcbChannels[1],x,y) >= _binarizationThreshold[7] && L(bgrChannels[1],x,y) <=_binarizationThreshold[1] && L(bgrChannels[2],x,y) >=_binarizationThreshold[2]) {
+    
                     L(mat,x,y) = 255;
                     
-                } else if(L(hsvChannels[1],x,y) >=224 && L(ycrcbChannels[1],x,y) >= 174  && L(bgrChannels[1],x,y) <= 21)  {
+                } else if(L(hsvChannels[1],x,y) >=_binarizationThreshold[4] && L(ycrcbChannels[1],x,y) >= 154 && L(bgrChannels[1],x,y) <= 40 && L(bgrChannels[0],x,y) <= 41 ) {
                     L(mat,x,y) = 255;
                 }
+
+
                 
             }
         }

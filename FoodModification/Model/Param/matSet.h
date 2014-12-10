@@ -11,7 +11,6 @@ public:
 	MatSet();
 	MatSet(Mat bgr);
 
-
 	void setBgr(Mat bgr) {
 		_bgr = bgr;
 		boxFilter(_bgr, _blur, 8, Size(3,3));

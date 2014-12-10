@@ -26,7 +26,7 @@ void MainProcedure::start() {
         
         _outputer.show(dstBGRImg);
 
-        char ch = waitKey(1);
+        char ch = waitKey(10);
         if ( ch == 27 ) break;
     }
 }
