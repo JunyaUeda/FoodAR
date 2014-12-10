@@ -27,7 +27,7 @@ public:
             return -1;
         }
         size_t max=0;
-        int indexForMaxArea=0;
+        int indexForMaxArea=-1;
         for(int i=0; i<contours.size(); ++i) {
             size_t count = contours[i].size();
             //if(count < 300 || count > 1000) continue;
@@ -39,6 +39,40 @@ public:
         }
 
         return indexForMaxArea;
+    }
+
+    vector<int> calcIndexiesOfTop3Area(vPs& contours) {
+       
+        size_t max=0;
+        size_t second =0;
+        size_t third = 0;
+        vector<int> indexForTop3 = {-1, -1, -1};
+    
+        if(contours.size() > 0) {
+            for(int i=0; i<contours.size(); ++i) {
+                size_t count = contours[i].size();
+                //if(count < 300 || count > 1000) continue;
+
+                if(count > max) {
+                    indexForTop3[2] = indexForTop3[1];
+                    indexForTop3[1] = indexForTop3[0];
+                    indexForTop3[0] = i;
+                    third = second;
+                    second = max;
+                    max = count;
+                } else if(count > second) {
+                    indexForTop3[2] = indexForTop3[1];
+                    indexForTop3[1] = i;
+                    third = second;
+                    second = count;
+                } else if(count > third) {
+                    indexForTop3[2] = i;
+                    third = count;
+                }
+            }
+        }
+        
+        return indexForTop3;
     }
 
     void revMergeEdges(vector<Mat>& channelEdgeImgs, Rect& roi, Mat& dstEdgeImg) {

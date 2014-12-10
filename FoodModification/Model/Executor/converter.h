@@ -64,6 +64,7 @@ private:
 
     void overlapTexture(const MatSet& srcSet, const Mat& textureImg, const Region& extractedRegion, Mat& dstBGRImg) {
 
+           
         vint sum(9,0);
         int pixelSum=0;
         vint averages(9,0);

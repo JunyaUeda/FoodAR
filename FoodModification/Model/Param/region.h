@@ -32,6 +32,10 @@ public:
         return _rotatedRect;
     }
 
+    void setRotatedRect(RotatedRect &rotatedRect) {
+        _rotatedRect = rotatedRect;
+    }
+
     Rect roi() const {
         return _roi;
     }
@@ -82,6 +86,10 @@ public:
         _roi = OpenCVAPI::calculateROI(_maskImg.size(), rect, _roiScaleRatio);
     }
 
+    void calcRoiWithRotatedRect() {
+        Rect rect = _rotatedRect.boundingRect();
+        _roi = OpenCVAPI::calculateROI(_maskImg.size(), rect, _roiScaleRatio);
+    }
     /**
     * 前フレームにおける回転Rectの中心と今回の中心の移動量を加味して今回のROIを作成する
     * @note このメソッドを実行する前にcalcRotatedRect()を実行する必要がある
@@ -106,6 +114,29 @@ public:
         }
 
         Rect rect = boundingRect(_contour);
+        _expectedRoi = OpenCVAPI::calculateROI(_maskImg.size(), rect, _roiScaleRatio, shiftX, shiftY);
+    }
+
+    void calcExpectedRoiConsideringMoveWithRotatedRect(Region& previousRegion) {
+        if(!_contour.size()) {
+            return;
+        }
+
+        int shiftX = 0;
+        int shiftY = 0;
+        _accelerationX = 0;
+        _accelerationY = 0;
+        if(previousRegion.rotatedRect().center.x > 0 && previousRegion.rotatedRect().center.x < _maskImg.size().width) {
+            _velocityX = _rotatedRect.center.x - previousRegion.rotatedRect().center.x;
+            _velocityY = _rotatedRect.center.y - previousRegion.rotatedRect().center.y;
+            _accelerationX = _velocityX - previousRegion.velocityX();
+            _accelerationY = _velocityY - previousRegion.velocityY();
+
+            shiftX = _velocityX + _accelerationX;
+            shiftY = _velocityY + _accelerationY;
+        }
+
+        Rect rect = _rotatedRect.boundingRect();
         _expectedRoi = OpenCVAPI::calculateROI(_maskImg.size(), rect, _roiScaleRatio, shiftX, shiftY);
     }
 

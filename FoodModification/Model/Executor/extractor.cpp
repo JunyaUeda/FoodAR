@@ -123,11 +123,65 @@ void Extractor::extract(MatSet& srcSet, Region& result) {
     //最大面積
     vPs contours;
     findContours(mat, contours, CV_RETR_LIST, CV_CHAIN_APPROX_NONE);
-    _indexOfMaxArea = calcIndexOfMaxArea(contours);
+    vector<int> indexiesOfTop3Area = calcIndexiesOfTop3Area(contours);
+    // _indexOfMaxArea = calcIndexOfMaxArea(contours);
+    _indexOfMaxArea = indexiesOfTop3Area[0];
     Mat mat2 = Mat::zeros(srcSet.size(), CV_8UC1);
    
-    drawContours(mat2, contours, _indexOfMaxArea, Scalar(255, 255, 255), CV_FILLED, LINK_EIGHT);
     
+    if(indexiesOfTop3Area[1] >= 0) {
+        vector<Point> allPoints;
+        if(indexiesOfTop3Area[2] >= 0) {
+            drawContours(mat2, contours, indexiesOfTop3Area[1], Scalar(255, 255, 255), CV_FILLED, LINK_EIGHT);
+            drawContours(mat2, contours, indexiesOfTop3Area[2], Scalar(255, 255, 255), CV_FILLED, LINK_EIGHT);
+            drawContours(mat2, contours, _indexOfMaxArea, Scalar(255, 255, 255), CV_FILLED, LINK_EIGHT);
+            for(int i=0; i<3; i++) {
+                for(Point point :contours[indexiesOfTop3Area[i]]) {
+                    allPoints.push_back(point);
+                }
+            }
+
+        } else {
+            drawContours(mat2, contours, indexiesOfTop3Area[1], Scalar(255, 255, 255), CV_FILLED, LINK_EIGHT);
+            drawContours(mat2, contours, _indexOfMaxArea, Scalar(255, 255, 255), CV_FILLED, LINK_EIGHT);
+            for(int i=0; i<2; i++) {
+                for(Point point :contours[indexiesOfTop3Area[i]]) {
+                    allPoints.push_back(point);
+                }
+            }
+    
+        }
+        
+        RotatedRect rect = minAreaRect(Mat(allPoints));
+        // Point2f vertices[4];
+        // rect.points(vertices);
+        // for (int i = 0; i < 4; i++) line(mat2, vertices[i], vertices[(i+1)%4], Scalar(255,255,255), 4, 8, 0);
+        result.setContour(contours[_indexOfMaxArea]);//TODO:本来は結合した輪郭を入れるか別にいれる必要がある
+        result.setMaskImg(mat2);
+        result.setRotatedRect(rect);
+        result.calcRoiWithRotatedRect();
+        result.calcExpectedRoiConsideringMoveWithRotatedRect(_previousRegion);
+
+        _previousRegion = result;
+
+        imshow("merge", mat2);
+    } else {
+
+        drawContours(mat2, contours, _indexOfMaxArea, Scalar(255, 255, 255), CV_FILLED, LINK_EIGHT);
+        result.setMaskImg(mat2);
+        if(_indexOfMaxArea>=0) {
+            result.setContour(contours[_indexOfMaxArea]);
+            result.calcRotatedRect();
+            result.calcRoi();
+            result.calcExpectedRoiConsideringMove(_previousRegion);
+        }
+        
+        _previousRegion = result;
+      
+        imshow("merge", mat2);
+    }
+    
+
     
     //エッジ画像を取得する
     //     // _edgeService.extractEdge(rawEdges, areamaxRegion.rois()[0], dstEdgeImg);
@@ -143,19 +197,6 @@ void Extractor::extract(MatSet& srcSet, Region& result) {
     //     int minSize = 200;
     //     _contourService.fillContours(dstEdgeImg, minSize);
         
-
-    imshow("merge", mat2);
-
-    result.setMaskImg(mat2);
-    if(_indexOfMaxArea>=0) {
-        result.setContour(contours[_indexOfMaxArea]);
-        result.calcRotatedRect();
-        result.calcRoi();
-        result.calcExpectedRoiConsideringMove(_previousRegion);
-    }
-    
-    _previousRegion = result;
-
 }
 
 
