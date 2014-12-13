@@ -14,12 +14,8 @@ TEMPLATE = app
 
 
 SOURCES += main.cpp\
-    Param/colorCriterion.cpp \
-    Param/colorExtractTolerance.cpp \
     View/calibrateDialog.cpp \
-    Param/calibrateClickParam.cpp \
     app.cpp \
-    Param/targetParam.cpp \
     Utils/opencvBase.cpp \
     Utils/opencvUtils.cpp \
     Controller/calibrationController.cpp \
@@ -29,21 +25,13 @@ SOURCES += main.cpp\
     Controller/textureController.cpp \
     Controller/convertController.cpp \
     View/colorDialog.cpp \
-    Param/textureParam.cpp \
     Utils/xmlUtils.cpp \
-    Param/illuminationParam.cpp \
     Controller/edgeController.cpp \
-    Param/edgeParam.cpp \
-    Controller/srcController.cpp \
-    Param/cannyThreshold.cpp \
-    Param/Features/feature.cpp \
-    Param/References/reference.cpp \
     Controller/baseController.cpp \
     Controller/File/fileController.cpp \
     Controller/singleton.cpp \
     Model/features.cpp \
     Model/Param/color.cpp \
-    Model/extractParam.cpp \
     Model/featureReference.cpp \
     Model/Param/channelThreshold.cpp \
     Model/Service/regionService.cpp \
@@ -92,7 +80,6 @@ SOURCES += main.cpp\
     Model/Param/xmlElement.cpp \
     Model/Manager/fileManager.cpp \
     Controller/fileController.cpp \
-    Param/Features/features.cpp \
     Model/Util/qtUtil.cpp \
     Model/Param/edgeThreshold.cpp \
     Model/edgeFactory.cpp \
@@ -108,12 +95,8 @@ SOURCES += main.cpp\
     Model/Param/channelSet.cpp
 
 HEADERS  += \
-    Param/colorCriterion.h \
-    Param/colorExtractTolerance.h \
     View/calibrateDialog.h \
-    Param/calibrateClickParam.h \
     app.h \
-    Param/targetParam.h \
     Utils/opencvBase.h \
     Utils/opencvUtils.h \
     Controller/calibrationController.h \
@@ -123,23 +106,15 @@ HEADERS  += \
     Controller/textureController.h \
     Controller/convertController.h \
     View/colorDialog.h \
-    Param/textureParam.h \
     Utils/xmlUtils.h \
-    Param/illuminationParam.h \
     Controller/edgeController.h \
-    Param/edgeParam.h \
     definition.h \
-    Controller/srcController.h \
-    Param/cannyThreshold.h \
-    Param/Features/feature.h \
-    Param/References/reference.h \
     Controller/baseController.h \
     Controller/File/fileController.h \
     Controller/singleton.h \
     Model/features.h \
     Model/Param/color.h \
     Model/Param/channel.h \
-    Model/extractParam.h \
     Model/featureReference.h \
     Model/Param/channelThreshold.h \
     Model/Param/channelType.h \
@@ -192,7 +167,6 @@ HEADERS  += \
     Model/Param/xmlElement.h \
     Model/Manager/fileManager.h \
     Controller/fileController.h \
-    Param/Features/features.h \
     Model/Util/qtUtil.h \
     Model/Param/edgeThreshold.h \
     Model/edgeFactory.h \
