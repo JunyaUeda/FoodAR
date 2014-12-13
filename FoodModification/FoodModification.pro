@@ -21,7 +21,6 @@ SOURCES += main.cpp\
     Controller/calibrationController.cpp \
     View/mainWindow.cpp \
     Controller/mainController.cpp \
-    Service/textureService.cpp \
     Controller/textureController.cpp \
     Controller/convertController.cpp \
     View/colorDialog.cpp \
@@ -102,7 +101,6 @@ HEADERS  += \
     Controller/calibrationController.h \
     View/mainWindow.h \
     Controller/mainController.h \
-    Service/textureService.h \
     Controller/textureController.h \
     Controller/convertController.h \
     View/colorDialog.h \
