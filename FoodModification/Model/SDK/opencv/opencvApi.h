@@ -149,6 +149,11 @@ public:
     	}
 	}
 
+    static void drawRotatedRect(RotatedRect& rect, Mat& result, Scalar color, int thickness) {
+        Point2f vertices[4];
+        rect.points(vertices);
+        for (int i = 0; i < 4; i++) line(result, vertices[i], vertices[(i+1)%4], color, thickness, 8, 0);
+    }
 private:
 
 

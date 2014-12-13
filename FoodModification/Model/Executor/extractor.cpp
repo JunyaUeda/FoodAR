@@ -135,9 +135,7 @@ void Extractor::extract(MatSet& srcSet, Region& result) {
         }
     
         RotatedRect rect = minAreaRect(Mat(allPoints));
-        // Point2f vertices[4];
-        // rect.points(vertices);
-        // for (int i = 0; i < 4; i++) line(mat2, vertices[i], vertices[(i+1)%4], Scalar(255,255,255), 4, 8, 0);
+       
         result.setContour(contours[_indexOfMaxArea]);//TODO:本来は結合した輪郭を入れるか別にいれる必要がある
         result.setMaskImg(mat2);
         result.setRotatedRect(rect);
