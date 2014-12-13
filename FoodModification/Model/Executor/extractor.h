@@ -11,6 +11,7 @@
 #include "../Service/contourService.h"
 #include "../Manager/extractionManager.h"
 #include "../SDK/opencv/opencvApi.h"
+#include "../Param/channelSet.h"
 
 class Extractor {
 
@@ -118,6 +119,7 @@ public:
     void updateBinarizationThreshold(int value ,int index) {
         _binarizationThreshold[index] = value;
     }
+
 private:
     Extractor();
     Extractor(const Extractor&);
@@ -138,6 +140,11 @@ private:
         double j = a.y -k*a.x;
         return k*p.x -p.y + j;
     }
+
+    void acquireAllChannels() {
+
+    }
+
 /*property*/
 private:
 	ExtractService  _extractService;

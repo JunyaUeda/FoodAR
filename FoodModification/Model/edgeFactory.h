@@ -4,6 +4,7 @@
 #include "./Param/edge.h"
 #include "typeDef.h"
 #include "./Param/edgeThreshold.h"
+#include "./Param/channelSet.h"
 
 class EdgeFactory {
 
@@ -12,6 +13,7 @@ public:
     static EdgeFactory& getInstance();
     void createEdges(MatSet& matSet, vector<Mat>& resultRawEdgeImgs);
     void createEdges(MatSet& matSet, vector<Mat>& resultRawEdgeImgs, map<ChannelType, Mat>& channelMats);
+    void createEdges(MatSet& matSet, vector<Mat>& resultRawEdgeImgs, ChannelSet& channelSet);
     void updateEngagedChannels(vector<ChannelType> newList);
 private:
     EdgeFactory();

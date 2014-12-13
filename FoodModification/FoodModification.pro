@@ -104,7 +104,8 @@ SOURCES += main.cpp\
     Model/Service/histogramsService.cpp \
     Controller/windowController.cpp \
     Model/binarizationViewer.cpp \
-    Model/cannyViewer.cpp
+    Model/cannyViewer.cpp \
+    Model/Param/channelSet.cpp
 
 HEADERS  += \
     Param/colorCriterion.h \
@@ -203,7 +204,8 @@ HEADERS  += \
     Model/Service/histogramService.h \
     Controller/windowController.h \
     Model/binarizationViewer.h \
-    Model/cannyViewer.h
+    Model/cannyViewer.h \
+    Model/Param/channelSet.h
 
 FORMS    += \
     View/calibrateDialog.ui \

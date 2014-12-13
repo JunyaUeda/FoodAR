@@ -85,6 +85,14 @@ void EdgeFactory::createEdges(MatSet& matSet, vector<Mat>& resultRawEdgeImgs, ma
     }
 }
 
+void EdgeFactory::createEdges(MatSet& matSet, vector<Mat>& resultRawEdgeImgs, ChannelSet& channelSet) {
+    for(ChannelType type : _engagedChannels) {
+        Mat edgeMat;
+		Canny(channelSet.getChannelMat(type), edgeMat, _allEdgeThresholds[type].upper(), _allEdgeThresholds[type].under(),  APERTURE_SIZE, L2_GRADIENT);
+        resultRawEdgeImgs.push_back(edgeMat);
+    }
+}
+
 void EdgeFactory::updateEngagedChannels(vector<ChannelType> newList) {
     _engagedChannels = newList;
 }

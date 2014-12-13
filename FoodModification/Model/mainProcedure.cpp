@@ -10,8 +10,7 @@ void MainProcedure::start() {
 
         MatSet matSet;
         _sourcer.loadSrc(matSet);
-		imshow(_windowManager.windowName(0), matSet.bgr());
-
+		
         _extractor.extract(matSet,_extractedRegion);
         //_extractor.extractCoffee(matSet,_extractedRegion);
         
@@ -24,7 +23,9 @@ void MainProcedure::start() {
         Mat dstBGRImg = matSet.bgr().clone();
         _converter.convert(matSet, _extractedRegion, resultTexture, dstBGRImg);
         
+        imshow(_windowManager.windowName(0), matSet.bgr());
         _outputer.show(dstBGRImg);
+        moveWindow(_windowManager.windowName(0), 100, 0);
 
         char ch = waitKey(10);
         if ( ch == 27 ) break;

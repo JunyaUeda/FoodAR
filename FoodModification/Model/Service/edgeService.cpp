@@ -55,9 +55,10 @@ void EdgeService::drawEdge(Mat srcEdgeImg, Mat dstDrawnImg, int luminace) {
 
     for(int y=0; y<srcEdgeImg.rows; y++){
         for(int x=0; x<srcEdgeImg.cols; x++) {
-            if(L(srcEdgeImg,x,y) == 255) {
+            if(L(srcEdgeImg,x,y) == 0) {
                 L(dstDrawnImg,x,y) = luminace;
             }
+            L(dstDrawnImg,x,y) = 0;
         }
     }
 
