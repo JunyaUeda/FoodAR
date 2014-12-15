@@ -9,7 +9,6 @@
 #include "../Controller/mainController.h"
 #include "../Controller/edgeController.h"
 #include "../Controller/extractionController.h"
-#include "../Param/cannyThreshold.h"
 #include "../definition.h"
 #include "../Controller/textureController.h"
 #include "../Controller/cameraController.h"

@@ -1,7 +1,7 @@
 #ifndef CALIBRATIONCONTROLLER_H
 #define CALIBRATIONCONTROLLER_H
 #include "../Utils/opencvUtils.h"
-#include "../Param/calibrateClickParam.h"
+#include "./Param/calibrateClickParam.h"
 #include "../Model/Service/regionService.h"
 #include "../Model/Executor/calibrator.h"
 #include "../Model/Manager/cameraManager.h"

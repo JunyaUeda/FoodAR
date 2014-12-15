@@ -4,7 +4,7 @@
 #include <QDialog>
 #include "../Controller/calibrationController.h"
 #include "../Utils/opencvBase.h"
-#include "../Param/calibrateClickParam.h"
+#include "../Controller/Param/calibrateClickParam.h"
 #include "../Model/Manager/cameraManager.h"
 
 namespace Ui {

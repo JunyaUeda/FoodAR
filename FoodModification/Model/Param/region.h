@@ -60,12 +60,6 @@ public:
         return _pixelSum;
     }
 
-    // bool isAccelerationXSlowerThan(int accelerationX) {
-    //     if(_accelerationX < accelerationX) {
-    //         return true;
-    //     }
-    //     return false;
-    // }
 
     void setContour(vector<Point> contour) {
         _contour = contour;
@@ -143,17 +137,28 @@ public:
     Size size() const {
         return _maskImg.size();
     }
+
+    RotatedRect expectedRotatedRect() {
+        return _expectedRotatedRect;
+    }
     
+    void calcExpectedRotatedRect() {
+        _expectedRotatedRect = RotatedRect(_rotatedRect.center, Size((int)_rotatedRect.size.width*1.5, (int)_rotatedRect.size.height*1.5), _rotatedRect.angle);
+    }
 private:
     
 /*property*/
 private:
 	Mat _maskImg;
     vector<Point> _contour;
+    vector<Point> _points;
     RotatedRect _rotatedRect;
     Rect _roi;
+    /**次回フレームで使用*/
     Rect _expectedRoi;
-    vector<Point> _points;
+    RotatedRect _expectedRotatedRect;
+    
+
     int _velocityX = 0;
     int _velocityY = 0;
     int _accelerationX = 0;

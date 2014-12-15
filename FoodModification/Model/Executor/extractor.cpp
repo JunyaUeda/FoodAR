@@ -161,21 +161,6 @@ void Extractor::extract(MatSet& srcSet, Region& result) {
        // imshow("merge", mat2);
     }
     
-
-    
-    //エッジ画像を取得する
-    //     // _edgeService.extractEdge(rawEdges, areamaxRegion.rois()[0], dstEdgeImg);
-    //     // imshow("edge", dstEdgeImg);
-
-
-    //     //残ったエッジ画像と色による抽出画像を合成する
-    //     bitwise_or(areamaxRegion.maskImg(), dstEdgeImg, dstEdgeImg);
-
-
-    //     drawContours(dstEdgeImg, areamaxRegion.contours(), 0, Scalar(255, 255, 255), CV_FILLED, LINK_EIGHT);
-
-    //     int minSize = 200;
-    //     _contourService.fillContours(dstEdgeImg, minSize);
         
 }
 

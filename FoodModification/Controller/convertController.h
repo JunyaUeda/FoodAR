@@ -2,8 +2,6 @@
 #define CONVERTCONTROLLER_H
 
 #include "../Utils/opencvBase.h"
-#include "../Param/textureParam.h"
-#include "../Param/illuminationParam.h"
 #include "../Model/Executor/converter.h"
 #include "../Model/Executor/calibrator.h"
 
@@ -25,7 +23,6 @@ private:
 
 /*property*/
 private:
-    IlluminationParam* _illuminationParam = new IlluminationParam();
     Converter& _converter = Converter::getInstance();//TODO : ConvertionManagerをかませたほうがよい。
     Calibrator& _calibrator = Calibrator::getInstance();
 };

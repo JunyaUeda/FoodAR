@@ -91,7 +91,8 @@ SOURCES += main.cpp\
     Controller/windowController.cpp \
     Model/binarizationViewer.cpp \
     Model/cannyViewer.cpp \
-    Model/Param/channelSet.cpp
+    Model/Param/channelSet.cpp \
+    Controller/Param/calibrateClickParam.cpp
 
 HEADERS  += \
     View/calibrateDialog.h \
@@ -177,7 +178,8 @@ HEADERS  += \
     Controller/windowController.h \
     Model/binarizationViewer.h \
     Model/cannyViewer.h \
-    Model/Param/channelSet.h
+    Model/Param/channelSet.h \
+    Controller/Param/calibrateClickParam.h
 
 FORMS    += \
     View/calibrateDialog.ui \

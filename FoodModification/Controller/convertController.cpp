@@ -20,21 +20,21 @@ int ConvertController::changeIllumination(int currentValue, double intensityFact
 
 }
 
-void ConvertController::changeIntensityParam(bool change, int intensityFactor) {
+//void ConvertController::changeIntensityParam(bool change, int intensityFactor) {
 
-	double d_IntensityFactor = (double)intensityFactor/100.0;
-	_illuminationParam->setIntensityChange(change);
-	_illuminationParam->setIntensityFactor(d_IntensityFactor);
+//	double d_IntensityFactor = (double)intensityFactor/100.0;
+//	_illuminationParam->setIntensityChange(change);
+//	_illuminationParam->setIntensityFactor(d_IntensityFactor);
 
-}
+//}
 
-void ConvertController::changeZParam(bool change, int ZFactor) {
+//void ConvertController::changeZParam(bool change, int ZFactor) {
 
-	double d_ZFactor = (double)ZFactor/100.0;
-	_illuminationParam->setZChange(change);
-	_illuminationParam->setZFactor(d_ZFactor);
+//	double d_ZFactor = (double)ZFactor/100.0;
+//	_illuminationParam->setZChange(change);
+//	_illuminationParam->setZFactor(d_ZFactor);
 
-}
+//}
 
 void ConvertController::updateAlpha(double alpha) {
 	_converter.updateAlpha(alpha);

@@ -82,7 +82,7 @@ void MainController::setResizeFlag(bool flag) {
 */
 void MainController::changeShiftValue(int hShift, int sShift, int vShift) {
 
-    textureParam->setShift(hShift, sShift, vShift);
+	//textureParam->setShift(hShift, sShift, vShift);
 }
 
 /**
@@ -95,17 +95,17 @@ void MainController::changeShiftValue(int value, int colorIndex) {
     const int SATURATION = 1;
     const int VALUE = 2;
 
-    switch(colorIndex) {
-        case HUE:
-            textureParam->setH_shift(value);
-            break;
-        case SATURATION:
-            textureParam->setS_shift(value);
-            break;
-        case VALUE:
-            textureParam->setV_shift(value);
-            break;
-    }
+//    switch(colorIndex) {
+//        case HUE:
+//            textureParam->setH_shift(value);
+//            break;
+//        case SATURATION:
+//            textureParam->setS_shift(value);
+//            break;
+//        case VALUE:
+//            textureParam->setV_shift(value);
+//            break;
+//    }
 
 }
 
@@ -115,7 +115,7 @@ void MainController::changeShiftValue(int value, int colorIndex) {
 */
 void MainController::setAlpha(double value) {
 
-    textureParam->setAlpha(value);
+   // textureParam->setAlpha(value);
 
 }
 
@@ -125,5 +125,5 @@ void MainController::setAlpha(double value) {
 *　@param textureありなしのフラグ
 */
 void MainController::setNoTexture(bool flag) {
-    textureParam->setNoTexture(flag);
+	//textureParam->setNoTexture(flag);
 }

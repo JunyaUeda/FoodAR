@@ -4,8 +4,6 @@
 #include "opencv2/opencv.hpp"
 #include "../Utils/opencvUtils.h"
 #include "./convertController.h"
-#include "./srcController.h"
-#include "../Param/textureParam.h"
 #include "../Model/mainProcedure.h"
 #include "../Model/channelViewer.h"
 #include "../Model/binarizationViewer.h"
@@ -38,8 +36,7 @@ private:
     MainProcedure& _mainProcedure = MainProcedure::getInstance();
 	ChannelViewer _viewer;
     BinarizationViewer _binarizationViewer;
-    CannyViewer _cannyViewer; 
-    TextureParam* textureParam = new TextureParam();
+	CannyViewer _cannyViewer;
     bool resizeFlag = false;
     Size dstSize;
 
