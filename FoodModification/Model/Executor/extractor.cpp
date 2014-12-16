@@ -6,15 +6,15 @@
 
 Extractor::Extractor() {
 
-    _binarizationThreshold[0] = 50;  //Blue
-    _binarizationThreshold[1] = 40;  //Green
-    _binarizationThreshold[2] = 180;  //Red
-    _binarizationThreshold[3] = 45;  //Hue
-    _binarizationThreshold[4] = 140; //Saturation
-    _binarizationThreshold[5] = 173; //Value
-    _binarizationThreshold[6] = 125;  //Y
-    _binarizationThreshold[7] = 155; //Cr
-    _binarizationThreshold[8] = 30;  //Cb
+    _binarizationThreshold[ChannelType::blue] = 50;  //Blue
+    _binarizationThreshold[ChannelType::green] = 40;  //Green
+    _binarizationThreshold[ChannelType::red] = 180;  //Red
+    _binarizationThreshold[ChannelType::hue] = 45;  //Hue
+    _binarizationThreshold[ChannelType::saturation] = 140; //Saturation
+    _binarizationThreshold[ChannelType::value] = 173; //Value
+    _binarizationThreshold[ChannelType::y] = 125;  //Y
+    _binarizationThreshold[ChannelType::cr] = 155; //Cr
+    _binarizationThreshold[ChannelType::cb] = 30;  //Cb
 
 }
 
@@ -38,10 +38,8 @@ void Extractor::extract(MatSet& srcSet, Region& result) {
   
     Mat dstEdgeImg(srcSet.size().height,srcSet.size().width, CV_8UC1, 255);
     revMergeEdges(rawEdges, _previousRegion.expectedRoi(), dstEdgeImg);
-    erode(dstEdgeImg, dstEdgeImg, cv::Mat(), Point(-1,-1), 1);
-    imshow("revEdge", dstEdgeImg);
+    
 
-   
     Mat mat = Mat::zeros(srcSet.size(), CV_8UC1);
 
     if(_indexOfMaxArea >=0){
@@ -297,6 +295,8 @@ void Extractor::extractCoffee(MatSet& srcSet, Region& result) {
     
 
 }
+
+
 /**
 * calibratorで呼び出される
 */

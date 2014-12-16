@@ -1,7 +1,7 @@
 #ifndef EXTRACTOR_H
 #define EXTRACTOR_H
 
-
+#include "../TypeDef.h"
 #include "../Param/edge.h"
 #include "../Param/matSet.h"
 #include "../Param/region.h"
@@ -12,6 +12,8 @@
 #include "../Manager/extractionManager.h"
 #include "../SDK/opencv/opencvApi.h"
 #include "../Param/channelSet.h"
+
+#define NUM_OF_CHANNEL 9
 
 class Extractor {
 
@@ -48,26 +50,30 @@ public:
         size_t second =0;
         size_t third = 0;
         vector<int> indexForTop3 = {-1, -1, -1};
-    
+        
+        const int FIRST = 0;
+        const int SECOND = 1;
+        const int THIRD = 2;
+
         if(contours.size() > 0) {
             for(int i=0; i<contours.size(); ++i) {
                 size_t count = contours[i].size();
                 //if(count < 300 || count > 1000) continue;
 
                 if(count > max) {
-                    indexForTop3[2] = indexForTop3[1];
-                    indexForTop3[1] = indexForTop3[0];
-                    indexForTop3[0] = i;
+                    indexForTop3[THIRD] = indexForTop3[SECOND];
+                    indexForTop3[SECOND] = indexForTop3[FIRST];
+                    indexForTop3[FIRST] = i;
                     third = second;
                     second = max;
                     max = count;
                 } else if(count > second) {
-                    indexForTop3[2] = indexForTop3[1];
-                    indexForTop3[1] = i;
+                    indexForTop3[THIRD] = indexForTop3[SECOND];
+                    indexForTop3[SECOND] = i;
                     third = second;
                     second = count;
                 } else if(count > third) {
-                    indexForTop3[2] = i;
+                    indexForTop3[THIRD] = i;
                     third = count;
                 }
             }
@@ -93,6 +99,7 @@ public:
                 }
             }
 		}
+        erode(dstEdgeImg, dstEdgeImg, cv::Mat(), Point(-1,-1), 1);
     }
 
     void revMergeEdges(vector<Mat>& channelEdgeImgs, Rect& roi, vector<Mat*> edgeImgs) {
@@ -156,7 +163,7 @@ private:
     Region _previousRegion;
     Mat _scoreMat;
     int _indexOfMaxArea=-1;
-	int _binarizationThreshold[9];
+	int _binarizationThreshold[NUM_OF_CHANNEL];
    
 
 };
