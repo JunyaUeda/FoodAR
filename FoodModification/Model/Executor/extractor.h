@@ -27,8 +27,6 @@ class Extractor {
 public:
     static Extractor& getInstance();
     void extract(MatSet& srcSet);
-    void setScoreMatZeroAndSize(Size size);
-
     int calcIndexOfMaxArea(vPs& contours) {
         if(!contours.size()) {
             return -1;
@@ -150,9 +148,6 @@ private:
         return k*p.x -p.y + j;
     }
 
-    void acquireAllChannels() {
-
-    }
 
 /*property*/
 private:
@@ -163,7 +158,6 @@ private:
     EdgeFactory& _edgeFactory = EdgeFactory::getInstance();
     ExtractionManager& _extractionManager = ExtractionManager::getInstance();
     RegionManager& _regionManager = RegionManager::getInstance();
-    Mat _scoreMat;
     int _indexOfMaxArea=-1;
     ContourState& _contourExisted = ContourExisted::getInstance();
 	ContourState& _contourNonExisted = ContourNonExisted::getInstance();

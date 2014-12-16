@@ -12,9 +12,7 @@ Extractor& Extractor::getInstance() {
     static Extractor instance;
     return instance;
 }
-void Extractor::setScoreMatZeroAndSize(Size size) {
-    _scoreMat = Mat(size.width, size.height, CV_8UC1, 2);
-}
+
 
 void Extractor::extract(MatSet& srcSet) {
 
