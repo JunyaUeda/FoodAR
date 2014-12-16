@@ -11,9 +11,9 @@ class EdgeFactory {
 /*method*/
 public:
     static EdgeFactory& getInstance();
-    void createEdges(MatSet& matSet, vector<Mat>& resultRawEdgeImgs);
-    void createEdges(MatSet& matSet, vector<Mat>& resultRawEdgeImgs, map<ChannelType, Mat>& channelMats);
-    void createEdges(MatSet& matSet, vector<Mat>& resultRawEdgeImgs, ChannelSet& channelSet);
+    void createEdges(const MatSet& matSet, vector<Mat>& resultRawEdgeImgs);
+    void createEdges(const MatSet& matSet, vector<Mat>& resultRawEdgeImgs, map<ChannelType, Mat>& channelMats);
+    void createEdges(const MatSet& matSet, vector<Mat>& resultRawEdgeImgs, ChannelSet& channelSet);
     void updateEngagedChannels(vector<ChannelType> newList);
 private:
     EdgeFactory();

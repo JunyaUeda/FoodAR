@@ -10,7 +10,7 @@ class ChannelSet {
 /*method*/
 public:
 	ChannelSet();
-    ChannelSet(MatSet& srcSet) {
+    ChannelSet(const MatSet& srcSet) {
 
         split(srcSet.blur(), _bgrChannels);
         split(srcSet.hsv(), _hsvChannels);

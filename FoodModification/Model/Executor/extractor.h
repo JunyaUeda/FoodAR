@@ -26,7 +26,7 @@ class Extractor {
 /*method*/
 public:
     static Extractor& getInstance();
-    void extract(MatSet& srcSet);
+    void extract(const MatSet& srcSet);
     int calcIndexOfMaxArea(vPs& contours) {
         if(!contours.size()) {
             return -1;

@@ -14,10 +14,8 @@ Extractor& Extractor::getInstance() {
 }
 
 
-void Extractor::extract(MatSet& srcSet) {
+void Extractor::extract(const MatSet& srcSet) {
 
-    //いったん手続き型でアルゴリズムを作成する
-    //TODO : メソッド分割すべし
     ChannelSet channelSet(srcSet);
     
     //エッジ画像を取得する
@@ -32,7 +30,6 @@ void Extractor::extract(MatSet& srcSet) {
 
     if(_indexOfMaxArea >=0){
         _contourExisted.createMaskByColor(mat, channelSet);
-        
     } else {
         _contourNonExisted.createMaskByColor(mat, channelSet);
     }

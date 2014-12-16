@@ -15,7 +15,7 @@ EdgeFactory& EdgeFactory::getInstance() {
     return instance;
 }
 
-void EdgeFactory::createEdges(MatSet& matSet, vector<Mat>& resultRawEdgeImgs) {
+void EdgeFactory::createEdges(const MatSet& matSet, vector<Mat>& resultRawEdgeImgs) {
 
    
     list<SpaceType> splittedSpaceType;
@@ -77,7 +77,7 @@ void EdgeFactory::createEdges(MatSet& matSet, vector<Mat>& resultRawEdgeImgs) {
 
 }
 
-void EdgeFactory::createEdges(MatSet& matSet, vector<Mat>& resultRawEdgeImgs, map<ChannelType, Mat>& channelMats) {
+void EdgeFactory::createEdges(const MatSet& matSet, vector<Mat>& resultRawEdgeImgs, map<ChannelType, Mat>& channelMats) {
     for(ChannelType type : _engagedChannels) {
         Mat edgeMat;
         Canny(channelMats[type], edgeMat, _allEdgeThresholds[type].upper(), _allEdgeThresholds[type].under(),  APERTURE_SIZE, L2_GRADIENT);
@@ -85,7 +85,7 @@ void EdgeFactory::createEdges(MatSet& matSet, vector<Mat>& resultRawEdgeImgs, ma
     }
 }
 
-void EdgeFactory::createEdges(MatSet& matSet, vector<Mat>& resultRawEdgeImgs, ChannelSet& channelSet) {
+void EdgeFactory::createEdges(const MatSet& matSet, vector<Mat>& resultRawEdgeImgs, ChannelSet& channelSet) {
     for(ChannelType type : _engagedChannels) {
         Mat edgeMat;
 		Canny(channelSet.getChannelMat(type), edgeMat, _allEdgeThresholds[type].upper(), _allEdgeThresholds[type].under(),  APERTURE_SIZE, L2_GRADIENT);
