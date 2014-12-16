@@ -16,8 +16,10 @@
 #include "../Extraction/State/contourState.h"
 #include "../Extraction/State/contourExisted.h"
 #include "../Extraction/State/contourNonEXisted.h"
+#include "../Extraction/State/ContourCount/contourCountState.h"
+#include "../Extraction/State/ContourCount/multiContour.h"
+#include "../Extraction/State/ContourCount/oneContour.h"
 
-#define NUM_OF_CHANNEL 9
 
 class Extractor {
 
@@ -127,9 +129,7 @@ public:
         }
     }
 
-    void updateBinarizationThreshold(int value ,int index) {
-        _binarizationThreshold[index] = value;
-    }
+    
 
 private:
     Extractor();
@@ -168,9 +168,10 @@ private:
     Region _previousRegion;
     Mat _scoreMat;
     int _indexOfMaxArea=-1;
-	int _binarizationThreshold[NUM_OF_CHANNEL];
     ContourState& _contourExisted = ContourExisted::getInstance();
 	ContourState& _contourNonExisted = ContourNonExisted::getInstance();
+    ContourCountState& _oneContour = OneContour::getInstance();
+    ContourCountState& _multiContour = MultiContour::getInstance();
    
 
 };

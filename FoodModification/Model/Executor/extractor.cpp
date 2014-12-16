@@ -6,16 +6,6 @@
 
 Extractor::Extractor() {
 
-    _binarizationThreshold[ChannelType::blue] = 50;  //Blue
-    _binarizationThreshold[ChannelType::green] = 40;  //Green
-    _binarizationThreshold[ChannelType::red] = 180;  //Red
-    _binarizationThreshold[ChannelType::hue] = 45;  //Hue
-    _binarizationThreshold[ChannelType::saturation] = 140; //Saturation
-    _binarizationThreshold[ChannelType::value] = 173; //Value
-    _binarizationThreshold[ChannelType::y] = 125;  //Y
-    _binarizationThreshold[ChannelType::cr] = 155; //Cr
-    _binarizationThreshold[ChannelType::cb] = 30;  //Cb
-
 }
 
 Extractor& Extractor::getInstance() {
@@ -64,155 +54,45 @@ void Extractor::extract(MatSet& srcSet, Region& result) {
    
     
     if(indexiesOfTop3Area[1] >= 0) {
-        Point2f vertices[4];
-        _previousRegion.rotatedRect().points(vertices);
-        vector<Point> allPoints = contours[indexiesOfTop3Area[0]];
-        if(indexiesOfTop3Area[2] >= 0) {
-            drawContours(mat2, contours, indexiesOfTop3Area[1], Scalar(255, 255, 255), CV_FILLED, LINK_EIGHT);
-            drawContours(mat2, contours, indexiesOfTop3Area[2], Scalar(255, 255, 255), CV_FILLED, LINK_EIGHT);
-            drawContours(mat2, contours, _indexOfMaxArea, Scalar(255, 255, 255), CV_FILLED, LINK_EIGHT);
-
-            for(int i=1; i<3; i++) {
-                for(Point point :contours[indexiesOfTop3Area[i]]) {
-                    if(isInROI(point, vertices)) {
-                        allPoints.push_back(point);
-                    }
-                    
-                }
-            }
-
-        } else {
-            drawContours(mat2, contours, indexiesOfTop3Area[1], Scalar(255, 255, 255), CV_FILLED, LINK_EIGHT);
-            drawContours(mat2, contours, _indexOfMaxArea, Scalar(255, 255, 255), CV_FILLED, LINK_EIGHT);
-           
-            for(int i=1; i<2; i++) {
-                for(Point point :contours[indexiesOfTop3Area[i]]) {
-                    if(isInROI(point, vertices)) {
-                        allPoints.push_back(point);
-                    }
-                }
-            }
-    
-        }
-    
-        RotatedRect rect = minAreaRect(Mat(allPoints));
-       
-        result.setContour(contours[_indexOfMaxArea]);//TODO:本来は結合した輪郭を入れるか別にいれる必要がある
-        result.setMaskImg(mat2);
-        result.setRotatedRect(rect);
-        result.calcRoiWithRotatedRect();
-        result.calcExpectedRoiConsideringMoveWithRotatedRect(_previousRegion);
-
-        _previousRegion = result;
-        _regionManager.setPreviousRegion(result);
-
-       // imshow("merge", mat2);
-    } else {
-
-        drawContours(mat2, contours, _indexOfMaxArea, Scalar(255, 255, 255), CV_FILLED, LINK_EIGHT);
-        result.setMaskImg(mat2);
-        if(_indexOfMaxArea>=0) {
-            result.setContour(contours[_indexOfMaxArea]);
-            result.calcRotatedRect();
-            result.calcRoi();
-            result.calcExpectedRoiConsideringMove(_previousRegion);
-        }
+        _multiContour.drawAndCalcRegion(mat2, indexiesOfTop3Area, contours);
         
-        _previousRegion = result;
-        _regionManager.setPreviousRegion(result);
-      
-       // imshow("merge", mat2);
+    } else {
+        _oneContour.drawAndCalcRegion(mat2, indexiesOfTop3Area, contours);
+        
     }
     
+    result = _regionManager.currentRegion();
         
 }
 
 
 void Extractor::extractCoffee(MatSet& srcSet, Region& result) {
 
-
-     map<ChannelType, Mat> channelMats;
-
-    Mat bgrChannels[3];
-    split(srcSet.blur(), bgrChannels);
-    channelMats.insert( map<ChannelType,Mat>::value_type(ChannelType::blue, bgrChannels[0]) );
-    channelMats.insert( map<ChannelType,Mat>::value_type(ChannelType::green, bgrChannels[1]) );
-    channelMats.insert( map<ChannelType,Mat>::value_type(ChannelType::red, bgrChannels[2]) );
-    Mat hsvChannels[3];
-    split(srcSet.hsv(), hsvChannels);
-    channelMats.insert( map<ChannelType,Mat>::value_type(ChannelType::hue, hsvChannels[0]) );
-    channelMats.insert( map<ChannelType,Mat>::value_type(ChannelType::saturation, hsvChannels[1]) );
-    channelMats.insert( map<ChannelType,Mat>::value_type(ChannelType::value, hsvChannels[2]) );  
-    Mat ycrcbChannels[3];
-    split(srcSet.ycrcb(), ycrcbChannels);
-    channelMats.insert( map<ChannelType,Mat>::value_type(ChannelType::y, ycrcbChannels[0]) );
-    channelMats.insert( map<ChannelType,Mat>::value_type(ChannelType::cr, ycrcbChannels[1]) );
-    channelMats.insert( map<ChannelType,Mat>::value_type(ChannelType::cb, ycrcbChannels[2]) );
-
+     //いったん手続き型でアルゴリズムを作成する
+    //TODO : メソッド分割すべし
+    ChannelSet channelSet(srcSet);
     
     //エッジ画像を取得する
     vector<Mat> rawEdges;
-    //_edgeFactory.createEdges(srcSet, rawEdges);
-    _edgeFactory.createEdges(srcSet, rawEdges, channelMats);
+    _edgeFactory.createEdges(srcSet, rawEdges, channelSet);
   
     Mat dstEdgeImg(srcSet.size().height,srcSet.size().width, CV_8UC1, 255);
     revMergeEdges(rawEdges, _previousRegion.expectedRoi(), dstEdgeImg);
-    Mat dstEdgeImg2 = dstEdgeImg.clone();
-    //erode(dstEdgeImg, dstEdgeImg, cv::Mat(), Point(-1,-1), 2);
-    //imshow("revEdge", dstEdgeImg);
+    
 
     Mat mat = Mat::zeros(srcSet.size(), CV_8UC1);
 
-    
-
     if(_indexOfMaxArea >=0){
-        int yBegin = _previousRegion.expectedRoi().y;
-        int yEnd = _previousRegion.expectedRoi().y+_previousRegion.expectedRoi().height;
-        int xBegin = _previousRegion.expectedRoi().x;
-        int xEnd = _previousRegion.expectedRoi().x+_previousRegion.expectedRoi().width;
-
+        _contourExisted.createMaskByColor(mat, channelSet);
         
-    
-        for(int y=yBegin; y<yEnd; y++) {
-            for(int x=xBegin; x<xEnd; x++) {
-                // if(_featureReference.isWithinThreshold(srcSet, Point(x,y)) ) { 
-                //         L(mat,x,y) = 255;     
-                //     } 
-
-                if(L(ycrcbChannels[1],x,y) <= _binarizationThreshold[7] && L(bgrChannels[1],x,y) <=_binarizationThreshold[1] && L(bgrChannels[2],x,y) <=_binarizationThreshold[2]
-                    && L(ycrcbChannels[0],x,y) <= _binarizationThreshold[6
-                        && L(hsvChannels[2],x,y) <=_binarizationThreshold[5]]) {
-    
-                    L(mat,x,y) = 255;
-                }  
-
-                
-            }
-        }
-    
     } else {
-        for(int y=0; y<srcSet.size().height; y++) {
-            for(int x=0; x<srcSet.size().width; x++) {
-                // if(_featureReference.isWithinThreshold(srcSet, Point(x,y)) ) { 
-                //         L(mat,x,y) = 255;     
-                //     } 
-                
-
-                if(L(ycrcbChannels[1],x,y) <= _binarizationThreshold[7] && L(bgrChannels[1],x,y) <=_binarizationThreshold[1] && L(bgrChannels[2],x,y) <=_binarizationThreshold[2]
-                    && L(ycrcbChannels[0],x,y) <= _binarizationThreshold[6
-                        && L(hsvChannels[2],x,y) <=_binarizationThreshold[5]]) {
-    
-                    L(mat,x,y) = 255;
-                }  
-            
-            }
-        }
-
+        _contourNonExisted.createMaskByColor(mat, channelSet);
     }
+
     
-    dilate(mat, mat, cv::Mat(), Point(-1,-1), _extractionManager.dilateCount());
-    //erode(mat, mat, cv::Mat(), Point(-1,-1), _extractionManager.erodeCount());
-    imshow("colorExtract", mat);
+    
+    Mat dstEdgeImg2 = dstEdgeImg.clone();
+    
 
     
     //最大面積

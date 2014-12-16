@@ -6,7 +6,7 @@
 #include "../Model/featureReference.h"
 #include "../Model/edgeFactory.h"
 #include "../Model/Manager/extractionManager.h"
-#include "../Model/Executor/extractor.h"
+#include "../Model/Manager/thresholdManager.h"
 
 
 class ExtractionController {
@@ -26,7 +26,7 @@ public:
         _extractionManager.updateRatioOfPixelNum(upperRatio, underRatio);
     }
     void updateBinarizationThreshold(int value, int index) {
-        _extractor.updateBinarizationThreshold(value, index);
+        _thresholdManager.updateBinarizationThreshold(value, index);
     }
    
 private:
@@ -38,7 +38,7 @@ private:
     FeatureReference& _featureReference = FeatureReference::getInstance();
     EdgeFactory& _edgeFactory = EdgeFactory::getInstance();
     ExtractionManager& _extractionManager = ExtractionManager::getInstance();
-    Extractor& _extractor = Extractor::getInstance();
+    ThresholdManager& _thresholdManager = ThresholdManager::getInstance();
 };
 
 #endif // EXTRACTIONCONTROLLER_H

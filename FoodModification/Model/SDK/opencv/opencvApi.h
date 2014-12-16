@@ -154,6 +154,23 @@ public:
         rect.points(vertices);
         for (int i = 0; i < 4; i++) line(result, vertices[i], vertices[(i+1)%4], color, thickness, 8, 0);
     }
+
+    static bool isInROI(Point p, Point2f roi[]) {
+        double pro[4];
+        for(int i=0; i<4; ++i) {
+            pro[i] = computeProduct(p, roi[i], roi[(i+1)%4]);
+        }
+        if(pro[0]*pro[2]<0 && pro[1]*pro[3]<0) {
+            return true;
+        }
+        return false;
+    }
+
+    static double computeProduct(Point p, Point2f a, Point2f b) {
+        double k = (a.y-b.y)/(a.x-b.x);
+        double j = a.y -k*a.x;
+        return k*p.x -p.y + j;
+    }
 private:
 
 

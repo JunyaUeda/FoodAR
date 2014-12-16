@@ -97,7 +97,10 @@ SOURCES += main.cpp\
     Model/Extraction/State/contourExisted.cpp \
     Model/Extraction/State/contourNonExisted.cpp \
     Model/Manager/regionManager.cpp \
-    Model/Manager/thresholdManager.cpp
+    Model/Manager/thresholdManager.cpp \
+    Model/Extraction/State/ContourCount/contourCountState.cpp \
+    Model/Extraction/State/ContourCount/oneContour.cpp \
+    Model/Extraction/State/ContourCount/multiContour.cpp
 
 HEADERS  += \
     View/calibrateDialog.h \
@@ -189,7 +192,10 @@ HEADERS  += \
     Model/Extraction/State/contourExisted.h \
     Model/Extraction/State/contourNonExisted.h \
     Model/Manager/regionManager.h \
-    Model/Manager/thresholdManager.h
+    Model/Manager/thresholdManager.h \
+    Model/Extraction/State/ContourCount/contourCountState.h \
+    Model/Extraction/State/ContourCount/oneContour.h \
+    Model/Extraction/State/ContourCount/multiContour.h
 
 FORMS    += \
     View/calibrateDialog.ui \

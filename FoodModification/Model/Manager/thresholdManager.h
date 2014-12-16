@@ -8,6 +8,11 @@ class ThresholdManager {
 /*method*/
 public:
     static ThresholdManager& getInstance();
+    
+    void updateBinarizationThreshold(int value ,int index) {
+        _binarizationThreshold[index] = value;
+    }
+
 	int b() {
         return _binarizationThreshold[ChannelType::blue];
     }
