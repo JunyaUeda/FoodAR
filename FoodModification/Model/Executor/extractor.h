@@ -10,8 +10,12 @@
 #include "../Service/extractService.h"
 #include "../Service/contourService.h"
 #include "../Manager/extractionManager.h"
+#include "../Manager/regionManager.h"
 #include "../SDK/opencv/opencvApi.h"
 #include "../Param/channelSet.h"
+#include "../Extraction/State/contourState.h"
+#include "../Extraction/State/contourExisted.h"
+#include "../Extraction/State/contourNonEXisted.h"
 
 #define NUM_OF_CHANNEL 9
 
@@ -160,10 +164,13 @@ private:
 	FeatureReference& _featureReference = FeatureReference::getInstance();
     EdgeFactory& _edgeFactory = EdgeFactory::getInstance();
     ExtractionManager& _extractionManager = ExtractionManager::getInstance();
+    RegionManager& _regionManager = RegionManager::getInstance();
     Region _previousRegion;
     Mat _scoreMat;
     int _indexOfMaxArea=-1;
 	int _binarizationThreshold[NUM_OF_CHANNEL];
+    ContourState& _contourExisted = ContourExisted::getInstance();
+	ContourState& _contourNonExisted = ContourNonExisted::getInstance();
    
 
 };

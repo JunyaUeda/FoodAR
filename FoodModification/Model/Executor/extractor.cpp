@@ -43,47 +43,10 @@ void Extractor::extract(MatSet& srcSet, Region& result) {
     Mat mat = Mat::zeros(srcSet.size(), CV_8UC1);
 
     if(_indexOfMaxArea >=0){
-        int yBegin = _previousRegion.expectedRoi().y;
-        int yEnd = _previousRegion.expectedRoi().y+_previousRegion.expectedRoi().height;
-        int xBegin = _previousRegion.expectedRoi().x;
-        int xEnd = _previousRegion.expectedRoi().x+_previousRegion.expectedRoi().width;
-
+        _contourExisted.createMaskByColor(mat, channelSet);
         
-    
-        for(int y=yBegin; y<yEnd; y++) {
-            for(int x=xBegin; x<xEnd; x++) {
-                // if(_featureReference.isWithinThreshold(srcSet, Point(x,y)) ) { 
-                //         L(mat,x,y) = 255;     
-                //     } 
-
-                if(L(channelSet.crMat(),x,y) >= _binarizationThreshold[7] && L(channelSet.gMat(),x,y) <=_binarizationThreshold[1] && L(channelSet.rMat(),x,y) >=_binarizationThreshold[2]) {
-    
-                    L(mat,x,y) = 255;
-                    
-                } else if(L(channelSet.sMat(),x,y) >=_binarizationThreshold[4] && L(channelSet.crMat(),x,y) >= 154 && L(channelSet.gMat(),x,y) <= 40 && L(channelSet.bMat(),x,y) <= 41 ) {
-                    L(mat,x,y) = 255;
-                }
-                
-            }
-        }
-    
     } else {
-        for(int y=0; y<srcSet.size().height; y++) {
-            for(int x=0; x<srcSet.size().width; x++) {
-                // if(_featureReference.isWithinThreshold(srcSet, Point(x,y)) ) { 
-                //         L(mat,x,y) = 255;     
-                //     } 
-                if(L(channelSet.crMat(),x,y) >= _binarizationThreshold[7] && L(channelSet.gMat(),x,y) <=_binarizationThreshold[1] && L(channelSet.rMat(),x,y) >=_binarizationThreshold[2]) {
-    
-                    L(mat,x,y) = 255;
-                    
-                } else if(L(channelSet.sMat(),x,y) >=_binarizationThreshold[4] && L(channelSet.crMat(),x,y) >= 154 && L(channelSet.gMat(),x,y) <= 40 && L(channelSet.bMat(),x,y) <= 41 ) {
-                    L(mat,x,y) = 255;
-                }
-   
-            }
-        }
-
+        _contourNonExisted.createMaskByColor(mat, channelSet);
     }
     
     dilate(mat, mat, cv::Mat(), Point(-1,-1), _extractionManager.dilateCount());
@@ -141,6 +104,7 @@ void Extractor::extract(MatSet& srcSet, Region& result) {
         result.calcExpectedRoiConsideringMoveWithRotatedRect(_previousRegion);
 
         _previousRegion = result;
+        _regionManager.setPreviousRegion(result);
 
        // imshow("merge", mat2);
     } else {
@@ -155,6 +119,7 @@ void Extractor::extract(MatSet& srcSet, Region& result) {
         }
         
         _previousRegion = result;
+        _regionManager.setPreviousRegion(result);
       
        // imshow("merge", mat2);
     }

@@ -92,7 +92,12 @@ SOURCES += main.cpp\
     Model/binarizationViewer.cpp \
     Model/cannyViewer.cpp \
     Model/Param/channelSet.cpp \
-    Controller/Param/calibrateClickParam.cpp
+    Controller/Param/calibrateClickParam.cpp \
+    Model/Extraction/State/contourState.cpp \
+    Model/Extraction/State/contourExisted.cpp \
+    Model/Extraction/State/contourNonExisted.cpp \
+    Model/Manager/regionManager.cpp \
+    Model/Manager/thresholdManager.cpp
 
 HEADERS  += \
     View/calibrateDialog.h \
@@ -179,7 +184,12 @@ HEADERS  += \
     Model/binarizationViewer.h \
     Model/cannyViewer.h \
     Model/Param/channelSet.h \
-    Controller/Param/calibrateClickParam.h
+    Controller/Param/calibrateClickParam.h \
+    Model/Extraction/State/contourState.h \
+    Model/Extraction/State/contourExisted.h \
+    Model/Extraction/State/contourNonExisted.h \
+    Model/Manager/regionManager.h \
+    Model/Manager/thresholdManager.h
 
 FORMS    += \
     View/calibrateDialog.ui \
