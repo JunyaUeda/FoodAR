@@ -34,7 +34,6 @@ private:
     Converter& _converter         = Converter::getInstance();
     Outputer& _outputer           = Outputer::getInstance();
     bool _isProcessed = true;
-    Region _extractedRegion;
 
 };
 

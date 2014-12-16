@@ -11,17 +11,17 @@ void MainProcedure::start() {
         MatSet matSet;
         _sourcer.loadSrc(matSet);
 		
-        _extractor.extract(matSet,_extractedRegion);
+        _extractor.extract(matSet);
         //_extractor.extractCoffee(matSet,_extractedRegion);
         
         Mat resultTexture = Mat::zeros(matSet.size(), CV_8UC3);
         
         if(_textureManager.currentMediaType() != MediaType::no) {
-            _textureFactory.create(_extractedRegion, resultTexture);
+            _textureFactory.create(resultTexture);
         }
          
         Mat dstBGRImg = matSet.bgr().clone();
-        _converter.convert(matSet, _extractedRegion, resultTexture, dstBGRImg);
+        _converter.convert(matSet, resultTexture, dstBGRImg);
         
         imshow(_windowManager.windowName(0), matSet.bgr());
         _outputer.show(dstBGRImg);

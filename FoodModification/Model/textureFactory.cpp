@@ -9,8 +9,8 @@ TextureFactory& TextureFactory::getInstance() {
     return instance;
 }
 
-void TextureFactory::create(const Region& region, Mat& aTexture) {
-            
+void TextureFactory::create(Mat& aTexture) {
+    Region region = _regionManager.currentRegion();
     if(region.contour().empty()) {
         qDebug() << "contours is empty in textureController";
         return;

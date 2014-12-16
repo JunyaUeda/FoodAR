@@ -3,13 +3,14 @@
 
 #include <QDebug>
 #include "./Param/region.h"
+#include "./Manager/regionManager.h"
 
 class TextureFactory {
 
 /*method*/
 public:
     static TextureFactory& getInstance();
-	void create(const Region& region, Mat& result);
+	void create(Mat& result);
     void updateSrc(Mat src);
 private:
     TextureFactory();
@@ -19,6 +20,7 @@ private:
 private:
     Mat _src;
     Mat _resizedSrc;
+    RegionManager& _regionManager = RegionManager::getInstance();
 
 };
 

@@ -7,13 +7,15 @@
 #include "../Param/matSet.h"
 #include "../typeDef.h"
 #include "../featureReference.h"
+#include "../Manager/regionManager.h"
 
 class Converter {
 
 /*method*/    
 public:
     static Converter& getInstance();
-    void convert(const MatSet& srcSet, const Region& extractedRegion, const Mat& textureImg, Mat& dstBGRImg) {
+    void convert(const MatSet& srcSet, const Mat& textureImg, Mat& dstBGRImg) {
+        Region extractedRegion = _regionManager.currentRegion();
         if(!extractedRegion.contour().size()) {
             qDebug() << "contour is empty in convert()";
             return;
@@ -323,6 +325,7 @@ private:
     bool _isOriginalValueUsed = true;
     MediaType _textureMediaType;
     FeatureReference& _featureReference = FeatureReference::getInstance();
+    RegionManager& _regionManager = RegionManager::getInstance();
 
 };
 

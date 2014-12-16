@@ -26,9 +26,7 @@ class Extractor {
 /*method*/
 public:
     static Extractor& getInstance();
-    void extract(MatSet& srcSet, Region& result);
-    void extractCoffee(MatSet& srcSet, Region& result);
-    void setPreviousRegion(Region& region);
+    void extract(MatSet& srcSet);
     void setScoreMatZeroAndSize(Size size);
 
     int calcIndexOfMaxArea(vPs& contours) {
@@ -165,7 +163,6 @@ private:
     EdgeFactory& _edgeFactory = EdgeFactory::getInstance();
     ExtractionManager& _extractionManager = ExtractionManager::getInstance();
     RegionManager& _regionManager = RegionManager::getInstance();
-    Region _previousRegion;
     Mat _scoreMat;
     int _indexOfMaxArea=-1;
     ContourState& _contourExisted = ContourExisted::getInstance();
