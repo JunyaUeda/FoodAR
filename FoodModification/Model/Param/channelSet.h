@@ -60,6 +60,9 @@ public:
     Mat& cbMat() {
         return _ycrcbChannels[2];
     }
+    Size size() {
+        return _bgrChannels[0].size();
+    }
 private:
 
 /*property*/
@@ -68,6 +71,7 @@ private:
     Mat _bgrChannels[3];
     Mat _hsvChannels[3];
     Mat _ycrcbChannels[3];
+
 };
 
 #endif // CHANNELSET_H

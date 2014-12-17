@@ -9,15 +9,20 @@ class Edge {
 /*method*/
 public:
     Edge();
-    Edge(const Mat &mat);
-    Mat mat() const;
-    void setMat(const Mat &mat);;
-    vPs contours() const;
-    void setContours(const vPs &contours);
-
+    void setRawMats(vector<Mat>& mats) {
+        _rawMats = mats;
+    }
+    Mat& roiMergedMat() {
+        return _roiMergedMat;
+    }
+    void setRoiMergedMat(Mat& mat) {
+        _roiMergedMat = mat;
+    }
 /*property*/
 private:
-	Mat _mat;
+    vector<Mat>  _rawMats;
+	Mat _roiMergedMat;
+    Mat _revRoiMergedMat;
 	vPs _contours;
 
 };

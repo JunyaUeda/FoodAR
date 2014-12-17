@@ -100,7 +100,8 @@ SOURCES += main.cpp\
     Model/Manager/thresholdManager.cpp \
     Model/Extraction/State/ContourCount/contourCountState.cpp \
     Model/Extraction/State/ContourCount/oneContour.cpp \
-    Model/Extraction/State/ContourCount/multiContour.cpp
+    Model/Extraction/State/ContourCount/multiContour.cpp \
+    Model/Manager/edgeManager.cpp
 
 HEADERS  += \
     View/calibrateDialog.h \
@@ -195,7 +196,8 @@ HEADERS  += \
     Model/Manager/thresholdManager.h \
     Model/Extraction/State/ContourCount/contourCountState.h \
     Model/Extraction/State/ContourCount/oneContour.h \
-    Model/Extraction/State/ContourCount/multiContour.h
+    Model/Extraction/State/ContourCount/multiContour.h \
+    Model/Manager/edgeManager.h
 
 FORMS    += \
     View/calibrateDialog.ui \

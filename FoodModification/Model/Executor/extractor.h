@@ -10,6 +10,7 @@
 #include "../Service/extractService.h"
 #include "../Service/contourService.h"
 #include "../Manager/extractionManager.h"
+#include "../Manager/edgeManager.h"
 #include "../Manager/regionManager.h"
 #include "../SDK/opencv/opencvApi.h"
 #include "../Param/channelSet.h"
@@ -100,7 +101,7 @@ public:
                     L(dstEdgeImg, x, y) = 255;
                 }
             }
-		}
+        }
         erode(dstEdgeImg, dstEdgeImg, cv::Mat(), Point(-1,-1), 1);
     }
 
@@ -124,7 +125,6 @@ public:
             }
         }
     }
-
     
 
 private:
@@ -158,6 +158,7 @@ private:
     EdgeFactory& _edgeFactory = EdgeFactory::getInstance();
     ExtractionManager& _extractionManager = ExtractionManager::getInstance();
     RegionManager& _regionManager = RegionManager::getInstance();
+    EdgeManager& _edgeManager = EdgeManager::getInstance();
     int _indexOfMaxArea=-1;
     ContourState& _contourExisted = ContourExisted::getInstance();
 	ContourState& _contourNonExisted = ContourNonExisted::getInstance();

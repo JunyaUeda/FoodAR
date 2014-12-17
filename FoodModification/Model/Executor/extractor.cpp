@@ -18,13 +18,15 @@ void Extractor::extract(const MatSet& srcSet) {
 
     ChannelSet channelSet(srcSet);
     
-    //エッジ画像を取得する
-    vector<Mat> rawEdges;
-    _edgeFactory.createEdges(srcSet, rawEdges, channelSet);
+    //エッジ画像を作成する
+   // _edgeFactory.createEdges(srcSet, channelSet);
   
-    Mat dstEdgeImg(srcSet.size().height,srcSet.size().width, CV_8UC1, 255);
-    revMergeEdges(rawEdges, _regionManager.previousRegion().expectedRoi(), dstEdgeImg);
+    // Mat dstEdgeImg(srcSet.size().height,srcSet.size().width, CV_8UC1, 255);
+    // revMergeEdges(rawEdges, _regionManager.previousRegion().expectedRoi(), dstEdgeImg);
     
+    _edgeFactory.createEdges(channelSet, _regionManager.previousRegion().expectedRoi());
+    imshow("edge", _edgeManager.currentEdge().roiMergedMat());
+
 
     Mat mat = Mat::zeros(srcSet.size(), CV_8UC1);
 
