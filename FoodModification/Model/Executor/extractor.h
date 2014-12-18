@@ -85,48 +85,6 @@ public:
         return indexForTop3;
     }
 
-    void revMergeEdges(vector<Mat>& channelEdgeImgs, Rect& roi, Mat& dstEdgeImg) {
-
-        if(!channelEdgeImgs.size()) {
-            return;  
-        }
-
-        for(int y=roi.y; y<(roi.y+roi.height); y++) {
-            for(int x=roi.x; x<(roi.x+roi.width); x++) {
-                for(Mat mat : channelEdgeImgs) {
-                    if(L(mat,x,y) == 255) {
-                        L(dstEdgeImg, x, y) = 0;
-                        break;
-                    } 
-                    L(dstEdgeImg, x, y) = 255;
-                }
-            }
-        }
-        erode(dstEdgeImg, dstEdgeImg, cv::Mat(), Point(-1,-1), 1);
-    }
-
-    void revMergeEdges(vector<Mat>& channelEdgeImgs, Rect& roi, vector<Mat*> edgeImgs) {
-
-        if(!channelEdgeImgs.size()) {
-            return;  
-        }
-
-        for(int y=roi.y; y<(roi.y+roi.height); y++) {
-            for(int x=roi.x; x<(roi.x+roi.width); x++) {
-                for(Mat mat : channelEdgeImgs) {
-                    if(L(mat,x,y) == 255) {
-                        L((*edgeImgs[0]), x, y) = 0;
-                        L((*edgeImgs[1]), x, y) = 255;
-                        break;
-                    } 
-                    L((*edgeImgs[0]), x, y) = 255;
-                    L((*edgeImgs[1]), x, y) = 0;
-                }
-            }
-        }
-    }
-    
-
 private:
     Extractor();
     Extractor(const Extractor&);

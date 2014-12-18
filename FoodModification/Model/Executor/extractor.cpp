@@ -18,12 +18,7 @@ void Extractor::extract(const MatSet& srcSet) {
 
     ChannelSet channelSet(srcSet);
     
-    //エッジ画像を作成する
-   // _edgeFactory.createEdges(srcSet, channelSet);
-  
-    // Mat dstEdgeImg(srcSet.size().height,srcSet.size().width, CV_8UC1, 255);
-    // revMergeEdges(rawEdges, _regionManager.previousRegion().expectedRoi(), dstEdgeImg);
-    
+    //エッジ画像を作成する    
     _edgeFactory.createEdges(channelSet, _regionManager.previousRegion().expectedRoi());
     imshow("edge", _edgeManager.currentEdge().roiMergedMat());
 
@@ -56,24 +51,7 @@ void Extractor::extract(const MatSet& srcSet) {
 		_oneContour.drawAndCalcRegion(mat2, indexiesOfTop3Area, contours);
     }
     
-    // //エッジ画像を取得する
-    // _edgeService.drawEdge(dstEdgeImg2, dstEdgeImg2, 255);
-    // // _edgeService.extractEdge(rawEdges, contours[_indexOfMaxArea], dstEdgeImg);
-    // imshow("edge", dstEdgeImg2);
 
-
-    // //残ったエッジ画像と色による抽出画像を合成する
-    // bitwise_or(mat2, dstEdgeImg2, dstEdgeImg2);
-
-    // vPs contours2;
-    // findContours(dstEdgeImg2, contours2, CV_RETR_LIST, CV_CHAIN_APPROX_NONE);
-    // _indexOfMaxArea = calcIndexOfMaxArea(contours2);
-    // //_indexOfMaxArea = indexiesOfTop3Area[0];
-    // Mat mat3 = Mat::zeros(srcSet.size(), CV_8UC1);
-    // drawContours(mat3, contours2, 0, Scalar(255, 255, 255), CV_FILLED, LINK_EIGHT);
-
-    //     int minSize = 200;
-    //     _contourService.fillContours(dstEdgeImg, minSize);
 }
 
 
