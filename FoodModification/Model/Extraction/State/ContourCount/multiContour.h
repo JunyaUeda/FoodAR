@@ -14,20 +14,23 @@ class MultiContour : public ContourCountState {
 /*method*/
 public:
     static MultiContour& getInstance();
-    void drawAndCalcRegion( Mat& maskImg, vector<int>& indexiesOfTop3Area, vPs contours) {
+
+    void drawAndCalcRegion(Contours& contours) {
+
+        Mat maskImg = Mat::zeros(contours.matSize(), CV_8UC1);
 
         Point2f vertices[4];
         _regionManager.previousRegion().rotatedRect().points(vertices);
 
-        vector<Point> allPoints = contours[indexiesOfTop3Area[0]];
+        vector<Point> allPoints = contours.getLargestContour();
 
-        if(indexiesOfTop3Area[2] >= 0) {
-            drawContours(maskImg, contours, indexiesOfTop3Area[0], Scalar(255, 255, 255), CV_FILLED, LINK_EIGHT);
-            drawContours(maskImg, contours, indexiesOfTop3Area[1], Scalar(255, 255, 255), CV_FILLED, LINK_EIGHT);
-            drawContours(maskImg, contours, indexiesOfTop3Area[2], Scalar(255, 255, 255), CV_FILLED, LINK_EIGHT);
+        if(contours.indexSortedByArea()[2] >= 0) {
+            drawContours(maskImg, contours.all(), contours.indexSortedByArea()[0], Scalar(255, 255, 255), CV_FILLED, LINK_EIGHT);
+            drawContours(maskImg, contours.all(), contours.indexSortedByArea()[1], Scalar(255, 255, 255), CV_FILLED, LINK_EIGHT);
+            drawContours(maskImg, contours.all(), contours.indexSortedByArea()[2], Scalar(255, 255, 255), CV_FILLED, LINK_EIGHT);
             
             for(int i=1; i<3; i++) {
-                for(Point point :contours[indexiesOfTop3Area[i]]) {
+                for(Point point :contours.all()[contours.indexSortedByArea()[i]]) {
                     if(OpenCVAPI::isInROI(point, vertices)) {
                         allPoints.push_back(point);
                     }
@@ -36,11 +39,11 @@ public:
             }
 
         } else {
-            drawContours(maskImg, contours, indexiesOfTop3Area[0], Scalar(255, 255, 255), CV_FILLED, LINK_EIGHT);
-            drawContours(maskImg, contours, indexiesOfTop3Area[1], Scalar(255, 255, 255), CV_FILLED, LINK_EIGHT);
+            drawContours(maskImg, contours.all(), contours.indexSortedByArea()[0], Scalar(255, 255, 255), CV_FILLED, LINK_EIGHT);
+            drawContours(maskImg, contours.all(), contours.indexSortedByArea()[1], Scalar(255, 255, 255), CV_FILLED, LINK_EIGHT);
             
             for(int i=1; i<2; i++) {
-                for(Point point :contours[indexiesOfTop3Area[i]]) {
+                for(Point point :contours.all()[contours.indexSortedByArea()[i]]) {
                     if(OpenCVAPI::isInROI(point, vertices)) {
                         allPoints.push_back(point);
                     }
@@ -51,7 +54,7 @@ public:
     
         RotatedRect rect = minAreaRect(Mat(allPoints));
        
-        _regionManager.currentRegion().setContour(contours[indexiesOfTop3Area[0]]);//TODO:本来は結合した輪郭を入れるか別にいれる必要がある
+        _regionManager.currentRegion().setContour(contours.getLargestContour());//TODO:本来は結合した輪郭を入れるか別にいれる必要がある
         _regionManager.currentRegion().setMaskImg(maskImg);
         _regionManager.currentRegion().setRotatedRect(rect);
         _regionManager.currentRegion().calcRoiWithRotatedRect();

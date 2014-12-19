@@ -3,11 +3,11 @@
 
 #include "../../../TypeDef.h"
 #include "../../../SDK/opencv/opencvApi.h"
-
+#include "../../../Param/contours.h"
 class ContourCountState {
 public:
 	ContourCountState();
-    virtual void drawAndCalcRegion(Mat& maskImg, vector<int>& indexiesOfTop3Area, vPs contours) {}
+    virtual void drawAndCalcRegion(Contours& contours) {}
 };
 
 #endif // CONTOURCOUNTSTATE_H

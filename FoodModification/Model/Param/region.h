@@ -145,6 +145,13 @@ public:
     void calcExpectedRotatedRect() {
         _expectedRotatedRect = RotatedRect(_rotatedRect.center, Size((int)_rotatedRect.size.width*1.5, (int)_rotatedRect.size.height*1.5), _rotatedRect.angle);
     }
+
+    bool isExisted() {
+        if(_contour.empty()) {
+            return false;
+        }
+        return true;
+    }
 private:
     
 /*property*/

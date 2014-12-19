@@ -25,7 +25,7 @@ void Extractor::extract(const MatSet& srcSet) {
 
     Mat mat = Mat::zeros(srcSet.size(), CV_8UC1);
 
-    if(_indexOfMaxArea >=0){
+    if(_regionManager.isPreviousRegionExisted()){
         _contourExisted.createMaskByColor(mat, channelSet);
     } else {
         _contourNonExisted.createMaskByColor(mat, channelSet);
@@ -35,23 +35,12 @@ void Extractor::extract(const MatSet& srcSet) {
 	erode(mat, mat, cv::Mat(), Point(-1,-1), _extractionManager.erodeCount());
    // imshow("colorExtract", mat);
 
+    Contours contours(mat);
     
-    //最大面積
-    vPs contours;
-    findContours(mat, contours, CV_RETR_LIST, CV_CHAIN_APPROX_NONE);
-    vector<int> indexiesOfTop3Area = calcIndexiesOfTop3Area(contours);
-    // _indexOfMaxArea = calcIndexOfMaxArea(contours);
-    _indexOfMaxArea = indexiesOfTop3Area[0];
-    Mat mat2 = Mat::zeros(srcSet.size(), CV_8UC1);
-   
-    
-    if(indexiesOfTop3Area[1] >= 0) {
-		_multiContour.drawAndCalcRegion(mat2, indexiesOfTop3Area, contours);
+    if(contours.hasMultiContour() ) {
+		_multiContour.drawAndCalcRegion(contours);
     } else {
-		_oneContour.drawAndCalcRegion(mat2, indexiesOfTop3Area, contours);
+		_oneContour.drawAndCalcRegion(contours);
     }
     
-
 }
-
-

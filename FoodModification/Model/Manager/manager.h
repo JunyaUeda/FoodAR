@@ -5,7 +5,6 @@
 #include <QFile>
 #include <QDebug>
 #include <QXmlStreamWriter>
-#include "../Param/xmlElement.h"
 #include "../Util/qtUtil.h"
 
 using namespace std;

@@ -7,7 +7,7 @@ class RegionManager {
 /*method*/
 public:
     static RegionManager& getInstance();
-    
+
     Region& currentRegion() {
         return _currentRegion;
     }
@@ -20,6 +20,12 @@ public:
         return _previousRegion;
     }
 
+    bool isPreviousRegionExisted() {
+        if(_previousRegion.isExisted()) {
+            return true;
+        }
+        return false;
+    }
 private:
 	RegionManager();
     RegionManager(const RegionManager&);

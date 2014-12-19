@@ -76,7 +76,6 @@ SOURCES += main.cpp\
     Model/mainProcedure.cpp \
     Model/Executor/saver.cpp \
     Model/Manager/manager.cpp \
-    Model/Param/xmlElement.cpp \
     Model/Manager/fileManager.cpp \
     Controller/fileController.cpp \
     Model/Util/qtUtil.cpp \
@@ -101,7 +100,8 @@ SOURCES += main.cpp\
     Model/Extraction/State/ContourCount/contourCountState.cpp \
     Model/Extraction/State/ContourCount/oneContour.cpp \
     Model/Extraction/State/ContourCount/multiContour.cpp \
-    Model/Manager/edgeManager.cpp
+    Model/Manager/edgeManager.cpp \
+    Model/Param/contours.cpp
 
 HEADERS  += \
     View/calibrateDialog.h \
@@ -172,7 +172,6 @@ HEADERS  += \
     Model/mainProcedure.h \
     Model/Executor/saver.h \
     Model/Manager/manager.h \
-    Model/Param/xmlElement.h \
     Model/Manager/fileManager.h \
     Controller/fileController.h \
     Model/Util/qtUtil.h \
@@ -197,7 +196,8 @@ HEADERS  += \
     Model/Extraction/State/ContourCount/contourCountState.h \
     Model/Extraction/State/ContourCount/oneContour.h \
     Model/Extraction/State/ContourCount/multiContour.h \
-    Model/Manager/edgeManager.h
+    Model/Manager/edgeManager.h \
+    Model/Param/contours.h
 
 FORMS    += \
     View/calibrateDialog.ui \

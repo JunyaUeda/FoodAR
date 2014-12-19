@@ -14,6 +14,7 @@
 #include "../Manager/regionManager.h"
 #include "../SDK/opencv/opencvApi.h"
 #include "../Param/channelSet.h"
+#include "../Param/contours.h"
 #include "../Extraction/State/contourState.h"
 #include "../Extraction/State/contourExisted.h"
 #include "../Extraction/State/contourNonEXisted.h"
@@ -28,63 +29,7 @@ class Extractor {
 public:
     static Extractor& getInstance();
     void extract(const MatSet& srcSet);
-    int calcIndexOfMaxArea(vPs& contours) {
-        if(!contours.size()) {
-            return -1;
-        }
-        size_t max=0;
-        int indexForMaxArea=-1;
-        for(int i=0; i<contours.size(); ++i) {
-            size_t count = contours[i].size();
-            //if(count < 300 || count > 1000) continue;
-
-            if(count > max) {
-                indexForMaxArea = i;
-                max = count;
-            }
-        }
-
-        return indexForMaxArea;
-    }
-
-    vector<int> calcIndexiesOfTop3Area(vPs& contours) {
-       
-        size_t max=0;
-        size_t second =0;
-        size_t third = 0;
-        vector<int> indexForTop3 = {-1, -1, -1};
-        
-        const int FIRST = 0;
-        const int SECOND = 1;
-        const int THIRD = 2;
-
-        if(contours.size() > 0) {
-            for(int i=0; i<contours.size(); ++i) {
-                size_t count = contours[i].size();
-                //if(count < 300 || count > 1000) continue;
-
-                if(count > max) {
-                    indexForTop3[THIRD] = indexForTop3[SECOND];
-                    indexForTop3[SECOND] = indexForTop3[FIRST];
-                    indexForTop3[FIRST] = i;
-                    third = second;
-                    second = max;
-                    max = count;
-                } else if(count > second) {
-                    indexForTop3[THIRD] = indexForTop3[SECOND];
-                    indexForTop3[SECOND] = i;
-                    third = second;
-                    second = count;
-                } else if(count > third) {
-                    indexForTop3[THIRD] = i;
-                    third = count;
-                }
-            }
-        }
-        
-        return indexForTop3;
-    }
-
+    
 private:
     Extractor();
     Extractor(const Extractor&);
@@ -117,7 +62,6 @@ private:
     ExtractionManager& _extractionManager = ExtractionManager::getInstance();
     RegionManager& _regionManager = RegionManager::getInstance();
     EdgeManager& _edgeManager = EdgeManager::getInstance();
-    int _indexOfMaxArea=-1;
     ContourState& _contourExisted = ContourExisted::getInstance();
 	ContourState& _contourNonExisted = ContourNonExisted::getInstance();
     ContourCountState& _oneContour = OneContour::getInstance();

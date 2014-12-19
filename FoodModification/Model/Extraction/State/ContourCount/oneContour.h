@@ -14,13 +14,14 @@ class OneContour : public ContourCountState {
 /*method*/
 public:
     static OneContour& getInstance();
-    void drawAndCalcRegion( Mat& maskImg, vector<int>& indexiesOfTop3Area, vPs contours) {
-        
-        drawContours(maskImg, contours, indexiesOfTop3Area[0], Scalar(255, 255, 255), CV_FILLED, LINK_EIGHT);
+
+    void drawAndCalcRegion(Contours& contours) {
+        Mat maskImg = Mat::zeros(contours.matSize(), CV_8UC1);
+        drawContours(maskImg, contours.all(), contours.indexSortedByArea()[0], Scalar(255, 255, 255), CV_FILLED, LINK_EIGHT);
         //imshow("OneContour", maskImg);
         _regionManager.currentRegion().setMaskImg(maskImg);
-        if(indexiesOfTop3Area[0]>=0) {
-            _regionManager.currentRegion().setContour(contours[indexiesOfTop3Area[0]]);
+        if(contours.indexSortedByArea()[0]>=0) {
+            _regionManager.currentRegion().setContour(contours.getLargestContour());
             _regionManager.currentRegion().calcRotatedRect();
             _regionManager.currentRegion().calcRoi();
             _regionManager.currentRegion().calcExpectedRoiConsideringMove(_regionManager.previousRegion());
