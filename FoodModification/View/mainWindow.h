@@ -6,6 +6,7 @@
 #include "../Utils/opencvUtils.h"
 #include "./colorDialog.h"
 #include "./calibrateDialog.h"
+#include "./bgr3dPlotDialog.h"
 #include "../Controller/mainController.h"
 #include "../Controller/edgeController.h"
 #include "../Controller/extractionController.h"

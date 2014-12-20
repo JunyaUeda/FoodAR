@@ -65,14 +65,16 @@ void MainWindow::on_colorMapButton_clicked()
 
 void MainWindow::on_plot3DPushButton_clicked()
 {
-// // Instantiate the viewer.
-//   BGR3DPlotController bgr3DPlotController;
+// // // Instantiate the viewer.
+// //   BGR3DPlotController bgr3DPlotController;
 
-  _bgr3DPlotController.setWindowTitle("simpleViewer");
+//   _bgr3DPlotController.setWindowTitle("simpleViewer");
 
-  // Make the viewer window visible on screen.
-  _bgr3DPlotController.show();
+//   // Make the viewer window visible on screen.
+//   _bgr3DPlotController.show();
 
+	BGR3DPlotDialog* dialog = new BGR3DPlotDialog();
+    dialog->QWidget::show();
 }
 
 

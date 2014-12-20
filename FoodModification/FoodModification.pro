@@ -104,7 +104,9 @@ SOURCES += main.cpp\
     Model/Manager/edgeManager.cpp \
     Model/Param/contours.cpp \
     Model/Util/cvUtil.cpp \
-    Controller/bgr3dPlotController.cpp
+    Controller/bgr3dPlotController.cpp \
+    View/bgr3dPlotDialog.cpp \
+    View/bgr3dPlotViewer.cpp
 
 HEADERS  += \
     View/calibrateDialog.h \
@@ -202,12 +204,15 @@ HEADERS  += \
     Model/Manager/edgeManager.h \
     Model/Param/contours.h \
     Model/Util/cvUtil.h \
-    Controller/bgr3dPlotController.h
+    Controller/bgr3dPlotController.h \
+    View/bgr3dPlotDialog.h \
+    View/bgr3dPlotViewer.h
 
 FORMS    += \
     View/calibrateDialog.ui \
     View/mainWindow.ui \
-    View/colorDialog.ui
+    View/colorDialog.ui \
+    View/bgr3dPlotDialog.ui
 
 # OpenCV settings
 # for Windows
