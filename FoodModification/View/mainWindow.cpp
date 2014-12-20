@@ -47,18 +47,34 @@ void MainWindow::on_stopPushButton_clicked()
     mainController.stop();
 }
 
-void MainWindow::on_CalibrateButton_clicked() {
+void MainWindow::on_CalibrateButton_clicked()
+{
 
     CalibrateDialog* calibrateDialog = new CalibrateDialog();
   	calibrateDialog->QWidget::show();
 
 }
 
-void MainWindow::on_colorMapButton_clicked() {
+void MainWindow::on_colorMapButton_clicked()
+{
 
 	ColorDialog* colorDialog = new ColorDialog();
 	colorDialog->QWidget::show();
 }
+
+
+void MainWindow::on_plot3DPushButton_clicked()
+{
+// // Instantiate the viewer.
+//   BGR3DPlotController bgr3DPlotController;
+
+  _bgr3DPlotController.setWindowTitle("simpleViewer");
+
+  // Make the viewer window visible on screen.
+  _bgr3DPlotController.show();
+
+}
+
 
 //alpha
 void MainWindow::on_alphaLineEdit_textChanged(const QString &arg1)
