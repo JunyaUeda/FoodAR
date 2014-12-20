@@ -143,7 +143,7 @@ public:
     }
     
     void calcExpectedRotatedRect() {
-        _expectedRotatedRect = RotatedRect(_rotatedRect.center, Size((int)_rotatedRect.size.width*1.5, (int)_rotatedRect.size.height*1.5), _rotatedRect.angle);
+        _expectedRotatedRect = RotatedRect(_rotatedRect.center, Size((int)_rotatedRect.size.width*1.2, (int)_rotatedRect.size.height*1.2), _rotatedRect.angle);
     }
 
     bool isExisted() {
@@ -171,7 +171,7 @@ private:
     int _accelerationX = 0;
     int _accelerationY = 0;
     int _pixelSum = 0;
-    double _roiScaleRatio = 2.0;
+    double _roiScaleRatio = 1.5;
   
 };
 

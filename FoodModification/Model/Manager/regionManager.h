@@ -4,6 +4,7 @@
 #include "../Param/region.h"
 
 class RegionManager {
+    
 /*method*/
 public:
     static RegionManager& getInstance();
@@ -26,6 +27,7 @@ public:
         }
         return false;
     }
+
 private:
 	RegionManager();
     RegionManager(const RegionManager&);

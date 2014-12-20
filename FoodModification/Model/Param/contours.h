@@ -44,6 +44,10 @@ public:
         return _mat.size();
     }
 
+    int numOfContour() {
+        return _numOfContour;
+    }
+
 private:
     int calcIndexOfMaxArea(vPs& contours) {
         if(!contours.size()) {
@@ -99,6 +103,15 @@ private:
             }
         }
         
+        if(indexForTop3[THIRD] >= 0) {
+            _numOfContour = 3;
+        } else if (indexForTop3[SECOND] >= 0) {
+            _numOfContour = 2;
+        } else if (indexForTop3[FIRST] >= 0) {
+            _numOfContour = 1;
+        } else {
+            _numOfContour = 0;
+        }
         return indexForTop3;
     }
 
@@ -108,6 +121,7 @@ private:
     Mat _mat;
     vPs _contours;
     vector<int> _indexSortedByArea;
+    int _numOfContour;
 
 
 };

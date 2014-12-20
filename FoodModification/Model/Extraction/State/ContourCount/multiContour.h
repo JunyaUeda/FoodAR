@@ -5,6 +5,7 @@
 #include "./contourCountState.h"
 #include "../../../Manager/regionManager.h"
 #include "../../../SDK/opencv/opencvApi.h"
+#include "../../../Util/cvUtil.h"
 
 #define LINK_EIGHT 8
 #define LINK_FOUR 4
@@ -23,35 +24,18 @@ public:
         _regionManager.previousRegion().rotatedRect().points(vertices);
 
         vector<Point> allPoints = contours.getLargestContour();
-
-        if(contours.indexSortedByArea()[2] >= 0) {
-            drawContours(maskImg, contours.all(), contours.indexSortedByArea()[0], Scalar(255, 255, 255), CV_FILLED, LINK_EIGHT);
-            drawContours(maskImg, contours.all(), contours.indexSortedByArea()[1], Scalar(255, 255, 255), CV_FILLED, LINK_EIGHT);
-            drawContours(maskImg, contours.all(), contours.indexSortedByArea()[2], Scalar(255, 255, 255), CV_FILLED, LINK_EIGHT);
-            
-            for(int i=1; i<3; i++) {
-                for(Point point :contours.all()[contours.indexSortedByArea()[i]]) {
-                    if(OpenCVAPI::isInROI(point, vertices)) {
-                        allPoints.push_back(point);
-                    }
-                    
+   
+        CVUtil::drawContours255(maskImg, contours.all(), contours.indexSortedByArea());
+        for(int i=1; i<contours.numOfContour(); i++) {
+            for(Point point :contours.all()[contours.indexSortedByArea()[i]]) {
+                if(CVUtil::isInROI(point, vertices)) {
+                    allPoints.push_back(point);
                 }
+                
             }
-
-        } else {
-            drawContours(maskImg, contours.all(), contours.indexSortedByArea()[0], Scalar(255, 255, 255), CV_FILLED, LINK_EIGHT);
-            drawContours(maskImg, contours.all(), contours.indexSortedByArea()[1], Scalar(255, 255, 255), CV_FILLED, LINK_EIGHT);
-            
-            for(int i=1; i<2; i++) {
-                for(Point point :contours.all()[contours.indexSortedByArea()[i]]) {
-                    if(OpenCVAPI::isInROI(point, vertices)) {
-                        allPoints.push_back(point);
-                    }
-                }
-            }
-    
         }
-    
+
+      
         RotatedRect rect = minAreaRect(Mat(allPoints));
        
         _regionManager.currentRegion().setContour(contours.getLargestContour());//TODO:本来は結合した輪郭を入れるか別にいれる必要がある

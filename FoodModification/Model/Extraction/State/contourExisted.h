@@ -26,11 +26,11 @@ public:
                 //         L(mat,x,y) = 255;     
                 //     } 
 
-                if(L(channelSet.crMat(),x,y) >= _thresholdManager.cr() && L(channelSet.gMat(),x,y) <=_thresholdManager.g() && L(channelSet.rMat(),x,y) >= _thresholdManager.r()) {
+                if(L(channelSet.crMat(),x,y) >= _thresholdManager.cr() && L(channelSet.gMat(),x,y) <=_thresholdManager.g() && L(channelSet.yMat(),x,y) <= _thresholdManager.y()) {
     
                     L(maskImg,x,y) = 255;
                     
-                } else if(L(channelSet.sMat(),x,y) >=_thresholdManager.s() && L(channelSet.crMat(),x,y) >= 154 && L(channelSet.gMat(),x,y) <= 40 && L(channelSet.bMat(),x,y) <= 41 ) {
+                } else if(L(channelSet.sMat(),x,y) >=_thresholdManager.s() && L(channelSet.crMat(),x,y) >= _thresholdManager.cr() && L(channelSet.gMat(),x,y) <=_thresholdManager.g() && L(channelSet.yMat(),x,y) <= _thresholdManager.y() ) {
                     L(maskImg,x,y) = 255;
                 }
                 

@@ -101,7 +101,8 @@ SOURCES += main.cpp\
     Model/Extraction/State/ContourCount/oneContour.cpp \
     Model/Extraction/State/ContourCount/multiContour.cpp \
     Model/Manager/edgeManager.cpp \
-    Model/Param/contours.cpp
+    Model/Param/contours.cpp \
+    Model/Util/cvUtil.cpp
 
 HEADERS  += \
     View/calibrateDialog.h \
@@ -197,7 +198,8 @@ HEADERS  += \
     Model/Extraction/State/ContourCount/oneContour.h \
     Model/Extraction/State/ContourCount/multiContour.h \
     Model/Manager/edgeManager.h \
-    Model/Param/contours.h
+    Model/Param/contours.h \
+    Model/Util/cvUtil.h
 
 FORMS    += \
     View/calibrateDialog.ui \
