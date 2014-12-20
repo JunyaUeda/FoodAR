@@ -13,6 +13,7 @@
 #include "../Controller/textureController.h"
 #include "../Controller/cameraController.h"
 #include "../Controller/windowController.h"
+#include "../Controller/bgr3dPlotController.h"
 
 #define DIRPATH "../FoodModification/Images/"
 
@@ -36,6 +37,8 @@ private slots:
     void on_stopPushButton_clicked();
     void on_CalibrateButton_clicked();
     void on_colorMapButton_clicked();
+    void on_plot3DPushButton_clicked();
+
     //色調整コントロール
     //alpha
     void on_alphaLineEdit_textChanged(const QString &arg1);
@@ -143,6 +146,8 @@ private slots:
 
 	
 
+	
+
 private:
     vector<ChannelType> collectColorCheckBoxStatus();
     vector<ChannelType> collectEdgeChannelCheckBoxStatus();
@@ -159,6 +164,7 @@ private:
 	TextureController& _textureController = TextureController::getInstance();
     CameraController& _cameraController = CameraController::getInstance();
     WindowController& _windowController = WindowController::getInstance();
+    BGR3DPlotController& _bgr3DPlotController = BGR3DPlotController::getInstance();
     map<int, int> _edgeWidgetChannelMap;
     
 };
