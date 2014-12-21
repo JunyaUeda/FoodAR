@@ -3,6 +3,7 @@
 
 #include <QDialog>
 #include "./bgr3dPlotViewer.h"
+#include "../Controller/bgr3dPlotController.h"
 
 namespace Ui {
 	class BGR3DPlotDialog;
@@ -10,6 +11,7 @@ namespace Ui {
 
 class BGR3DPlotDialog : public QDialog
 {
+
 	Q_OBJECT
 
 public:
@@ -19,6 +21,7 @@ public:
 private:
 	Ui::BGR3DPlotDialog *ui;
     BGR3dPlotViewer _bgr3dPlotViewer;
+    BGR3DPlotController& _bgr3DPlotController = BGR3DPlotController::getInstance();
 };
 
 #endif // BGR3DPLOTDIALOG_H

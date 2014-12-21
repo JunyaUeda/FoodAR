@@ -28,6 +28,10 @@ public:
         return false;
     }
 
+    vector<Point> previousPointList() {
+        return _previousRegion.points();
+    }
+    
 private:
 	RegionManager();
     RegionManager(const RegionManager&);

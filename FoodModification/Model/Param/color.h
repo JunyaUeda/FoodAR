@@ -12,13 +12,13 @@ class Color {
 
 /*property*/
 public:
-    QVector<Channel> _channels;
+    //QVector<Channel> _channels;
 
 /*method*/
 public:
     Color();
-    Color(int channelNum);
-    bool hasColorSpaceFunc(ColorSpaceFunc type);
+    //Color(int channelNum);
+    //bool hasColorSpaceFunc(ColorSpaceFunc type);
 };
 
 #endif // COLOR_H
