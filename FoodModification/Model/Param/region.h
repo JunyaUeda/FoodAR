@@ -152,6 +152,10 @@ public:
         }
         return true;
     }
+
+    vector<Point> points() {
+        return _points;
+    }
 private:
     
 /*property*/

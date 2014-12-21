@@ -106,7 +106,9 @@ SOURCES += main.cpp\
     Model/Util/cvUtil.cpp \
     Controller/bgr3dPlotController.cpp \
     View/bgr3dPlotDialog.cpp \
-    View/bgr3dPlotViewer.cpp
+    View/bgr3dPlotViewer.cpp \
+    Model/Param/bgrColor.cpp \
+    Model/Manager/inputManager.cpp
 
 HEADERS  += \
     View/calibrateDialog.h \
@@ -206,7 +208,9 @@ HEADERS  += \
     Model/Util/cvUtil.h \
     Controller/bgr3dPlotController.h \
     View/bgr3dPlotDialog.h \
-    View/bgr3dPlotViewer.h
+    View/bgr3dPlotViewer.h \
+    Model/Param/bgrColor.h \
+    Model/Manager/inputManager.h
 
 FORMS    += \
     View/calibrateDialog.ui \

@@ -14,7 +14,7 @@
 #include "../Controller/textureController.h"
 #include "../Controller/cameraController.h"
 #include "../Controller/windowController.h"
-#include "../Controller/bgr3dPlotController.h"
+
 
 #define DIRPATH "../FoodModification/Images/"
 
@@ -165,7 +165,7 @@ private:
 	TextureController& _textureController = TextureController::getInstance();
     CameraController& _cameraController = CameraController::getInstance();
     WindowController& _windowController = WindowController::getInstance();
-    BGR3DPlotController& _bgr3DPlotController = BGR3DPlotController::getInstance();
+    
     map<int, int> _edgeWidgetChannelMap;
     
 };

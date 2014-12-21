@@ -5,7 +5,8 @@ BGR3DPlotDialog::BGR3DPlotDialog(QWidget *parent) :
 	QDialog(parent),
 	ui(new Ui::BGR3DPlotDialog)
 {
-    //_bgr3dPlotViewer.show();
+    _bgr3DPlotController.prepareBGR3dPlot(_bgr3dPlotViewer);
+    _bgr3dPlotViewer.show();
 	ui->setupUi(this);
     // // Instantiate the viewer.
 //   BGR3DPlotController bgr3DPlotController;

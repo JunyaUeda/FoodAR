@@ -3,10 +3,10 @@
 Color::Color() {
 }
 
-Color::Color(int channelNum) {
+// Color::Color(int channelNum) {
 
-}
+// }
 
-bool Color::hasColorSpaceFunc(ColorSpaceFunc type) {
-	return true;
-}
+// bool Color::hasColorSpaceFunc(ColorSpaceFunc type) {
+// 	return true;
+// }
