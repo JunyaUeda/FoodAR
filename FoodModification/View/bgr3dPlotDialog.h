@@ -2,7 +2,6 @@
 #define BGR3DPLOTDIALOG_H
 
 #include <QDialog>
-#include "./bgr3dPlotViewer.h"
 #include "../Controller/bgr3dPlotController.h"
 
 namespace Ui {
@@ -20,7 +19,6 @@ public:
 
 private:
 	Ui::BGR3DPlotDialog *ui;
-    BGR3dPlotViewer _bgr3dPlotViewer;
     BGR3DPlotController& _bgr3DPlotController = BGR3DPlotController::getInstance();
 };
 

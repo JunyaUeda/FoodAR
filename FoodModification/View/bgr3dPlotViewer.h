@@ -19,6 +19,7 @@ public:
     void addColorPoint(BGRColor color) {
         _colors.push_back(color);
     }
+    
 protected:
     virtual void draw();
     virtual void init();

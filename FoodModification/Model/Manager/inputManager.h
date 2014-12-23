@@ -8,8 +8,15 @@ class InputManager {
 /*method*/
 public:
     static InputManager& getInstance();
+    void updateCurrentSrc(Mat& bgrImg) {
+        _currentSrcSet.setBgr(bgrImg);
+    }
+
     Mat currentBGRMat() {
         return _currentSrcSet.bgr();
+    }
+    MatSet& currentSrcSet() {
+        return _currentSrcSet;
     }
 
 private:

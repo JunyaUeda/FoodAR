@@ -154,6 +154,13 @@ public:
     }
 
     vector<Point> points() {
+        for(int y=_roi.y; y<_roi.y+_roi.height; y++) {
+            for(int x=_roi.x; x<_roi.x+_roi.width; x++) {
+                if(L(_maskImg, x,y)==255) {
+                    _points.push_back(Point(x,y));
+                }
+            }
+        }
         return _points;
     }
 private:

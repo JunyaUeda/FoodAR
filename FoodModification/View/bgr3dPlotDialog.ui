@@ -6,9 +6,15 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1174</width>
-    <height>762</height>
+    <width>1912</width>
+    <height>887</height>
    </rect>
+  </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
   </property>
   <property name="windowTitle">
    <string>Dialog</string>
@@ -29,13 +35,29 @@
     <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
    </property>
   </widget>
-  <widget class="BGR3dPlotViewer" name="widget" native="true">
+  <widget class="BGR3dPlotViewer" name="bgrPlot3dView" native="true">
    <property name="geometry">
     <rect>
-     <x>60</x>
-     <y>50</y>
-     <width>1091</width>
+     <x>50</x>
+     <y>60</y>
+     <width>741</width>
      <height>651</height>
+    </rect>
+   </property>
+   <property name="sizePolicy">
+    <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+     <horstretch>0</horstretch>
+     <verstretch>0</verstretch>
+    </sizepolicy>
+   </property>
+  </widget>
+  <widget class="QWidget" name="widget" native="true">
+   <property name="geometry">
+    <rect>
+     <x>810</x>
+     <y>60</y>
+     <width>841</width>
+     <height>641</height>
     </rect>
    </property>
   </widget>
