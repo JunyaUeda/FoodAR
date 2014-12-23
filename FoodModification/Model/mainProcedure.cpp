@@ -8,9 +8,9 @@ void MainProcedure::start() {
     
     while (_isProcessed) {
 
-        MatSet matSet;
-        _sourcer.loadSrc(matSet);
-		
+        
+        _sourcer.loadSrc();
+		MatSet& matSet = _inputManager.currentSrcSet();
         _extractor.extract(matSet);
         //_extractor.extractCoffee(matSet,_extractedRegion);
         

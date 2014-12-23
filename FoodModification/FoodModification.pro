@@ -108,7 +108,8 @@ SOURCES += main.cpp\
     View/bgr3dPlotDialog.cpp \
     View/bgr3dPlotViewer.cpp \
     Model/Param/bgrColor.cpp \
-    Model/Manager/inputManager.cpp
+    Model/Manager/inputManager.cpp \
+    View/histogram3dViewer.cpp
 
 HEADERS  += \
     View/calibrateDialog.h \
@@ -210,7 +211,8 @@ HEADERS  += \
     View/bgr3dPlotDialog.h \
     View/bgr3dPlotViewer.h \
     Model/Param/bgrColor.h \
-    Model/Manager/inputManager.h
+    Model/Manager/inputManager.h \
+    View/histogram3dViewer.h
 
 FORMS    += \
     View/calibrateDialog.ui \

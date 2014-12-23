@@ -9,6 +9,7 @@
 #include "./Manager/windowManager.h"
 #include "./Manager/cameraManager.h"
 #include "./Manager/textureManager.h"
+#include "./Manager/inputManager.h"
 
 
 class MainProcedure {
@@ -31,6 +32,7 @@ private:
     TextureFactory& _textureFactory = TextureFactory::getInstance();
     TextureManager& _textureManager = TextureManager::getInstance();
     CameraManager& _cameraManager = CameraManager::getInstance();
+    InputManager& _inputManager   = InputManager::getInstance();
     Converter& _converter         = Converter::getInstance();
     Outputer& _outputer           = Outputer::getInstance();
     bool _isProcessed = true;

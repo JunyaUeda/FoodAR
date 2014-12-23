@@ -131,7 +131,6 @@ private slots:
     /**
     * カメラタブ
     */
-
 	void on_captureContrastLineEdit_textChanged(const QString &arg1);
 	void on_captureContrastSlider_valueChanged(int value);
 	void on_captureBrightnessLineEdit_textChanged(const QString &arg1);

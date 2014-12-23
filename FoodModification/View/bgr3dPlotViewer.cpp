@@ -7,18 +7,7 @@ using namespace qglviewer;
 BGR3dPlotViewer::BGR3dPlotViewer(QWidget *parent) :
 	QGLViewer(parent)
 {
-            // BGRColor color(200,30,40);
-            // _colors.push_back(color);
-            // BGRColor color1(255,80,80);
-            // _colors.push_back(color1);
-            // BGRColor color2(100,45,0);
-            // _colors.push_back(color2);
-            // BGRColor color3(5,4,3);
-            // _colors.push_back(color3);
-            // BGRColor color4(10,3,5);
-            // _colors.push_back(color4);
-            // BGRColor color5(7,8,9);
-            // _colors.push_back(color5);
+           
 }
 
 
@@ -33,51 +22,24 @@ void BGR3dPlotViewer::draw() {
     //Orientate light along view direction
     glLightfv(GL_LIGHT1, GL_SPOT_DIRECTION, camera()->viewDirection());
 
-    glColor3f(1.0, 1.0, 1.0);
-    drawGrid(1.0, 256);
+    glPushMatrix();
+        glColor3f(0.5f, 0.5f, 0.5f);
+        drawGrid(1.0, 256);
+    glPopMatrix();
 
-    float normalizeScale = 1.0/256;
-    glScalef(normalizeScale, normalizeScale, normalizeScale);
-
-
-    // const float nbSteps = 200.0;
-    // glBegin(GL_QUAD_STRIP);
-    // for (int i=0; i<nbSteps; ++i) {
-    //     const float ratio = i/nbSteps;
-    //     const float angle = 21.0*ratio;
-    //     const float c = cos(angle);
-    //     const float s = sin(angle);
-    //     const float r1 = 1.0 - 0.8f*ratio;
-    //     const float r2 = 0.8f - 0.8f*ratio;
-    //     const float alt = ratio - 0.5f;
-    //     const float nor = 0.5f;
-    //     const float up = sqrt(1.0-nor*nor);
-    //     glColor3f(1.0-ratio, 0.2f , ratio);
-    //     glNormal3f(nor*c, up, nor*s);
-    //     glVertex3f(r1*c, alt, r1*s);
-    //     glVertex3f(r2*c, alt+0.05f, r2*s);
-    // }
-    // glEnd();
-
+    glPushMatrix();
     glPointSize(5.0);
-    glColor3f(1.0, 0.0, 0.0);
+    float normalizeScale = 1.0/255.0;
     glBegin(GL_POINTS);
-
         for(BGRColor color : _colors) {
-
-            
-            glVertex3d(color.b, color.g, color.r);
+            glColor3ub(color.r, color.g, color.b);
+            float normalizedR = (static_cast<float>(color.r)/255.0);
+            float normalizedG = (static_cast<float>(color.g)/255.0);
+            float normalizedB = (static_cast<float>(color.b)/255.0);
+            glVertex3d(normalizedR, normalizedG, normalizedB);
         }
-    glEnd();
-
-    //glutWireCube(256);
-    
-    glBegin(GL_LINE_LOOP);
-        glColor3d(1.0, 0.2, 0.0);
-        glVertex3d(_colors[0].b, _colors[0].g, _colors[0].r);
-        glVertex3d(_colors[1].b, _colors[1].g, _colors[1].r);
-        glVertex3d(_colors[2].b, _colors[2].g, _colors[2].r);
-    glEnd();
+    glEnd(); 
+    glPopMatrix();
 
     drawRainbowWireCube();
 }
@@ -85,16 +47,16 @@ void BGR3dPlotViewer::draw() {
 void BGR3dPlotViewer::init() {
 
     //Light setup
-    //glDisable(GL_LIGHT0);
+    glDisable(GL_LIGHT0);
     glEnable(GL_LIGHT1);
 
     //Light default parameters
-    const GLfloat light_ambient[]  = {1.0, 1.0, 1.0, 1.0};
+    const GLfloat light_ambient[]  = {1.0, 1.0, 1.0};
     const GLfloat light_specular[] = {1.0, 1.0, 1.0, 1.0};
     const GLfloat light_diffuse[]  = {1.0, 1.0, 1.0, 1.0};
 
-    glLightf( GL_LIGHT1, GL_SPOT_EXPONENT, 3.0);
-    glLightf( GL_LIGHT1, GL_SPOT_CUTOFF, 10.0);
+    glLightf( GL_LIGHT1, GL_SPOT_EXPONENT, 0.0);
+    glLightf( GL_LIGHT1, GL_SPOT_CUTOFF, 100.0);
     glLightf( GL_LIGHT1, GL_CONSTANT_ATTENUATION, 0.1f);
     glLightf( GL_LIGHT1, GL_LINEAR_ATTENUATION, 0.3f);
     glLightf( GL_LIGHT1, GL_QUADRATIC_ATTENUATION, 0.3f);
@@ -103,9 +65,8 @@ void BGR3dPlotViewer::init() {
 	glLightfv( GL_LIGHT1, GL_DIFFUSE, light_diffuse);
 
 
-
     // Restore previous BGR3dPlotViewer state.
-    restoreStateFromFile();
+    //restoreStateFromFile();
 
     // Opens help window
     //help();
@@ -134,6 +95,8 @@ QString BGR3dPlotViewer::helpString() const
 
 void BGR3dPlotViewer::drawRainbowWireCube() {
     glPushMatrix();
+    float normalizeScale = 1.0/255.0;
+    glScalef(normalizeScale, normalizeScale, normalizeScale); 
     glLineWidth(400);
     //RGB=0から３本
     glBegin(GL_LINES);
@@ -213,5 +176,6 @@ void BGR3dPlotViewer::drawRainbowWireCube() {
         glVertex3d(0.0f, 256.0f, 256.0f);
     glEnd();
     glLineWidth(1.0);
+	glScalef(1.0, 1.0, 1.0f);
     glPopMatrix();
 }

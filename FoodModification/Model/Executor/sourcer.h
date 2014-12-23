@@ -5,6 +5,7 @@
 #include "../SDK/opencv/opencvApi.h"
 #include "../Manager/cameraManager.h"
 #include "../Manager/textureManager.h"
+#include "../Manager/inputManager.h"
 
 class Sourcer {
 
@@ -12,9 +13,11 @@ class Sourcer {
 public:
     static Sourcer& getInstance();
     bool setUp();
-    void loadSrc(MatSet& srcSet) {
+    void loadSrc() {
         Mat& bgrImg = _cameraManager.getFrame();
-        srcSet.setBgr(bgrImg);
+        //srcSet.setBgr(bgrImg);
+        _inputManager.updateCurrentSrc(bgrImg);
+
     }
     
 private:
@@ -25,6 +28,7 @@ private:
 private:
     CameraManager& _cameraManager = CameraManager::getInstance();
     TextureManager& _textureManager = TextureManager::getInstance();
+    InputManager& _inputManager = InputManager::getInstance();
 
 };
 
