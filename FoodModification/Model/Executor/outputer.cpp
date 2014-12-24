@@ -9,6 +9,7 @@ Outputer& Outputer::getInstance() {
 }
 void Outputer::setUp() {
     _windowManager.createWindow(QString("dst"));
+	 
 }
 void Outputer::show(Mat& img) {
     if(_isFullScreenSize) {
