@@ -9,7 +9,7 @@ BGR3DPlotDialog::BGR3DPlotDialog(QWidget *parent) :
 	ui->setupUi(this);
 
     _bgr3DPlotController.prepareBGR3dPlot(ui->bgrPlot3dView);
-
+    _bgr3DPlotController.prepare_xyHistogram(ui->histogram3dView);
 
     
 }

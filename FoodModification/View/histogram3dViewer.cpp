@@ -9,90 +9,116 @@ Histogram3dViewer::Histogram3dViewer(QWidget *parent) :
     QGLViewer(parent) 
 {
     _textureSrcImg = imread(A_TEXTURE_PATH, 1);
+    imshow("textureSrc", _textureSrcImg);
 }
 
 // Draws a spiral
 void Histogram3dViewer::draw() {
 
     //Place light at camera position
-	// const qglviewer::Vec cameraPos = camera()->position(); //OpenCVにもVecの定義があるため明示的に指定する
- //    const GLfloat pos[4] = {cameraPos[0], cameraPos[1], cameraPos[2], 1.0};
- //    glLightfv(GL_LIGHT1, GL_POSITION, pos);
+	const qglviewer::Vec cameraPos = camera()->position(); //OpenCVにもVecの定義があるため明示的に指定する
+    const GLfloat pos[4] = {cameraPos[0], cameraPos[1], cameraPos[2], 1.0};
+    glLightfv(GL_LIGHT1, GL_POSITION, pos);
 
     //Orientate light along view direction
-    //glLightfv(GL_LIGHT1, GL_SPOT_DIRECTION, camera()->viewDirection());
+    glLightfv(GL_LIGHT1, GL_SPOT_DIRECTION, camera()->viewDirection());
 
-    // const float nbSteps = 200.0;
-    // glBegin(GL_QUAD_STRIP);
-    //     for (int i=0; i<nbSteps; ++i) {
-    //         const float ratio = i/nbSteps;
-    //         const float angle = 21.0*ratio;
-    //         const float c = cos(angle);
-    //         const float s = sin(angle);
-    //         const float r1 = 1.0 - 0.8f*ratio;
-    //         const float r2 = 0.8f - 0.8f*ratio;
-    //         const float alt = ratio - 0.5f;
-    //         const float nor = 0.5f;
-    //         const float up = sqrt(1.0-nor*nor);
-    //         glColor3f(1.0-ratio, 0.2f , ratio);
-    //         glNormal3f(nor*c, up, nor*s);
-    //         glVertex3f(r1*c, alt, r1*s);
-    //         glVertex3f(r2*c, alt+0.05f, r2*s);
-    //     }
-    // glEnd();
+    // glPushMatrix();
+    //     glColor3f(0.0f, 0.0f, 0.0f);
+    //     drawGrid(1.0, 50);
+    //     glColor3d(1.0, 1.0, 1.0);
+    // glPopMatrix();
+    
+    drawColorDiagram();
+    
 
+    glPushMatrix();
+    glLineWidth(1);
+    glColor3d(0.2, 0.6, 0.4);
+    for(int y=0; y<1000; y++) {
+        for(int x=0; x<1000; x++) {
+            glBegin(GL_LINES);
+                glVertex3f(static_cast<float>(x)/1000.0, static_cast<float>(y)/1000.0, 0.0);
+                glVertex3f(static_cast<float>(x)/1000.0, static_cast<float>(y)/1000.0, static_cast<float>(xyHistogram[x][y])/100.0);
+            glEnd();
+        }
+    }
+    glColor3d(1.0, 1.0, 1.0);
+    glPopMatrix();
+}
+
+void Histogram3dViewer::drawColorDiagram() {
+    glPushMatrix();
     glEnable(GL_TEXTURE_2D);
 
-    // glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, _textureSrcImg.cols, _textureSrcImg.rows,
-    //                 0, GL_BGR, GL_UNSIGNED_BYTE,  _textureSrcImg.ptr());
+    // glPixelStorei(GL_UNPACK_ALIGNMENT, 4);
+    glGenTextures(1, &_texture);
+    glBindTexture(GL_TEXTURE_2D, _texture);
 
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+    glTexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_REPLACE);
+
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, _textureSrcImg.cols, _textureSrcImg.rows,
+                    0, GL_BGR_EXT, GL_UNSIGNED_BYTE,  _textureSrcImg.ptr());
+
+    // GLuint imageTex = matToTexture(_textureSrcImg, GL_LINEAR_MIPMAP_LINEAR,   GL_LINEAR, GL_CLAMP);
+    // glBindTexture(GL_TEXTURE_2D, imageTex);
+
+    
+    //glBindTexture(GL_TEXTURE_2D, _texture);
+    
     // glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP);
     // glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP);
     // glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
     // glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_REPLACE);
     // glTexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_REPLACE);
 
-    GLuint imageTex = matToTexture(_textureSrcImg, GL_LINEAR_MIPMAP_LINEAR,   GL_LINEAR, GL_CLAMP);
-    glBindTexture(GL_TEXTURE_2D, imageTex);
-    
-    glBegin(GL_QUADS);
-    // glTexCoord2f(0,1); glVertex3f(0.0, 1.0, 0.0);//左上
+
+    glBegin(GL_POLYGON);
+    glTexCoord2f(0,0); glVertex3f(0.0, 0.9, 0.0);//左上
+    glTexCoord2f(0,1); glVertex3f(0.0, 0.0, 0.0);//左下
+    glTexCoord2f(1,1); glVertex3f(0.8, 0.0, 0.0);//右下
+    glTexCoord2f(1,0); glVertex3f(0.8, 0.9, 0.0);//右上
+
+    // glTexCoord2f(0,1); glVertex3f(0.0, static_cast<float>(_textureSrcImg.rows)/100.0, 0.0);//左上
     // glTexCoord2f(0,0); glVertex3f(0.0, 0.0, 0.0);//左下
-    // glTexCoord2f(1,0); glVertex3f(1.0, 0.0, 0.0);//右下
-    // glTexCoord2f(1,1); glVertex3f(1.0, 1.0, 0.0);//右上
-    glTexCoord2f(1,1); glVertex3f(0.0, 1.0, 0.0);
-    glTexCoord2f(1,0); glVertex3f(0.0, 0.0, 0.0);
-    glTexCoord2f(0,0); glVertex3f(1.0, 0.0, 0.0); 
-    glTexCoord2f(0,1); glVertex3f(1.0, 1.0, 0.0);
+    // glTexCoord2f(1,0); glVertex3f(static_cast<float>(_textureSrcImg.cols)/100.0, 0.0, 0.0);//右下
+    // glTexCoord2f(1,1); glVertex3f(static_cast<float>(_textureSrcImg.cols)/100.0, static_cast<float>(_textureSrcImg.rows)/100.0, 0.0);//右上
+
+    // glTexCoord2f(1,1); glVertex3f(0.0, 1.0, 0.0);
+    // glTexCoord2f(1,0); glVertex3f(0.0, 0.0, 0.0);
+    // glTexCoord2f(0,0); glVertex3f(1.0, 0.0, 0.0); 
+    // glTexCoord2f(0,1); glVertex3f(1.0, 1.0, 0.0);
     glEnd();
     glDisable(GL_TEXTURE_2D);
+    glPopMatrix();
 }
 
 void Histogram3dViewer::init() {
 
     //Light setup
-    // glDisable(GL_LIGHT0);
-    // glEnable(GL_LIGHT1);
+    glDisable(GL_LIGHT0);
+    glEnable(GL_LIGHT1);
 
-    // //Light default parameters
-    // const GLfloat light_ambient[]  = {1.0, 1.0, 1.0};
-    // const GLfloat light_specular[] = {1.0, 1.0, 1.0, 1.0};
-    // const GLfloat light_diffuse[]  = {1.0, 1.0, 1.0, 1.0};
+    //Light default parameters
+    const GLfloat light_ambient[]  = {1.0, 1.0, 1.0};
+    const GLfloat light_specular[] = {1.0, 1.0, 1.0, 1.0};
+    const GLfloat light_diffuse[]  = {1.0, 1.0, 1.0, 1.0};
 
-    // glLightf( GL_LIGHT1, GL_SPOT_EXPONENT, 0.0);
-    // glLightf( GL_LIGHT1, GL_SPOT_CUTOFF, 100.0);
-    // glLightf( GL_LIGHT1, GL_CONSTANT_ATTENUATION, 0.1f);
-    // glLightf( GL_LIGHT1, GL_LINEAR_ATTENUATION, 0.3f);
-    // glLightf( GL_LIGHT1, GL_QUADRATIC_ATTENUATION, 0.3f);
-    // glLightfv( GL_LIGHT1, GL_AMBIENT, light_ambient);
-    // glLightfv( GL_LIGHT1, GL_SPECULAR, light_specular);
-    // glLightfv( GL_LIGHT1, GL_DIFFUSE, light_diffuse);
+    glLightf( GL_LIGHT1, GL_SPOT_EXPONENT, 0.0);
+    glLightf( GL_LIGHT1, GL_SPOT_CUTOFF, 100.0);
+    glLightf( GL_LIGHT1, GL_CONSTANT_ATTENUATION, 0.1f);
+    glLightf( GL_LIGHT1, GL_LINEAR_ATTENUATION, 0.3f);
+    glLightf( GL_LIGHT1, GL_QUADRATIC_ATTENUATION, 0.3f);
+    glLightfv( GL_LIGHT1, GL_AMBIENT, light_ambient);
+    glLightfv( GL_LIGHT1, GL_SPECULAR, light_specular);
+    glLightfv( GL_LIGHT1, GL_DIFFUSE, light_diffuse);
 
 
-    glPixelStorei(GL_UNPACK_ALIGNMENT, 4);
-    // glGenTextures(1, &_texture);
-    // glBindTexture(GL_TEXTURE_2D, _texture);
-
+    
 
     // Restore previous Histogram3dViewer state.
     //restoreStateFromFile();
