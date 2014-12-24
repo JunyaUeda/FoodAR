@@ -51,7 +51,7 @@
     </sizepolicy>
    </property>
   </widget>
-  <widget class="Histogram3dAreaWidget" name="histogram3dViewer" native="true">
+  <widget class="Histogram3dAreaWidget" name="histogram3dAreaWidget" native="true">
    <property name="geometry">
     <rect>
      <x>810</x>

@@ -9,7 +9,7 @@ class Histogram3dAreaWidget : public QWidget
     Q_OBJECT
 public:
     explicit Histogram3dAreaWidget(QWidget *parent = 0);
-
+    Histogram3dViewer* _viewer;
 signals:
 
 public slots:

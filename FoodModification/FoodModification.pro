@@ -116,7 +116,9 @@ SOURCES += main.cpp\
     Model/Manager/inputManager.cpp \
     View/histogram3dViewer.cpp \
     View/bgr3dPlotAreaWidget.cpp \
-    View/histogram3dAreaWidget.cpp
+    View/histogram3dAreaWidget.cpp \
+    Model/Param/xyzColor.cpp \
+    Model/Param/xyYColor.cpp
 
 HEADERS  += \
     View/calibrateDialog.h \
@@ -220,7 +222,9 @@ HEADERS  += \
     Model/Manager/inputManager.h \
     View/histogram3dViewer.h \
     View/bgr3dPlotAreaWidget.h \
-    View/histogram3dAreaWidget.h
+    View/histogram3dAreaWidget.h \
+    Model/Param/xyzColor.h \
+    Model/Param/xyYColor.h
 
 FORMS    += \
     View/calibrateDialog.ui \
