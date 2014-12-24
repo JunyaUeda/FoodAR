@@ -33,7 +33,7 @@ void Extractor::extract(const MatSet& srcSet) {
     
     dilate(mat, mat, cv::Mat(), Point(-1,-1), _extractionManager.dilateCount());
 	erode(mat, mat, cv::Mat(), Point(-1,-1), _extractionManager.erodeCount());
-   // imshow("colorExtract", mat);
+    imshow("colorExtract", mat);
 
     Contours contours(mat);
     
@@ -42,5 +42,5 @@ void Extractor::extract(const MatSet& srcSet) {
     } else {
 		_oneContour.drawAndCalcRegion(contours);
     }
-    
+    //_oneContour.drawAndCalcRegion(contours);
 }

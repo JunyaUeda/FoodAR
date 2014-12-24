@@ -20,6 +20,13 @@ public:
                 } else if(L(channelSet.sMat(),x,y) >=_thresholdManager.s() && L(channelSet.crMat(),x,y) >= _thresholdManager.cr() && L(channelSet.gMat(),x,y) <=_thresholdManager.g()-15 && L(channelSet.yMat(),x,y) <= _thresholdManager.y() ) {
                     L(maskImg,x,y) = 255;
                 }
+
+                // if(L(channelSet.crMat(),x,y) <= _thresholdManager.cr() && L(channelSet.gMat(),x,y) <=_thresholdManager.g() && L(channelSet.yMat(),x,y) <= _thresholdManager.y()) {
+    
+                //     L(maskImg,x,y) = 255;
+                    
+                // }
+
             }
         }
     }

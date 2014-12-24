@@ -34,6 +34,11 @@ public:
                     L(maskImg,x,y) = 255;
                 }
                 
+                // if(L(channelSet.crMat(),x,y) <= _thresholdManager.cr() && L(channelSet.gMat(),x,y) <=_thresholdManager.g() && L(channelSet.yMat(),x,y) <= _thresholdManager.y()) {
+    
+                //     L(maskImg,x,y) = 255;
+                    
+                // }
             }
         }
     }

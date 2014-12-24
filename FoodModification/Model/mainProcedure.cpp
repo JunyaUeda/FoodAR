@@ -25,7 +25,7 @@ void MainProcedure::start() {
         
         imshow(_windowManager.windowName(0), matSet.bgr());
         _outputer.show(dstBGRImg);
-        moveWindow(_windowManager.windowName(0), 100, 0);
+        //moveWindow(_windowManager.windowName(0), 100, 0);
 
         char ch = waitKey(10);
         if ( ch == 27 ) break;
