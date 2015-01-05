@@ -25,7 +25,7 @@ public:
     int calcIndexOfMaxArea(vPs& contours) {
         size_t max=0;
         int indexForMaxArea=0;
-        for(int i=0; i<contours.size(); ++i) {
+        for(int i=0; i < static_cast<int>(contours.size()); ++i) {
             size_t count = contours[i].size();
             if(count < 300 || count > 1000) continue;
 
@@ -41,7 +41,7 @@ public:
     int getMaxAreaContourIndex(vPs& contours) {
         size_t max=0;
         int indexForMaxArea=0;
-        for(int i=0; i<contours.size(); ++i) {
+        for(int i=0; i<static_cast<int>(contours.size()); ++i) {
             size_t count = contours[i].size();
             if(count < 150 || count > 1000) continue;
 
@@ -62,10 +62,10 @@ public:
             return;
         }
 
-        for(int i=0; i<contours.size(); ++i) {
+        for(int i=0; i < static_cast<int>(contours.size()); ++i) {
 
             size_t count = contours[i].size();
-            if(count < minSize) {
+            if(static_cast<int>(count) < minSize) {
                 drawContours(filledImg, contours, i, Scalar(0, 0, 0), CV_FILLED, lineType);
             } else {
                 drawContours(filledImg, contours, i, Scalar(255, 255, 255), CV_FILLED, lineType);

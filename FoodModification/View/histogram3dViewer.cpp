@@ -17,7 +17,7 @@ void Histogram3dViewer::draw() {
 
     //Place light at camera position
 	const qglviewer::Vec cameraPos = camera()->position(); //OpenCVにもVecの定義があるため明示的に指定する
-    const GLfloat pos[4] = {cameraPos[0], cameraPos[1], cameraPos[2], 1.0};
+    const GLfloat pos[4] = {static_cast<GLfloat>(cameraPos[0]), static_cast<GLfloat>(cameraPos[1]), static_cast<GLfloat>(cameraPos[2]), 1.0};
     glLightfv(GL_LIGHT1, GL_POSITION, pos);
 
     //Orientate light along view direction

@@ -12,12 +12,14 @@ public:
     }
 
     int value(MatSet& matSet, int x, int y) {
-        return value(matSet.bgr(),x,y);
+        return G(matSet.bgr(),x,y);
     }
 
+    using ChannelFunc::value;//for warning: *** hides overloaded virtual function [-Woverloaded-virtual]
     int value(MatSet& matSet, Point point) {
-        return value(matSet, point.x, point.y);
+        return GreenFunc::value(matSet, point.x, point.y);
     }
+    
     QString getChannelName() {
         return "green";
     }

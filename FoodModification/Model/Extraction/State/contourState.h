@@ -9,7 +9,7 @@ class ContourState {
 /*method*/
 public:
 	ContourState();
-    virtual void createMaskByColor(Mat& maskImg, ChannelSet& channelSet) {}
+    virtual void createMaskByColor(Mat& maskImg, ChannelSet& channelSet);
 
 };
 

@@ -20,7 +20,7 @@ public:
         
 
     virtual int value(MatSet& matSet, Point& point) {
-         return value(matSet, point.x, point.y);
+         return ChannelFunc::value(matSet, point.x, point.y);
     }
 
     virtual QString getChannelName() {

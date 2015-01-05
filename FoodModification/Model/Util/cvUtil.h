@@ -1,3 +1,4 @@
+#pragma once
 #ifndef CVUTIL_H
 #define CVUTIL_H
 

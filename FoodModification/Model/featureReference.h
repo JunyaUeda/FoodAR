@@ -1,3 +1,4 @@
+#pragma once
 #ifndef FEATUREREFERENCE_H
 #define FEATUREREFERENCE_H
 
@@ -51,9 +52,10 @@ public:
     void updateChannelThresholdValue(int degree, ChannelType type, int index);
     void displayThreshold();
 
-    int channelThresholdDegree(ChannelType type, int index){
+    int channelThresholdDegree(ChannelType type) {
         return _colorThresholds[0].channelThresholdDegree(type); //ほんとはindexで区別すべし
     }
+
 private:
     FeatureReference();
     FeatureReference(const FeatureReference&);

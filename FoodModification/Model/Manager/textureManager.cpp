@@ -78,7 +78,7 @@ void TextureManager::loadTextureSrcFromDir() {
     vector<string> pathStringList;
     for(QString filePath : filelist) {
         //QString→std::string
-		string path = filePath.toLocal8Bit();
+        string path = filePath.toLocal8Bit().data();
         pathStringList.push_back(path);
     }
 

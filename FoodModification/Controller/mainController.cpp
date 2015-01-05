@@ -76,54 +76,5 @@ void MainController::setResizeFlag(bool flag) {
     resizeFlag = flag;
 }
 
-/**
-* colorDialogの色の編集によって呼び出される.
-*　@param HSVのシフト量
-*/
-void MainController::changeShiftValue(int hShift, int sShift, int vShift) {
-
-	//textureParam->setShift(hShift, sShift, vShift);
-}
-
-/**
-* colorDialogの色の編集によって呼び出される.
-*　@param shift量と色チャンネルを示すindex
-*/
-void MainController::changeShiftValue(int value, int colorIndex) {
-    
-    const int HUE = 0;
-    const int SATURATION = 1;
-    const int VALUE = 2;
-
-//    switch(colorIndex) {
-//        case HUE:
-//            textureParam->setH_shift(value);
-//            break;
-//        case SATURATION:
-//            textureParam->setS_shift(value);
-//            break;
-//        case VALUE:
-//            textureParam->setV_shift(value);
-//            break;
-//    }
-
-}
-
-/**
-* alpha値のセットを行う。colorDialogの色の編集によって呼び出される.
-*　@param value:double
-*/
-void MainController::setAlpha(double value) {
-
-   // textureParam->setAlpha(value);
-
-}
 
 
-/**
-* mainWindowのテクスチャ選択によって呼び出される。テクスチャなしかどうかのフラグを設定する。
-*　@param textureありなしのフラグ
-*/
-void MainController::setNoTexture(bool flag) {
-	//textureParam->setNoTexture(flag);
-}

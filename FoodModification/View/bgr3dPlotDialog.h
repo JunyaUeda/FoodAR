@@ -1,3 +1,4 @@
+#pragma once
 #ifndef BGR3DPLOTDIALOG_H
 #define BGR3DPLOTDIALOG_H
 

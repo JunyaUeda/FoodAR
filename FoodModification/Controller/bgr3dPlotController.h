@@ -1,3 +1,4 @@
+#pragma once
 #ifndef BGR3DPLOTCONTROLLER_H
 #define BGR3DPLOTCONTROLLER_H
 
@@ -60,8 +61,8 @@ public:
             xyYColor color_xyY = color_XYZ.convert2xyY();
             viewer->addColorPoint(color_xyY);
 
-            int result_x_Bin;
-            int result_y_Bin;
+            int result_x_Bin=0;
+            int result_y_Bin=0;
             for(int xBin=0; xBin<1000; xBin++) {
                 if(color_xyY.x*1000 > xBin ){
                     continue;

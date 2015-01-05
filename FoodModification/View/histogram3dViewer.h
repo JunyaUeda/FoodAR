@@ -1,3 +1,4 @@
+#pragma once
 #ifndef HISTOGRAM3DVIEWER_H
 #define HISTOGRAM3DVIEWER_H
 

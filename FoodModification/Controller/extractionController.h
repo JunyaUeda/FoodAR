@@ -18,7 +18,7 @@ public:
     void updateEngagedEdgeChannels(vector<ChannelType> list);
     void updateChannelThresholdValue(int degree, ChannelType type, int index);
     int channelThresholdComboBox_currentIndexChanged(ChannelType type){
-		return _featureReference.channelThresholdDegree(type, 0);
+        return _featureReference.channelThresholdDegree(type);
     }
     void updateDilateCount(int count);
     void updateErodeCount(int count);

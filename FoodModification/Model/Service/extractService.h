@@ -1,3 +1,4 @@
+#pragma once
 #ifndef EXTRACTSERVICE_H
 #define EXTRACTSERVICE_H
 

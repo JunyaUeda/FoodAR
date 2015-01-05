@@ -14,7 +14,7 @@ public:
     static EdgeFactory& getInstance();
     void createEdges(const MatSet& matSet, vector<Mat>& resultRawEdgeImgs);
     void createEdges(const MatSet& matSet, vector<Mat>& resultRawEdgeImgs, map<ChannelType, Mat>& channelMats);
-    void createEdges(ChannelSet& channelSet, Rect& roi);
+    void createEdges(ChannelSet& channelSet, const Rect& roi);
     void updateEngagedChannels(vector<ChannelType> newList);
 private:
     EdgeFactory();
@@ -40,7 +40,7 @@ private:
         erode(dstEdgeImg, dstEdgeImg, cv::Mat(), Point(-1,-1), 1);
     }
 
-    void revMergeEdges(vector<Mat>& channelEdgeImgs, Rect& roi, vector<Mat*> edgeImgs) {
+    void revMergeEdges(vector<Mat>& channelEdgeImgs, const Rect& roi, vector<Mat*> edgeImgs) {
 
         if(!channelEdgeImgs.size()) {
             return;  

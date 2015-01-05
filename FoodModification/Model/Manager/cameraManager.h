@@ -1,3 +1,4 @@
+#pragma once
 #ifndef CAMERAMANAGER_H
 #define CAMERAMANAGER_H
 

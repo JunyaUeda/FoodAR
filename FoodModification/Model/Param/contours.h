@@ -55,7 +55,7 @@ private:
         }
         size_t max=0;
         int indexForMaxArea=-1;
-        for(int i=0; i<contours.size(); ++i) {
+        for(int i=0; i<static_cast<int>(contours.size()); ++i) {
             size_t count = contours[i].size();
             //if(count < 300 || count > 1000) continue;
 
@@ -73,14 +73,14 @@ private:
         size_t max=0;
         size_t second =0;
         size_t third = 0;
-        vector<int> indexForTop3 = {-1, -1, -1};
+        vector<int> indexForTop3(3, -1);
         
         const int FIRST = 0;
         const int SECOND = 1;
         const int THIRD = 2;
 
         if(contours.size() > 0) {
-            for(int i=0; i<contours.size(); ++i) {
+            for(int i=0; i<static_cast<int>(contours.size()); ++i) {
                 size_t count = contours[i].size();
                 //if(count < 300 || count > 1000) continue;
 
@@ -96,7 +96,7 @@ private:
                     indexForTop3[SECOND] = i;
                     third = second;
                     second = count;
-                } else if(count > third) {
+                } else if( count > third) {
                     indexForTop3[THIRD] = i;
                     third = count;
                 }

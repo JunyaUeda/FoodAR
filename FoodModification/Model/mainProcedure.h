@@ -1,3 +1,4 @@
+#pragma once
 #ifndef MAINPROCEDURE_H
 #define MAINPROCEDURE_H
 

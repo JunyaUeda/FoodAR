@@ -15,8 +15,8 @@ BGR3dPlotViewer::BGR3dPlotViewer(QWidget *parent) :
 void BGR3dPlotViewer::draw() {
 
     //Place light at camera position
-    const Vec cameraPos = camera()->position();
-    const GLfloat pos[4] = {cameraPos[0], cameraPos[1], cameraPos[2], 1.0};
+    const qglviewer::Vec cameraPos = camera()->position();
+    const GLfloat pos[4] = {static_cast<GLfloat>(cameraPos[0]), static_cast<GLfloat>(cameraPos[1]), static_cast<GLfloat>(cameraPos[2]), 1.0};
     glLightfv(GL_LIGHT1, GL_POSITION, pos);
 
     //Orientate light along view direction
@@ -29,7 +29,7 @@ void BGR3dPlotViewer::draw() {
 
     glPushMatrix();
     glPointSize(5.0);
-    float normalizeScale = 1.0/255.0;
+
     glBegin(GL_POINTS);
         for(BGRColor color : _colors) {
             glColor3ub(color.r, color.g, color.b);
