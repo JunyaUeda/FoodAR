@@ -85,7 +85,7 @@ void EdgeFactory::createEdges(const MatSet& matSet, vector<Mat>& resultRawEdgeIm
     }
 }
 
-void EdgeFactory::createEdges(ChannelSet& channelSet, Rect& roi) {
+void EdgeFactory::createEdges(ChannelSet& channelSet, const Rect& roi) {
 
     vector<Mat> rawEdges;
     for(ChannelType type : _engagedChannels) {

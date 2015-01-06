@@ -1,7 +1,7 @@
 #include "window.h"
 
 Window::Window(QString name, Size size) {
-    _name = name.toLocal8Bit();
+    _name = name.toLocal8Bit().data();
     _size = size;
     create();
 }
@@ -28,7 +28,7 @@ std::string Window::name() const {
     
 void Window::changeName(const QString& name) {
     destroyWindow(_name);
-    _name = name.toLocal8Bit();
+    _name = name.toLocal8Bit().data();
     create();
 }
 

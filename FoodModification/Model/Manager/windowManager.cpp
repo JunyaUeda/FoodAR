@@ -14,7 +14,7 @@ WindowManager& WindowManager::getInstance() {
 }
 
 void WindowManager::createWindow(QString name) {
-	std::string windowName = name.toLocal8Bit();
+    std::string windowName = name.toLocal8Bit().data();
 	_windowNames.push_back(windowName);
     namedWindow(windowName, CV_WINDOW_NORMAL);
     resizeWindow(windowName, DEFAULT_WIDTH, DEFAULT_HEIGHT);

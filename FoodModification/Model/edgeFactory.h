@@ -14,13 +14,13 @@ public:
     static EdgeFactory& getInstance();
     void createEdges(const MatSet& matSet, vector<Mat>& resultRawEdgeImgs);
     void createEdges(const MatSet& matSet, vector<Mat>& resultRawEdgeImgs, map<ChannelType, Mat>& channelMats);
-    void createEdges(ChannelSet& channelSet, Rect& roi);
+    void createEdges(ChannelSet& channelSet, const Rect& roi);
     void updateEngagedChannels(vector<ChannelType> newList);
 private:
     EdgeFactory();
     EdgeFactory(const EdgeFactory&);
 
-    void revMergeEdges(vector<Mat>& channelEdgeImgs, Rect& roi, Mat& dstEdgeImg) {
+    void revMergeEdges(vector<Mat>& channelEdgeImgs, const Rect& roi, Mat& dstEdgeImg) {
 
         if(!channelEdgeImgs.size()) {
             return;  

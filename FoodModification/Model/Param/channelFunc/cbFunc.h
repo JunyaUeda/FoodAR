@@ -12,7 +12,7 @@ public:
     }
 
     int value(MatSet& matSet, int x, int y) {
-        return value(matSet.ycrcb(),x,y);;
+        return R(matSet.ycrcb(),x,y);;
     }
 
     int value(MatSet& matSet, Point point) {

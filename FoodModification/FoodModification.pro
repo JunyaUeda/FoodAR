@@ -8,7 +8,13 @@ QT       += core gui
 QT += xml
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
-QMAKE_MACOSX_DEPLOYMENT_TARGET = 10.9
+CONFIG += MAC_CONFIG
+MAC_CONFIG {
+    QMAKE_CXXFLAGS = -std=c++11 -stdlib=libc++ -mmacosx-version-min=10.10
+    QMAKE_LFLAGS = -std=c++11 -stdlib=libc++ -mmacosx-version-min=10.10
+}
+
+QMAKE_MACOSX_DEPLOYMENT_TARGET = 10.10
 TARGET = FoodModification
 TEMPLATE = app
 
@@ -27,7 +33,6 @@ SOURCES += main.cpp\
     Utils/xmlUtils.cpp \
     Controller/edgeController.cpp \
     Controller/baseController.cpp \
-    Controller/File/fileController.cpp \
     Controller/singleton.cpp \
     Model/features.cpp \
     Model/Param/color.cpp \
@@ -119,7 +124,6 @@ HEADERS  += \
     Controller/edgeController.h \
     definition.h \
     Controller/baseController.h \
-    Controller/File/fileController.h \
     Controller/singleton.h \
     Model/features.h \
     Model/Param/color.h \
@@ -213,15 +217,23 @@ win32:INCLUDEPATH += "C:\opencv248\build\include"
 win32:LIBS += -L"C:\opencv248\build\x86\vc12\lib"
 
 # for Mac
+unix {
 INCLUDEPATH += /usr/local/include
 DEPENDPATH += /usr/local/include
-#LIBS += -L/usr/local/lib \
-#    -lopencv_core \
-#    -lopencv_imgproc \
-#    -lopencv_highgui \
-#    -lopencv_objdetect \
-#    -lopencv_calib3d
-
+LIBS += -L/usr/local/lib \
+-lopencv_highgui \
+-lopencv_imgproc \
+-lopencv_core \
+-lopencv_calib3d \
+-lopencv_objdetect \
+-lopencv_features2d \
+-lopencv_contrib \
+-lopencv_flann \
+-lopencv_gpu \
+-lopencv_legacy \
+-lopencv_ml \
+-lopencv_video
+}
 OTHER_FILES += \
     ExtractParam.xml \
     Images/hamachi.jpg \
