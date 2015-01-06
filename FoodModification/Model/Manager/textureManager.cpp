@@ -90,7 +90,7 @@ void TextureManager::loadTextureSrcFromDir() {
         string uppercase_path;
         uppercase_path.resize(path.size());
         //すべて大文字に変換
-        std::transform(path.cbegin(), path.cend(), uppercase_path.begin(), (int (*)(int))std::toupper);
+        std::transform(path.begin(), path.end(), uppercase_path.begin(), (int (*)(int))std::toupper);
         
         for(string e : imgExtensions) {
 			//静止画の拡張子を持っている検索

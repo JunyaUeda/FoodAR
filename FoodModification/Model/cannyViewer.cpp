@@ -70,17 +70,17 @@ void CannyViewer::showCannyImgs() {
     Mat srcBGRImg, srcHSVImg, srcYCrCbImg;
     Mat bgrChannelImgs[3], hsvChannelImgs[3], ycrcbChannelImgs[3];
 
-    vector<string> channelNames = {
-        "Blue",
-        "Green",
-        "Red",
-        "Hue",
-        "Saturation",
-        "Value",
-        "Y",
-        "Cr",
-        "Cb"
-    };
+    vector<string> channelNames;
+    channelNames.push_back("Blue");
+    channelNames.push_back("Green");
+    channelNames.push_back("Red");
+    channelNames.push_back("Hue");
+    channelNames.push_back("Saturation");
+    channelNames.push_back("Value");
+    channelNames.push_back("Y");
+    channelNames.push_back("Cr");
+    channelNames.push_back("Cb");
+
     vector<string> upperTrackbarNames;
     vector<string> underTrackbarNames;
     for(int i=0; i<9; i++) {

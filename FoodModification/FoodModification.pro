@@ -9,18 +9,14 @@ QT += xml
 QT += opengl
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
-#QMAKE_CXXFLAGS += -std=c++11 -stdlib=libc++ -mmacosx-version-min=10.9
-#LIBS += -stdlib=libc++ -mmacosx-version-min=10.9
-CONFIG += c++11
-#CONFIG += c++11
 CONFIG += MAC_CONFIG
 MAC_CONFIG {
-    QMAKE_CXXFLAGS = -std=c++11 -stdlib=libstdc++ -mmacosx-version-min=10.9
-    QMAKE_LFLAGS = -std=c++11 -stdlib=libstdc++ -mmacosx-version-min=10.9
+    QMAKE_CXXFLAGS = -std=c++11 -stdlib=libc++ -mmacosx-version-min=10.10
+    QMAKE_LFLAGS = -std=c++11 -stdlib=libc++ -mmacosx-version-min=10.10
 }
 
-QMAKE_MACOSX_DEPLOYMENT_TARGET = 10.9
-QMAKE_MAC_SDK=macosx10.9
+QMAKE_MACOSX_DEPLOYMENT_TARGET = 10.10
+#QMAKE_MAC_SDK=macosx10.10
 
 TARGET = FoodModification
 TEMPLATE = app
@@ -244,20 +240,20 @@ FORMS    += \
 # for Mac
 INCLUDEPATH += /usr/local/include
 DEPENDPATH += /usr/local/include
-LIBS += -L/usr/local/lib
-#LIBS += -lopencv_core \
-#-lopencv_contrib \
-#-lopencv_core \
-#-lopencv_features2d \
-#-lopencv_flann \
-##-lopencv_gpu \
-#-lopencv_highgui \
-#-lopencv_imgproc \
-#-lopencv_legacy \
-#-lopencv_ml \
-#-lopencv_objdetect \
-#-lopencv_video \
-#-lopencv_calib3d
+LIBS += -L/usr/local/lib \
+-lopencv_highgui \
+-lopencv_imgproc \
+-lopencv_core \
+-lopencv_calib3d \
+-lopencv_objdetect \
+-lopencv_features2d \
+-lopencv_contrib \
+-lopencv_flann \
+-lopencv_gpu \
+-lopencv_legacy \
+-lopencv_ml \
+-lopencv_video
+
 
 OTHER_FILES += \
     ExtractParam.xml \

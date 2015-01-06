@@ -47,7 +47,7 @@ void BinarizationViewer::showBinarizedImgs() {
     Mat srcBGRImg, srcHSVImg, srcYCrCbImg;
     Mat bgrChannelImgs[3], hsvChannelImgs[3], ycrcbChannelImgs[3];
 
-    vector<string> channelNames = {};
+    //vector<string> channelNames;
     int trackbarInitValue = 128;
     namedWindow("Blue", CV_WINDOW_AUTOSIZE);
     namedWindow("Green", CV_WINDOW_AUTOSIZE);
