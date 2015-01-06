@@ -1,7 +1,7 @@
 #ifndef BGR3DPLOTVIEWER_H
 #define BGR3DPLOTVIEWER_H
 
-#include <../QGLViewer/qglviewer.h>
+#include <../libQGLViewer-2.6.0/QGLViewer/qglviewer.h>
 #include "../Model/Param/bgrColor.h"
 
 using namespace std;

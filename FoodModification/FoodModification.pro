@@ -299,44 +299,45 @@ unix {
   LIB_NAME = libQGLViewer*.a
   }
 
-  # LIB_DIR
-  isEmpty( LIB_DIR ) {
-  LIB_DIR = $${PREFIX}/lib
-  }
+#  # LIB_DIR
+#  isEmpty( LIB_DIR ) {
+#  LIB_DIR = $${PREFIX}/lib
+#  }
 
-  !exists( $${LIB_DIR}/$${LIB_NAME} ) {
-        exists( ../QGLViewer/$${LIB_NAME} ) {
-    #message( The library was found in ../../QGLViewer which will be set as the LIB_DIR )
-          LIB_DIR = ../QGLViewer
-  }
-  }
+#  !exists( $${LIB_DIR}/$${LIB_NAME} ) {
+#        exists( ../libQGLViewer-2.6.0/QGLViewer/$${LIB_NAME} ) {
+#    #message( The library was found in ../../QGLViewer which will be set as the LIB_DIR )
+#          LIB_DIR = ../libQGLViewer-2.6.0/QGLViewer
+#  }
+#  }
 
-  !exists( $${LIB_DIR}/$${LIB_NAME} ) {
-        exists( ../QGLViewer-build-desktop/$${LIB_NAME} ) {
-    #message( The library was found in ../../QGLViewer-build-desktop which will be set as the LIB_DIR )
-          LIB_DIR = ../QGLViewer-build-desktop
-  }
-  }
+#  !exists( $${LIB_DIR}/$${LIB_NAME} ) {
+#        exists( ../libQGLViewer-2.6.0/QGLViewer-build-desktop/$${LIB_NAME} ) {
+#    #message( The library was found in ../../QGLViewer-build-desktop which will be set as the LIB_DIR )
+#          LIB_DIR = ../libQGLViewer-2.6.0/QGLViewer-build-desktop
+#  }
+#  }
 
   macx|darwin-g++ {
   !exists( $${LIB_DIR}/$${LIB_NAME} ) {
     # DYLIB was not found, try to find Framework instead
     LIB_NAME = QGLViewer.framework/QGLViewer
-    LIB_DIR = ~/Library/Frameworks
+    #LIB_DIR = ~/Library/Frameworks
+    LIB_DIR = /Users/Okajima/Library/Frameworks
     # qmake does not handle tilde
     LIB_DIR = $$system(cd $${LIB_DIR};pwd)
 
     !exists( $${LIB_DIR}/$${LIB_NAME} ) {
-                exists( ../QGLViewer/$${LIB_NAME} ) {
+                exists( ../libQGLViewer-2.6.0/QGLViewer/$${LIB_NAME} ) {
       #message( The framework was found in ../../QGLViewer which will be set as the LIB_DIR )
-                  LIB_DIR = ../QGLViewer
+                  LIB_DIR = ../libQGLViewer-2.6.0/QGLViewer
     }
     }
 
     !exists( $${LIB_DIR}/$${LIB_NAME} ) {
-                exists( ../QGLViewer-build-desktop/$${LIB_NAME} ) {
+                exists( ../libQGLViewer-2.6.0/QGLViewer-build-desktop/$${LIB_NAME} ) {
       #message( The framework was found in ../../QGLViewer-build-desktop which will be set as the LIB_DIR )
-                  LIB_DIR = ../QGLViewer-build-desktop
+                  LIB_DIR = ../libQGLViewer-2.6.0/QGLViewer-build-desktop
     }
     }
   }
@@ -365,10 +366,10 @@ unix {
   }
 
   !exists( $${INCLUDE_DIR}/QGLViewer/qglviewer.h ) {
-        exists( ../QGLViewer/qglviewer.h ) {
+        exists( ../libQGLViewer-2.6.0/QGLViewer/qglviewer.h ) {
     # message( libQGLViewer header files were not installed in standard $${INCLUDE_DIR} directory )
     # message( Headers were found in ../.. which will be set as the INCLUDE_DIR )
-          INCLUDE_DIR = ..
+          INCLUDE_DIR = ../libQGLViewer-2.6.0
   }
   }
 
@@ -416,4 +417,147 @@ unix {
   MOC_DIR = .moc
   OBJECTS_DIR = .obj
 }
+
+
+win32 {
+  CONFIG *= debug_and_release
+
+  # Seems to be needed for Visual Studio with Intel compiler
+  DEFINES *= WIN32
+
+  !isEmpty( QGLVIEWER_STATIC ) {
+        DEFINES *= QGLVIEWER_STATIC
+  }
+
+  # INCLUDE_DIR
+  !exists( $${INCLUDE_DIR}/QGLViewer/qglviewer.h ) {
+        exists( ../../QGLViewer/qglviewer.h ) {
+          # message( libQGLViewer header files were not installed in standard $${INCLUDE_DIR} directory )
+          # message( Headers were found in ../.. which will be set as the INCLUDE_DIR )
+          INCLUDE_DIR = ../..
+        }
+  }
+
+  !exists( $${INCLUDE_DIR}/QGLViewer/qglviewer.h ) {
+        message( Unable to find QGLViewer/qglviewer.h in $${INCLUDE_DIR} )
+        error( Use qmake INCLUDE_DIR=/path/to/QGLViewerDir )
+  }
+
+  # Paths were correctly detected
+  INCLUDEPATH *= $${INCLUDE_DIR}
+  DEPENDPATH  *= $${INCLUDE_DIR}
+
+  # LIB_NAME
+  LIB_NAME = QGLViewer
+  build_pass:CONFIG(debug, debug|release) {
+        LIB_NAME = $$join(LIB_NAME,,,d)
+  }
+  LIB_NAME = $$join(LIB_NAME,,,2) #TODO 2
+
+  win32-g++: LIB_FILE_NAME = lib$${LIB_NAME}.a
+  !win32-g++: LIB_FILE_NAME = $${LIB_NAME}.lib
+
+  isEmpty( LIB_DIR ) {
+        LIB_DIR = C:\\Windows\\System32
+  }
+
+  !exists( $${LIB_DIR}/$${LIB_FILE_NAME} ) {
+        exists( ../../QGLViewer/$${LIB_FILE_NAME} ) {
+          LIB_DIR = ../../QGLViewer
+        }
+  }
+
+  !exists( $${LIB_DIR}/$${LIB_FILE_NAME} ) {
+         exists( ../../QGLViewer/Release/$${LIB_FILE_NAME} ) {
+           LIB_DIR = ../../QGLViewer/Release
+         }
+  }
+
+  !exists( $${LIB_DIR}/$${LIB_FILE_NAME} ) {
+         exists( ../../QGLViewer/release/$${LIB_FILE_NAME} ) {
+           LIB_DIR = ../../QGLViewer/release
+         }
+  }
+
+  !exists( $${LIB_DIR}/$${LIB_FILE_NAME} ) {
+        exists( ../../QGLViewer/Debug/$${LIB_FILE_NAME} ) {
+          LIB_DIR = ../../QGLViewer/Debug
+        }
+  }
+
+  !exists( $${LIB_DIR}/$${LIB_FILE_NAME} ) {
+        exists( ../../QGLViewer/debug/$${LIB_FILE_NAME} ) {
+          LIB_DIR = ../../QGLViewer/debug
+        }
+  }
+
+  !exists( $${LIB_DIR}/$${LIB_FILE_NAME} ) {
+        exists( ../../QGLViewer-build-desktop/$${LIB_FILE_NAME} ) {
+          LIB_DIR = ../../QGLViewer-build-desktop
+        }
+  }
+
+  !exists( $${LIB_DIR}/$${LIB_FILE_NAME} ) {
+         exists( ../../QGLViewer-build-desktop/Release/$${LIB_FILE_NAME} ) {
+           LIB_DIR = ../../QGLViewer-build-desktop/Release
+         }
+  }
+
+  !exists( $${LIB_DIR}/$${LIB_FILE_NAME} ) {
+         exists( ../../QGLViewer-build-desktop/release/$${LIB_FILE_NAME} ) {
+           LIB_DIR = ../../QGLViewer-build-desktop/release
+         }
+  }
+
+  !exists( $${LIB_DIR}/$${LIB_FILE_NAME} ) {
+        exists( ../../QGLViewer-build-desktop/Debug/$${LIB_FILE_NAME} ) {
+          LIB_DIR = ../../QGLViewer-build-desktop/Debug
+        }
+  }
+
+  !exists( $${LIB_DIR}/$${LIB_FILE_NAME} ) {
+        exists( ../../QGLViewer-build-desktop/debug/$${LIB_FILE_NAME} ) {
+          LIB_DIR = ../../QGLViewer-build-desktop/debug
+        }
+  }
+
+  !exists( $${LIB_DIR}/$${LIB_FILE_NAME} ) {
+        message( Unable to find $${LIB_FILE_NAME} in $${LIB_DIR} )
+        error( Use qmake LIB_DIR=/path/to/QGLViewer/$${LIB_FILE_NAME} )
+  }
+
+  win32-g++ {
+        # The actual directory where the library/framework was found
+        # LIB_DIR_ABSOLUTE_PATH = $$system(cd $${LIB_DIR} && cd)
+
+        isEmpty( QGLVIEWER_STATIC ) {
+          LIBS *= -L$${LIB_DIR} -l$${LIB_NAME}
+        } else {
+          LIBS *= $${LIB_DIR}/$${LIB_FILE_NAME}
+        }
+  }
+
+  !win32-g++ {
+        # Use the Qt DLL version. Only needed with Qt3
+
+        LIBS *= -L$${LIB_DIR} -l$${LIB_NAME}
+  }
+}
+
+
+macx|darwin-g++ {
+  ICON = $${INCLUDEPATH}/QGLViewer/qglviewer.icns
+}
+
+win32 {
+   !designer {
+      exists( ../qglviewer.rc ) {
+             RC_FILE = ../qglviewer.rc
+          }
+      exists( ../examples/qglviewer.rc ) {
+             RC_FILE = ../examples/qglviewer.rc
+          }
+   }
+}
+
 

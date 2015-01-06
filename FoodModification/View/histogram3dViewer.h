@@ -2,7 +2,7 @@
 #ifndef HISTOGRAM3DVIEWER_H
 #define HISTOGRAM3DVIEWER_H
 
-#include <../QGLViewer/qglviewer.h>
+#include <../libQGLViewer-2.6.0/QGLViewer/qglviewer.h>
 #include "../Model/Param/xyYColor.h"
 #include "../Model/Util/cvUtil.h"
 
