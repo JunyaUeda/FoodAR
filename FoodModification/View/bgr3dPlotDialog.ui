@@ -35,7 +35,7 @@
     <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
    </property>
   </widget>
-  <widget class="BGR3dPlotViewer" name="bgrPlot3dView" native="true">
+  <widget class="BGR3dPlotAreaWidget" name="bgr3dPlotAreaWidget" native="true">
    <property name="geometry">
     <rect>
      <x>50</x>
@@ -64,9 +64,9 @@
  </widget>
  <customwidgets>
   <customwidget>
-   <class>BGR3dPlotViewer</class>
+   <class>BGR3dPlotAreaWidget</class>
    <extends>QWidget</extends>
-   <header>bgr3dPlotViewer.h</header>
+   <header location="global">bgr3dPlotAreaWidget.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>
