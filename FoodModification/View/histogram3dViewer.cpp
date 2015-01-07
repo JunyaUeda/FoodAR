@@ -3,13 +3,12 @@
 using namespace std;
 using namespace qglviewer;
 
-#define A_TEXTURE_PATH "../FoodModification/Images/GL/colormap.png"
+#define A_TEXTURE_PATH "/Users/Okajima/projects/FoodAR/FoodModification/Images/GL/colormap.png"
 
 Histogram3dViewer::Histogram3dViewer(QWidget *parent) :
     QGLViewer(parent) 
 {
-    _textureSrcImg = imread(A_TEXTURE_PATH, 1);
-    imshow("textureSrc", _textureSrcImg);
+    _textureSrcImg = cv::imread(A_TEXTURE_PATH, 1);
 }
 
 // Draws a spiral
