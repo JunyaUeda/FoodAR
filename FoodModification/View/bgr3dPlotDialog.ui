@@ -51,7 +51,7 @@
     </sizepolicy>
    </property>
   </widget>
-  <widget class="Histogram3dViewer" name="widget" native="true">
+  <widget class="Histogram3dAreaWidget" name="histogram3dViewer" native="true">
    <property name="geometry">
     <rect>
      <x>810</x>
@@ -66,13 +66,13 @@
   <customwidget>
    <class>BGR3dPlotAreaWidget</class>
    <extends>QWidget</extends>
-   <header location="global">bgr3dPlotAreaWidget.h</header>
+   <header>bgr3dPlotAreaWidget.h</header>
    <container>1</container>
   </customwidget>
   <customwidget>
-   <class>Histogram3dViewer</class>
+   <class>Histogram3dAreaWidget</class>
    <extends>QWidget</extends>
-   <header location="global">histogram3dViewer.h</header>
+   <header location="global">histogram3dAreaWidget.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

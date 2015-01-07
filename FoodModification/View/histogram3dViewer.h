@@ -1,7 +1,7 @@
 #ifndef HISTOGRAM3DVIEWER_H
 #define HISTOGRAM3DVIEWER_H
 
-#include <../QGLViewer/qglviewer.h>
+#include <qglviewer.h>
 #include "../Model/Param/bgrColor.h"
 #include "../Model/Util/cvUtil.h"
 
