@@ -1,7 +1,7 @@
 #ifndef BGR3DPLOTVIEWER_H
 #define BGR3DPLOTVIEWER_H
 
-#include <../QGLViewer/qglviewer.h>
+#include <qglviewer.h>
 
 class BGR3dPlotViewer : public QGLViewer
 {
