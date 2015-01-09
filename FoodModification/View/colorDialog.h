@@ -2,8 +2,8 @@
 #define COLORDIALOG_H
 
 #include <QDialog>
-#include "../Utils/opencvUtils.h"
-#include "../Controller/mainController.h"
+#include <Model/Util/cvUtil.h>
+#include "Controller/mainController.h"
 
 namespace Ui {
 class ColorDialog;

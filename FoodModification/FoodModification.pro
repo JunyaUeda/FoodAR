@@ -24,8 +24,6 @@ TEMPLATE = app
 SOURCES += main.cpp\
     View/calibrateDialog.cpp \
     app.cpp \
-    Utils/opencvBase.cpp \
-    Utils/opencvUtils.cpp \
     Controller/calibrationController.cpp \
     View/mainWindow.cpp \
     Controller/mainController.cpp \
@@ -124,8 +122,6 @@ SOURCES += main.cpp\
 HEADERS  += \
     View/calibrateDialog.h \
     app.h \
-    Utils/opencvBase.h \
-    Utils/opencvUtils.h \
     Controller/calibrationController.h \
     View/mainWindow.h \
     Controller/mainController.h \
@@ -232,6 +228,9 @@ FORMS    += \
     View/mainWindow.ui \
     View/colorDialog.ui \
     View/bgr3dPlotDialog.ui
+
+#ProjectDirectory path
+INCLUDEPATH += $$PWD
 
 # OpenCV settings
 # for Windows
@@ -547,9 +546,9 @@ win32 {
 }
 
 
-macx|darwin-g++ {
-  ICON = $${INCLUDEPATH}/QGLViewer/qglviewer.icns
-}
+#macx|darwin-g++ {
+#  ICON = $${INCLUDEPATH}/QGLViewer/qglviewer.icns
+#}
 
 win32 {
    !designer {

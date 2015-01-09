@@ -18,7 +18,7 @@
 #include "View/mainWindow.h"
 #include "Controller/mainController.h"
 #include "Controller/calibrationController.h"
-#include "Utils/opencvBase.h"
+#include "Model/Util/cvUtil.h"
 
 #define FILEPATH "ExtractParam.xml"
 

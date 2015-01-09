@@ -2,15 +2,15 @@
 #define BGR3DPLOTCONTROLLER_H
 
 #include <QDebug>
-#include "../View/bgr3dPlotViewer.h"
-#include "../View/histogram3dViewer.h"
-#include "../Model/Manager/inputManager.h"
-#include "../Model/Manager/regionManager.h"
-#include "../Model/Param/bgrColor.h"
-#include "../Model/Param/xyzColor.h"
-#include "../Model/Param/xyYColor.h"
-#include "../Model/Util/cvUtil.h"
-#include "../Model/mainProcedure.h"
+#include "View/bgr3dPlotViewer.h"
+#include "View/histogram3dViewer.h"
+#include "Model/Manager/inputManager.h"
+#include "Model/Manager/regionManager.h"
+#include "Model/Param/bgrColor.h"
+#include "Model/Param/xyzColor.h"
+#include "Model/Param/xyYColor.h"
+#include "Model/Util/cvUtil.h"
+#include "Model/mainProcedure.h"
 
 class BGR3DPlotController {
 /*method*/

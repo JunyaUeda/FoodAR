@@ -2,12 +2,12 @@
 #define MAINCONTROLLER_H
 
 #include "opencv2/opencv.hpp"
-#include "../Utils/opencvUtils.h"
-#include "./convertController.h"
-#include "../Model/mainProcedure.h"
-#include "../Model/channelViewer.h"
-#include "../Model/binarizationViewer.h"
-#include "../Model/cannyViewer.h"
+#include "Model/Util/cvUtil.h"
+#include "convertController.h"
+#include "Model/mainProcedure.h"
+#include "Model/channelViewer.h"
+#include "Model/binarizationViewer.h"
+#include "Model/cannyViewer.h"
 
 
 class MainController {

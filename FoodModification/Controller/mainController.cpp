@@ -1,5 +1,5 @@
 #include "mainController.h"
-#include "../Utils/opencvUtils.h"
+#include "Model/Util/cvUtil.h"
 
 #define THRESHOLD1 30.0
 #define THRESHOLD2 60.0

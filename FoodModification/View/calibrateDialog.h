@@ -3,7 +3,7 @@
 
 #include <QDialog>
 #include "../Controller/calibrationController.h"
-#include "../Utils/opencvBase.h"
+#include "Model/Util/cvUtil.h"
 #include "../Controller/Param/calibrateClickParam.h"
 #include "../Model/Manager/cameraManager.h"
 

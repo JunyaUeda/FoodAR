@@ -1,7 +1,7 @@
 #ifndef CONVERTCONTROLLER_H
 #define CONVERTCONTROLLER_H
 
-#include "../Utils/opencvBase.h"
+#include "Model/Util/cvUtil.h"
 #include "../Model/Executor/converter.h"
 #include "../Model/Executor/calibrator.h"
 

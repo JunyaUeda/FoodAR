@@ -3,17 +3,17 @@
 #include <QDir>
 #include <QMainWindow>
 #include <QDebug>
-#include "../Utils/opencvUtils.h"
-#include "./colorDialog.h"
-#include "./calibrateDialog.h"
-#include "./bgr3dPlotDialog.h"
-#include "../Controller/mainController.h"
-#include "../Controller/edgeController.h"
-#include "../Controller/extractionController.h"
-#include "../definition.h"
-#include "../Controller/textureController.h"
-#include "../Controller/cameraController.h"
-#include "../Controller/windowController.h"
+#include "Model/Util/cvUtil.h"
+#include "colorDialog.h"
+#include "calibrateDialog.h"
+#include "bgr3dPlotDialog.h"
+#include "Controller/mainController.h"
+#include "Controller/edgeController.h"
+#include "Controller/extractionController.h"
+#include "definition.h"
+#include "Controller/textureController.h"
+#include "Controller/cameraController.h"
+#include "Controller/windowController.h"
 
 
 #define DIRPATH "../FoodModification/Images/"

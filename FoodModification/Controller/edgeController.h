@@ -2,7 +2,7 @@
 #define EDGECONTROLLER_H
 
 #include "../Model/TypeDef.h"
-#include "../Utils/opencvUtils.h"
+#include "Model/Util/cvUtil.h"
 
 class EdgeController {
 

@@ -2,7 +2,7 @@
 #define BGR3DPLOTDIALOG_H
 
 #include <QDialog>
-#include "../Controller/bgr3dPlotController.h"
+#include "Controller/bgr3dPlotController.h"
 
 namespace Ui {
 	class BGR3DPlotDialog;
