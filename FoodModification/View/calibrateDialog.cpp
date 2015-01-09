@@ -54,6 +54,7 @@ void CalibrateDialog::on_captureButton_clicked() {
 */
 void CalibrateDialog::timerEvent(QTimerEvent *event) {
 
+    event->timerId();//for warning unused
     srcBGRImg = _cameraManager.getFrame();
     show(srcBGRImg);
 
@@ -77,8 +78,6 @@ void CalibrateDialog::mousePressEvent(QMouseEvent* event) {
             clickParam->clickedPoints[0].push_back(Point(clickedPoint.x(),clickedPoint.y()));
             pts = &clickParam->clickedPoints[0][0];
             fillConvexPoly(clickParam->refImg, pts, clickParam->leftClickedCounts, Scalar(0,0,255));
-	        // clickParam->clickedPoints[0][clickParam->leftClickedCounts-1] = Point(clickedPoint.x(),clickedPoint.y());
-	        // fillConvexPoly(clickParam->refImg, clickParam->clickedPoints[0], clickParam->leftClickedCounts, Scalar(0,0,255));
 	    	break;
 
 	    case Qt::RightButton:
@@ -86,10 +85,9 @@ void CalibrateDialog::mousePressEvent(QMouseEvent* event) {
             clickParam->clickedPoints[1].push_back(Point(clickedPoint.x(),clickedPoint.y()));
             pts = &clickParam->clickedPoints[1][0];
             fillConvexPoly(clickParam->refImg, pts, clickParam->rightClickedCounts, Scalar(0,255,0));
-	        // clickParam->clickedPoints[1][clickParam->rightClickedCounts-1] = Point(clickedPoint.x(),clickedPoint.y());
-	        // fillConvexPoly(clickParam->refImg, clickParam->clickedPoints[1], clickParam->rightClickedCounts, Scalar(0,255,0));
 	    	break;
-
+        default:
+            break;
     }
 
     show(clickParam->refImg);

@@ -27,10 +27,6 @@ public:
     void closeCannyImgs();
 	void setResizeFlag(bool flag);
 	void setDstSize(Size size);
-	void changeShiftValue(int hShift, int sShift, int vShift);
-    void changeShiftValue(int value, int colorIndex);
-    void setAlpha(double value);
-    void setNoTexture(bool flag);
 
 private:
     MainProcedure& _mainProcedure = MainProcedure::getInstance();

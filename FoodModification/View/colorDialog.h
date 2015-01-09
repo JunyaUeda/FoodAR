@@ -18,9 +18,7 @@ public:
     ~ColorDialog();
 
 private slots:
- 	void on_hShiftSlider_actionTriggered(int action);
-    void on_sShiftSlider_actionTriggered(int action);
-    void on_vShiftSlider_actionTriggered(int action);
+
 
    
 

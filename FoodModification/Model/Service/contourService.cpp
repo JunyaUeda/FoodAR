@@ -14,15 +14,14 @@ vPs ContourService::getTargetContours(Mat srcBinaryImg) {
 *特定の輪郭を塗りつぶし、それ以外を黒にする.
 *@note 
 */
-void ContourService::fillSpecifiedContour(Mat filledImg, vPs& contours, int lineType, int minSize, int specifiedIndex) {
+void ContourService::fillSpecifiedContour(Mat filledImg, vPs& contours, int lineType, int specifiedIndex) {
 
     if(!contours.empty()) {
         return;
     }
 
-    for(int i=0; i<contours.size(); ++i) {
+    for(int i=0; i<static_cast<int>(contours.size()); ++i) {
 
-        size_t count = contours[i].size();
         if( i== specifiedIndex) {
             drawContours(filledImg, contours, i, Scalar(255, 255, 255), CV_FILLED, lineType);
         } else {
@@ -46,12 +45,12 @@ vPs ContourService::extractContoursWithPoints(vPs& srcContours, vP& points, int 
 
     vPs dstContours;
     
-    for(int i=0; i<srcContours.size(); ++i) {
+    for(int i=0; i<static_cast<int>(srcContours.size()); ++i) {
         size_t count = srcContours[i].size();
-        if(count < minSize) {
+        if(static_cast<int>(count)< minSize) {
             continue;
         } else {
-            for(int j=0; j<points.size(); j++) {
+            for(int j=0; j<static_cast<int>(points.size()); j++) {
                 if(pointPolygonTest(srcContours[i], points[j], false)) {
                     dstContours.push_back(srcContours[i]);
                    
@@ -72,7 +71,7 @@ void ContourService::contourAreasAndCenters(vPs& contours, vector<double>& areas
     }
 
     //色による抽出領域の面積を求める
-    for(int i=0; i<contours.size(); i++) {
+    for(int i=0; i<static_cast<int>(contours.size()); i++) {
         areas[i] = contourArea(contours[i]);
     }
 
@@ -88,11 +87,11 @@ void ContourService::calcurateCenter(vPs& contours, vP &mCenters) {
     }
 
     vector<Moments> mu(contours.size());
-    for(int i=0; i<contours.size(); i++) {
+    for(int i=0; i<static_cast<int>(contours.size()); i++) {
         mu[i] = moments(contours[i], false);
     }
     //std::vector<cv::Point> mCenters(contours2.size());
-    for(int i=0; i<contours.size(); i++) {
+    for(int i=0; i<static_cast<int>(contours.size()); i++) {
         mCenters[i] = Point(mu[i].m10/mu[i].m00, mu[i].m01/mu[i].m00);
     }
 

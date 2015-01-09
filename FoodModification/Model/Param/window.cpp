@@ -33,7 +33,7 @@ void Window::changeName(const QString& name) {
 }
 
 void onMouse(int event, int x, int y, int flags, void* param) {
- 
+
 	Mat* img = (Mat*) param;
     switch(event) {
         case cv::EVENT_LBUTTONDOWN:

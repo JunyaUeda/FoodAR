@@ -81,35 +81,8 @@ void MainWindow::on_alphaSlider_valueChanged(int value)
     _convertController.updateAlpha(alpha);
 }
 
-void MainWindow::on_hueLineEdit_textChanged(const QString &arg1)
-{
 
-}
 
-void MainWindow::on_hueSlider_valueChanged(int value)
-{
-
-}
-
-void MainWindow::on_saturationLineEdit_textChanged(const QString &arg1)
-{
-
-}
-
-void MainWindow::on_saturationSlider_valueChanged(int value)
-{
-
-}
-
-void MainWindow::on_valueLineEdit_textChanged(const QString &arg1)
-{
-
-}
-
-void MainWindow::on_valueSlider_valueChanged(int value)
-{
-
-}
 //テクスチャ切り替え
 void MainWindow::on_textureComboBox_currentIndexChanged(const QString &arg1) {
     if(arg1.contains(".")) {
@@ -141,7 +114,9 @@ void MainWindow::on_maguroRadioButton_clicked()
 
 void MainWindow::on_coffeeRadioButton_clicked(bool checked)
 {
-    _convertController.setUpForCoffee();
+    if(checked) {
+        _convertController.setUpForCoffee();
+    }
 }
 
 /**
@@ -176,10 +151,12 @@ void MainWindow::on_radioButton_dstSizeLarge_clicked() {
 
 
 void MainWindow::on_illuminationSlider_valueChanged(int value) {
+    value =0; //for warning
 	//convertController.changeIntensityParam(true, value);
 }
 
 void MainWindow::on_horizontalSlider_valueChanged(int value) {
+    value=0;//for warning
 	//convertController.changeZParam(true, value);
 }
 
@@ -383,7 +360,8 @@ ChannelType MainWindow::aqcuireChannelType(int channelNumber) {
             return ChannelType::cr;
         case 8:
             return ChannelType::cb;
-
+        default:
+            return ChannelType::blue;
     }
 }
 
@@ -439,8 +417,10 @@ void MainWindow::on_redBinarizationThresholdSlider_valueChanged(int value)
 }
 void MainWindow::on_hueBinarizationThresholdLineEdit_textChanged(const QString &arg1)
 {
-     _extractionController.updateBinarizationThreshold(value, 3);
-    ui->hueBinarizationThresholdLineEdit->setText(QString::number(value));
+    int value = arg1.toInt();
+    _extractionController.updateBinarizationThreshold(value, 3);
+    ui->hueBinarizationThresholdSlider->setSliderPosition(value);
+
 }
 
 void MainWindow::on_hueBinarizationThresholdSlider_valueChanged(int value)
@@ -451,8 +431,9 @@ void MainWindow::on_hueBinarizationThresholdSlider_valueChanged(int value)
 
 void MainWindow::on_saturationBinarizationThresholdLineEdit_textChanged(const QString &arg1)
 {
-     _extractionController.updateBinarizationThreshold(value, 4);
-    ui->saturationBinarizationThresholdLineEdit->setText(QString::number(value));
+    int value = arg1.toInt();
+    _extractionController.updateBinarizationThreshold(value, 4);
+    ui->saturationBinarizationThresholdSlider->setSliderPosition(value);
 }
 
 void MainWindow::on_saturationBinarizationThresholdSlider_valueChanged(int value)
@@ -463,8 +444,9 @@ void MainWindow::on_saturationBinarizationThresholdSlider_valueChanged(int value
 
 void MainWindow::on_valueBinarizationThresholdLineEdit_textChanged(const QString &arg1)
 {
-     _extractionController.updateBinarizationThreshold(value, 5);
-    ui->valueBinarizationThresholdLineEdit->setText(QString::number(value));
+    int value = arg1.toInt();
+    _extractionController.updateBinarizationThreshold(value, 5);
+    ui->valueBinarizationThresholdSlider->setSliderPosition(value);
 }   
 
 void MainWindow::on_valueBinarizationThresholdSlider_valueChanged(int value)
@@ -501,8 +483,9 @@ void MainWindow::on_crBinarizationThresholdSlider_valueChanged(int value)
 
 void MainWindow::on_cbBinarizationThresholdLineEdit_textChanged(const QString &arg1)
 {
-     _extractionController.updateBinarizationThreshold(value, 8);
-    ui->cbBinarizationThresholdLineEdit->setText(QString::number(value));
+    int value = arg1.toInt();
+    _extractionController.updateBinarizationThreshold(value, 8);
+    ui->cbBinarizationThresholdSlider->setSliderPosition(value);
 }
 
 void MainWindow::on_cbBinarizationThresholdSlider_valueChanged(int value)

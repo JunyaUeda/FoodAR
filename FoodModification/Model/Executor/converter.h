@@ -24,16 +24,16 @@ public:
         if(_isOriginalValueUsed) {
 
             if(_textureMediaType != MediaType::no) {
-                overlapTexture(srcSet, textureImg, extractedRegion, dstBGRImg);
+                overlapTexture(textureImg, extractedRegion, dstBGRImg);
             } 
             convertHSV(srcSet, extractedRegion, dstBGRImg);
 
         } else {
 
             if(_textureMediaType != MediaType::no) {
-                overlapTextureWithAverageCalc(srcSet, textureImg, extractedRegion, dstBGRImg);
+                overlapTextureWithAverageCalc(textureImg, extractedRegion, dstBGRImg);
             } 
-            convertHSVWithTextureValue(srcSet, extractedRegion, dstBGRImg);
+            convertHSVWithTextureValue(extractedRegion, dstBGRImg);
         }
         
 
@@ -60,11 +60,12 @@ public:
     void setOriginalValueUsedFlag(bool flag) {
         _isOriginalValueUsed = flag;
     }
+
 private:
 	Converter();
     Converter(const Converter&);
 
-    void overlapTexture(const MatSet& srcSet, const Mat& textureImg, const Region& extractedRegion, Mat& dstBGRImg) {
+    void overlapTexture(const Mat& textureImg, const Region& extractedRegion, Mat& dstBGRImg) {
         Mat dstHSVImg;
         // cvtColor(dstBGRImg, dstHSVImg, CV_BGR2HSV);
         // for(int y=0; y<srcSet.size().height; y++) {
@@ -226,7 +227,7 @@ private:
         // underTolerances[8] = cbUnderTolerance;
         // _featureReference.updateMedianAndTolerance(medians, upperTolerances, underTolerances);
     }
-    void overlapTextureWithAverageCalc(const MatSet& srcSet, const Mat& textureImg, const Region& extractedRegion, Mat& dstBGRImg) {
+    void overlapTextureWithAverageCalc(const Mat& textureImg, const Region& extractedRegion, Mat& dstBGRImg) {
         // vint sum(9,0);
         // int pixelSum=0;
         // vint averages(9,0);
@@ -293,7 +294,7 @@ private:
         cvtColor(dstHSVImg, dstBGRImg, CV_HSV2BGR);
     }
 
-    void convertHSVWithTextureValue(const MatSet& srcSet, const Region& extractedRegion, Mat& dstBGRImg) {
+    void convertHSVWithTextureValue(const Region& extractedRegion, Mat& dstBGRImg) {
         Mat dstHSVImg;
         cvtColor(dstBGRImg, dstHSVImg, CV_BGR2HSV);
 

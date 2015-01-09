@@ -7,7 +7,7 @@
 class ContourCountState {
 public:
 	ContourCountState();
-    virtual void drawAndCalcRegion(Contours& contours) {}
+    virtual void drawAndCalcRegion(Contours& contours)=0;
 };
 
 #endif // CONTOURCOUNTSTATE_H

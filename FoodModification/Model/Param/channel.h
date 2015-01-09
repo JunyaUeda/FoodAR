@@ -8,7 +8,7 @@ class Channel {
 /*property*/
 private:
     ChannelFunc _channelFunc;
-    int _value;
+
 public:
     Channel();
 };

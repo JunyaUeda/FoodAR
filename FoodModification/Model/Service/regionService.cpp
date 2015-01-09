@@ -145,8 +145,7 @@ QVi RegionService::calcTolerance(const MatSet& matSet, QLP region, QVi averages)
 
 int RegionService::findTolerance(int average, QVi histogram, int pixcelNum) {
     int sum =0;
-    bool maxFlag = false;
-    bool minFlag = false;
+
     int result =0;
     for(result=0; sum < pixcelNum*0.8; result++) {
         if((average+result) > 255) {

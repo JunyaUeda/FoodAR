@@ -28,13 +28,13 @@ public:
     }
 
     void updateAverages(vint averages) {
-        for(int i=0; i<averages.size(); i++) {
+        for(int i=0; i< static_cast<int>(averages.size()); i++) {
             _channelThresholds[i].updateAverage(averages[i]);
         }
     }
 
     void updateMedianAndTolerance(vint medians, vint upperTolerances, vint underTolerances) {
-        for(int i=0; i<medians.size(); i++) {
+        for(int i=0; i<static_cast<int>(medians.size()); i++) {
             _channelThresholds[i].updateMedianAndTolerance(medians[i], upperTolerances[i], underTolerances[i]);
         }
     }

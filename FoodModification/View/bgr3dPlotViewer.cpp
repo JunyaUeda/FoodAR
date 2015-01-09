@@ -29,7 +29,7 @@ void BGR3dPlotViewer::draw() {
 
     glPushMatrix();
     glPointSize(5.0);
-    float normalizeScale = 1.0/255.0;
+
     glBegin(GL_POINTS);
         for(BGRColor color : _colors) {
             glColor3ub(color.r, color.g, color.b);

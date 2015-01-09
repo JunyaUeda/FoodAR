@@ -95,7 +95,7 @@ void TextureManager::loadTextureSrcFromDir() {
         for(string e : imgExtensions) {
 			//静止画の拡張子を持っている検索
 			unsigned int result = uppercase_path.find(e);
-			if(result != String::npos) {
+            if(result != static_cast<unsigned int>(std::string::npos)) {
                  addTexture(MediaType::still, TEXTURE_DIRPATH+path, path);
                  break;
              }
@@ -104,7 +104,7 @@ void TextureManager::loadTextureSrcFromDir() {
         for(string e : movieExtensions) {
             //動画の拡張子を持っているか検索
 			unsigned int result = uppercase_path.find(e);
-			if(result != String::npos) {
+            if(result != static_cast<unsigned int>(std::string::npos)) {
 				addTexture(MediaType::movie, TEXTURE_DIRPATH+path, path);
                 break;
             }

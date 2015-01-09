@@ -27,31 +27,4 @@ ColorDialog::~ColorDialog()
     delete ui;
 }
 
-void ColorDialog::on_hShiftSlider_actionTriggered(int action) {
-
-	int value = ui->hShiftSlider->value();
-	ui->hShiftLabel->setText(QString::number(value));
-	const int HUE = 0;
-	mainController.changeShiftValue(value, HUE);
-
-}
-
-void ColorDialog::on_sShiftSlider_actionTriggered(int action) {
-
-	int value = ui->sShiftSlider->value();
-	ui->sShiftLabel->setText(QString::number(value));
-	const int SATURATION = 1;
-	mainController.changeShiftValue(value, SATURATION);
-
-}
-
-void ColorDialog::on_vShiftSlider_actionTriggered(int action) {
-
-	int value = ui->vShiftSlider->value();
-	ui->vShiftLabel->setText(QString::number(value));
-	const int VALUE = 2;
-	mainController.changeShiftValue(value, VALUE);
-
-}
-
 

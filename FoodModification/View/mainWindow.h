@@ -44,12 +44,7 @@ private slots:
     //alpha
     void on_alphaLineEdit_textChanged(const QString &arg1);
     void on_alphaSlider_valueChanged(int value);
-    void on_hueLineEdit_textChanged(const QString &arg1);
-    void on_hueSlider_valueChanged(int value);
-    void on_saturationLineEdit_textChanged(const QString &arg1);
-    void on_saturationSlider_valueChanged(int value);
-    void on_valueLineEdit_textChanged(const QString &arg1);
-    void on_valueSlider_valueChanged(int value);
+
     //テクスチャ切り替え
     void on_textureComboBox_currentIndexChanged(const QString &arg1);
     //フルスクリーン

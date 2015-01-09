@@ -11,7 +11,6 @@ class FeatureReference {
 /*method*/
 public:
     static FeatureReference& getInstance();
-    void loadFeaturesFromFile(QDomDocument doc);
     void updateAverages(vint averages) {
         _colorThresholds[1].updateAverages(averages);
     }
@@ -52,7 +51,7 @@ public:
     void displayThreshold();
 
     int channelThresholdDegree(ChannelType type, int index){
-        return _colorThresholds[0].channelThresholdDegree(type); //ほんとはindexで区別すべし
+        return _colorThresholds[index].channelThresholdDegree(type); //ほんとはindexで区別すべし
     }
 private:
     FeatureReference();

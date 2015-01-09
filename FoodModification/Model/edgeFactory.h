@@ -13,7 +13,7 @@ class EdgeFactory {
 public:
     static EdgeFactory& getInstance();
     void createEdges(const MatSet& matSet, vector<Mat>& resultRawEdgeImgs);
-    void createEdges(const MatSet& matSet, vector<Mat>& resultRawEdgeImgs, map<ChannelType, Mat>& channelMats);
+    void createEdges(vector<Mat>& resultRawEdgeImgs, map<ChannelType, Mat>& channelMats);
     void createEdges(ChannelSet& channelSet, const Rect& roi);
     void updateEngagedChannels(vector<ChannelType> newList);
 private:

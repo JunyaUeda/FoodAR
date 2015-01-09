@@ -16,10 +16,6 @@ FeatureReference& FeatureReference::getInstance() {
     return instance;
 }
 
-void FeatureReference::loadFeaturesFromFile(QDomDocument doc) {
-
-	//loadAverage(doc);
-}
 
 
 

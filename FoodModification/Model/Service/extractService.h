@@ -6,7 +6,7 @@
 #include "../Param/matSet.h"
 #include "../featureReference.h"
 #include "../SDK/opencv/opencvApi.h"
-#include "contourService.h"
+
 
 #define LINK_EIGHT 8
 #define LINK_FOUR 4
@@ -43,8 +43,6 @@ public:
 private:
 	Condition& _condition 				= Condition::getInstance();
 	FeatureReference& _featureReference = FeatureReference::getInstance();
-    ContourService* _contourService;
-	
 
 };
 

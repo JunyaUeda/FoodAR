@@ -15,6 +15,7 @@ public:
         return G(matSet.hsv(),x,y);
     }
 
+    using ChannelFunc::value;
     int value(MatSet& matSet, Point point) {
         return value(matSet, point.x, point.y);
     }

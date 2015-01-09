@@ -55,7 +55,7 @@ private:
         }
         size_t max=0;
         int indexForMaxArea=-1;
-        for(int i=0; i<contours.size(); ++i) {
+        for(int i=0; i<static_cast<int>(contours.size()); ++i) {
             size_t count = contours[i].size();
             //if(count < 300 || count > 1000) continue;
 
@@ -80,7 +80,7 @@ private:
         const int THIRD = 2;
 
         if(contours.size() > 0) {
-            for(int i=0; i<contours.size(); ++i) {
+            for(int i=0; i<static_cast<int>(contours.size()); ++i) {
                 size_t count = contours[i].size();
                 //if(count < 300 || count > 1000) continue;
 
