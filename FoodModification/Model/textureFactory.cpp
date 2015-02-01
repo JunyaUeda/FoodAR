@@ -54,6 +54,7 @@ void TextureFactory::create(Mat& aTexture) {
     // circle(aTexture, region.rotatedRects()[i].center, 10, cv::Scalar(0,200,0), 8, 8);
     // rectangle(aTexture, rect.tl(), rect.br(), Scalar(255,0,255), 2);
     //for (int i = 0; i < 4; i++) line(aTexture, vertices[i], vertices[(i+1)%4], Scalar(0,255,0), 4, 8, 0);
+    imshow("texture", aTexture);
         
 }
 
