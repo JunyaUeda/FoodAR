@@ -212,6 +212,9 @@
           <height>21</height>
          </rect>
         </property>
+        <property name="text">
+         <string>0</string>
+        </property>
        </widget>
        <widget class="QSlider" name="hueSlider">
         <property name="geometry">
@@ -221,6 +224,12 @@
           <width>19</width>
           <height>160</height>
          </rect>
+        </property>
+        <property name="maximum">
+         <number>180</number>
+        </property>
+        <property name="pageStep">
+         <number>1</number>
         </property>
         <property name="orientation">
          <enum>Qt::Vertical</enum>
@@ -248,6 +257,9 @@
           <height>21</height>
          </rect>
         </property>
+        <property name="text">
+         <string>0</string>
+        </property>
        </widget>
        <widget class="QSlider" name="saturationSlider">
         <property name="geometry">
@@ -257,6 +269,18 @@
           <width>19</width>
           <height>160</height>
          </rect>
+        </property>
+        <property name="minimum">
+         <number>-250</number>
+        </property>
+        <property name="maximum">
+         <number>250</number>
+        </property>
+        <property name="pageStep">
+         <number>1</number>
+        </property>
+        <property name="value">
+         <number>0</number>
         </property>
         <property name="orientation">
          <enum>Qt::Vertical</enum>
@@ -284,6 +308,9 @@
           <height>21</height>
          </rect>
         </property>
+        <property name="text">
+         <string>0</string>
+        </property>
        </widget>
        <widget class="QSlider" name="valueSlider">
         <property name="geometry">
@@ -293,6 +320,15 @@
           <width>19</width>
           <height>160</height>
          </rect>
+        </property>
+        <property name="minimum">
+         <number>-250</number>
+        </property>
+        <property name="maximum">
+         <number>250</number>
+        </property>
+        <property name="pageStep">
+         <number>1</number>
         </property>
         <property name="orientation">
          <enum>Qt::Vertical</enum>
@@ -376,6 +412,149 @@
       <property name="text">
        <string>3D PLOT</string>
       </property>
+     </widget>
+     <widget class="QGroupBox" name="groupBox_6">
+      <property name="geometry">
+       <rect>
+        <x>490</x>
+        <y>320</y>
+        <width>131</width>
+        <height>91</height>
+       </rect>
+      </property>
+      <property name="title">
+       <string>オリジナル</string>
+      </property>
+      <widget class="QRadioButton" name="barleyTeaRadioButton">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>60</y>
+         <width>121</width>
+         <height>19</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>麦茶（オレンジ）</string>
+       </property>
+      </widget>
+      <widget class="QRadioButton" name="greenTeaRadioButton">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>30</y>
+         <width>105</width>
+         <height>19</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>緑茶（黄色）</string>
+       </property>
+      </widget>
+     </widget>
+     <widget class="QGroupBox" name="groupBox_7">
+      <property name="geometry">
+       <rect>
+        <x>490</x>
+        <y>440</y>
+        <width>131</width>
+        <height>111</height>
+       </rect>
+      </property>
+      <property name="title">
+       <string>緑茶Target</string>
+      </property>
+      <widget class="QRadioButton" name="japTeaTargetRadioButton">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>20</y>
+         <width>105</width>
+         <height>19</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>日本茶</string>
+       </property>
+      </widget>
+      <widget class="QRadioButton" name="greenTeaTargetRadioButton">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>50</y>
+         <width>105</width>
+         <height>19</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>緑茶（市販）</string>
+       </property>
+      </widget>
+      <widget class="QRadioButton" name="barleyTeaTargetRadioButton">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>80</y>
+         <width>105</width>
+         <height>19</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>麦茶</string>
+       </property>
+      </widget>
+     </widget>
+     <widget class="QGroupBox" name="groupBox_8">
+      <property name="geometry">
+       <rect>
+        <x>650</x>
+        <y>440</y>
+        <width>121</width>
+        <height>121</height>
+       </rect>
+      </property>
+      <property name="title">
+       <string>麦茶Target</string>
+      </property>
+      <widget class="QRadioButton" name="mattyaTargetRadioButton">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>20</y>
+         <width>105</width>
+         <height>19</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>抹茶</string>
+       </property>
+      </widget>
+      <widget class="QRadioButton" name="greenTeaTargetRadioButton2">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>50</y>
+         <width>105</width>
+         <height>19</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>緑茶（市販）</string>
+       </property>
+      </widget>
+      <widget class="QRadioButton" name="uronTeaTargetRadioButton">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>80</y>
+         <width>105</width>
+         <height>19</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>ウーロン</string>
+       </property>
+      </widget>
      </widget>
     </widget>
     <widget class="QWidget" name="tab_3">

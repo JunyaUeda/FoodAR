@@ -44,6 +44,16 @@ void ConvertController::updateVariableHSVShift (int hue, int saturation, int val
 	_converter.updateVariableHSVShift(hue, saturation, value);
 }
 
+void ConvertController::updateVariableHueShift (int hue) {
+	_converter.updateVariableHueShift(hue);
+}
+void ConvertController::updateVariableSaturationShift (int saturation) {
+	_converter.updateVariableSaturationShift(saturation);
+}
+void ConvertController::updateVariableValueShift (int value) {
+	_converter.updateVariableValueShift(value);
+}
+
 void ConvertController::setUpForCoffee() {
 	_calibrator.setAverageUsedFlag(true);
 	_converter.setOriginalValueUsedFlag(false);

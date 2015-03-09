@@ -20,7 +20,7 @@ void Extractor::extract(const MatSet& srcSet) {
     
     //エッジ画像を作成する    
     _edgeFactory.createEdges(channelSet, _regionManager.previousRegion().expectedRoi());
-   // imshow("edge", _edgeManager.currentEdge().roiMergedMat());
+    imshow("edge", _edgeManager.currentEdge().roiMergedMat());
 
 
     Mat mat = Mat::zeros(srcSet.size(), CV_8UC1);
@@ -32,15 +32,15 @@ void Extractor::extract(const MatSet& srcSet) {
     }
     
     dilate(mat, mat, cv::Mat(), Point(-1,-1), _extractionManager.dilateCount());
-	erode(mat, mat, cv::Mat(), Point(-1,-1), _extractionManager.erodeCount());
+	//erode(mat, mat, cv::Mat(), Point(-1,-1), _extractionManager.erodeCount());
     imshow("colorExtract", mat);
 
     Contours contours(mat);
     
-    if(contours.hasMultiContour() ) {
-		_multiContour.drawAndCalcRegion(contours);
-    } else {
+  //   if(contours.hasMultiContour() ) {
+		// _multiContour.drawAndCalcRegion(contours);
+  //   } else {
 		_oneContour.drawAndCalcRegion(contours);
-    }
+    //}
     //_oneContour.drawAndCalcRegion(contours);
 }

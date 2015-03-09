@@ -142,11 +142,21 @@ private slots:
 	void on_captureSaturationLineEdit_textChanged(const QString &arg1);
 	void on_captureSaturationSlider_valueChanged(int value);
 
+    //お茶セッティング
+	void on_greenTeaRadioButton_clicked();
+	void on_barleyTeaRadioButton_clicked();
 
+	void on_japTeaTargetRadioButton_clicked();
 
-	
+	void on_greenTeaTargetRadioButton_clicked();
 
-	
+	void on_barleyTeaTargetRadioButton_clicked();
+
+	void on_mattyaTargetRadioButton_clicked();
+
+	void on_greenTeaTargetRadioButton2_clicked();
+
+	void on_uronTeaTargetRadioButton_clicked();
 
 private:
     vector<ChannelType> collectColorCheckBoxStatus();
@@ -159,7 +169,7 @@ private:
 	MainController& mainController               = MainController::getInstance();
     CalibrationController& calibrationController = CalibrationController::getInstance();
     ConvertController& _convertController         = ConvertController::getInstance();
-    EdgeController& edgeController               = EdgeController::getInstance();
+	EdgeController& edgeController               = EdgeController::getInstance();
     ExtractionController& _extractionController  = ExtractionController::getInstance();
 	TextureController& _textureController = TextureController::getInstance();
     CameraController& _cameraController = CameraController::getInstance();

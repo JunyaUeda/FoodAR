@@ -37,7 +37,7 @@ private:
                 }
             }
         }
-        erode(dstEdgeImg, dstEdgeImg, cv::Mat(), Point(-1,-1), 1);
+        //erode(dstEdgeImg, dstEdgeImg, cv::Mat(), Point(-1,-1), 1);
     }
 
     void revMergeEdges(vector<Mat>& channelEdgeImgs, Rect& roi, vector<Mat*> edgeImgs) {

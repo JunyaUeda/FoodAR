@@ -5,8 +5,8 @@
 
 EdgeFactory::EdgeFactory() {
     _allEdgeThresholds = EdgeThreshold::createAllEdgeThreshold();
-    _engagedChannels.push_back(ChannelType::cr);
-    _engagedChannels.push_back(ChannelType::value);
+    _engagedChannels.push_back(ChannelType::y);
+    _engagedChannels.push_back(ChannelType::green);
     _engagedChannels.push_back(ChannelType::red);
 }
 

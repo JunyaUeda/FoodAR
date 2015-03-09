@@ -22,11 +22,11 @@ public:
         }
         
         if(_isOriginalValueUsed) {
-
+            convertHSV(srcSet, extractedRegion, dstBGRImg);
             if(_textureMediaType != MediaType::no) {
                 overlapTexture(srcSet, textureImg, extractedRegion, dstBGRImg);
             } 
-            convertHSV(srcSet, extractedRegion, dstBGRImg);
+            
 
         } else {
 
@@ -53,6 +53,15 @@ public:
     void updateAlpha(double value);
 	void updateMediaType(MediaType type);
     void updateVariableHSVShift(int hue, int saturation, int value);
+    void updateVariableHueShift(int hue) {
+        _variableHueShift = hue;
+    }
+    void updateVariableSaturationShift(int saturation) {
+        _variableSaturationShift = saturation;
+    }
+    void updateVariableValueShift(int value) {
+        _variableValueShift = value;
+    }
     void updateRatioPixelNum(double upperRatio, double underRatio) {
         _ratioOfUpperPixelNum = upperRatio;
         _ratioOfUnderPixelNum = underRatio;
@@ -284,8 +293,8 @@ private:
                 if(L(extractedRegion.maskImg(),x,y) == 255) {
                     H(dstHSVImg,x,y) = H(dstHSVImg,x,y) + _variableHueShift;
                     S(dstHSVImg,x,y) = S(dstHSVImg,x,y) + _variableSaturationShift;
-                    V(dstHSVImg,x,y) = V(srcSet.hsv(),x,y) + _variableValueShift;
-                    //V(dstHSVImg,x,y) = V(dstHSVImg,x,y) + _variableValueShift;
+                    //V(dstHSVImg,x,y) = V(srcSet.hsv(),x,y) + _variableValueShift;
+                    V(dstHSVImg,x,y) = V(dstHSVImg,x,y) + _variableValueShift;
                 }
             }
         }

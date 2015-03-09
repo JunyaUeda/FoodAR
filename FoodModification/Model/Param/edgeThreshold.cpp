@@ -4,8 +4,8 @@ EdgeThreshold::EdgeThreshold() {
 }
 
 EdgeThreshold::EdgeThreshold(ChannelFunc* type) : _channelFunc(type) {
-    _upper = 60;
-    _under = 30;
+    _upper = 40;
+    _under = 20;
 }
 
 int EdgeThreshold::upper() const {

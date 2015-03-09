@@ -13,13 +13,13 @@ public:
     void createMaskByColor(Mat& maskImg, ChannelSet& channelSet) {
         for(int y=0; y<maskImg.rows; y++) {
             for(int x=0; x<maskImg.cols; x++) {
-                if(L(channelSet.crMat(),x,y) >= _thresholdManager.cr() && L(channelSet.gMat(),x,y) <=_thresholdManager.g() && L(channelSet.yMat(),x,y) <= _thresholdManager.y()) {
+				if(L(channelSet.sMat(),x,y)>=_thresholdManager.s() && L(channelSet.crMat(),x,y) >= _thresholdManager.cr() && L(channelSet.cbMat(), x, y)<=_thresholdManager.cb() && L(channelSet.bMat(),x,y) <=_thresholdManager.b() && L(channelSet.yMat(),x,y) <= _thresholdManager.y()) {
     
                     L(maskImg,x,y) = 255;
                     
-                } else if(L(channelSet.sMat(),x,y) >=_thresholdManager.s() && L(channelSet.crMat(),x,y) >= _thresholdManager.cr() && L(channelSet.gMat(),x,y) <=_thresholdManager.g()-15 && L(channelSet.yMat(),x,y) <= _thresholdManager.y() ) {
-                    L(maskImg,x,y) = 255;
-                }
+                }// } else if(L(channelSet.sMat(),x,y) >=_thresholdManager.s() && L(channelSet.crMat(),x,y) >= _thresholdManager.cr() && L(channelSet.gMat(),x,y) <=_thresholdManager.g()-15 && L(channelSet.yMat(),x,y) <= _thresholdManager.y() ) {
+                //     L(maskImg,x,y) = 255;
+                // }
 
                 // if(L(channelSet.crMat(),x,y) <= _thresholdManager.cr() && L(channelSet.gMat(),x,y) <=_thresholdManager.g() && L(channelSet.yMat(),x,y) <= _thresholdManager.y()) {
     

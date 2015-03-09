@@ -5,6 +5,7 @@
 #include "../../SDK/opencv/opencvApi.h"
 #include "../../Manager/regionManager.h"
 #include "../../Manager/thresholdManager.h"
+#include "../../Manager/edgeManager.h"
 
 class ContourExisted : public ContourState {
 
@@ -26,13 +27,15 @@ public:
                 //         L(mat,x,y) = 255;     
                 //     } 
 
-                if(L(channelSet.crMat(),x,y) >= _thresholdManager.cr() && L(channelSet.gMat(),x,y) <=_thresholdManager.g() && L(channelSet.yMat(),x,y) <= _thresholdManager.y()) {
-    
-                    L(maskImg,x,y) = 255;
+				if(L(channelSet.sMat(),x,y)>=_thresholdManager.s() && L(channelSet.crMat(),x,y) >= _thresholdManager.cr() && L(channelSet.cbMat(), x, y)<=_thresholdManager.cb() && L(channelSet.bMat(),x,y) <=_thresholdManager.b() && L(channelSet.yMat(),x,y) <= _thresholdManager.y()) {
+                    //if(L(_edgeManager.currentEdge().roiMergedMat(), x, y) != 0) {
+                        L(maskImg,x,y) = 255;
+                   // }
                     
-                } else if(L(channelSet.sMat(),x,y) >=_thresholdManager.s() && L(channelSet.crMat(),x,y) >= _thresholdManager.cr() && L(channelSet.gMat(),x,y) <=_thresholdManager.g() && L(channelSet.yMat(),x,y) <= _thresholdManager.y() ) {
-                    L(maskImg,x,y) = 255;
-                }
+                    
+                 }// } else if(L(channelSet.sMat(),x,y) >=_thresholdManager.s() && L(channelSet.crMat(),x,y) >= _thresholdManager.cr() && L(channelSet.gMat(),x,y) <=_thresholdManager.g() && L(channelSet.yMat(),x,y) <= _thresholdManager.y() ) {
+                //     L(maskImg,x,y) = 255;
+                // }
                 
                 // if(L(channelSet.crMat(),x,y) <= _thresholdManager.cr() && L(channelSet.gMat(),x,y) <=_thresholdManager.g() && L(channelSet.yMat(),x,y) <= _thresholdManager.y()) {
     
@@ -50,6 +53,7 @@ private:
 private:
     RegionManager& _regionManager = RegionManager::getInstance();
     ThresholdManager& _thresholdManager = ThresholdManager::getInstance();
+    EdgeManager& _edgeManager              = EdgeManager::getInstance();
 
 };
 #endif // CONTOUREXISTED_H

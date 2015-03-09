@@ -1,6 +1,6 @@
 #include "textureManager.h"
 
-#define A_IMAGE_PATH "../FoodModification/Images/sarmon.jpg"
+#define A_IMAGE_PATH "../FoodModification/Images/tea_nigori.jpg"
 
 TextureManager::TextureManager() {
     

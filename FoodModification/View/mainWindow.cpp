@@ -35,8 +35,8 @@ MainWindow::~MainWindow() {
 }
 
 /**
-    * ホームタブ
-    */
+* ホームタブ
+*/
 void MainWindow::on_startPushButton_clicked()
 {
     mainController.start();
@@ -83,33 +83,43 @@ void MainWindow::on_alphaSlider_valueChanged(int value)
 
 void MainWindow::on_hueLineEdit_textChanged(const QString &arg1)
 {
-
+    int value = arg1.toInt();
+    _convertController.updateVariableHueShift(value);
+    ui->hueSlider->setSliderPosition(value); 
 }
 
 void MainWindow::on_hueSlider_valueChanged(int value)
 {
-
+    _convertController.updateVariableHueShift(value);
+    ui->hueLineEdit->setText(QString::number(value));
 }
 
 void MainWindow::on_saturationLineEdit_textChanged(const QString &arg1)
 {
-
+    int value = arg1.toInt();
+    _convertController.updateVariableSaturationShift(value);
+    ui->saturationSlider->setSliderPosition(value); 
 }
 
 void MainWindow::on_saturationSlider_valueChanged(int value)
 {
-
+    _convertController.updateVariableSaturationShift(value);
+    ui->saturationLineEdit->setText(QString::number(value));
 }
 
 void MainWindow::on_valueLineEdit_textChanged(const QString &arg1)
 {
-
+    int value = arg1.toInt();
+    _convertController.updateVariableValueShift(value);
+    ui->valueSlider->setSliderPosition(value); 
 }
 
 void MainWindow::on_valueSlider_valueChanged(int value)
 {
-
+    _convertController.updateVariableValueShift(value);
+    ui->valueLineEdit->setText(QString::number(value));
 }
+
 //テクスチャ切り替え
 void MainWindow::on_textureComboBox_currentIndexChanged(const QString &arg1) {
     if(arg1.contains(".")) {
@@ -621,4 +631,142 @@ void MainWindow::on_captureContrastLineEdit_textChanged(const QString &arg1)
 }
  
 
+void MainWindow::on_greenTeaRadioButton_clicked()
+{
+    _extractionController.updateBinarizationThreshold(25, 0);
+    _extractionController.updateBinarizationThreshold(177, 1);
+    _extractionController.updateBinarizationThreshold(225, 4);
+    _extractionController.updateBinarizationThreshold(184, 6);
+    _extractionController.updateBinarizationThreshold(157, 7);
+    _extractionController.updateBinarizationThreshold(93, 8);
+}
 
+void MainWindow::on_barleyTeaRadioButton_clicked()
+{
+    _extractionController.updateBinarizationThreshold(42, 0);
+    _extractionController.updateBinarizationThreshold(120, 1);
+    _extractionController.updateBinarizationThreshold(150, 4);
+    _extractionController.updateBinarizationThreshold(108, 6);
+    _extractionController.updateBinarizationThreshold(140, 7);
+    _extractionController.updateBinarizationThreshold(123, 8);
+}
+
+void MainWindow::on_japTeaTargetRadioButton_clicked()
+{
+    double alpha = 0.8;
+    int hue = 6;
+    int saturation = 0;
+    int value = 0;
+    _convertController.updateAlpha(alpha);
+    _convertController.updateVariableHueShift(hue);
+    _convertController.updateVariableSaturationShift(saturation);
+    _convertController.updateVariableValueShift(value);
+    ui->alphaSlider->setSliderPosition(alpha*100);
+    ui->alphaLineEdit->setText(QString::number(alpha));
+    ui->hueSlider->setSliderPosition(hue); 
+    ui->hueLineEdit->setText(QString::number(hue));
+    ui->saturationSlider->setSliderPosition(saturation); 
+    ui->saturationLineEdit->setText(QString::number(saturation));
+    ui->valueSlider->setSliderPosition(value); 
+    ui->valueLineEdit->setText(QString::number(value));
+}
+
+void MainWindow::on_greenTeaTargetRadioButton_clicked()
+{
+     double alpha = 1.0;
+    int hue = 0;
+    int saturation = 0;
+    int value = 0;
+    _convertController.updateAlpha(alpha);
+    _convertController.updateVariableHueShift(hue);
+    _convertController.updateVariableSaturationShift(saturation);
+    _convertController.updateVariableValueShift(value);
+    ui->alphaSlider->setSliderPosition(alpha*100);
+    ui->alphaLineEdit->setText(QString::number(alpha));
+    ui->hueSlider->setSliderPosition(hue); 
+    ui->hueLineEdit->setText(QString::number(hue));
+    ui->saturationSlider->setSliderPosition(saturation); 
+    ui->saturationLineEdit->setText(QString::number(saturation));
+    ui->valueSlider->setSliderPosition(value); 
+    ui->valueLineEdit->setText(QString::number(value));
+}
+
+void MainWindow::on_barleyTeaTargetRadioButton_clicked()
+{
+    double alpha = 0.8;
+    int hue = 174;
+    int saturation = 0;
+    int value = -30;
+    _convertController.updateAlpha(alpha);
+    _convertController.updateVariableHueShift(hue);
+    _convertController.updateVariableSaturationShift(saturation);
+    _convertController.updateVariableValueShift(value);
+    ui->alphaSlider->setSliderPosition(alpha*100);
+    ui->alphaLineEdit->setText(QString::number(alpha));
+    ui->hueSlider->setSliderPosition(hue); 
+    ui->hueLineEdit->setText(QString::number(hue));
+    ui->saturationSlider->setSliderPosition(saturation); 
+    ui->saturationLineEdit->setText(QString::number(saturation));
+    ui->valueSlider->setSliderPosition(value); 
+    ui->valueLineEdit->setText(QString::number(value));
+}
+
+void MainWindow::on_mattyaTargetRadioButton_clicked()
+{
+    double alpha = 0.6;
+    int hue = 20;
+    int saturation = -12;
+    int value = 5;
+    _convertController.updateAlpha(alpha);
+    _convertController.updateVariableHueShift(hue);
+    _convertController.updateVariableSaturationShift(saturation);
+    _convertController.updateVariableValueShift(value);
+    ui->alphaSlider->setSliderPosition(alpha*100);
+    ui->alphaLineEdit->setText(QString::number(alpha));
+    ui->hueSlider->setSliderPosition(hue); 
+    ui->hueLineEdit->setText(QString::number(hue));
+    ui->saturationSlider->setSliderPosition(saturation); 
+    ui->saturationLineEdit->setText(QString::number(saturation));
+    ui->valueSlider->setSliderPosition(value); 
+    ui->valueLineEdit->setText(QString::number(value));
+}
+
+void MainWindow::on_greenTeaTargetRadioButton2_clicked()
+{
+    double alpha = 1.0;
+    int hue = 20;
+    int saturation = -83;
+    int value = 0;
+    _convertController.updateAlpha(alpha);
+    _convertController.updateVariableHueShift(hue);
+    _convertController.updateVariableSaturationShift(saturation);
+    _convertController.updateVariableValueShift(value);
+    ui->alphaSlider->setSliderPosition(alpha*100);
+    ui->alphaLineEdit->setText(QString::number(alpha));
+    ui->hueSlider->setSliderPosition(hue); 
+    ui->hueLineEdit->setText(QString::number(hue));
+    ui->saturationSlider->setSliderPosition(saturation); 
+    ui->saturationLineEdit->setText(QString::number(saturation));
+    ui->valueSlider->setSliderPosition(value); 
+    ui->valueLineEdit->setText(QString::number(value));
+}
+
+void MainWindow::on_uronTeaTargetRadioButton_clicked()
+{
+     double alpha = 1.0;
+    int hue = 0;
+    int saturation = 0;
+    int value = 0;
+    _convertController.updateAlpha(alpha);
+    _convertController.updateVariableHueShift(hue);
+    _convertController.updateVariableSaturationShift(saturation);
+    _convertController.updateVariableValueShift(value);
+    ui->alphaSlider->setSliderPosition(alpha*100);
+    ui->alphaLineEdit->setText(QString::number(alpha));
+    ui->hueSlider->setSliderPosition(hue); 
+    ui->hueLineEdit->setText(QString::number(hue));
+    ui->saturationSlider->setSliderPosition(saturation); 
+    ui->saturationLineEdit->setText(QString::number(saturation));
+    ui->valueSlider->setSliderPosition(value); 
+    ui->valueLineEdit->setText(QString::number(value));
+}

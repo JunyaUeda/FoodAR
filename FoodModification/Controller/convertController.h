@@ -14,6 +14,9 @@ public:
     void changeZParam(bool change, int ZFactor);
     void updateAlpha(double alpha);
     void updateVariableHSVShift (int hue, int saturation, int value);
+    void updateVariableHueShift(int hue);
+    void updateVariableSaturationShift(int saturation);
+    void updateVariableValueShift(int value);
     void setUpForCoffee();
     void setUpForMaguro();
 private:
