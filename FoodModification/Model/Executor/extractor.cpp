@@ -19,7 +19,8 @@ void Extractor::extract(const MatSet& srcSet) {
     ChannelSet channelSet(srcSet);
     
     //エッジ画像を作成する    
-    _edgeFactory.createEdges(channelSet, _regionManager.previousRegion().expectedRoi());
+    // _edgeFactory.createEdges(channelSet, _regionManager.previousRegion().expectedRoi());
+    _edgeFactory.createEdge(channelSet, _regionManager.previousRegion().expectedRoi());
     imshow("edge", _edgeManager.currentEdge().roiMergedMat());
 
 
@@ -33,8 +34,19 @@ void Extractor::extract(const MatSet& srcSet) {
     
     dilate(mat, mat, cv::Mat(), Point(-1,-1), _extractionManager.dilateCount());
 	//erode(mat, mat, cv::Mat(), Point(-1,-1), _extractionManager.erodeCount());
-    imshow("colorExtract", mat);
+    imshow("ExtractByColor", mat);
 
+    // add(mat, _edgeManager.currentEdge().roiMergedMat(), mat );
+    // imshow("add", mat);
+    // vPs contoursForAdd;
+    // findContours(mat, contoursForAdd, CV_RETR_LIST, CV_CHAIN_APPROX_NONE);
+    // for(int i=0; i<contoursForAdd.size(); i++) {
+    //     drawContours(mat, contoursForAdd, i, Scalar(255, 255, 255), CV_FILLED, LINK_EIGHT);
+    // }
+    // erode(mat, mat, cv::Mat(), Point(-1,-1), _extractionManager.erodeCount());
+    //dilate(mat, mat, cv::Mat(), Point(-1,-1), _extractionManager.dilateCount());
+    
+    imshow("draw", mat);
     Contours contours(mat);
     
   //   if(contours.hasMultiContour() ) {

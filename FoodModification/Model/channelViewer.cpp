@@ -3,16 +3,37 @@
 ChannelViewer::ChannelViewer() {
 }
 
+Mat srcBGRImg;
+Mat srcHSVImg;
+void mouse_callback(int event, int x, int y, int flags, void* param){
+    
+    switch (event){
+    
+
+        case cv::EVENT_LBUTTONDOWN:
+            qDebug() << "H =" << B(srcHSVImg, x, y);
+            qDebug() << "S =" << G(srcHSVImg, x, y);
+            qDebug() << "V =" << R(srcHSVImg, x, y);
+            break;
+        default:
+            break;
+    }
+}
+
+
+
 void ChannelViewer::showAllChannels() {
     
-    Mat srcBGRImg;
-    Mat srcHSVImg;
+    
+    
     Mat srcYCrCbImg;
     Mat bgrChannelImgs[3];
     Mat hsvChannelImgs[3];
     Mat ycrcbChannelImgs[3];
-
+    namedWindow("src", 0);
+    setMouseCallback("src",mouse_callback, 0);
     _isShowing = true;
+
     while(_isShowing) {
 
         srcBGRImg = _cameraManager.getFrame();

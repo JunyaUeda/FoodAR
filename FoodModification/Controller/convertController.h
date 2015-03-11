@@ -17,8 +17,7 @@ public:
     void updateVariableHueShift(int hue);
     void updateVariableSaturationShift(int saturation);
     void updateVariableValueShift(int value);
-    void setUpForCoffee();
-    void setUpForMaguro();
+    
 private:
 	ConvertController();
 	ConvertController(const ConvertController&);

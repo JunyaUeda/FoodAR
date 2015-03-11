@@ -12,6 +12,7 @@ class EdgeFactory {
 /*method*/
 public:
     static EdgeFactory& getInstance();
+    void createEdge(ChannelSet& channelSet, Rect& roi);
     void createEdges(const MatSet& matSet, vector<Mat>& resultRawEdgeImgs);
     void createEdges(const MatSet& matSet, vector<Mat>& resultRawEdgeImgs, map<ChannelType, Mat>& channelMats);
     void createEdges(ChannelSet& channelSet, Rect& roi);
@@ -19,6 +20,26 @@ public:
 private:
     EdgeFactory();
     EdgeFactory(const EdgeFactory&);
+
+    void mergeEdges(vector<Mat>& channelEdgeImgs, Rect& roi, Mat& dstEdgeImg) {
+
+        if(!channelEdgeImgs.size()) {
+            return;  
+        }
+
+        for(int y=roi.y; y < (roi.y + roi.height); y++) {
+            for(int x=roi.x; x < (roi.x + roi.width); x++) {
+                for(Mat mat : channelEdgeImgs) {
+                    if(L(mat,x,y) == 255) {
+                        L(dstEdgeImg, x, y) = 255;
+                        break;
+                    } 
+                    //L(dstEdgeImg, x, y) = 0;
+                }
+            }
+        }
+        //erode(dstEdgeImg, dstEdgeImg, cv::Mat(), Point(-1,-1), 1);
+    }
 
     void revMergeEdges(vector<Mat>& channelEdgeImgs, Rect& roi, Mat& dstEdgeImg) {
 

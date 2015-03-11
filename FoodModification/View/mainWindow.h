@@ -54,9 +54,7 @@ private slots:
     void on_textureComboBox_currentIndexChanged(const QString &arg1);
     //フルスクリーン
     void on_fullScreenPushButton_toggled(bool checked);
-    //ショートカットセッティング
-    void on_maguroRadioButton_clicked();    
-    void on_coffeeRadioButton_clicked(bool checked);
+
     /**
     * 画面サイズタブ
     */
@@ -143,20 +141,26 @@ private slots:
 	void on_captureSaturationSlider_valueChanged(int value);
 
     //お茶セッティング
+    void updateHSVA(int hue, int saturation, int value, double alpha);
+    void updateVinarizationThreshold(int blue, int green, int saturation, int Y, int Cr, int Cb);
 	void on_greenTeaRadioButton_clicked();
 	void on_barleyTeaRadioButton_clicked();
-
 	void on_japTeaTargetRadioButton_clicked();
-
 	void on_greenTeaTargetRadioButton_clicked();
-
 	void on_barleyTeaTargetRadioButton_clicked();
-
 	void on_mattyaTargetRadioButton_clicked();
-
 	void on_greenTeaTargetRadioButton2_clicked();
-
 	void on_uronTeaTargetRadioButton_clicked();
+	void on_term1RadioButton_clicked();
+	void on_term2RadioButton_clicked();
+	void on_term3RadioButton_clicked();
+	void on_term4RadioButton_clicked();
+	void on_term5RadioButton_clicked();
+	void on_term6RadioButton_clicked();
+	void on_term7RadioButton_clicked();
+	void on_term8RadioButton_clicked();
+	void on_term9RadioButton_clicked();
+	void on_term10RadioButton_clicked();
 
 private:
     vector<ChannelType> collectColorCheckBoxStatus();

@@ -53,13 +53,3 @@ void ConvertController::updateVariableSaturationShift (int saturation) {
 void ConvertController::updateVariableValueShift (int value) {
 	_converter.updateVariableValueShift(value);
 }
-
-void ConvertController::setUpForCoffee() {
-	_calibrator.setAverageUsedFlag(true);
-	_converter.setOriginalValueUsedFlag(false);
-}
-
-void ConvertController::setUpForMaguro() {
-	_calibrator.setAverageUsedFlag(false);
-	_converter.setOriginalValueUsedFlag(true);
-}

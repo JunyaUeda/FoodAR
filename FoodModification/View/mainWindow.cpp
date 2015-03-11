@@ -143,16 +143,6 @@ void MainWindow::on_fullScreenPushButton_toggled(bool checked)
         _windowController.unFullScreen();
     }
 }
-//ショートカットセッティング
-void MainWindow::on_maguroRadioButton_clicked()
-{
-    _convertController.setUpForMaguro();
-}
-
-void MainWindow::on_coffeeRadioButton_clicked(bool checked)
-{
-    _convertController.setUpForCoffee();
-}
 
 /**
 * 画面サイズタブ
@@ -631,142 +621,164 @@ void MainWindow::on_captureContrastLineEdit_textChanged(const QString &arg1)
 }
  
 
+/*tea setting*/
+void MainWindow::updateHSVA(int hue, int saturation, int value, double alpha) {
+    _convertController.updateAlpha(alpha);
+    _convertController.updateVariableHueShift(hue);
+    _convertController.updateVariableSaturationShift(saturation);
+    _convertController.updateVariableValueShift(value);
+    ui->alphaSlider->setSliderPosition(alpha*100);
+    ui->alphaLineEdit->setText(QString::number(alpha));
+    ui->hueSlider->setSliderPosition(hue); 
+    ui->hueLineEdit->setText(QString::number(hue));
+    ui->saturationSlider->setSliderPosition(saturation); 
+    ui->saturationLineEdit->setText(QString::number(saturation));
+    ui->valueSlider->setSliderPosition(value); 
+    ui->valueLineEdit->setText(QString::number(value));
+}
+
+void MainWindow::updateVinarizationThreshold(int blue, int green, int saturation, int Y, int Cr, int Cb) {
+    _extractionController.updateBinarizationThreshold(blue, 0);
+    _extractionController.updateBinarizationThreshold(green, 1);
+    _extractionController.updateBinarizationThreshold(saturation, 4);
+    _extractionController.updateBinarizationThreshold(Y, 6);
+    _extractionController.updateBinarizationThreshold(Cr, 7);
+    _extractionController.updateBinarizationThreshold(Cb, 8);
+ }
 void MainWindow::on_greenTeaRadioButton_clicked()
 {
-    _extractionController.updateBinarizationThreshold(25, 0);
-    _extractionController.updateBinarizationThreshold(177, 1);
-    _extractionController.updateBinarizationThreshold(225, 4);
-    _extractionController.updateBinarizationThreshold(184, 6);
-    _extractionController.updateBinarizationThreshold(157, 7);
-    _extractionController.updateBinarizationThreshold(93, 8);
+    int blue=25, green=177, saturation=225, Y=184, Cr=157, Cb=93;
+    updateVinarizationThreshold(blue, green, saturation, Y, Cr, Cb);
 }
 
 void MainWindow::on_barleyTeaRadioButton_clicked()
 {
-    _extractionController.updateBinarizationThreshold(42, 0);
-    _extractionController.updateBinarizationThreshold(120, 1);
-    _extractionController.updateBinarizationThreshold(150, 4);
-    _extractionController.updateBinarizationThreshold(108, 6);
-    _extractionController.updateBinarizationThreshold(140, 7);
-    _extractionController.updateBinarizationThreshold(123, 8);
+    int blue=42, green=120, saturation=150, Y=108, Cr=140, Cb=123;
+    updateVinarizationThreshold(blue, green, saturation, Y, Cr, Cb);
 }
 
 void MainWindow::on_japTeaTargetRadioButton_clicked()
 {
-    double alpha = 0.8;
-    int hue = 6;
-    int saturation = 0;
-    int value = 0;
-    _convertController.updateAlpha(alpha);
-    _convertController.updateVariableHueShift(hue);
-    _convertController.updateVariableSaturationShift(saturation);
-    _convertController.updateVariableValueShift(value);
-    ui->alphaSlider->setSliderPosition(alpha*100);
-    ui->alphaLineEdit->setText(QString::number(alpha));
-    ui->hueSlider->setSliderPosition(hue); 
-    ui->hueLineEdit->setText(QString::number(hue));
-    ui->saturationSlider->setSliderPosition(saturation); 
-    ui->saturationLineEdit->setText(QString::number(saturation));
-    ui->valueSlider->setSliderPosition(value); 
-    ui->valueLineEdit->setText(QString::number(value));
+    double alpha = 0.8; int hue = 6, saturation = 0, value = 0;
+    updateHSVA(hue,saturation,value,alpha);
 }
 
 void MainWindow::on_greenTeaTargetRadioButton_clicked()
 {
-     double alpha = 1.0;
-    int hue = 0;
-    int saturation = 0;
-    int value = 0;
-    _convertController.updateAlpha(alpha);
-    _convertController.updateVariableHueShift(hue);
-    _convertController.updateVariableSaturationShift(saturation);
-    _convertController.updateVariableValueShift(value);
-    ui->alphaSlider->setSliderPosition(alpha*100);
-    ui->alphaLineEdit->setText(QString::number(alpha));
-    ui->hueSlider->setSliderPosition(hue); 
-    ui->hueLineEdit->setText(QString::number(hue));
-    ui->saturationSlider->setSliderPosition(saturation); 
-    ui->saturationLineEdit->setText(QString::number(saturation));
-    ui->valueSlider->setSliderPosition(value); 
-    ui->valueLineEdit->setText(QString::number(value));
+    double alpha = 1.0; int hue = 0, saturation = 0, value = 0;
+    updateHSVA(hue,saturation,value,alpha);
 }
 
 void MainWindow::on_barleyTeaTargetRadioButton_clicked()
 {
-    double alpha = 0.8;
-    int hue = 174;
-    int saturation = 0;
-    int value = -30;
-    _convertController.updateAlpha(alpha);
-    _convertController.updateVariableHueShift(hue);
-    _convertController.updateVariableSaturationShift(saturation);
-    _convertController.updateVariableValueShift(value);
-    ui->alphaSlider->setSliderPosition(alpha*100);
-    ui->alphaLineEdit->setText(QString::number(alpha));
-    ui->hueSlider->setSliderPosition(hue); 
-    ui->hueLineEdit->setText(QString::number(hue));
-    ui->saturationSlider->setSliderPosition(saturation); 
-    ui->saturationLineEdit->setText(QString::number(saturation));
-    ui->valueSlider->setSliderPosition(value); 
-    ui->valueLineEdit->setText(QString::number(value));
+    double alpha = 0.8; int hue = 174, saturation = 0, value = -30;
+    updateHSVA(hue,saturation,value,alpha);
 }
 
 void MainWindow::on_mattyaTargetRadioButton_clicked()
 {
-    double alpha = 0.6;
-    int hue = 20;
-    int saturation = -12;
-    int value = 5;
-    _convertController.updateAlpha(alpha);
-    _convertController.updateVariableHueShift(hue);
-    _convertController.updateVariableSaturationShift(saturation);
-    _convertController.updateVariableValueShift(value);
-    ui->alphaSlider->setSliderPosition(alpha*100);
-    ui->alphaLineEdit->setText(QString::number(alpha));
-    ui->hueSlider->setSliderPosition(hue); 
-    ui->hueLineEdit->setText(QString::number(hue));
-    ui->saturationSlider->setSliderPosition(saturation); 
-    ui->saturationLineEdit->setText(QString::number(saturation));
-    ui->valueSlider->setSliderPosition(value); 
-    ui->valueLineEdit->setText(QString::number(value));
+    double alpha = 0.6; int hue = 20, saturation = -12, value = 5;
+    updateHSVA(hue,saturation,value,alpha);
 }
 
 void MainWindow::on_greenTeaTargetRadioButton2_clicked()
 {
-    double alpha = 1.0;
-    int hue = 20;
-    int saturation = -83;
-    int value = 0;
-    _convertController.updateAlpha(alpha);
-    _convertController.updateVariableHueShift(hue);
-    _convertController.updateVariableSaturationShift(saturation);
-    _convertController.updateVariableValueShift(value);
-    ui->alphaSlider->setSliderPosition(alpha*100);
-    ui->alphaLineEdit->setText(QString::number(alpha));
-    ui->hueSlider->setSliderPosition(hue); 
-    ui->hueLineEdit->setText(QString::number(hue));
-    ui->saturationSlider->setSliderPosition(saturation); 
-    ui->saturationLineEdit->setText(QString::number(saturation));
-    ui->valueSlider->setSliderPosition(value); 
-    ui->valueLineEdit->setText(QString::number(value));
+    double alpha = 1.0; int hue = 20, saturation = -83, value = 0;
+    updateHSVA(hue,saturation,value,alpha);
 }
 
 void MainWindow::on_uronTeaTargetRadioButton_clicked()
 {
-     double alpha = 1.0;
-    int hue = 0;
-    int saturation = 0;
-    int value = 0;
-    _convertController.updateAlpha(alpha);
-    _convertController.updateVariableHueShift(hue);
-    _convertController.updateVariableSaturationShift(saturation);
-    _convertController.updateVariableValueShift(value);
-    ui->alphaSlider->setSliderPosition(alpha*100);
-    ui->alphaLineEdit->setText(QString::number(alpha));
-    ui->hueSlider->setSliderPosition(hue); 
-    ui->hueLineEdit->setText(QString::number(hue));
-    ui->saturationSlider->setSliderPosition(saturation); 
-    ui->saturationLineEdit->setText(QString::number(saturation));
-    ui->valueSlider->setSliderPosition(value); 
-    ui->valueLineEdit->setText(QString::number(value));
+    double alpha = 1.0; int hue = 0, saturation = 0, value = 0;
+    updateHSVA(hue,saturation,value,alpha);
+}
+
+void MainWindow::on_term1RadioButton_clicked()
+{
+    int bThreshold=25, gThreshold=177, sThreshold=225, YThreshold=184, CrThreshold=157, CbThreshold=93;
+    updateVinarizationThreshold(bThreshold, gThreshold, sThreshold, YThreshold, CrThreshold, CbThreshold);
+
+    double alpha = 1.0; int hue = 0, saturation = 0, value = 0;
+    updateHSVA(hue,saturation,value,alpha);
+}
+
+void MainWindow::on_term2RadioButton_clicked()
+{
+    int bThreshold=25, gThreshold=177, sThreshold=225, YThreshold=184, CrThreshold=157, CbThreshold=93;
+    updateVinarizationThreshold(bThreshold, gThreshold, sThreshold, YThreshold, CrThreshold, CbThreshold);
+
+    double alpha = 1.0; int hue = 0, saturation = 0, value = 0;
+    updateHSVA(hue,saturation,value,alpha);
+}
+
+void MainWindow::on_term3RadioButton_clicked()
+{
+    int bThreshold=25, gThreshold=177, sThreshold=225, YThreshold=184, CrThreshold=157, CbThreshold=93;
+    updateVinarizationThreshold(bThreshold, gThreshold, sThreshold, YThreshold, CrThreshold, CbThreshold);
+
+    double alpha = 1.0; int hue = 0, saturation = 0, value = 0;
+    updateHSVA(hue,saturation,value,alpha);
+}
+
+void MainWindow::on_term4RadioButton_clicked()
+{
+    int bThreshold=25, gThreshold=177, sThreshold=225, YThreshold=184, CrThreshold=157, CbThreshold=93;
+    updateVinarizationThreshold(bThreshold, gThreshold, sThreshold, YThreshold, CrThreshold, CbThreshold);
+
+    double alpha = 1.0; int hue = 0, saturation = 0, value = 0;
+    updateHSVA(hue,saturation,value,alpha);
+}
+
+void MainWindow::on_term5RadioButton_clicked()
+{
+    int bThreshold=25, gThreshold=177, sThreshold=225, YThreshold=184, CrThreshold=157, CbThreshold=93;
+    updateVinarizationThreshold(bThreshold, gThreshold, sThreshold, YThreshold, CrThreshold, CbThreshold);
+
+    double alpha = 1.0; int hue = 0, saturation = 0, value = 0;
+    updateHSVA(hue,saturation,value,alpha);
+}
+
+void MainWindow::on_term6RadioButton_clicked()
+{
+    int bThreshold=25, gThreshold=177, sThreshold=225, YThreshold=184, CrThreshold=157, CbThreshold=93;
+    updateVinarizationThreshold(bThreshold, gThreshold, sThreshold, YThreshold, CrThreshold, CbThreshold);
+
+    double alpha = 1.0; int hue = 0, saturation = 0, value = 0;
+    updateHSVA(hue,saturation,value,alpha);
+}
+
+void MainWindow::on_term7RadioButton_clicked()
+{
+    int bThreshold=25, gThreshold=177, sThreshold=225, YThreshold=184, CrThreshold=157, CbThreshold=93;
+    updateVinarizationThreshold(bThreshold, gThreshold, sThreshold, YThreshold, CrThreshold, CbThreshold);
+
+    double alpha = 1.0; int hue = 0, saturation = 0, value = 0;
+    updateHSVA(hue,saturation,value,alpha);
+}
+
+void MainWindow::on_term8RadioButton_clicked()
+{   
+    int bThreshold=25, gThreshold=177, sThreshold=225, YThreshold=184, CrThreshold=157, CbThreshold=93;
+    updateVinarizationThreshold(bThreshold, gThreshold, sThreshold, YThreshold, CrThreshold, CbThreshold);
+
+    double alpha = 1.0; int hue = 0, saturation = 0, value = 0;
+    updateHSVA(hue,saturation,value,alpha);
+}
+
+void MainWindow::on_term9RadioButton_clicked()
+{
+    int bThreshold=25, gThreshold=177, sThreshold=225, YThreshold=184, CrThreshold=157, CbThreshold=93;
+    updateVinarizationThreshold(bThreshold, gThreshold, sThreshold, YThreshold, CrThreshold, CbThreshold);
+
+    double alpha = 1.0; int hue = 0, saturation = 0, value = 0;
+    updateHSVA(hue,saturation,value,alpha);
+}
+
+void MainWindow::on_term10RadioButton_clicked()
+{
+    int bThreshold=25, gThreshold=177, sThreshold=225, YThreshold=184, CrThreshold=157, CbThreshold=93;
+    updateVinarizationThreshold(bThreshold, gThreshold, sThreshold, YThreshold, CrThreshold, CbThreshold);
+
+    double alpha = 1.0; int hue = 0, saturation = 0, value = 0;
+    updateHSVA(hue,saturation,value,alpha);
 }

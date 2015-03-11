@@ -15,65 +15,20 @@ EdgeFactory& EdgeFactory::getInstance() {
     return instance;
 }
 
-void EdgeFactory::createEdges(const MatSet& matSet, vector<Mat>& resultRawEdgeImgs) {
-
-   
-    list<SpaceType> splittedSpaceType;
-
-    for(ChannelType type : _engagedChannels) {
-        switch(type) {
-            case ChannelType::blue :
-            case ChannelType::green :
-            case ChannelType::red :
-                splittedSpaceType.push_back(SpaceType::bgr);
-                break;
-            case ChannelType::hue :
-            case ChannelType::saturation :
-            case ChannelType::value :
-                splittedSpaceType.push_back(SpaceType::hsv);
-                break;
-            case ChannelType::y :
-            case ChannelType::cr :
-            case ChannelType::cb :
-                splittedSpaceType.push_back(SpaceType::ycrcb);
-                break;
-
+void EdgeFactory::createEdge(ChannelSet& channelSet, Rect& roi) {
+    Mat edgeMat;
+    Canny(channelSet.getChannelMat(ChannelType::saturation), edgeMat, 120,
+         80,  APERTURE_SIZE, L2_GRADIENT);
+    Mat dstEdgeImg = Mat::zeros(channelSet.size().height, channelSet.size().width, CV_8UC1);
+    for(int y=roi.y; y < (roi.y + roi.height); y++) {
+            for(int x=roi.x; x < (roi.x + roi.width); x++) {
+                if(L(edgeMat,x,y) == 255) {
+                    L(dstEdgeImg, x, y) = 255;
+                } 
+            }
         }
-    }
-
-    map<ChannelType, Mat> channelMats;
-
-    for(SpaceType type : splittedSpaceType) {
-        Mat channels[3];
-        switch(type) {
-            case SpaceType::bgr :
-                split(matSet.blur(), channels);
-                channelMats.insert( map<ChannelType,Mat>::value_type(ChannelType::blue, channels[0]) );
-                channelMats.insert( map<ChannelType,Mat>::value_type(ChannelType::green, channels[1]) );
-                channelMats.insert( map<ChannelType,Mat>::value_type(ChannelType::red, channels[2]) );
-                break;
-            case SpaceType::hsv :
-                split(matSet.hsv(), channels);
-                channelMats.insert( map<ChannelType,Mat>::value_type(ChannelType::hue, channels[0]) );
-                channelMats.insert( map<ChannelType,Mat>::value_type(ChannelType::saturation, channels[1]) );
-                channelMats.insert( map<ChannelType,Mat>::value_type(ChannelType::value, channels[2]) );
-                break;
-            case SpaceType::ycrcb :
-                split(matSet.ycrcb(), channels);
-                channelMats.insert( map<ChannelType,Mat>::value_type(ChannelType::y, channels[0]) );
-                channelMats.insert( map<ChannelType,Mat>::value_type(ChannelType::cr, channels[1]) );
-                channelMats.insert( map<ChannelType,Mat>::value_type(ChannelType::cb, channels[2]) );
-                break;
-        }
-    }
-
-
-    
-    for(ChannelType type : _engagedChannels) {
-        Mat edgeMat;
-        Canny(channelMats[type], edgeMat, _allEdgeThresholds[type].upper(), _allEdgeThresholds[type].under(),  APERTURE_SIZE, L2_GRADIENT);
-        resultRawEdgeImgs.push_back(edgeMat);
-    }
+    //dilate(dstEdgeImg, dstEdgeImg, cv::Mat(), Point(-1,-1), 1);
+    _edgeManager.currentEdge().setRoiMergedMat(dstEdgeImg);
 
 }
 
@@ -96,8 +51,11 @@ void EdgeFactory::createEdges(ChannelSet& channelSet, Rect& roi) {
     _edgeManager.currentEdge().setRawMats(rawEdges);
 
 
-	Mat dstEdgeImg(channelSet.size().height, channelSet.size().width, CV_8UC1, 255);
-    revMergeEdges(rawEdges, roi, dstEdgeImg);
+	// Mat dstEdgeImg(channelSet.size().height, channelSet.size().width, CV_8UC1, 255);
+ //    revMergeEdges(rawEdges, roi, dstEdgeImg);
+
+    Mat dstEdgeImg = Mat::zeros(channelSet.size().height, channelSet.size().width, CV_8UC1);
+    mergeEdges(rawEdges, roi, dstEdgeImg);
 
     _edgeManager.currentEdge().setRoiMergedMat(dstEdgeImg);
 
