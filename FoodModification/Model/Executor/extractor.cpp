@@ -20,8 +20,8 @@ void Extractor::extract(const MatSet& srcSet) {
     
     //エッジ画像を作成する    
     // _edgeFactory.createEdges(channelSet, _regionManager.previousRegion().expectedRoi());
-    _edgeFactory.createEdge(channelSet, _regionManager.previousRegion().expectedRoi());
-    imshow("edge", _edgeManager.currentEdge().roiMergedMat());
+    //_edgeFactory.createEdge(channelSet, _regionManager.previousRegion().expectedRoi());
+    //imshow("edge", _edgeManager.currentEdge().roiMergedMat());
 
 
     Mat mat = Mat::zeros(srcSet.size(), CV_8UC1);
