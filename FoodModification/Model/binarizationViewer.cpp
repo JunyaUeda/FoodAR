@@ -57,6 +57,7 @@ void BinarizationViewer::showBinarizedImgs(int* thresholdsFromFile) {
 
     vector<string> channelNames = {};
     int trackbarInitValue = 128;
+	namedWindow("src", CV_WINDOW_AUTOSIZE);
     namedWindow("Blue", CV_WINDOW_AUTOSIZE);
 //    namedWindow("Green", CV_WINDOW_AUTOSIZE);
 //    namedWindow("Red", CV_WINDOW_AUTOSIZE);
@@ -67,6 +68,12 @@ void BinarizationViewer::showBinarizedImgs(int* thresholdsFromFile) {
     namedWindow("Cr", CV_WINDOW_AUTOSIZE);
     namedWindow("Cb", CV_WINDOW_AUTOSIZE);
 
+	moveWindow("src", 0, 0);
+	moveWindow("Blue", 640, 0);
+	moveWindow("Saturation", 1280, 0);
+	moveWindow("Y", 0, 480);
+	moveWindow("Cr", 640, 480);
+	moveWindow("Cb", 1280, 480);
     cvCreateTrackbar("B_Threshold", "Blue", &trackbarInitValue, 255, onBlueTrackbar);
 //    cvCreateTrackbar("G_Threshold", "Green", &trackbarInitValue, 255, onGreenTrackbar);
 //    cvCreateTrackbar("R_Threshold", "Red", &trackbarInitValue, 255, onRedTrackbar);

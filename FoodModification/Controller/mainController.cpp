@@ -29,6 +29,7 @@ void MainController::stop() {
 
 void MainController::finish() {
 	_mainProcedure.finish();
+	_binarizationViewer.finish();
 }
 
 /**

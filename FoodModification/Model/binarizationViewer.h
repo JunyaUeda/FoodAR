@@ -11,6 +11,10 @@ public:
 	BinarizationViewer();
 	void showBinarizedImgs(int* thresholdsFromFile);
 	void closeBinarizedImgs(int* thresholds);
+	void finish() {
+		_isShowing=false;
+	}
+
 private:
 
 /*property*/
