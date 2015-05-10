@@ -645,53 +645,6 @@ void MainWindow::updateVinarizationThreshold(int blue, int green, int saturation
     _extractionController.updateBinarizationThreshold(Cr, 7);
     _extractionController.updateBinarizationThreshold(Cb, 8);
  }
-void MainWindow::on_greenTeaRadioButton_clicked()
-{
-    int blue=25, green=177, saturation=225, Y=184, Cr=157, Cb=93;
-    updateVinarizationThreshold(blue, green, saturation, Y, Cr, Cb);
-}
-
-void MainWindow::on_barleyTeaRadioButton_clicked()
-{
-    int blue=42, green=120, saturation=150, Y=108, Cr=140, Cb=123;
-    updateVinarizationThreshold(blue, green, saturation, Y, Cr, Cb);
-}
-
-void MainWindow::on_japTeaTargetRadioButton_clicked()
-{
-    double alpha = 0.8; int hue = 6, saturation = 0, value = 0;
-    updateHSVA(hue,saturation,value,alpha);
-}
-
-void MainWindow::on_greenTeaTargetRadioButton_clicked()
-{
-    double alpha = 1.0; int hue = 0, saturation = 0, value = 0;
-    updateHSVA(hue,saturation,value,alpha);
-}
-
-void MainWindow::on_barleyTeaTargetRadioButton_clicked()
-{
-    double alpha = 0.8; int hue = 174, saturation = 0, value = -30;
-    updateHSVA(hue,saturation,value,alpha);
-}
-
-void MainWindow::on_mattyaTargetRadioButton_clicked()
-{
-    double alpha = 0.6; int hue = 20, saturation = -12, value = 5;
-    updateHSVA(hue,saturation,value,alpha);
-}
-
-void MainWindow::on_greenTeaTargetRadioButton2_clicked()
-{
-    double alpha = 1.0; int hue = 20, saturation = -83, value = 0;
-    updateHSVA(hue,saturation,value,alpha);
-}
-
-void MainWindow::on_uronTeaTargetRadioButton_clicked()
-{
-    double alpha = 1.0; int hue = 0, saturation = 0, value = 0;
-    updateHSVA(hue,saturation,value,alpha);
-}
 
 void MainWindow::on_term1RadioButton_clicked()
 {

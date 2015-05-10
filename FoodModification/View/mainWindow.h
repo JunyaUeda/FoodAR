@@ -143,14 +143,6 @@ private slots:
     //お茶セッティング
     void updateHSVA(int hue, int saturation, int value, double alpha);
     void updateVinarizationThreshold(int blue, int green, int saturation, int Y, int Cr, int Cb);
-	void on_greenTeaRadioButton_clicked();
-	void on_barleyTeaRadioButton_clicked();
-	void on_japTeaTargetRadioButton_clicked();
-	void on_greenTeaTargetRadioButton_clicked();
-	void on_barleyTeaTargetRadioButton_clicked();
-	void on_mattyaTargetRadioButton_clicked();
-	void on_greenTeaTargetRadioButton2_clicked();
-	void on_uronTeaTargetRadioButton_clicked();
 	void on_term1RadioButton_clicked();
 	void on_term2RadioButton_clicked();
 	void on_term3RadioButton_clicked();
