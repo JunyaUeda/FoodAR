@@ -45,55 +45,11 @@
      <attribute name="title">
       <string>ホーム</string>
      </attribute>
-     <widget class="QPushButton" name="CalibrateButton">
-      <property name="geometry">
-       <rect>
-        <x>20</x>
-        <y>100</y>
-        <width>111</width>
-        <height>81</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>補正</string>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="colorMapButton">
-      <property name="geometry">
-       <rect>
-        <x>300</x>
-        <y>90</y>
-        <width>93</width>
-        <height>91</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>色の調整</string>
-      </property>
-     </widget>
-     <widget class="QComboBox" name="textureComboBox">
-      <property name="geometry">
-       <rect>
-        <x>140</x>
-        <y>100</y>
-        <width>141</width>
-        <height>81</height>
-       </rect>
-      </property>
-      <property name="currentText">
-       <string>テクスチャなし</string>
-      </property>
-      <item>
-       <property name="text">
-        <string>テクスチャなし</string>
-       </property>
-      </item>
-     </widget>
      <widget class="QPushButton" name="stopPushButton">
       <property name="geometry">
        <rect>
-        <x>140</x>
-        <y>10</y>
+        <x>270</x>
+        <y>70</y>
         <width>101</width>
         <height>81</height>
        </rect>
@@ -105,8 +61,8 @@
      <widget class="QPushButton" name="startPushButton">
       <property name="geometry">
        <rect>
-        <x>20</x>
-        <y>10</y>
+        <x>90</x>
+        <y>70</y>
         <width>111</width>
         <height>81</height>
        </rect>
@@ -115,24 +71,11 @@
        <string>Start</string>
       </property>
      </widget>
-     <widget class="QPushButton" name="pushButton">
-      <property name="geometry">
-       <rect>
-        <x>20</x>
-        <y>200</y>
-        <width>141</width>
-        <height>81</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>現在の状態を保存</string>
-      </property>
-     </widget>
      <widget class="QGroupBox" name="destinationColorControlGroupBox">
       <property name="geometry">
        <rect>
-        <x>20</x>
-        <y>320</y>
+        <x>480</x>
+        <y>250</y>
         <width>411</width>
         <height>321</height>
        </rect>
@@ -336,49 +279,17 @@
        </widget>
       </widget>
      </widget>
-     <widget class="QPushButton" name="fullScreenPushButton">
-      <property name="geometry">
-       <rect>
-        <x>200</x>
-        <y>200</y>
-        <width>121</width>
-        <height>81</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>フルスクリーン</string>
-      </property>
-      <property name="checkable">
-       <bool>true</bool>
-      </property>
-      <property name="checked">
-       <bool>false</bool>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="plot3DPushButton">
-      <property name="geometry">
-       <rect>
-        <x>360</x>
-        <y>210</y>
-        <width>121</width>
-        <height>71</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>3D PLOT</string>
-      </property>
-     </widget>
      <widget class="QGroupBox" name="groupBox_9">
       <property name="geometry">
        <rect>
-        <x>530</x>
-        <y>20</y>
+        <x>30</x>
+        <y>260</y>
         <width>391</width>
         <height>291</height>
        </rect>
       </property>
       <property name="title">
-       <string>GroupBox</string>
+       <string>変換パターン</string>
       </property>
       <widget class="QRadioButton" name="term1RadioButton">
        <property name="geometry">
@@ -475,7 +386,7 @@
        <property name="geometry">
         <rect>
          <x>30</x>
-         <y>230</y>
+         <y>240</y>
          <width>141</width>
          <height>19</height>
         </rect>
@@ -488,7 +399,7 @@
        <property name="geometry">
         <rect>
          <x>30</x>
-         <y>260</y>
+         <y>270</y>
          <width>151</width>
          <height>19</height>
         </rect>
@@ -497,64 +408,12 @@
         <string>9　ウーロン→ウーロン</string>
        </property>
       </widget>
-      <widget class="QRadioButton" name="term10RadioButton">
-       <property name="geometry">
-        <rect>
-         <x>220</x>
-         <y>30</y>
-         <width>131</width>
-         <height>19</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>10 麦茶→緑茶</string>
-       </property>
-      </widget>
-      <widget class="QRadioButton" name="term11RadioButton">
-       <property name="geometry">
-        <rect>
-         <x>220</x>
-         <y>60</y>
-         <width>141</width>
-         <height>19</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>11 麦茶→ブレンド</string>
-       </property>
-      </widget>
-      <widget class="QRadioButton" name="term12RadioButton">
-       <property name="geometry">
-        <rect>
-         <x>220</x>
-         <y>100</y>
-         <width>151</width>
-         <height>19</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>12 麦茶→ウーロン</string>
-       </property>
-      </widget>
-      <widget class="QRadioButton" name="term12RadioButton_2">
-       <property name="geometry">
-        <rect>
-         <x>220</x>
-         <y>140</y>
-         <width>171</width>
-         <height>19</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>13 ほうじ茶→ほうじ茶</string>
-       </property>
-      </widget>
      </widget>
      <widget class="QPushButton" name="calibrationRyokutyaButton">
       <property name="geometry">
        <rect>
-        <x>450</x>
-        <y>330</y>
+        <x>640</x>
+        <y>10</y>
         <width>171</width>
         <height>61</height>
        </rect>
@@ -569,8 +428,8 @@
      <widget class="QPushButton" name="calibrationBrendButton">
       <property name="geometry">
        <rect>
-        <x>450</x>
-        <y>410</y>
+        <x>640</x>
+        <y>90</y>
         <width>171</width>
         <height>61</height>
        </rect>
@@ -585,8 +444,8 @@
      <widget class="QPushButton" name="calibrationUronButton">
       <property name="geometry">
        <rect>
-        <x>450</x>
-        <y>500</y>
+        <x>640</x>
+        <y>170</y>
         <width>171</width>
         <height>51</height>
        </rect>
@@ -2212,7 +2071,7 @@
  <resources/>
  <connections/>
  <buttongroups>
-  <buttongroup name="buttonGroup_dstSize"/>
   <buttongroup name="buttonGroup_captureSize"/>
+  <buttongroup name="buttonGroup_dstSize"/>
  </buttongroups>
 </ui>

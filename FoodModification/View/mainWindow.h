@@ -20,7 +20,7 @@
 #include "../Controller/windowController.h"
 
 
-#define DIRPATH "../FoodModification/Images/"
+#define DIRPATH "Images/"
 
 namespace Ui {
     class MainWindow;

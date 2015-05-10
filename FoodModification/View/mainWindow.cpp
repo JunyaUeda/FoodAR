@@ -18,7 +18,7 @@ MainWindow::MainWindow(QWidget *parent) :
     }
     for(QString s : fileList) {
     	if(s == "." || s== "..") continue;
-    	ui->textureComboBox->addItem(s);
+		//ui->textureComboBox->addItem(s);
     }
 
     _edgeWidgetChannelMap.insert(make_pair(0, JU_S));
