@@ -160,6 +160,12 @@ private slots:
 
 	void on_term12RadioButton_2_clicked();
 
+	void on_calibrationRyokutyaButton_toggled(bool checked);
+
+	void on_calibrationBrendButton_toggled(bool checked);
+
+	void on_calibrationUronButton_toggled(bool checked);
+
 private:
     vector<ChannelType> collectColorCheckBoxStatus();
     vector<ChannelType> collectEdgeChannelCheckBoxStatus();
@@ -179,6 +185,9 @@ private:
     
     map<int, int> _edgeWidgetChannelMap;
 	QMap<QString, int> _thresholdsMap;
+	QString RYOKUTYA_CSVFILE_NAME = "thresholds_ryokutya.csv";
+	QString BREND_CSVFILE_NAME = "thresholds_brend.csv";
+	QString URON_CSVFILE_NAME = "thresholds_uron.csv";
     
 };
 

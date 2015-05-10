@@ -47,8 +47,11 @@ void onCbTrackbar(int position) {
 }
 
 
-void BinarizationViewer::showBinarizedImgs() {
-    
+void BinarizationViewer::showBinarizedImgs(int* thresholdsFromFile) {
+	for(int i=0; i<5; i++) {
+		_thresholds[i] = thresholdsFromFile[i];
+	}
+
     Mat srcBGRImg, srcHSVImg, srcYCrCbImg;
     Mat bgrChannelImgs[3], hsvChannelImgs[3], ycrcbChannelImgs[3];
 
@@ -74,15 +77,15 @@ void BinarizationViewer::showBinarizedImgs() {
     cvCreateTrackbar("Cr_Threshold", "Cr", &trackbarInitValue, 255, onCrTrackbar);
     cvCreateTrackbar("Cb_Threshold", "Cb", &trackbarInitValue, 255, onCbTrackbar);
 
-    cvSetTrackbarPos("B_Threshold", "Blue", 128);
+	cvSetTrackbarPos("B_Threshold", "Blue", _thresholds[0]);
 //    cvSetTrackbarPos("G_Threshold", "Green", 128);
 //    cvSetTrackbarPos("R_Threshold", "Red", 128);
 //    cvSetTrackbarPos("H_Threshold", "Hue", 128);
-    cvSetTrackbarPos("S_Threshold", "Saturation", 128);
+	cvSetTrackbarPos("S_Threshold", "Saturation", _thresholds[1]);
 //    cvSetTrackbarPos("V_Threshold", "Value", 128);
-    cvSetTrackbarPos("Y_Threshold", "Y", 128);
-    cvSetTrackbarPos("Cr_Threshold", "Cr", 128);
-    cvSetTrackbarPos("Cb_Threshold", "Cb", 128);
+	cvSetTrackbarPos("Y_Threshold", "Y", _thresholds[2]);
+	cvSetTrackbarPos("Cr_Threshold", "Cr", _thresholds[3]);
+	cvSetTrackbarPos("Cb_Threshold", "Cb", _thresholds[4]);
 
     _isShowing = true;
 	while(_isShowing) {

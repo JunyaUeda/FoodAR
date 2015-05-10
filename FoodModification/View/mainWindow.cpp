@@ -323,9 +323,9 @@ void MainWindow::on_channelMatPushButton_toggled(bool checked)
 void MainWindow::on_binarizedMatPushButton_toggled(bool checked)
 {
     if(checked) {
-        mainController.showBinarizationImgs();
+		mainController.showBinarizationImgs("thresholds_ryokutya.csv");
     } else {
-        mainController.closeBinarizationImgs();
+		mainController.closeBinarizationImgs("thresholds_ryokutya.csv");
     }
 }
 void MainWindow::on_cannyEdgeMatPushButton_toggled(bool checked)
@@ -517,17 +517,6 @@ void MainWindow::on_cbBinarizationThresholdSlider_valueChanged(int value)
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
 void MainWindow::on_underRatioLineEdit_textChanged(const QString &arg1)
 {
     double underRatio = arg1.toDouble(); // TODO ：ユーザーが整数以外を入力した場合の処理を書くべし
@@ -693,7 +682,7 @@ void MainWindow::on_term1RadioButton_clicked()
 	QByteArray cStr = path.toLocal8Bit();
 	_textureController.changeTextureImg(cStr.data());
 
-	readThresholdsFromCSV("thresholds_ryokutya.csv");
+	readThresholdsFromCSV(RYOKUTYA_CSVFILE_NAME);
 	updateVinarizationThreshold();
 
     double alpha = 1.0; int hue = 0, saturation = 0, value = 0;
@@ -702,7 +691,7 @@ void MainWindow::on_term1RadioButton_clicked()
 
 void MainWindow::on_term2RadioButton_clicked()
 {
-	readThresholdsFromCSV("thresholds_ryokutya.csv");
+	readThresholdsFromCSV(RYOKUTYA_CSVFILE_NAME);
 	updateVinarizationThreshold();
 
     double alpha = 1.0; int hue = -7, saturation = -6, value = -33;
@@ -716,7 +705,7 @@ void MainWindow::on_term3RadioButton_clicked()
 	QByteArray cStr = path.toLocal8Bit();
 	_textureController.changeTextureImg(cStr.data());
 
-	readThresholdsFromCSV("thresholds_ryokutya.csv");
+	readThresholdsFromCSV(RYOKUTYA_CSVFILE_NAME);
 	updateVinarizationThreshold();
 
 	double alpha = 1.0; int hue = -15, saturation = 0, value = -77;
@@ -730,8 +719,8 @@ void MainWindow::on_term4RadioButton_clicked()
 	QByteArray cStr = path.toLocal8Bit();
 	_textureController.changeTextureImg(cStr.data());
 
-    int bThreshold=103, gThreshold=145, sThreshold=110, YThreshold=145, CrThreshold=140, CbThreshold=120;
-	updateVinarizationThreshold(bThreshold, gThreshold, sThreshold, YThreshold, CrThreshold, CbThreshold);
+	readThresholdsFromCSV(BREND_CSVFILE_NAME);
+	updateVinarizationThreshold();
 
 	double alpha = 0.5; int hue = 7, saturation = 6, value = -30;
     updateHSVA(hue,saturation,value,alpha);
@@ -744,8 +733,8 @@ void MainWindow::on_term5RadioButton_clicked()
 	QByteArray cStr = path.toLocal8Bit();
 	_textureController.changeTextureImg(cStr.data());
 
-    int bThreshold=103, gThreshold=145, sThreshold=110, YThreshold=145, CrThreshold=140, CbThreshold=120;
-    updateVinarizationThreshold(bThreshold, gThreshold, sThreshold, YThreshold, CrThreshold, CbThreshold);
+	readThresholdsFromCSV(BREND_CSVFILE_NAME);
+	updateVinarizationThreshold();
 
     double alpha = 1.0; int hue = 0, saturation = 0, value = 0;
     updateHSVA(hue,saturation,value,alpha);
@@ -758,8 +747,8 @@ void MainWindow::on_term6RadioButton_clicked()
 	QByteArray cStr = path.toLocal8Bit();
 	_textureController.changeTextureImg(cStr.data());
 
-    int bThreshold=103, gThreshold=145, sThreshold=110, YThreshold=145, CrThreshold=140, CbThreshold=120;
-    updateVinarizationThreshold(bThreshold, gThreshold, sThreshold, YThreshold, CrThreshold, CbThreshold);
+	readThresholdsFromCSV(BREND_CSVFILE_NAME);
+	updateVinarizationThreshold();
 
 	double alpha = 0.6; int hue = -8, saturation = 6, value = -56;
     updateHSVA(hue,saturation,value,alpha);
@@ -772,8 +761,8 @@ void MainWindow::on_term7RadioButton_clicked()
 	QByteArray cStr = path.toLocal8Bit();
 	_textureController.changeTextureImg(cStr.data());
 
-    int bThreshold=70, gThreshold=80, sThreshold=40, YThreshold=76, CrThreshold=130, CbThreshold=130;
-    updateVinarizationThreshold(bThreshold, gThreshold, sThreshold, YThreshold, CrThreshold, CbThreshold);
+	readThresholdsFromCSV(URON_CSVFILE_NAME);
+	updateVinarizationThreshold();
 
 	double alpha = 0.4; int hue = 12, saturation = 0, value = 35;
     updateHSVA(hue,saturation,value,alpha);
@@ -786,8 +775,8 @@ void MainWindow::on_term8RadioButton_clicked()
 	QByteArray cStr = path.toLocal8Bit();
 	_textureController.changeTextureImg(cStr.data());
 
-    int bThreshold=70, gThreshold=80, sThreshold=40, YThreshold=76, CrThreshold=130, CbThreshold=130;
-    updateVinarizationThreshold(bThreshold, gThreshold, sThreshold, YThreshold, CrThreshold, CbThreshold);
+	readThresholdsFromCSV(URON_CSVFILE_NAME);
+	updateVinarizationThreshold();
 
 	double alpha = 0.3; int hue = 4, saturation = -22, value = 30;
     updateHSVA(hue,saturation,value,alpha);
@@ -800,8 +789,8 @@ void MainWindow::on_term9RadioButton_clicked()
 	QByteArray cStr = path.toLocal8Bit();
 	_textureController.changeTextureImg(cStr.data());
 
-    int bThreshold=70, gThreshold=80, sThreshold=40, YThreshold=76, CrThreshold=130, CbThreshold=130;
-    updateVinarizationThreshold(bThreshold, gThreshold, sThreshold, YThreshold, CrThreshold, CbThreshold);
+	readThresholdsFromCSV(URON_CSVFILE_NAME);
+	updateVinarizationThreshold();
 
     double alpha = 1.0; int hue = 0, saturation = 0, value = 0;
     updateHSVA(hue,saturation,value,alpha);
@@ -814,8 +803,8 @@ void MainWindow::on_term10RadioButton_clicked()
 	QByteArray cStr = path.toLocal8Bit();
 	_textureController.changeTextureImg(cStr.data());
 
-   int bThreshold=103, gThreshold=145, sThreshold=110, YThreshold=145, CrThreshold=140, CbThreshold=120;
-    updateVinarizationThreshold(bThreshold, gThreshold, sThreshold, YThreshold, CrThreshold, CbThreshold);
+	readThresholdsFromCSV(URON_CSVFILE_NAME);
+	updateVinarizationThreshold();
 
 	double alpha = 0.5; int hue = 7, saturation = 6, value = -30;
     updateHSVA(hue,saturation,value,alpha);
@@ -828,8 +817,8 @@ void MainWindow::on_term11RadioButton_clicked()
 	QByteArray cStr = path.toLocal8Bit();
 	_textureController.changeTextureImg(cStr.data());
 
-   int bThreshold=103, gThreshold=145, sThreshold=110, YThreshold=145, CrThreshold=140, CbThreshold=120;
-    updateVinarizationThreshold(bThreshold, gThreshold, sThreshold, YThreshold, CrThreshold, CbThreshold);
+	readThresholdsFromCSV(URON_CSVFILE_NAME);
+	updateVinarizationThreshold();
 
 	double alpha = 1.0; int hue = 0, saturation = 0, value = 0;
     updateHSVA(hue,saturation,value,alpha);
@@ -842,8 +831,8 @@ void MainWindow::on_term12RadioButton_clicked()
 	QByteArray cStr = path.toLocal8Bit();
 	_textureController.changeTextureImg(cStr.data());
 
-	int bThreshold=103, gThreshold=145, sThreshold=110, YThreshold=145, CrThreshold=140, CbThreshold=120;
-    updateVinarizationThreshold(bThreshold, gThreshold, sThreshold, YThreshold, CrThreshold, CbThreshold);
+	readThresholdsFromCSV(URON_CSVFILE_NAME);
+	updateVinarizationThreshold();
 
 	double alpha = 0.6; int hue = 0, saturation = 6, value = -43;
     updateHSVA(hue,saturation,value,alpha);
@@ -856,9 +845,36 @@ void MainWindow::on_term12RadioButton_2_clicked()
 	QByteArray cStr = path.toLocal8Bit();
 	_textureController.changeTextureImg(cStr.data());
 
-	int bThreshold=103, gThreshold=145, sThreshold=110, YThreshold=145, CrThreshold=140, CbThreshold=120;
-	updateVinarizationThreshold(bThreshold, gThreshold, sThreshold, YThreshold, CrThreshold, CbThreshold);
+	readThresholdsFromCSV(URON_CSVFILE_NAME);
+	updateVinarizationThreshold();
 
 	double alpha =1.0 ; int hue = 0, saturation = 0, value = 0;
 	updateHSVA(hue,saturation,value,alpha);
+}
+
+void MainWindow::on_calibrationRyokutyaButton_toggled(bool checked)
+{
+	if(checked) {
+		mainController.showBinarizationImgs(RYOKUTYA_CSVFILE_NAME);
+	} else {
+		mainController.closeBinarizationImgs(RYOKUTYA_CSVFILE_NAME);
+	}
+}
+
+void MainWindow::on_calibrationBrendButton_toggled(bool checked)
+{
+	if(checked) {
+		mainController.showBinarizationImgs(BREND_CSVFILE_NAME);
+	} else {
+		mainController.closeBinarizationImgs(BREND_CSVFILE_NAME);
+	}
+}
+
+void MainWindow::on_calibrationUronButton_toggled(bool checked)
+{
+	if(checked) {
+		mainController.showBinarizationImgs(URON_CSVFILE_NAME);
+	} else {
+		mainController.closeBinarizationImgs(URON_CSVFILE_NAME);
+	}
 }

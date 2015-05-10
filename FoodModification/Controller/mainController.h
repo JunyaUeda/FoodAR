@@ -20,8 +20,8 @@ public:
     void showChannelMat();
     void closeChannelMat();
     /**2値化画像を見る*/
-    void showBinarizationImgs();
-    void closeBinarizationImgs();
+	void showBinarizationImgs(QString file_name);
+	void closeBinarizationImgs(QString file_name);
     /**Cannyエッジ画像を見る*/
     void showCannyImgs();
     void closeCannyImgs();

@@ -9,7 +9,7 @@ class BinarizationViewer {
 /*method*/
 public:
 	BinarizationViewer();
-	void showBinarizedImgs();
+	void showBinarizedImgs(int* thresholdsFromFile);
 	void closeBinarizedImgs(int* thresholds);
 private:
 

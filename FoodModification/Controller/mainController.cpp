@@ -41,14 +41,30 @@ void MainController::closeChannelMat() {
 /**
 * 各チャンネルの二値化画像を見る
 */
-void MainController::showBinarizationImgs() {
+void MainController::showBinarizationImgs(QString file_name) {
     _mainProcedure.stop();
-	_binarizationViewer.showBinarizedImgs();
+	QFile file(file_name);
+	if(!file.open(QIODevice::ReadOnly)){
+				qDebug() << "cant open file";
+				return;
+	}
+
+	QString str;
+	QTextStream in(&file);
+	in >> str;
+
+	int thresholds[5];
+	for(int i=0; i < 5; i++) {
+		QStringList list = str.split(',');
+		thresholds[i] = list[2*i+1].toInt();
+	}
+	file.close();
+	_binarizationViewer.showBinarizedImgs(thresholds);
 }
 
-void MainController::closeBinarizationImgs() {
+void MainController::closeBinarizationImgs(QString file_name) {
 	_binarizationViewer.closeBinarizedImgs(thresholds);
-	QFile file("thresholds_ryokutya.csv");
+	QFile file(file_name);
 	if ( file.open(QIODevice::WriteOnly ) ) {
 		QTextStream stream( &file );
 		stream << "b" << "," << thresholds[0] << ",";

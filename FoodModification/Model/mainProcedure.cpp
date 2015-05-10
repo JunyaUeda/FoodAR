@@ -5,7 +5,8 @@ void MainProcedure::start() {
     _sourcer.setUp();
     _saver.save();
 
-    
+   _windowManager.createWindow("SourceImage");
+
     while (_isProcessed) {
 
         

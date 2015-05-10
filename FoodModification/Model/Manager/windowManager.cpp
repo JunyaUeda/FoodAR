@@ -5,7 +5,7 @@
 
 WindowManager::WindowManager() {
     _output = Size(DEFAULT_WIDTH, DEFAULT_HEIGHT);
-    createWindow("SourceImage");
+	//createWindow("SourceImage");
 }
 
 WindowManager& WindowManager::getInstance() {
