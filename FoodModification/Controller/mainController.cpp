@@ -43,11 +43,15 @@ void MainController::closeChannelMat() {
 */
 void MainController::showBinarizationImgs() {
     _mainProcedure.stop();
-	_binarizationViewer.showBinarizedImgs(thresholds);
+	_binarizationViewer.showBinarizedImgs();
 }
 
 void MainController::closeBinarizationImgs() {
-	_binarizationViewer.closeBinarizedImgs();
+	_binarizationViewer.closeBinarizedImgs(thresholds);
+	for(int i=0; i<5; i++) {
+		qDebug() << "threshold1 = " << thresholds[i];
+	}
+
 }
 
 /**

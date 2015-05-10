@@ -9,14 +9,15 @@ class BinarizationViewer {
 /*method*/
 public:
 	BinarizationViewer();
-	void showBinarizedImgs(int thresholds[]);
-    void closeBinarizedImgs();
+	void showBinarizedImgs();
+	void closeBinarizedImgs(int* thresholds);
 private:
 
 /*property*/
 private:
 	bool _isShowing = true;
     CameraManager& _cameraManager = CameraManager::getInstance();
+	int _thresholds[5];
 };
 
 #endif // BINARIZATIONVIEWER_H

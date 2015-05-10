@@ -1,6 +1,11 @@
 #include "binarizationViewer.h"
 
 BinarizationViewer::BinarizationViewer() {
+	_thresholds[0] = 128;
+	_thresholds[1] = 128;
+	_thresholds[2] = 128;
+	_thresholds[3] = 128;
+	_thresholds[4] = 128;
 }
 
 int binarizationViewerBlueThreshold = 128;
@@ -42,7 +47,7 @@ void onCbTrackbar(int position) {
 }
 
 
-void BinarizationViewer::showBinarizedImgs(int thresholds[]) {
+void BinarizationViewer::showBinarizedImgs() {
     
     Mat srcBGRImg, srcHSVImg, srcYCrCbImg;
     Mat bgrChannelImgs[3], hsvChannelImgs[3], ycrcbChannelImgs[3];
@@ -111,6 +116,12 @@ void BinarizationViewer::showBinarizedImgs(int thresholds[]) {
         imshow("Cr", ycrcbChannelImgs[1]);
         imshow("Cb", ycrcbChannelImgs[2]);
 
+		_thresholds[0] = cvGetTrackbarPos ("B_Threshold", "Blue");
+		_thresholds[1] = cvGetTrackbarPos ("S_Threshold", "Saturation");
+		_thresholds[2] = cvGetTrackbarPos ("Y_Threshold", "Y");
+		_thresholds[3] = cvGetTrackbarPos ("Cr_Threshold", "Cr");
+		_thresholds[4] = cvGetTrackbarPos ("Cb_Threshold", "Cb");
+
 		int key = waitKey(1);
         if(key == 27) break;
     }
@@ -118,7 +129,11 @@ void BinarizationViewer::showBinarizedImgs(int thresholds[]) {
     destroyAllWindows();
 }
 
-void BinarizationViewer::closeBinarizedImgs() {
+void BinarizationViewer::closeBinarizedImgs(int* thresholds) {
     _isShowing = false;
+	for(int i=0; i<5; i++) {
+		thresholds[i] = _thresholds[i];
+	}
+
 }
 
