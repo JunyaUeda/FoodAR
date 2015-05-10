@@ -161,6 +161,10 @@ private slots:
 	void on_term8RadioButton_clicked();
 	void on_term9RadioButton_clicked();
 	void on_term10RadioButton_clicked();
+    void on_term11RadioButton_clicked();
+    void on_term12RadioButton_clicked();
+
+	void on_term12RadioButton_2_clicked();
 
 private:
     vector<ChannelType> collectColorCheckBoxStatus();

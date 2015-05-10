@@ -30,7 +30,7 @@
      <enum>QTabWidget::Triangular</enum>
     </property>
     <property name="currentIndex">
-     <number>4</number>
+     <number>1</number>
     </property>
     <property name="iconSize">
      <size>
@@ -516,7 +516,7 @@
        <rect>
         <x>530</x>
         <y>20</y>
-        <width>371</width>
+        <width>391</width>
         <height>291</height>
        </rect>
       </property>
@@ -554,12 +554,12 @@
         <rect>
          <x>30</x>
          <y>90</y>
-         <width>121</width>
+         <width>141</width>
          <height>19</height>
         </rect>
        </property>
        <property name="text">
-        <string>3 緑茶→紅茶</string>
+        <string>3 緑茶→ウーロン</string>
        </property>
       </widget>
       <widget class="QRadioButton" name="term4RadioButton">
@@ -598,7 +598,7 @@
         </rect>
        </property>
        <property name="text">
-        <string>6 ブレンド→紅茶</string>
+        <string>6 ブレンド→ウーロン</string>
        </property>
       </widget>
       <widget class="QRadioButton" name="term7RadioButton">
@@ -611,20 +611,20 @@
         </rect>
        </property>
        <property name="text">
-        <string>7　紅茶→緑茶</string>
+        <string>7　ウーロン→緑茶</string>
        </property>
       </widget>
       <widget class="QRadioButton" name="term8RadioButton">
        <property name="geometry">
         <rect>
          <x>30</x>
-         <y>240</y>
+         <y>230</y>
          <width>141</width>
          <height>19</height>
         </rect>
        </property>
        <property name="text">
-        <string>8 紅茶→ブレンド</string>
+        <string>8 ウーロン→ブレンド</string>
        </property>
       </widget>
       <widget class="QRadioButton" name="term9RadioButton">
@@ -632,25 +632,64 @@
         <rect>
          <x>30</x>
          <y>260</y>
-         <width>131</width>
+         <width>151</width>
          <height>19</height>
         </rect>
        </property>
        <property name="text">
-        <string>9　紅茶→紅茶</string>
+        <string>9　ウーロン→ウーロン</string>
        </property>
       </widget>
       <widget class="QRadioButton" name="term10RadioButton">
        <property name="geometry">
         <rect>
-         <x>200</x>
-         <y>40</y>
-         <width>105</width>
+         <x>220</x>
+         <y>30</y>
+         <width>131</width>
          <height>19</height>
         </rect>
        </property>
        <property name="text">
-        <string>RadioButton</string>
+        <string>10 麦茶→緑茶</string>
+       </property>
+      </widget>
+      <widget class="QRadioButton" name="term11RadioButton">
+       <property name="geometry">
+        <rect>
+         <x>220</x>
+         <y>60</y>
+         <width>141</width>
+         <height>19</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>11 麦茶→ブレンド</string>
+       </property>
+      </widget>
+      <widget class="QRadioButton" name="term12RadioButton">
+       <property name="geometry">
+        <rect>
+         <x>220</x>
+         <y>100</y>
+         <width>151</width>
+         <height>19</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>12 麦茶→ウーロン</string>
+       </property>
+      </widget>
+      <widget class="QRadioButton" name="term12RadioButton_2">
+       <property name="geometry">
+        <rect>
+         <x>220</x>
+         <y>140</y>
+         <width>171</width>
+         <height>19</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>13 ほうじ茶→ほうじ茶</string>
        </property>
       </widget>
      </widget>
@@ -2268,8 +2307,7 @@
  <resources/>
  <connections/>
  <buttongroups>
-  <buttongroup name="buttonGroup_captureSize"/>
-  <buttongroup name="buttonGroup"/>
   <buttongroup name="buttonGroup_dstSize"/>
+  <buttongroup name="buttonGroup_captureSize"/>
  </buttongroups>
 </ui>

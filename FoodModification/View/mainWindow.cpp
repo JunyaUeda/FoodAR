@@ -695,7 +695,13 @@ void MainWindow::on_uronTeaTargetRadioButton_clicked()
 
 void MainWindow::on_term1RadioButton_clicked()
 {
-    int bThreshold=25, gThreshold=177, sThreshold=225, YThreshold=184, CrThreshold=157, CbThreshold=93;
+
+	QString path = DIRPATH;
+	path.append("NoTexture");
+	QByteArray cStr = path.toLocal8Bit();
+	_textureController.changeTextureImg(cStr.data());
+
+    int bThreshold=90, gThreshold=145, sThreshold=110, YThreshold=145, CrThreshold=140, CbThreshold=100;
     updateVinarizationThreshold(bThreshold, gThreshold, sThreshold, YThreshold, CrThreshold, CbThreshold);
 
     double alpha = 1.0; int hue = 0, saturation = 0, value = 0;
@@ -704,34 +710,55 @@ void MainWindow::on_term1RadioButton_clicked()
 
 void MainWindow::on_term2RadioButton_clicked()
 {
-    int bThreshold=25, gThreshold=177, sThreshold=225, YThreshold=184, CrThreshold=157, CbThreshold=93;
+
+//	QString path = DIRPATH;
+//	path.append("brend.png");
+//	QByteArray cStr = path.toLocal8Bit();
+//	_textureController.changeTextureImg(cStr.data());
+
+    int bThreshold=90, gThreshold=145, sThreshold=110, YThreshold=145, CrThreshold=140, CbThreshold=100;
     updateVinarizationThreshold(bThreshold, gThreshold, sThreshold, YThreshold, CrThreshold, CbThreshold);
 
-    double alpha = 1.0; int hue = 0, saturation = 0, value = 0;
+    double alpha = 1.0; int hue = -7, saturation = -6, value = -33;
     updateHSVA(hue,saturation,value,alpha);
 }
 
 void MainWindow::on_term3RadioButton_clicked()
 {
-    int bThreshold=25, gThreshold=177, sThreshold=225, YThreshold=184, CrThreshold=157, CbThreshold=93;
+	QString path = DIRPATH;
+	path.append("brend.png");
+	QByteArray cStr = path.toLocal8Bit();
+	_textureController.changeTextureImg(cStr.data());
+
+    int bThreshold=90, gThreshold=145, sThreshold=110, YThreshold=145, CrThreshold=140, CbThreshold=100;
     updateVinarizationThreshold(bThreshold, gThreshold, sThreshold, YThreshold, CrThreshold, CbThreshold);
 
-    double alpha = 1.0; int hue = 0, saturation = 0, value = 0;
+	double alpha = 1.0; int hue = -15, saturation = 0, value = -77;
     updateHSVA(hue,saturation,value,alpha);
 }
 
 void MainWindow::on_term4RadioButton_clicked()
 {
-    int bThreshold=25, gThreshold=177, sThreshold=225, YThreshold=184, CrThreshold=157, CbThreshold=93;
-    updateVinarizationThreshold(bThreshold, gThreshold, sThreshold, YThreshold, CrThreshold, CbThreshold);
+	QString path = DIRPATH;
+	path.append("green.png");
+	QByteArray cStr = path.toLocal8Bit();
+	_textureController.changeTextureImg(cStr.data());
 
-    double alpha = 1.0; int hue = 0, saturation = 0, value = 0;
+    int bThreshold=103, gThreshold=145, sThreshold=110, YThreshold=145, CrThreshold=140, CbThreshold=120;
+	updateVinarizationThreshold(bThreshold, gThreshold, sThreshold, YThreshold, CrThreshold, CbThreshold);
+
+	double alpha = 0.5; int hue = 7, saturation = 6, value = -30;
     updateHSVA(hue,saturation,value,alpha);
 }
 
 void MainWindow::on_term5RadioButton_clicked()
 {
-    int bThreshold=25, gThreshold=177, sThreshold=225, YThreshold=184, CrThreshold=157, CbThreshold=93;
+	QString path = DIRPATH;
+	path.append("brend.png");
+	QByteArray cStr = path.toLocal8Bit();
+	_textureController.changeTextureImg(cStr.data());
+
+    int bThreshold=103, gThreshold=145, sThreshold=110, YThreshold=145, CrThreshold=140, CbThreshold=120;
     updateVinarizationThreshold(bThreshold, gThreshold, sThreshold, YThreshold, CrThreshold, CbThreshold);
 
     double alpha = 1.0; int hue = 0, saturation = 0, value = 0;
@@ -740,34 +767,54 @@ void MainWindow::on_term5RadioButton_clicked()
 
 void MainWindow::on_term6RadioButton_clicked()
 {
-    int bThreshold=25, gThreshold=177, sThreshold=225, YThreshold=184, CrThreshold=157, CbThreshold=93;
+	QString path = DIRPATH;
+	path.append("uron.png");
+	QByteArray cStr = path.toLocal8Bit();
+	_textureController.changeTextureImg(cStr.data());
+
+    int bThreshold=103, gThreshold=145, sThreshold=110, YThreshold=145, CrThreshold=140, CbThreshold=120;
     updateVinarizationThreshold(bThreshold, gThreshold, sThreshold, YThreshold, CrThreshold, CbThreshold);
 
-    double alpha = 1.0; int hue = 0, saturation = 0, value = 0;
+	double alpha = 0.6; int hue = -8, saturation = 6, value = -56;
     updateHSVA(hue,saturation,value,alpha);
 }
 
 void MainWindow::on_term7RadioButton_clicked()
 {
-    int bThreshold=25, gThreshold=177, sThreshold=225, YThreshold=184, CrThreshold=157, CbThreshold=93;
+	QString path = DIRPATH;
+	path.append("green.png");
+	QByteArray cStr = path.toLocal8Bit();
+	_textureController.changeTextureImg(cStr.data());
+
+    int bThreshold=70, gThreshold=80, sThreshold=40, YThreshold=76, CrThreshold=130, CbThreshold=130;
     updateVinarizationThreshold(bThreshold, gThreshold, sThreshold, YThreshold, CrThreshold, CbThreshold);
 
-    double alpha = 1.0; int hue = 0, saturation = 0, value = 0;
+	double alpha = 0.4; int hue = 12, saturation = 0, value = 35;
     updateHSVA(hue,saturation,value,alpha);
 }
 
 void MainWindow::on_term8RadioButton_clicked()
 {   
-    int bThreshold=25, gThreshold=177, sThreshold=225, YThreshold=184, CrThreshold=157, CbThreshold=93;
+	QString path = DIRPATH;
+	path.append("brend.png");
+	QByteArray cStr = path.toLocal8Bit();
+	_textureController.changeTextureImg(cStr.data());
+
+    int bThreshold=70, gThreshold=80, sThreshold=40, YThreshold=76, CrThreshold=130, CbThreshold=130;
     updateVinarizationThreshold(bThreshold, gThreshold, sThreshold, YThreshold, CrThreshold, CbThreshold);
 
-    double alpha = 1.0; int hue = 0, saturation = 0, value = 0;
+	double alpha = 0.3; int hue = 4, saturation = -22, value = 30;
     updateHSVA(hue,saturation,value,alpha);
 }
 
 void MainWindow::on_term9RadioButton_clicked()
 {
-    int bThreshold=25, gThreshold=177, sThreshold=225, YThreshold=184, CrThreshold=157, CbThreshold=93;
+	QString path = DIRPATH;
+	path.append("brend.png");
+	QByteArray cStr = path.toLocal8Bit();
+	_textureController.changeTextureImg(cStr.data());
+
+    int bThreshold=70, gThreshold=80, sThreshold=40, YThreshold=76, CrThreshold=130, CbThreshold=130;
     updateVinarizationThreshold(bThreshold, gThreshold, sThreshold, YThreshold, CrThreshold, CbThreshold);
 
     double alpha = 1.0; int hue = 0, saturation = 0, value = 0;
@@ -776,9 +823,56 @@ void MainWindow::on_term9RadioButton_clicked()
 
 void MainWindow::on_term10RadioButton_clicked()
 {
-    int bThreshold=25, gThreshold=177, sThreshold=225, YThreshold=184, CrThreshold=157, CbThreshold=93;
+	QString path = DIRPATH;
+	path.append("green.png");
+	QByteArray cStr = path.toLocal8Bit();
+	_textureController.changeTextureImg(cStr.data());
+
+   int bThreshold=103, gThreshold=145, sThreshold=110, YThreshold=145, CrThreshold=140, CbThreshold=120;
     updateVinarizationThreshold(bThreshold, gThreshold, sThreshold, YThreshold, CrThreshold, CbThreshold);
 
-    double alpha = 1.0; int hue = 0, saturation = 0, value = 0;
+	double alpha = 0.5; int hue = 7, saturation = 6, value = -30;
     updateHSVA(hue,saturation,value,alpha);
+}
+
+void MainWindow::on_term11RadioButton_clicked()
+{
+	QString path = DIRPATH;
+	path.append("brend.png");
+	QByteArray cStr = path.toLocal8Bit();
+	_textureController.changeTextureImg(cStr.data());
+
+   int bThreshold=103, gThreshold=145, sThreshold=110, YThreshold=145, CrThreshold=140, CbThreshold=120;
+    updateVinarizationThreshold(bThreshold, gThreshold, sThreshold, YThreshold, CrThreshold, CbThreshold);
+
+	double alpha = 1.0; int hue = 0, saturation = 0, value = 0;
+    updateHSVA(hue,saturation,value,alpha);
+}
+
+void MainWindow::on_term12RadioButton_clicked()
+{
+	QString path = DIRPATH;
+	path.append("uron.png");
+	QByteArray cStr = path.toLocal8Bit();
+	_textureController.changeTextureImg(cStr.data());
+
+	int bThreshold=103, gThreshold=145, sThreshold=110, YThreshold=145, CrThreshold=140, CbThreshold=120;
+    updateVinarizationThreshold(bThreshold, gThreshold, sThreshold, YThreshold, CrThreshold, CbThreshold);
+
+	double alpha = 0.6; int hue = 0, saturation = 6, value = -43;
+    updateHSVA(hue,saturation,value,alpha);
+}
+
+void MainWindow::on_term12RadioButton_2_clicked()
+{
+	QString path = DIRPATH;
+	path.append("NoTexture");
+	QByteArray cStr = path.toLocal8Bit();
+	_textureController.changeTextureImg(cStr.data());
+
+	int bThreshold=103, gThreshold=145, sThreshold=110, YThreshold=145, CrThreshold=140, CbThreshold=120;
+	updateVinarizationThreshold(bThreshold, gThreshold, sThreshold, YThreshold, CrThreshold, CbThreshold);
+
+	double alpha =1.0 ; int hue = 0, saturation = 0, value = 0;
+	updateHSVA(hue,saturation,value,alpha);
 }
