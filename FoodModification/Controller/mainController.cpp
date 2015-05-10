@@ -51,11 +51,11 @@ void MainController::closeBinarizationImgs() {
 	QFile file("thresholds_ryokutya.csv");
 	if ( file.open(QIODevice::WriteOnly ) ) {
 		QTextStream stream( &file );
-		stream << "ryokutya_b" << "," << thresholds[0] << ",";
-		stream << "ryokutya_s" << "," << thresholds[1] <<",";
-		stream << "ryokutya_y" << "," << thresholds[2] <<",";
-		stream << "ryokutya_cr" << "," << thresholds[3] <<",";
-		stream << "ryokutya_cb" << "," << thresholds[4] <<endl;
+		stream << "b" << "," << thresholds[0] << ",";
+		stream << "s" << "," << thresholds[1] <<",";
+		stream << "y" << "," << thresholds[2] <<",";
+		stream << "cr" << "," << thresholds[3] <<",";
+		stream << "cb" << "," << thresholds[4] <<endl;
 	}
 	file.close();
 }

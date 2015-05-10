@@ -24,7 +24,12 @@ MainWindow::MainWindow(QWidget *parent) :
     _edgeWidgetChannelMap.insert(make_pair(0, JU_S));
     _edgeWidgetChannelMap.insert(make_pair(1, JU_Cr));
     _edgeWidgetChannelMap.insert(make_pair(2, JU_V));
-    //ui->ch0EdgeThreshold_groupBox->setTitle
+
+	_thresholdsMap["b"] = 90;
+	_thresholdsMap["s"] = 110;
+	_thresholdsMap["y"] = 145;
+	_thresholdsMap["cr"] = 140;
+	_thresholdsMap["cb"] = 100;
     
 }
 
@@ -646,6 +651,40 @@ void MainWindow::updateVinarizationThreshold(int blue, int green, int saturation
     _extractionController.updateBinarizationThreshold(Cb, 8);
  }
 
+void MainWindow::updateVinarizationThreshold() {
+	_extractionController.updateBinarizationThreshold(_thresholdsMap["b"], 0);
+	_extractionController.updateBinarizationThreshold(128, 1);
+	_extractionController.updateBinarizationThreshold(_thresholdsMap["s"], 4);
+	_extractionController.updateBinarizationThreshold(_thresholdsMap["y"], 6);
+	_extractionController.updateBinarizationThreshold(_thresholdsMap["cr"], 7);
+	_extractionController.updateBinarizationThreshold(_thresholdsMap["cb"], 8);
+ }
+
+void MainWindow::readThresholdsFromCSV(QString file_name) {
+	//QFile file("thresholds_ryokutya.csv");
+	QFile file(file_name);
+	if(!file.open(QIODevice::ReadOnly)){
+			qDebug() << "cant open file";
+			return;
+	}
+	QString str;
+	QTextStream in(&file);
+	in >> str;
+
+	QMap<QString, int> map;
+	for(int i=0; i < 5; i++) {
+		QStringList list = str.split(',');
+		map[list[2*i]] = list[2*i+1].toInt();
+	}
+	file.close();
+
+	_thresholdsMap["b"] = map["b"];
+	_thresholdsMap["s"] = map["s"];
+	_thresholdsMap["y"] = map["y"];
+	_thresholdsMap["cr"] = map["cr"];
+	_thresholdsMap["cb"] = map["cb"];
+}
+
 void MainWindow::on_term1RadioButton_clicked()
 {
 
@@ -654,8 +693,8 @@ void MainWindow::on_term1RadioButton_clicked()
 	QByteArray cStr = path.toLocal8Bit();
 	_textureController.changeTextureImg(cStr.data());
 
-    int bThreshold=90, gThreshold=145, sThreshold=110, YThreshold=145, CrThreshold=140, CbThreshold=100;
-    updateVinarizationThreshold(bThreshold, gThreshold, sThreshold, YThreshold, CrThreshold, CbThreshold);
+	readThresholdsFromCSV("thresholds_ryokutya.csv");
+	updateVinarizationThreshold();
 
     double alpha = 1.0; int hue = 0, saturation = 0, value = 0;
     updateHSVA(hue,saturation,value,alpha);
@@ -663,14 +702,8 @@ void MainWindow::on_term1RadioButton_clicked()
 
 void MainWindow::on_term2RadioButton_clicked()
 {
-
-//	QString path = DIRPATH;
-//	path.append("brend.png");
-//	QByteArray cStr = path.toLocal8Bit();
-//	_textureController.changeTextureImg(cStr.data());
-
-    int bThreshold=90, gThreshold=145, sThreshold=110, YThreshold=145, CrThreshold=140, CbThreshold=100;
-    updateVinarizationThreshold(bThreshold, gThreshold, sThreshold, YThreshold, CrThreshold, CbThreshold);
+	readThresholdsFromCSV("thresholds_ryokutya.csv");
+	updateVinarizationThreshold();
 
     double alpha = 1.0; int hue = -7, saturation = -6, value = -33;
     updateHSVA(hue,saturation,value,alpha);
@@ -683,8 +716,8 @@ void MainWindow::on_term3RadioButton_clicked()
 	QByteArray cStr = path.toLocal8Bit();
 	_textureController.changeTextureImg(cStr.data());
 
-    int bThreshold=90, gThreshold=145, sThreshold=110, YThreshold=145, CrThreshold=140, CbThreshold=100;
-    updateVinarizationThreshold(bThreshold, gThreshold, sThreshold, YThreshold, CrThreshold, CbThreshold);
+	readThresholdsFromCSV("thresholds_ryokutya.csv");
+	updateVinarizationThreshold();
 
 	double alpha = 1.0; int hue = -15, saturation = 0, value = -77;
     updateHSVA(hue,saturation,value,alpha);

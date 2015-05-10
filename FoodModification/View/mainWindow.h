@@ -143,6 +143,8 @@ private slots:
     //お茶セッティング
     void updateHSVA(int hue, int saturation, int value, double alpha);
     void updateVinarizationThreshold(int blue, int green, int saturation, int Y, int Cr, int Cb);
+	void updateVinarizationThreshold();
+	void readThresholdsFromCSV(QString file_name);
 	void on_term1RadioButton_clicked();
 	void on_term2RadioButton_clicked();
 	void on_term3RadioButton_clicked();
@@ -176,7 +178,7 @@ private:
     WindowController& _windowController = WindowController::getInstance();
     
     map<int, int> _edgeWidgetChannelMap;
-
+	QMap<QString, int> _thresholdsMap;
     
 };
 
