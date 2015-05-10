@@ -176,6 +176,7 @@ private:
     WindowController& _windowController = WindowController::getInstance();
     
     map<int, int> _edgeWidgetChannelMap;
+
     
 };
 

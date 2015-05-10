@@ -48,6 +48,16 @@ void MainController::showBinarizationImgs() {
 
 void MainController::closeBinarizationImgs() {
 	_binarizationViewer.closeBinarizedImgs(thresholds);
+	QFile file("thresholds_ryokutya.csv");
+	if ( file.open(QIODevice::WriteOnly ) ) {
+		QTextStream stream( &file );
+		stream << "ryokutya_b" << "," << thresholds[0] << ",";
+		stream << "ryokutya_s" << "," << thresholds[1] <<",";
+		stream << "ryokutya_y" << "," << thresholds[2] <<",";
+		stream << "ryokutya_cr" << "," << thresholds[3] <<",";
+		stream << "ryokutya_cb" << "," << thresholds[4] <<endl;
+	}
+	file.close();
 }
 
 /**
