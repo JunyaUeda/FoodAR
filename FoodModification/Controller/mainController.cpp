@@ -48,10 +48,6 @@ void MainController::showBinarizationImgs() {
 
 void MainController::closeBinarizationImgs() {
 	_binarizationViewer.closeBinarizedImgs(thresholds);
-	for(int i=0; i<5; i++) {
-		qDebug() << "threshold1 = " << thresholds[i];
-	}
-
 }
 
 /**
