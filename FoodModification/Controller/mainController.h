@@ -39,6 +39,7 @@ private:
 	CannyViewer _cannyViewer;
     bool resizeFlag = false;
     Size dstSize;
+	int thresholds[5];
 
     MainController();
     MainController(const MainController&);

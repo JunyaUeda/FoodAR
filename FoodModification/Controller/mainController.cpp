@@ -7,7 +7,11 @@
 #define L2_GRADIENT true
 
 MainController::MainController() {
-
+	thresholds[0] = 0;
+	thresholds[1] = 0;
+	thresholds[2] = 0;
+	thresholds[3] = 0;
+	thresholds[4] = 0;
 }
 
 MainController& MainController::getInstance() {
@@ -39,7 +43,7 @@ void MainController::closeChannelMat() {
 */
 void MainController::showBinarizationImgs() {
     _mainProcedure.stop();
-	_binarizationViewer.showBinarizedImgs();
+	_binarizationViewer.showBinarizedImgs(thresholds);
 }
 
 void MainController::closeBinarizationImgs() {

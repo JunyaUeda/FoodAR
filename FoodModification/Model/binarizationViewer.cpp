@@ -42,7 +42,7 @@ void onCbTrackbar(int position) {
 }
 
 
-void BinarizationViewer::showBinarizedImgs() {
+void BinarizationViewer::showBinarizedImgs(int thresholds[]) {
     
     Mat srcBGRImg, srcHSVImg, srcYCrCbImg;
     Mat bgrChannelImgs[3], hsvChannelImgs[3], ycrcbChannelImgs[3];
