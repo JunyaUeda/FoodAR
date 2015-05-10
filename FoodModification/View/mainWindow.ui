@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1088</width>
-    <height>779</height>
+    <width>935</width>
+    <height>515</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -20,7 +20,7 @@
       <x>0</x>
       <y>0</y>
       <width>1091</width>
-      <height>721</height>
+      <height>491</height>
      </rect>
     </property>
     <property name="tabPosition">
@@ -48,8 +48,8 @@
      <widget class="QPushButton" name="stopPushButton">
       <property name="geometry">
        <rect>
-        <x>270</x>
-        <y>70</y>
+        <x>140</x>
+        <y>20</y>
         <width>101</width>
         <height>81</height>
        </rect>
@@ -61,8 +61,8 @@
      <widget class="QPushButton" name="startPushButton">
       <property name="geometry">
        <rect>
-        <x>90</x>
-        <y>70</y>
+        <x>10</x>
+        <y>20</y>
         <width>111</width>
         <height>81</height>
        </rect>
@@ -74,8 +74,8 @@
      <widget class="QGroupBox" name="destinationColorControlGroupBox">
       <property name="geometry">
        <rect>
-        <x>480</x>
-        <y>250</y>
+        <x>410</x>
+        <y>110</y>
         <width>411</width>
         <height>321</height>
        </rect>
@@ -167,6 +167,9 @@
           <width>19</width>
           <height>160</height>
          </rect>
+        </property>
+        <property name="minimum">
+         <number>-180</number>
         </property>
         <property name="maximum">
          <number>180</number>
@@ -279,13 +282,13 @@
        </widget>
       </widget>
      </widget>
-     <widget class="QGroupBox" name="groupBox_9">
+     <widget class="QGroupBox" name="changePatternGroupBox">
       <property name="geometry">
        <rect>
-        <x>30</x>
-        <y>260</y>
+        <x>0</x>
+        <y>110</y>
         <width>391</width>
-        <height>291</height>
+        <height>321</height>
        </rect>
       </property>
       <property name="title">
@@ -412,8 +415,8 @@
      <widget class="QPushButton" name="calibrationRyokutyaButton">
       <property name="geometry">
        <rect>
-        <x>640</x>
-        <y>10</y>
+        <x>380</x>
+        <y>30</y>
         <width>171</width>
         <height>61</height>
        </rect>
@@ -428,8 +431,8 @@
      <widget class="QPushButton" name="calibrationBrendButton">
       <property name="geometry">
        <rect>
-        <x>640</x>
-        <y>90</y>
+        <x>560</x>
+        <y>30</y>
         <width>171</width>
         <height>61</height>
        </rect>
@@ -444,14 +447,43 @@
      <widget class="QPushButton" name="calibrationUronButton">
       <property name="geometry">
        <rect>
-        <x>640</x>
-        <y>170</y>
+        <x>740</x>
+        <y>30</y>
         <width>171</width>
-        <height>51</height>
+        <height>61</height>
        </rect>
       </property>
       <property name="text">
        <string>烏龍茶キャリブレーション</string>
+      </property>
+      <property name="checkable">
+       <bool>true</bool>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="hsvaSavebutton">
+      <property name="geometry">
+       <rect>
+        <x>830</x>
+        <y>380</y>
+        <width>93</width>
+        <height>28</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>保存</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="fullScreenPushButton">
+      <property name="geometry">
+       <rect>
+        <x>260</x>
+        <y>20</y>
+        <width>101</width>
+        <height>81</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>HD</string>
       </property>
       <property name="checkable">
        <bool>true</bool>
@@ -465,8 +497,8 @@
      <widget class="QPushButton" name="channelMatPushButton">
       <property name="geometry">
        <rect>
-        <x>20</x>
-        <y>30</y>
+        <x>0</x>
+        <y>0</y>
         <width>121</width>
         <height>91</height>
        </rect>
@@ -481,8 +513,8 @@
      <widget class="QGroupBox" name="colorChannelGroupBox">
       <property name="geometry">
        <rect>
-        <x>180</x>
-        <y>20</y>
+        <x>130</x>
+        <y>0</y>
         <width>271</width>
         <height>141</height>
        </rect>
@@ -629,8 +661,8 @@
      <widget class="QGroupBox" name="edgeChannelGroupBox">
       <property name="geometry">
        <rect>
-        <x>480</x>
-        <y>30</y>
+        <x>400</x>
+        <y>10</y>
         <width>281</width>
         <height>131</height>
        </rect>
@@ -771,8 +803,8 @@
      <widget class="QGroupBox" name="channelThresholdAdjustmentGroupBox">
       <property name="geometry">
        <rect>
-        <x>610</x>
-        <y>170</y>
+        <x>560</x>
+        <y>140</y>
         <width>281</width>
         <height>171</height>
        </rect>
@@ -909,8 +941,8 @@
      <widget class="QGroupBox" name="groupBox">
       <property name="geometry">
        <rect>
-        <x>840</x>
-        <y>40</y>
+        <x>690</x>
+        <y>30</y>
         <width>151</width>
         <height>91</height>
        </rect>
@@ -977,8 +1009,8 @@
      <widget class="QGroupBox" name="histogramToleranceRatioGroupBox">
       <property name="geometry">
        <rect>
-        <x>150</x>
-        <y>170</y>
+        <x>130</x>
+        <y>140</y>
         <width>431</width>
         <height>171</height>
        </rect>
@@ -1095,8 +1127,8 @@
      <widget class="QPushButton" name="binarizedMatPushButton">
       <property name="geometry">
        <rect>
-        <x>20</x>
-        <y>130</y>
+        <x>0</x>
+        <y>90</y>
         <width>121</width>
         <height>91</height>
        </rect>
@@ -1111,10 +1143,10 @@
      <widget class="QGroupBox" name="binarizationThresholdGroupBox">
       <property name="geometry">
        <rect>
-        <x>20</x>
-        <y>360</y>
-        <width>1031</width>
-        <height>291</height>
+        <x>10</x>
+        <y>310</y>
+        <width>871</width>
+        <height>271</height>
        </rect>
       </property>
       <property name="title">
@@ -1583,8 +1615,8 @@
      <widget class="QPushButton" name="cannyEdgeMatPushButton">
       <property name="geometry">
        <rect>
-        <x>20</x>
-        <y>240</y>
+        <x>0</x>
+        <y>190</y>
         <width>121</width>
         <height>71</height>
        </rect>
@@ -2052,7 +2084,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1088</width>
+     <width>935</width>
      <height>29</height>
     </rect>
    </property>

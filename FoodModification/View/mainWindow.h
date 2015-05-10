@@ -148,6 +148,7 @@ private slots:
     void updateHSVA(int hue, int saturation, int value, double alpha);
     void updateVinarizationThreshold(int blue, int green, int saturation, int Y, int Cr, int Cb);
 	void updateVinarizationThreshold();
+	void loadHSVA(QString file_name);
 	void readThresholdsFromCSV(QString file_name);
 	void on_term1RadioButton_clicked();
 	void on_term2RadioButton_clicked();
@@ -167,6 +168,8 @@ private slots:
 	void on_calibrationBrendButton_toggled(bool checked);
 	void on_calibrationUronButton_toggled(bool checked);
 
+	void on_hsvaSavebutton_clicked();
+
 protected:
 	void closeEvent(QCloseEvent *ce) {
 			mainController.finish();
@@ -177,6 +180,7 @@ private:
     vector<ChannelType> collectColorCheckBoxStatus();
     vector<ChannelType> collectEdgeChannelCheckBoxStatus();
     ChannelType aqcuireChannelType(int channelNumber);
+
 
 /*property*/
 private:
@@ -195,6 +199,10 @@ private:
 	QString RYOKUTYA_CSVFILE_NAME = "thresholds_ryokutya.csv";
 	QString BREND_CSVFILE_NAME = "thresholds_brend.csv";
 	QString URON_CSVFILE_NAME = "thresholds_uron.csv";
+	int _hueShift;
+	int _saturationShift;
+	int _valueShift;
+	double _alpha;
     
 };
 

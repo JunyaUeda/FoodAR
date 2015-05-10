@@ -34,7 +34,7 @@ void Extractor::extract(const MatSet& srcSet) {
     
     dilate(mat, mat, cv::Mat(), Point(-1,-1), _extractionManager.dilateCount());
 	//erode(mat, mat, cv::Mat(), Point(-1,-1), _extractionManager.erodeCount());
-    imshow("ExtractByColor", mat);
+	//imshow("ExtractByColor", mat);
 
     // add(mat, _edgeManager.currentEdge().roiMergedMat(), mat );
     // imshow("add", mat);

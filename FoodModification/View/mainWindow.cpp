@@ -649,6 +649,25 @@ void MainWindow::updateVinarizationThreshold() {
 	_extractionController.updateBinarizationThreshold(_thresholdsMap["cb"], 8);
  }
 
+void MainWindow::loadHSVA(QString file_name) {
+	QFile file(file_name);
+	if(!file.open(QIODevice::ReadOnly)){
+				qDebug() << "cant open file";
+				return;
+	}
+
+	QString str;
+	QTextStream in(&file);
+	in >> str;
+	QStringList list = str.split(',');
+	_hueShift = list[1].toInt();
+	_saturationShift = list[3].toInt();
+	_valueShift = list[5].toInt();
+	_alpha = list[7].toDouble();
+
+	file.close();
+}
+
 void MainWindow::readThresholdsFromCSV(QString file_name) {
 	//QFile file("thresholds_ryokutya.csv");
 	QFile file(file_name);
@@ -685,8 +704,8 @@ void MainWindow::on_term1RadioButton_clicked()
 	readThresholdsFromCSV(RYOKUTYA_CSVFILE_NAME);
 	updateVinarizationThreshold();
 
-    double alpha = 1.0; int hue = 0, saturation = 0, value = 0;
-    updateHSVA(hue,saturation,value,alpha);
+	loadHSVA("hsva_term1.csv");
+	updateHSVA(_hueShift, _saturationShift, _valueShift, _alpha);
 }
 
 void MainWindow::on_term2RadioButton_clicked()
@@ -694,8 +713,8 @@ void MainWindow::on_term2RadioButton_clicked()
 	readThresholdsFromCSV(RYOKUTYA_CSVFILE_NAME);
 	updateVinarizationThreshold();
 
-    double alpha = 1.0; int hue = -7, saturation = -6, value = -33;
-    updateHSVA(hue,saturation,value,alpha);
+	loadHSVA("hsva_term2.csv");
+	updateHSVA(_hueShift, _saturationShift, _valueShift, _alpha);
 }
 
 void MainWindow::on_term3RadioButton_clicked()
@@ -708,8 +727,8 @@ void MainWindow::on_term3RadioButton_clicked()
 	readThresholdsFromCSV(RYOKUTYA_CSVFILE_NAME);
 	updateVinarizationThreshold();
 
-	double alpha = 1.0; int hue = -15, saturation = 0, value = -77;
-    updateHSVA(hue,saturation,value,alpha);
+	loadHSVA("hsva_term3.csv");
+	updateHSVA(_hueShift, _saturationShift, _valueShift, _alpha);
 }
 
 void MainWindow::on_term4RadioButton_clicked()
@@ -722,8 +741,8 @@ void MainWindow::on_term4RadioButton_clicked()
 	readThresholdsFromCSV(BREND_CSVFILE_NAME);
 	updateVinarizationThreshold();
 
-	double alpha = 0.5; int hue = 7, saturation = 6, value = -30;
-    updateHSVA(hue,saturation,value,alpha);
+	loadHSVA("hsva_term4.csv");
+	updateHSVA(_hueShift, _saturationShift, _valueShift, _alpha);
 }
 
 void MainWindow::on_term5RadioButton_clicked()
@@ -736,8 +755,8 @@ void MainWindow::on_term5RadioButton_clicked()
 	readThresholdsFromCSV(BREND_CSVFILE_NAME);
 	updateVinarizationThreshold();
 
-    double alpha = 1.0; int hue = 0, saturation = 0, value = 0;
-    updateHSVA(hue,saturation,value,alpha);
+	loadHSVA("hsva_term5.csv");
+	updateHSVA(_hueShift, _saturationShift, _valueShift, _alpha);
 }
 
 void MainWindow::on_term6RadioButton_clicked()
@@ -750,8 +769,8 @@ void MainWindow::on_term6RadioButton_clicked()
 	readThresholdsFromCSV(BREND_CSVFILE_NAME);
 	updateVinarizationThreshold();
 
-	double alpha = 0.6; int hue = -8, saturation = 6, value = -56;
-    updateHSVA(hue,saturation,value,alpha);
+	loadHSVA("hsva_term6.csv");
+	updateHSVA(_hueShift, _saturationShift, _valueShift, _alpha);
 }
 
 void MainWindow::on_term7RadioButton_clicked()
@@ -764,8 +783,8 @@ void MainWindow::on_term7RadioButton_clicked()
 	readThresholdsFromCSV(URON_CSVFILE_NAME);
 	updateVinarizationThreshold();
 
-	double alpha = 0.4; int hue = 12, saturation = 0, value = 35;
-    updateHSVA(hue,saturation,value,alpha);
+	loadHSVA("hsva_term7.csv");
+	updateHSVA(_hueShift, _saturationShift, _valueShift, _alpha);
 }
 
 void MainWindow::on_term8RadioButton_clicked()
@@ -778,8 +797,8 @@ void MainWindow::on_term8RadioButton_clicked()
 	readThresholdsFromCSV(URON_CSVFILE_NAME);
 	updateVinarizationThreshold();
 
-	double alpha = 0.3; int hue = 4, saturation = -22, value = 30;
-    updateHSVA(hue,saturation,value,alpha);
+	loadHSVA("hsva_term8.csv");
+	updateHSVA(_hueShift, _saturationShift, _valueShift, _alpha);
 }
 
 void MainWindow::on_term9RadioButton_clicked()
@@ -792,8 +811,8 @@ void MainWindow::on_term9RadioButton_clicked()
 	readThresholdsFromCSV(URON_CSVFILE_NAME);
 	updateVinarizationThreshold();
 
-    double alpha = 1.0; int hue = 0, saturation = 0, value = 0;
-    updateHSVA(hue,saturation,value,alpha);
+	loadHSVA("hsva_term9.csv");
+	updateHSVA(_hueShift, _saturationShift, _valueShift, _alpha);
 }
 
 void MainWindow::on_term10RadioButton_clicked()
@@ -890,3 +909,69 @@ void MainWindow::on_calibrationUronButton_toggled(bool checked)
 
 
 
+
+void MainWindow::on_hsvaSavebutton_clicked()
+{
+	int checkedId;
+	if(ui->term1RadioButton->isChecked()) {
+		checkedId = 1;
+	} else if(ui->term2RadioButton->isChecked()) {
+		checkedId = 2;
+	}else if(ui->term3RadioButton->isChecked()) {
+		checkedId = 3;
+	}else if(ui->term4RadioButton->isChecked()) {
+		checkedId = 4;
+	}else if(ui->term5RadioButton->isChecked()) {
+		checkedId = 5;
+	}else if(ui->term6RadioButton->isChecked()) {
+		checkedId = 6;
+	}else if(ui->term7RadioButton->isChecked()) {
+		checkedId = 7;
+	}else if(ui->term8RadioButton->isChecked()) {
+		checkedId = 8;
+	}else if(ui->term9RadioButton->isChecked()) {
+		checkedId = 9;
+	}
+
+	QString file_name;
+
+	switch(checkedId) {
+		case 1:
+		file_name = "hsva_term1.csv";
+			break;
+		case 2:
+		file_name = "hsva_term2.csv";
+			break;
+		case 3:
+		file_name = "hsva_term3.csv";
+			break;
+		case 4:
+		file_name = "hsva_term4.csv";
+			break;
+		case 5:
+		file_name = "hsva_term5.csv";
+			break;
+		case 6:
+		file_name = "hsva_term6.csv";
+			break;
+		case 7:
+		file_name = "hsva_term7.csv";
+			break;
+		case 8:
+		file_name = "hsva_term8.csv";
+			break;
+		case 9:
+		file_name = "hsva_term9.csv";
+			break;
+	}
+
+	QFile file(file_name);
+	if ( file.open(QIODevice::WriteOnly ) ) {
+		QTextStream stream( &file );
+		stream << "h" << "," << ui->hueLineEdit->text() << ",";
+		stream << "s" << "," << ui->saturationLineEdit->text() <<",";
+		stream << "v" << "," << ui->valueLineEdit->text() <<",";
+		stream << "a" << "," << ui->alphaLineEdit->text() <<endl;
+	}
+	file.close();
+}

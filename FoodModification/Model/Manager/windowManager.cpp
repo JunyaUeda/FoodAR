@@ -24,8 +24,8 @@ void WindowManager::fullScreen() {
     destroyWindow(String("dst"));
     namedWindow(String("full"), 0);
     setWindowProperty(String("full"), CV_WND_PROP_FULLSCREEN,CV_WINDOW_FULLSCREEN);
-    moveWindow("full", 1920, 0);
-    resizeWindow("full", 1280, 720);
+	moveWindow("full",640,0);
+	resizeWindow("full", 1280, 720);
 }
 
 
