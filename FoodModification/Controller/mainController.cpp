@@ -26,6 +26,11 @@ void MainController::start() {
 void MainController::stop() {
     _mainProcedure.stop();
 }
+
+void MainController::finish() {
+	_mainProcedure.finish();
+}
+
 /**
 * チャンネル画像を見る
 */

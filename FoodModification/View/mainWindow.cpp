@@ -878,3 +878,15 @@ void MainWindow::on_calibrationUronButton_toggled(bool checked)
 		mainController.closeBinarizationImgs(URON_CSVFILE_NAME);
 	}
 }
+
+//bool MainWindow::event(QEvent *event) {
+//	switch(&event) {
+//	case QEvent::Close:
+//		mainController.finish();
+//		closeEvent((QCloseEvent *)event);
+//		break;
+//	}
+//}
+
+
+

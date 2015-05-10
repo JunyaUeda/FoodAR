@@ -19,6 +19,7 @@ public:
     static MainProcedure& getInstance();
     void start();
     void stop();
+	void finish();
 private:
     MainProcedure();
     MainProcedure(const MainProcedure&);

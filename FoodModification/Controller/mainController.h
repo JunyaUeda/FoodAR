@@ -16,6 +16,8 @@ public:
 	static MainController& getInstance();
     void start();
     void stop();
+	void finish();
+
     /**チャンネル画像を見る*/
     void showChannelMat();
     void closeChannelMat();

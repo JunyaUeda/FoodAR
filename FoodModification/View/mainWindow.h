@@ -3,6 +3,10 @@
 #include <QDir>
 #include <QMainWindow>
 #include <QDebug>
+#include <QMenu>
+#include <QAction>
+#include <QMenuBar>
+#include <QCloseEvent>
 #include "../Utils/opencvUtils.h"
 #include "./colorDialog.h"
 #include "./calibrateDialog.h"
@@ -157,14 +161,17 @@ private slots:
 	void on_term10RadioButton_clicked();
     void on_term11RadioButton_clicked();
     void on_term12RadioButton_clicked();
-
 	void on_term12RadioButton_2_clicked();
 
 	void on_calibrationRyokutyaButton_toggled(bool checked);
-
 	void on_calibrationBrendButton_toggled(bool checked);
-
 	void on_calibrationUronButton_toggled(bool checked);
+
+protected:
+	void closeEvent(QCloseEvent *ce) {
+			mainController.finish();
+			ce->accept();
+	};
 
 private:
     vector<ChannelType> collectColorCheckBoxStatus();

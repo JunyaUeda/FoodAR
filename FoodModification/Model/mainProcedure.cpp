@@ -31,10 +31,16 @@ void MainProcedure::start() {
         char ch = waitKey(10);
         if ( ch == 27 ) break;
     }
+
+	destroyAllWindows();
 }
 
 void MainProcedure::stop() {
     _isProcessed = false;
+}
+
+void MainProcedure::finish() {
+	_isProcessed = false;
 }
 
 MainProcedure::MainProcedure() {
